@@ -1,0 +1,17 @@
+.git
+.venv
+__pycache__
+*.pyc
+data
+logs
+browser
+dist
+build
+screenshots
+samples
+*.zip
+*.lnk
+启动语镜*
+停止语镜*
+创建桌面快捷方式*
+使用说明.txt

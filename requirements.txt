@@ -1,0 +1,6 @@
+# 语镜 LinguaLens runtime dependencies
+# PDF text extraction (the rest of the document formats use the standard library)
+pypdf>=5.0
+
+# Reliable CA bundle for HTTPS on Windows
+certifi>=2024.2.2
