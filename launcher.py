@@ -10,6 +10,7 @@ import ctypes
 import json
 import logging
 import os
+import subprocess
 import sys
 import threading
 import time
@@ -92,13 +93,49 @@ def _cleanup_files() -> None:
             pass
 
 
+def _open_browser(url: str) -> bool:
+    """Open the app in a real browser window.
+
+    webbrowser.open() depends on the default-browser association and can fail
+    silently on some Windows profiles, so try Edge/Chrome explicitly first.
+    """
+    local = Path(os.environ.get("LOCALAPPDATA", ""))
+    candidates = [
+        Path(os.environ.get("ProgramFiles(x86)", r"C:\Program Files (x86)")) / "Microsoft/Edge/Application/msedge.exe",
+        Path(os.environ.get("ProgramFiles", r"C:\Program Files")) / "Microsoft/Edge/Application/msedge.exe",
+        local / "Microsoft/Edge/Application/msedge.exe",
+        Path(os.environ.get("ProgramFiles", r"C:\Program Files")) / "Google/Chrome/Application/chrome.exe",
+        Path(os.environ.get("ProgramFiles(x86)", r"C:\Program Files (x86)")) / "Google/Chrome/Application/chrome.exe",
+        local / "Google/Chrome/Application/chrome.exe",
+    ]
+    for browser in candidates:
+        if browser.exists():
+            try:
+                subprocess.Popen([str(browser), url], close_fds=True)
+                logging.info("Opened browser: %s", browser)
+                return True
+            except Exception:
+                logging.exception("Browser launch failed: %s", browser)
+    try:
+        if os.name == "nt":
+            os.startfile(url)  # type: ignore[attr-defined]
+        else:
+            webbrowser.open(url)
+        logging.info("Opened browser via shell association")
+        return True
+    except Exception:
+        logging.exception("Shell open failed")
+    return False
+
+
 def main() -> None:
     _log_stream()
     logging.info("Portable launcher starting; packaged=%s; root=%s", paths.is_packaged(), paths.resource_root())
     existing = _existing_url()
     if existing:
         logging.info("Existing instance found: %s", existing)
-        webbrowser.open(existing)
+        if not _open_browser(existing):
+            _message("语镜已经在运行，但没能打开浏览器。\n\n请手动访问：\n" + existing, error=True)
         return
 
     _cleanup_files()
@@ -115,7 +152,8 @@ def main() -> None:
         url = f"http://127.0.0.1:{port}"
         _write_url(url)
         logging.info("Service ready: %s", url)
-        webbrowser.open(url)
+        if not _open_browser(url):
+            _message("语镜服务已启动，但没能自动打开浏览器。\n\n请手动访问：\n" + url, error=True)
         event.wait()
         logging.info("Quit requested by UI")
     except Exception:
