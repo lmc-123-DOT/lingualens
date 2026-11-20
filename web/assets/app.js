@@ -574,7 +574,7 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
               <button class="btn btn-sm" data-action="upload">${icon('upload', 13)} 导入文件</button>
               <button class="btn btn-sm" data-action="open-url">${icon('link', 13)} 网页链接</button>
               <button class="btn btn-sm" data-action="load-sample" data-sample="en">${icon('book', 13)} 示例</button>
-              <span class="meta" id="source-meta">${stats ? `${fmtNumber(stats.paragraphs)} 段 · 约 ${stats.minutes} 分钟` : 'Ctrl / ⌘ + Enter 翻译'}</span>
+              <span class="meta" id="source-meta">${stats ? `${fmtNumber(stats.paragraphs)} 段 · 约 ${stats.minutes} 分钟` : '选中句子可单独翻译 / 解析 · Ctrl / ⌘ + Enter 翻译'}</span>
             </div>
           </div>
         </section>
@@ -2436,6 +2436,119 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
     } finally { if (btn) btn.disabled = false; }
   }
 
+  // ---------------------------------------------------------------- selection translate
+  let selectionToolEl = null;
+  let selectionPicked = '';
+  let selectionTimer = null;
+
+  function ensureSelectionTool() {
+    if (selectionToolEl) return;
+    selectionToolEl = document.createElement('div');
+    selectionToolEl.id = 'selection-tool';
+    selectionToolEl.className = 'selection-tool';
+    selectionToolEl.hidden = true;
+    selectionToolEl.innerHTML = `<button type="button" class="selection-tool-btn" data-action="translate-selection">${icon('spark', 13)} 翻译并解析</button>`;
+    selectionToolEl.addEventListener('mousedown', (e) => e.preventDefault());
+    document.body.appendChild(selectionToolEl);
+  }
+
+  function readPageSelection() {
+    const active = document.activeElement;
+    if (active && active.id === 'source-text') {
+      const start = active.selectionStart || 0;
+      const end = active.selectionEnd || 0;
+      if (end - start > 1) {
+        return { text: active.value.slice(start, end), rect: active.getBoundingClientRect() };
+      }
+    }
+    const sel = window.getSelection();
+    if (!sel || sel.isCollapsed || !sel.rangeCount) return null;
+    const text = sel.toString().trim();
+    if (text.length < 2) return null;
+    const anchor = sel.anchorNode;
+    const el = anchor?.nodeType === 3 ? anchor.parentElement : anchor;
+    if (!el || !el.closest('#app')) return null;
+    if (el.closest('a, button, input, textarea, select, .word-card, .modal, .selection-tool, .nav, .topbar')) return null;
+    if (el.closest('#cmp-right')) return null;
+    if (!el.closest('.pane-body, .bi-source, .cmp-text, .ana-sentence, .source-area-wrap')) return null;
+    const rect = sel.getRangeAt(0).getBoundingClientRect();
+    return { text, rect };
+  }
+
+  function hideSelectionTool() {
+    if (selectionToolEl) selectionToolEl.hidden = true;
+    selectionPicked = '';
+  }
+
+  function refreshSelectionTool() {
+    ensureSelectionTool();
+    const picked = readPageSelection();
+    if (!picked || picked.text.length > 1200) { hideSelectionTool(); return; }
+    selectionPicked = picked.text;
+    const rect = picked.rect;
+    const width = 150;
+    const left = Math.min(window.innerWidth - width - 10, Math.max(10, rect.left + Math.min(rect.width, 280) / 2 - width / 2));
+    const top = rect.top > 58 ? rect.top - 44 : Math.min(window.innerHeight - 54, rect.bottom + 8);
+    selectionToolEl.style.left = `${left}px`;
+    selectionToolEl.style.top = `${top}px`;
+    selectionToolEl.hidden = false;
+  }
+
+  function scheduleSelectionTool() {
+    clearTimeout(selectionTimer);
+    selectionTimer = setTimeout(refreshSelectionTool, 30);
+  }
+
+  function selectionResultHTML(text, article, analysis) {
+    const target = article.target || {};
+    const translated = (target.blocks || []).map((b) => b.target).filter(Boolean).join('\n\n') || target.text || '—';
+    const points = article.grammar?.points || [];
+    const sentences = analysis?.sentences || [];
+    const grammarHTML = points.length ? points.slice(0, 6).map((p) => `
+      <button class="selection-grammar-item" data-action="selection-grammar" data-gid="${attr(p.id)}">
+        <span class="chip">${esc(p.category)}</span>
+        <strong>${esc(p.title)}</strong>
+        <small>${esc(p.formula)}</small>
+        <span class="sel-open">完整讲解 ${icon('arrow', 10)}</span>
+      </button>`).join('') : `<p class="selection-empty">这次没有匹配到语法条目，但译文已经生成。</p>`;
+    const parseHTML = sentences.length ? sentences.slice(0, 4).map((s) => `
+      <div class="selection-sentence">
+        <p class="sel-sentence-text">${esc(s.text)}</p>
+        ${s.translation ? `<p class="sel-sentence-tr">${esc(s.translation)}</p>` : ''}
+        <div class="sel-tokens">${(s.tokens || []).slice(0, 24).map((t) => `<span class="sel-token"><b>${esc(t.text)}</b><small>${esc(t.pos || '')}</small></span>`).join('')}</div>
+        ${s.chunks?.length ? `<div class="sel-chunks">${s.chunks.slice(0, 8).map((c) => `<span>${esc(c.role || '')} · ${esc(c.label || '')}</span>`).join('')}</div>` : ''}
+      </div>`).join('') : `<p class="selection-empty">暂时没有逐句拆解结果。</p>`;
+    return `<div class="modal-head"><div><h2>选中句子</h2><p class="sub">单独翻译 · 语法解析</p></div><button class="icon-btn modal-close" data-action="close-modal">${icon('x', 16)}</button></div>
+      <div class="selection-modal">
+        <div class="selection-block"><span class="selection-label">原文</span><p class="selection-source">${esc(text)}</p></div>
+        <div class="selection-block selection-result"><span class="selection-label">译文</span><p class="selection-translation">${esc(translated)}</p></div>
+        <div class="selection-columns">
+          <section class="selection-section"><h3>语法点</h3>${grammarHTML}</section>
+          <section class="selection-section"><h3>逐句拆解</h3>${parseHTML}</section>
+        </div>
+        <div class="selection-foot"><span>${esc(target.providerLabel || providerLabel(target.provider))} · ${sentences.length || 1} 句</span><button class="btn btn-sm" data-action="close-modal">关闭</button></div>
+      </div>`;
+  }
+
+  async function openSelectionModal(text) {
+    const clean = (text || '').trim();
+    if (clean.length < 2) { toast('先选中一个句子或短语。', 'error'); return; }
+    hideSelectionTool();
+    openModal(`<div class="modal-head"><div><h2>选中句子</h2><p class="sub">正在单独翻译与解析…</p></div><button class="icon-btn modal-close" data-action="close-modal">${icon('x', 16)}</button></div><div class="selection-loading"><span class="spinner"></span><span>正在翻译并拆解这一句…</span></div>`);
+    try {
+      const data = await api('/api/translate', {
+        method: 'POST',
+        body: { text: clean, source: state.sourceLang, target: state.targetLang, provider: state.provider, save: false, analyze: true },
+        timeout: 90000,
+      });
+      const modal = $('#modal-root .modal');
+      if (modal) modal.innerHTML = selectionResultHTML(clean, data.article || {}, data.analysis || data.article?.analysis);
+    } catch (err) {
+      const modal = $('#modal-root .modal');
+      if (modal) modal.innerHTML = `<div class="modal-head"><div><h2>选中句子</h2><p class="sub">单独翻译失败</p></div><button class="icon-btn modal-close" data-action="close-modal">${icon('x', 16)}</button></div><div class="wc-error">${esc(err.message || '翻译失败，请稍后再试。')}</div>`;
+    }
+  }
+
   // ---------------------------------------------------------------- modal
   function openModal(inner, onMount) {
     closeModal();
@@ -2618,6 +2731,11 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       case 'font-larger': setReadingScale(state.readingScale + 0.05); break;
       case 'speak-sentence': speakSentence(action.dataset.text || ''); break;
       case 'open-grammar-report': openGrammarReport(); break;
+      case 'translate-selection': openSelectionModal(selectionPicked); break;
+      case 'selection-grammar':
+        closeModal();
+        navigate(`/grammar/${encodeURIComponent(action.dataset.gid || '')}`);
+        break;
       case 'open-settings': openSettings(); break;
       case 'close-modal': closeModal(); break;
       case 'open-grammar-index': navigate('/grammar'); break;
@@ -2823,10 +2941,13 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       if (state.provider !== 'auto' && !availableProviders.has(state.provider)) state.provider = 'auto';
       renderRoute();
       ensureWordCard();
+      ensureSelectionTool();
       loadNotebook();
       setupFileInput();
       document.addEventListener('click', onDocumentClick);
       document.addEventListener('keydown', onDocumentKeydown);
+      document.addEventListener('mouseup', scheduleSelectionTool);
+      document.addEventListener('keyup', (e) => { if (e.shiftKey || e.key === 'Shift') scheduleSelectionTool(); });
       window.addEventListener('scroll', () => {
         if (state.activeWordToken && !$('#word-card')?.hidden) positionWordCard(state.activeWordToken);
       }, { passive: true });
