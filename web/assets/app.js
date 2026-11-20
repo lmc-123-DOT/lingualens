@@ -333,7 +333,7 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
   }
 
   function footer() {
-    const total = state.health?.grammar?.total || 231;
+    const total = state.health?.grammar?.total || 325;
     return `<footer class="site-footer">
       <span class="seal"><i></i> 语镜 LinguaLens</span>
       <span>本地优先的阅读工作台 · 语法库 ${total} 条</span>
@@ -448,7 +448,7 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
 
   // ---------------------------------------------------------------- workspace
   function heroHTML() {
-    const total = state.health?.grammar?.total || 231;
+    const total = state.health?.grammar?.total || 325;
     const langCount = targetLangs.length || 25;
     const grammarLangCount = Object.keys(state.health?.grammar?.byLanguage || {}).length || 24;
     return `<section class="hero">
@@ -1805,10 +1805,10 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       <div>
         <p class="eyebrow">GRAMMAR ATLAS</p>
         <h1>语法的骨架，<br>值得单独看。</h1>
-        <p class="lede">${stats.total || 231} 个语法点，覆盖 ${languageCount || 24} 种高频语言。每一条都有结构公式、语感解释、例句、易错点，以及可以在新标签页打开的权威语法参考。</p>
+        <p class="lede">${stats.total || 325} 个语法点，覆盖 ${languageCount || 24} 种高频语言。每一条都有结构公式、语感解释、例句、易错点，以及可以在新标签页打开的权威语法参考。</p>
       </div>
       <div class="page-hero-stats">
-        <div class="big-stat"><strong>${stats.total || 231}</strong><span>语法条目</span></div>
+        <div class="big-stat"><strong>${stats.total || 325}</strong><span>语法条目</span></div>
         <div class="big-stat"><strong>${languageCount || 24}</strong><span>语言</span></div>
       </div>
     </section>
@@ -1822,7 +1822,7 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       </aside>
       <section>
         <div class="index-toolbar">
-          <span class="result-count"><strong id="grammar-result-count">${stats.total || 231}</strong> 条语法</span>
+          <span class="result-count"><strong id="grammar-result-count">${stats.total || 325}</strong> 条语法</span>
           <span class="muted" style="font-size:10px">每条都可独立打开、复制链接</span>
           <div class="select-wrap select-sm sort"><select id="grammar-sort"><option value="default">按语言与类别</option><option value="level">按难度</option><option value="name">按名称</option></select></div>
         </div>
