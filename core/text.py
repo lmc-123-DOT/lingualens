@@ -5,34 +5,21 @@ import html as html_lib
 import re
 from html.parser import HTMLParser
 
-LANGUAGES = {
-    "zh-CN": {"name": "简体中文", "native": "简体中文", "short": "中"},
-    "zh-TW": {"name": "繁体中文", "native": "繁體中文", "short": "繁"},
-    "en": {"name": "英语", "native": "English", "short": "EN"},
-    "ja": {"name": "日语", "native": "日本語", "short": "日"},
-    "ko": {"name": "韩语", "native": "한국어", "short": "한"},
-    "fr": {"name": "法语", "native": "Français", "short": "FR"},
-    "de": {"name": "德语", "native": "Deutsch", "short": "DE"},
-    "es": {"name": "西班牙语", "native": "Español", "short": "ES"},
-    "pt": {"name": "葡萄牙语", "native": "Português", "short": "PT"},
-    "it": {"name": "意大利语", "native": "Italiano", "short": "IT"},
-    "ru": {"name": "俄语", "native": "Русский", "short": "RU"},
-    "ar": {"name": "阿拉伯语", "native": "العربية", "short": "AR"},
-    "vi": {"name": "越南语", "native": "Tiếng Việt", "short": "VI"},
-    "th": {"name": "泰语", "native": "ไทย", "short": "TH"},
-    "auto": {"name": "自动检测", "native": "Auto", "short": "A"},
-    "unknown": {"name": "未知语言", "native": "Unknown", "short": "?"},
-}
+from .languages import LANGUAGES
 
 STOPWORDS = {
     "en": "the and of to in is that for it with as was on are be this have from or by at not you we they he she his her their an but had has were which will would can could should there what when who how all".split(),
-    "fr": "le la les des une est dans pour que qui avec sur pas plus au aux ce cette il elle nous vous ils sont du en et un".split(),
-    "de": "der die das und ist nicht mit für auf sich ein eine von zu den dem des im ich wir sie sind auch als aus".split(),
-    "es": "el la los las de que y en un una es por con para del se al lo como más pero sus le ha".split(),
-    "it": "il la gli le di che e in un una è per con del si al non sono da come anche".split(),
-    "pt": "o a os as de que e em um uma é para com do da não se por ao mais como mas".split(),
-    "vi": "và của là có không được trong cho một những các với này đó người".split(),
-    "nl": "de het een en van is dat op te voor met niet zijn aan er ook als".split(),
+    "fr": "le la les des une est dans pour que qui avec sur pas plus au aux ce cette il elle nous vous ils sont du en et un et ne se sa son leur".split(),
+    "de": "der die das und ist nicht mit für auf sich ein eine von zu den dem des im ich wir sie sind auch als aus aber oder wenn weil".split(),
+    "es": "el la los las de que y en un una es por con para del se al lo como más pero sus le ha este esta son fue muy".split(),
+    "it": "il la gli le di che e in un una è per con del si al non sono da come anche questo questa nel nella dei delle".split(),
+    "pt": "o a os as de que e em um uma é para com do da não se por ao mais como mas este esta são foi dos das".split(),
+    "vi": "và của là có không được trong cho một những các với này đó người chúng tôi bạn anh chị những".split(),
+    "nl": "de het een en van is dat op te voor met niet zijn aan er ook als maar door bij uit nog wel".split(),
+    "pl": "i w nie na się z do że to jest są jak ale po od dla przez ten ta te było być".split(),
+    "tr": "ve bir bu da de için ile değil olan olarak çok daha ne var yok ben sen biz".split(),
+    "id": "dan yang di ke dari ini itu untuk dengan tidak ada dalam pada saya kamu kami mereka akan".split(),
+    "sv": "och att det som en ett på är av för med till inte har om den de jag du vi".split(),
 }
 
 _ACCENTS = {
@@ -42,6 +29,9 @@ _ACCENTS = {
     "pt": "ãõáéíóúâêôç",
     "it": "àèéìòù",
     "vi": "ăâđêôơưàảãáạằẳẵắặầẩẫấậèẻẽéẹềểễếệìỉĩíịòỏõóọồổỗốộờởỡớợùủũúụừửữứựỳỷỹýỵ",
+    "pl": "ąćęłńóśźż",
+    "tr": "çğıöşü",
+    "sv": "åäö",
 }
 
 
@@ -71,6 +61,9 @@ def detect_language(text: str) -> dict:
     cyrillic = count(lambda c: "\u0400" <= c <= "\u04ff")
     arabic = count(lambda c: "\u0600" <= c <= "\u06ff")
     thai = count(lambda c: "\u0e00" <= c <= "\u0e7f")
+    devanagari = count(lambda c: "\u0900" <= c <= "\u097f")
+    bengali = count(lambda c: "\u0980" <= c <= "\u09ff")
+    hebrew = count(lambda c: "\u0590" <= c <= "\u05ff")
     latin = count(lambda c: ("a" <= c.lower() <= "z"))
 
     if kana >= 2 and kana / max(han + kana, 1) > 0.015:
@@ -79,9 +72,26 @@ def detect_language(text: str) -> dict:
         return {"code": "ko", "confidence": 0.98, **_lang("ko")}
     if thai >= 3:
         return {"code": "th", "confidence": 0.97, **_lang("th")}
+    if devanagari >= 3:
+        return {"code": "hi", "confidence": 0.97, **_lang("hi")}
+    if bengali >= 3:
+        return {"code": "bn", "confidence": 0.97, **_lang("bn")}
+    if hebrew >= 3:
+        return {"code": "he", "confidence": 0.97, **_lang("he")}
     if arabic >= 3:
+        # Arabic script is shared by Arabic, Persian and Urdu. Distinctive
+        # letters are a more reliable signal than word lists at this size.
+        urdu = sum(sample.count(ch) for ch in "ٹڈڑںےھۓ")
+        persian = sum(sample.count(ch) for ch in "پچژگکی")
+        if urdu >= 2:
+            return {"code": "ur", "confidence": 0.96, **_lang("ur")}
+        if persian >= 2:
+            return {"code": "fa", "confidence": 0.96, **_lang("fa")}
         return {"code": "ar", "confidence": 0.97, **_lang("ar")}
     if cyrillic >= 3:
+        ukrainian = sum(sample.count(ch) for ch in "іїєґІЇЄҐ")
+        if ukrainian >= 2:
+            return {"code": "uk", "confidence": 0.96, **_lang("uk")}
         return {"code": "ru", "confidence": 0.96, **_lang("ru")}
     if han >= 3 and han >= latin * 0.4:
         return {"code": "zh-CN", "confidence": 0.95 if han > latin else 0.88, **_lang("zh-CN")}

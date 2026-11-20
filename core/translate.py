@@ -12,6 +12,7 @@ preserved in the reader.
 from __future__ import annotations
 
 import hashlib
+import html as html_lib
 import json
 import re
 import threading
@@ -193,6 +194,7 @@ def mymemory_translate(text: str, source: str, target: str) -> str:
         translated = ((payload.get("responseData") or {}).get("translatedText") or "").strip()
         if not translated:
             raise TranslationError("MyMemory 没有返回译文")
+        translated = html_lib.unescape(translated).replace("\r", "").strip()
         if translated.upper().startswith("MYMEMORY WARNING"):
             raise TranslationError("MyMemory 今日额度已用完")
         results.append(translated)

@@ -1,0 +1,1247 @@
+{
+  "entries": [
+    {
+      "id": "pt-articles",
+      "language": "pt",
+      "title": "葡萄牙语冠词",
+      "english": "Portuguese Articles",
+      "category": "限定词",
+      "cefr": "A1",
+      "formula": "o / a / os / as（定冠词）；um / uma（不定冠词）；de + o → do",
+      "summary": "葡萄牙语名词前几乎总要带冠词，冠词随性数变化。定冠词的使用频率明显高于英语，还常与介词缩合成 do、no、pelo 等形式。",
+      "sections": [
+        {
+          "heading": "定冠词",
+          "body": "o、a、os、as 随名词的性和数变化，指已知事物或整体类别。",
+          "bullets": ["o livro / a mesa / os dias", "A água está fria."]
+        },
+        {
+          "heading": "不定冠词",
+          "body": "um、uma 指不确定的个体，也兼表数量「一个」。",
+          "bullets": ["um amigo / uma ideia"]
+        },
+        {
+          "heading": "介词缩合",
+          "body": "定冠词与 de、em、por 缩合为 do/da、no/na、pelo/pela，不能拆开写成两个词。",
+          "bullets": ["do Brasil / na escola / pelo correio"]
+        }
+      ],
+      "examples": [
+        {
+          "source": "A menina comprou um livro na livraria do bairro.",
+          "translation": "女孩在街区书店买了一本书。"
+        },
+        {
+          "source": "As janelas da casa estão abertas.",
+          "translation": "房子的窗户都开着。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Vou a a escola.",
+          "right": "Vou à escola.",
+          "why": "介词 a 与阴性定冠词 a 缩合为 à，写两个 a 是拼写错误。"
+        },
+        {
+          "wrong": "Eu gosto de o café.",
+          "right": "Eu gosto do café.",
+          "why": "de + o 必须缩合为 do。"
+        }
+      ],
+      "related": ["pt-clitics"],
+      "links": [
+        {
+          "label": "Wikipedia · Portuguese grammar",
+          "url": "https://en.wikipedia.org/wiki/Portuguese_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "PortuguesePod101",
+          "url": "https://www.portuguesepod101.com/",
+          "site": "PortuguesePod101"
+        }
+      ],
+      "patterns": [
+        "\\b(?:do|da|dos|das|no|na|nos|nas|pelo|pela)\\s+[A-Za-zÀ-ÿ]+",
+        "\\b(?:um|uma)\\s+[A-Za-zÀ-ÿ]+"
+      ],
+      "sample": "A menina comprou um livro na livraria do bairro.",
+      "priority": 6,
+      "confidence": 0.86
+    },
+    {
+      "id": "pt-ser-estar",
+      "language": "pt",
+      "title": "ser 与 estar",
+      "english": "Ser vs. Estar in Portuguese",
+      "category": "动词",
+      "cefr": "A1",
+      "formula": "ser + 身份/本质；estar + 状态/地点；estar a + 不定式（进行时）",
+      "summary": "ser 表身份、来源和本质特征，estar 表临时状态与位置。葡语的进行时由 estar 加副动词或 estar a + 不定式构成。",
+      "sections": [
+        {
+          "heading": "ser",
+          "body": "用于身份、职业、国籍、本质特征和时间。",
+          "bullets": ["Sou brasileiro.", "Ela é médica."]
+        },
+        {
+          "heading": "estar",
+          "body": "用于临时状态、情绪和位置。",
+          "bullets": ["Estou cansado.", "O livro está na mesa."]
+        },
+        {
+          "heading": "进行时",
+          "body": "巴西葡语用 estar + 动名词，欧洲葡语多用 estar a + 不定式。",
+          "bullets": ["Estou estudando.（巴）", "Estou a estudar.（葡）"]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Ela é médica, mas hoje está doente.",
+          "translation": "她是医生，但今天生病了。"
+        },
+        {
+          "source": "Nós estamos em casa porque está chovendo.",
+          "translation": "我们在家，因为正在下雨。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Estou estudante.",
+          "right": "Sou estudante.",
+          "why": "身份和职业用 ser，不用 estar。"
+        },
+        {
+          "wrong": "Sou em casa.",
+          "right": "Estou em casa.",
+          "why": "表示所在位置用 estar。"
+        }
+      ],
+      "related": ["pt-preterite"],
+      "links": [
+        {
+          "label": "Wikipedia · Portuguese grammar",
+          "url": "https://en.wikipedia.org/wiki/Portuguese_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "PortuguesePod101",
+          "url": "https://www.portuguesepod101.com/",
+          "site": "PortuguesePod101"
+        }
+      ],
+      "patterns": [
+        "\\b(?:sou|és|é|somos|são|era|eram)\\s+[a-zà-ÿ]+",
+        "\\b(?:estou|estás|está|estamos|estão|estava)\\s+[a-zà-ÿ]+"
+      ],
+      "sample": "Ela é médica, mas hoje está doente.",
+      "priority": 6,
+      "confidence": 0.85
+    },
+    {
+      "id": "pt-preterite",
+      "language": "pt",
+      "title": "简单过去时",
+      "english": "Preterite (Pretérito Perfeito Simples)",
+      "category": "时态",
+      "cefr": "A2",
+      "formula": "-ar: -ei / -aste / -ou / -ámos / -aram；-er/-ir: -i / -este / -eu / -emos / -eram",
+      "summary": "表示已经结束、有明确终点的过去动作，是葡语叙事最常用的过去时。它推进事件，而 imperfeito 负责描写背景和反复习惯。",
+      "sections": [
+        {
+          "heading": "构成",
+          "body": "第一变位 -ar 加 -ei、-aste、-ou、-ámos、-aram；第二、三变位 -er/-ir 加 -i、-este、-eu、-emos、-eram。",
+          "bullets": ["falei / falou / falaram", "comi / comeu / comeram"]
+        },
+        {
+          "heading": "用法",
+          "body": "用于一次性完成、有明确时间或次数的动作。",
+          "bullets": ["Ontem cheguei tarde.", "Ela escreveu três cartas."]
+        },
+        {
+          "heading": "与未完成过去时",
+          "body": "imperfeito 铺背景和反复习惯，简单过去时讲发生的事。",
+          "bullets": ["Chovia quando saí de casa."]
+        }
+      ],
+      "examples": [
+        {
+          "source": "No ano passado viajei para o Brasil e fiquei duas semanas.",
+          "translation": "去年我去了巴西，待了两周。"
+        },
+        {
+          "source": "Ela escreveu três cartas ontem à noite.",
+          "translation": "她昨晚写了三封信。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Ontem eu falo com ela.",
+          "right": "Ontem eu falei com ela.",
+          "why": "已完成的过去动作要用简单过去时，不能用现在时。"
+        },
+        {
+          "wrong": "Todos os domingos eu comi bolo.",
+          "right": "Todos os domingos eu comia bolo.",
+          "why": "反复的习惯动作用 imperfeito。"
+        }
+      ],
+      "related": ["pt-ser-estar", "pt-future-subjunctive"],
+      "links": [
+        {
+          "label": "Wikipedia · Portuguese grammar",
+          "url": "https://en.wikipedia.org/wiki/Portuguese_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "PortuguesePod101",
+          "url": "https://www.portuguesepod101.com/",
+          "site": "PortuguesePod101"
+        }
+      ],
+      "patterns": [
+        "\\b(?!estou|sou|vou|dou)\\w{3,}(?:ei|aste|ou|ámos|aram)\\b",
+        "\\b(?:ontem|anteontem|no ano passado|na semana passada)\\b"
+      ],
+      "sample": "No ano passado viajei para o Brasil e fiquei duas semanas.",
+      "priority": 5,
+      "confidence": 0.84
+    },
+    {
+      "id": "pt-clitics",
+      "language": "pt",
+      "title": "宾格与与格代词",
+      "english": "Object Pronouns (Clitics)",
+      "category": "代词",
+      "cefr": "B1",
+      "formula": "直接宾语 o / a / os / as；间接宾语 lhe / lhes；me / te / nos / vos 两用",
+      "summary": "葡语用 o、a、os、as 代替直接宾语，用 lhe、lhes 代替间接宾语。欧洲葡语里代词多后置于动词并用连字符连接，否定句和疑问词后则前置。",
+      "sections": [
+        {
+          "heading": "形式",
+          "body": "直接宾语为 o、a、os、as；间接宾语为 lhe、lhes；me、te、nos、vos 不分宾格与格。",
+          "bullets": ["Vejo-o todos os dias.", "Dei-lhe o livro."]
+        },
+        {
+          "heading": "位置",
+          "body": "欧洲葡语肯定句常后置（ênclise），否定词、疑问词、副词之前则前置（próclise）。",
+          "bullets": ["Chamo-me Ana.", "Não o vi."]
+        },
+        {
+          "heading": "变体",
+          "body": "动词以 -s、-r、-z 结尾时 o/a 变为 -lo/-la；以鼻音结尾时变为 -no/-na。",
+          "bullets": ["Vou fazê-lo.", "Eles compraram-no."]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Ela deu-me o livro e eu devolvi-o ontem.",
+          "translation": "她把书给了我，我昨天把它还了回去。"
+        },
+        {
+          "source": "Não o encontrei em casa, por isso deixei-lhe um recado.",
+          "translation": "我在家没找到他，就给他留了言。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Eu vi ele ontem.",
+          "right": "Eu vi-o ontem.",
+          "why": "标准书面语用宾格代词 o；ele 是主格代词，口语中才常见这种用法。"
+        },
+        {
+          "wrong": "Não vi-o.",
+          "right": "Não o vi.",
+          "why": "否定词后代词要前置到动词前（próclise）。"
+        }
+      ],
+      "related": ["pt-articles"],
+      "links": [
+        {
+          "label": "Wikipedia · Portuguese grammar",
+          "url": "https://en.wikipedia.org/wiki/Portuguese_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "PortuguesePod101",
+          "url": "https://www.portuguesepod101.com/",
+          "site": "PortuguesePod101"
+        }
+      ],
+      "patterns": [
+        "\\b(?:não|nunca|já|também|só|quem|que)\\s+(?:me|te|o|a|os|as|lhe|lhes|nos)\\b",
+        "\\b[a-zà-ÿ]{2,}-(?:me|te|se|lhe|lhes|o|a|os|as|no|na|nos|nas)\\b"
+      ],
+      "sample": "Não o encontrei em casa, por isso deixei-lhe um recado.",
+      "priority": 4,
+      "confidence": 0.80
+    },
+    {
+      "id": "pt-future-subjunctive",
+      "language": "pt",
+      "title": "未来虚拟式",
+      "english": "Future Subjunctive",
+      "category": "语气",
+      "cefr": "B2",
+      "formula": "第三人称复数简单过去时词干 + -r + 人称词尾（falar → falar, falares, falarmos…）",
+      "summary": "未来虚拟式表示将来可能发生或尚未确定的事，主要出现在 se、quando、enquanto、assim que 引导的从句里。它由简单过去时第三人称复数的词干加 -r 构成。",
+      "sections": [
+        {
+          "heading": "构成",
+          "body": "取第三人称复数简单过去时去掉 -am，加 -r 和人称词尾：falar → falar、falares、falar、falarmos、falardes、falarem。",
+          "bullets": ["fizer / fizeres / fizer / fizermos / fizerem"]
+        },
+        {
+          "heading": "用法",
+          "body": "se、quando、enquanto、assim que、caso 引导的将来从句中用未来虚拟式，不用将来时。",
+          "bullets": ["Se puder, vou.", "Quando chegares, avisa-me."]
+        },
+        {
+          "heading": "与现在虚拟式",
+          "body": "现在虚拟式表当下的假设，未来虚拟式强调「一旦发生」，两者有时可替换，但语气不同。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Se souberes a resposta, diz-me.",
+          "translation": "如果你知道答案，就告诉我。"
+        },
+        {
+          "source": "Assim que chegarmos ao hotel, telefonamos para casa.",
+          "translation": "我们一到酒店就给家里打电话。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Se eu posso, eu vou.",
+          "right": "Se eu puder, eu vou.",
+          "why": "se 引导的将来条件用未来虚拟式，不用现在陈述式。"
+        },
+        {
+          "wrong": "Quando eu chegarei, telefono.",
+          "right": "Quando eu chegar, telefono.",
+          "why": "将来时间从句不用将来时，而用未来虚拟式；第一、三人称单数形式与不定式同形。"
+        }
+      ],
+      "related": ["pt-preterite"],
+      "links": [
+        {
+          "label": "Wikipedia · Portuguese grammar",
+          "url": "https://en.wikipedia.org/wiki/Portuguese_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "PortuguesePod101",
+          "url": "https://www.portuguesepod101.com/",
+          "site": "PortuguesePod101"
+        }
+      ],
+      "patterns": [
+        "\\b(?:se|quando|enquanto|assim que|logo que|caso)\\b[^.!?]{0,30}\\b\\w{2,}(?:rmos|rdes|rem|res)\\b",
+        "\\b(?:fizer|fizeres|puder|puderes|souber|souberes|tiver|vier|quiser|chegares|chegarmos)\\b"
+      ],
+      "sample": "Se souberes a resposta, diz-me.",
+      "priority": 3,
+      "confidence": 0.79
+    },
+    {
+      "id": "it-articles",
+      "language": "it",
+      "title": "意大利语冠词",
+      "english": "Italian Articles",
+      "category": "限定词",
+      "cefr": "A1",
+      "formula": "il / lo / la / l' / i / gli / le；un / uno / una / un'",
+      "summary": "意大利语定冠词随名词的性、数和词首音变化：元音开头用 l'，s+辅音、z、gn 前用 lo/gli。不定冠词同样要区分 un、uno、una、un'。",
+      "sections": [
+        {
+          "heading": "定冠词",
+          "body": "il 用于一般阳性单数，lo 用于 s+辅音、z、gn、ps 开头，la 用于阴性，元音前省音为 l'。",
+          "bullets": ["il libro / lo studente / l'amico", "i libri / gli studenti / le amiche"]
+        },
+        {
+          "heading": "不定冠词",
+          "body": "un 用于一般阳性，uno 用于 s+辅音、z、gn 开头，una 用于阴性，阴性元音前省音为 un'。",
+          "bullets": ["un libro / uno specchio / una casa / un'amica"]
+        },
+        {
+          "heading": "用法",
+          "body": "定冠词表已知事物、类别和总体概念，在表达喜好、拥有时也常用。",
+          "bullets": ["Mi piace il caffè."]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Lo studente ha comprato un libro e una penna.",
+          "translation": "那个学生买了一本书和一支笔。"
+        },
+        {
+          "source": "Gli amici di Luca sono andati al mare.",
+          "translation": "卢卡的朋友们去海边了。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Il studente",
+          "right": "Lo studente",
+          "why": "以 s+辅音、z、gn 开头的阳性单数名词用 lo。"
+        },
+        {
+          "wrong": "Un amica",
+          "right": "Un'amica",
+          "why": "阴性名词以元音开头时，una 省音为 un'。"
+        }
+      ],
+      "related": ["it-clitics"],
+      "links": [
+        {
+          "label": "Wikipedia · Italian grammar",
+          "url": "https://en.wikipedia.org/wiki/Italian_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "ItalianPod101",
+          "url": "https://www.italianpod101.com/",
+          "site": "ItalianPod101"
+        }
+      ],
+      "patterns": [
+        "\\b(?:il|lo|la|i|gli|le)\\s+[A-Za-zÀ-ÿ]+",
+        "\\b(?:un|uno|una)\\s+[A-Za-zÀ-ÿ]+",
+        "\\b(?:l|un|all|dell|nell|sull)'[A-Za-zÀ-ÿ]+"
+      ],
+      "sample": "Lo studente ha comprato un libro e una penna.",
+      "priority": 6,
+      "confidence": 0.87
+    },
+    {
+      "id": "it-passato-prossimo",
+      "language": "it",
+      "title": "近过去时",
+      "english": "Passato Prossimo",
+      "category": "时态",
+      "cefr": "A2",
+      "formula": "avere / essere 的现在时 + 过去分词",
+      "summary": "意大利语最常用的过去时，表示已完成的动作。多数动词用 avere，表移动、变化、状态的不及物动词和反身动词用 essere，此时过去分词要与主语性数一致。",
+      "sections": [
+        {
+          "heading": "构成",
+          "body": "助动词 avere 或 essere 的现在时加 participio passato。",
+          "bullets": ["ho mangiato", "sono andato / sono andata"]
+        },
+        {
+          "heading": "助动词选择",
+          "body": "及物动词用 avere；表移动、变化、状态的不及物动词（andare、arrivare、partire、venire）和反身动词用 essere。",
+          "bullets": ["Siamo partiti alle otto.", "Si è svegliata tardi."]
+        },
+        {
+          "heading": "不规则分词",
+          "body": "fare → fatto，vedere → visto，prendere → preso，scrivere → scritto。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Ieri ho visto un film molto bello.",
+          "translation": "昨天我看了一部非常好的电影。"
+        },
+        {
+          "source": "Maria è arrivata tardi perché il treno era in ritardo.",
+          "translation": "玛丽亚迟到了，因为火车晚点。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Ho andato al cinema.",
+          "right": "Sono andato al cinema.",
+          "why": "andare 表移动，用 essere 作助动词。"
+        },
+        {
+          "wrong": "Maria è arrivato tardi.",
+          "right": "Maria è arrivata tardi.",
+          "why": "essere 作助动词时，过去分词要与主语的性数一致。"
+        }
+      ],
+      "related": ["it-imperfetto"],
+      "links": [
+        {
+          "label": "Wikipedia · Italian grammar",
+          "url": "https://en.wikipedia.org/wiki/Italian_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "ItalianPod101",
+          "url": "https://www.italianpod101.com/",
+          "site": "ItalianPod101"
+        }
+      ],
+      "patterns": [
+        "\\b(?:ho|hai|ha|abbiamo|avete|hanno)\\s+(?:non\\s+)?\\w+(?:ato|uto|ito|atto|etto|otto|so|to)\\b",
+        "\\b(?:sono|sei|è|siamo|siete)\\s+(?:andat|arrivat|partit|stat|venut|tornat|rimast)\\w*\\b"
+      ],
+      "sample": "Ieri ho visto un film molto bello.",
+      "priority": 6,
+      "confidence": 0.86
+    },
+    {
+      "id": "it-imperfetto",
+      "language": "it",
+      "title": "未完成过去时",
+      "english": "Imperfetto",
+      "category": "时态·体",
+      "cefr": "A2",
+      "formula": "-are → -avo 系列；-ere → -evo；-ire → -ivo",
+      "summary": "表示过去的持续状态、反复习惯或叙事背景，不强调动作完成。常与 passato prossimo 配合：imperfetto 铺场景，passato prossimo 推进事件。",
+      "sections": [
+        {
+          "heading": "构成",
+          "body": "去掉不定式词尾，加 -avo/-evo/-ivo 系列词尾；essere 变为 ero、eri、era、eravamo、erano。",
+          "bullets": ["parlavo / parlavi / parlava", "facevo / dicevo / bevevo"]
+        },
+        {
+          "heading": "用法",
+          "body": "描写天气、年龄、情绪、外貌，以及过去反复发生的习惯动作。",
+          "bullets": ["Da bambino giocavo a calcio.", "Fuori pioveva e faceva freddo."]
+        },
+        {
+          "heading": "与近过去时",
+          "body": "背景用 imperfetto，突然发生、有结果的事件用 passato prossimo。",
+          "bullets": ["Leggevo quando ha squillato il telefono."]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Quando ero piccolo, andavo spesso in bicicletta.",
+          "translation": "我小时候常骑自行车。"
+        },
+        {
+          "source": "Mentre cucinavo, è arrivato mio fratello.",
+          "translation": "我正在做饭时，我弟弟到了。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Da bambino ho giocato a calcio ogni giorno.",
+          "right": "Da bambino giocavo a calcio ogni giorno.",
+          "why": "反复的习惯动作用 imperfetto，不用近过去时。"
+        },
+        {
+          "wrong": "Ieri sera guardavo un film intero.",
+          "right": "Ieri sera ho guardato un film intero.",
+          "why": "有明确终点的一次性动作用 passato prossimo。"
+        }
+      ],
+      "related": ["it-passato-prossimo"],
+      "links": [
+        {
+          "label": "Wikipedia · Italian grammar",
+          "url": "https://en.wikipedia.org/wiki/Italian_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Lawless Italian · Imperfetto",
+          "url": "https://www.lawlessitalian.com/grammar/verbs/imperfect/",
+          "site": "Lawless Italian"
+        }
+      ],
+      "patterns": [
+        "\\b\\w{2,}(?:avo|avi|ava|avamo|avate|avano|evo|evi|eva|evamo|evano|ivo|ivi|iva|ivamo|ivano)\\b",
+        "\\b(?:ero|eri|era|eravamo|eravate|erano)\\b"
+      ],
+      "sample": "Mentre cucinavo, è arrivato mio fratello.",
+      "priority": 5,
+      "confidence": 0.85
+    },
+    {
+      "id": "it-congiuntivo",
+      "language": "it",
+      "title": "虚拟式",
+      "english": "Congiuntivo (Subjunctive)",
+      "category": "语气",
+      "cefr": "B1",
+      "formula": "che + 主语 + congiuntivo presente",
+      "summary": "虚拟式表达愿望、怀疑、情绪、必要性和非现实，通常出现在 che 引导的从句中。主句若是过去时，从句多用 congiuntivo imperfetto 或 trapassato。",
+      "sections": [
+        {
+          "heading": "构成",
+          "body": "-are 动词：parli、parli、parli、parliamo、parliate、parlino；-ere/-ire 动词：prenda、parta。",
+          "bullets": ["che io parli", "che tu venga"]
+        },
+        {
+          "heading": "触发语境",
+          "body": "愿望、情绪、判断、必要性与不确定：sperare che、volere che、è importante che、pensare che。",
+          "bullets": ["Spero che tu stia bene.", "È importante che studiate."]
+        },
+        {
+          "heading": "时态配合",
+          "body": "主句是过去时，从句一般用 congiuntivo imperfetto 或 trapassato。",
+          "bullets": ["Pensavo che fosse tardi."]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Spero che tu possa venire alla festa.",
+          "translation": "我希望你能来参加聚会。"
+        },
+        {
+          "source": "È meglio che partiamo prima delle sei.",
+          "translation": "我们最好六点前出发。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Spero che tu puoi venire.",
+          "right": "Spero che tu possa venire.",
+          "why": "sperare che 后面的从句要用虚拟式。"
+        },
+        {
+          "wrong": "Penso che è tardi.",
+          "right": "Penso che sia tardi.",
+          "why": "pensare che 后标准意大利语用虚拟式。"
+        }
+      ],
+      "related": ["it-imperfetto"],
+      "links": [
+        {
+          "label": "Wikipedia · Italian grammar",
+          "url": "https://en.wikipedia.org/wiki/Italian_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "ItalianPod101",
+          "url": "https://www.italianpod101.com/",
+          "site": "ItalianPod101"
+        }
+      ],
+      "patterns": [
+        "\\bche\\s+(?:io|tu|lui|lei|noi|voi|loro)?\\s*\\b(?:sia|siano|possa|possiate|venga|vengano|fosse|parli|parta|stia|abbia|debba|faccia)\\b",
+        "\\b(?:spero|speriamo|penso|credo|voglio|vogliamo|è importante|è meglio|è necessario|benche|benché|prima che)\\b[^.!?]{0,40}\\bche\\b"
+      ],
+      "sample": "Spero che tu possa venire alla festa.",
+      "priority": 5,
+      "confidence": 0.83
+    },
+    {
+      "id": "it-clitics",
+      "language": "it",
+      "title": "代词",
+      "english": "Object Pronouns (Clitics)",
+      "category": "代词",
+      "cefr": "A2",
+      "formula": "mi / ti / lo / la / ci / vi / li / le；gli / le（间接）",
+      "summary": "直接宾语代词为 mi、ti、lo、la、ci、vi、li、le，间接宾语为 mi、ti、gli、le、ci、vi、gli。代词一般紧贴变位动词之前，不定式、命令式和副动词后则连写在词尾。",
+      "sections": [
+        {
+          "heading": "形式",
+          "body": "直接宾语代词看性数，间接宾语第三人称单数为 gli（阳）/ le（阴），复数为 gli。",
+          "bullets": ["Lo vedo ogni giorno.", "Gli telefono stasera."]
+        },
+        {
+          "heading": "位置",
+          "body": "放在变位动词前；不定式、命令式、副动词之后连写在词尾。",
+          "bullets": ["Voglio vederlo.", "Dimmelo!"]
+        },
+        {
+          "heading": "组合",
+          "body": "间接宾语排在直接宾语前，mi、ti、gli、le 变为 me、te、glie：me lo、te lo、glielo。",
+          "bullets": ["Me lo dai?", "Gliel'ho detto ieri."]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Il libro? L'ho già letto.",
+          "translation": "那本书？我已经读过了。"
+        },
+        {
+          "source": "Se vedi tua sorella, puoi dirle che la chiamo stasera?",
+          "translation": "如果你见到你姐姐，能告诉她我今晚给她打电话吗？"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Conosco lui bene.",
+          "right": "Lo conosco bene.",
+          "why": "直接宾语要用宾格代词 lo；lui 是主语代词，只在对比强调时使用。"
+        },
+        {
+          "wrong": "Ho telefonato gli.",
+          "right": "Gli ho telefonato.",
+          "why": "间接宾语代词 gli 放在变位动词之前。"
+        }
+      ],
+      "related": ["it-articles"],
+      "links": [
+        {
+          "label": "Wikipedia · Italian grammar",
+          "url": "https://en.wikipedia.org/wiki/Italian_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "ItalianPod101",
+          "url": "https://www.italianpod101.com/",
+          "site": "ItalianPod101"
+        }
+      ],
+      "patterns": [
+        "\\b(?:mi|ti|ci|vi|gli)\\s+[a-zà-ÿ]{3,}(?:o|i|a|iamo|ate|ano|ono)\\b",
+        "\\b[a-zà-ÿ]{2,}(?:rlo|rla|rli|rle|rmi|rti|rci|rvi)\\b",
+        "\\b(?:l|m|t|c|v|n)'(?:ho|hai|ha|abbiamo|avete|hanno|è|era|erano)\\b"
+      ],
+      "sample": "Il libro? L'ho già letto.",
+      "priority": 4,
+      "confidence": 0.82
+    },
+    {
+      "id": "fr-imparfait",
+      "language": "fr",
+      "title": "未完成过去时",
+      "english": "Imparfait",
+      "category": "时态·体",
+      "cefr": "A2",
+      "formula": "nous 现在时词干 + -ais / -ais / -ait / -ions / -iez / -aient",
+      "summary": "表示过去的持续状态、反复习惯或叙事背景，不强调动作完成。与 passé composé 分工明确：imparfait 铺背景，passé composé 讲事件。",
+      "sections": [
+        {
+          "heading": "构成",
+          "body": "取 nous 现在时去掉 -ons 再加词尾；être 是唯一不规则动词，词干为 ét-。",
+          "bullets": ["je parlais / tu parlais / il parlait", "nous parlions / ils parlaient"]
+        },
+        {
+          "heading": "用法",
+          "body": "描写年龄、天气、情绪、外貌，以及过去反复发生的习惯动作。",
+          "bullets": ["Quand j'étais petit, je jouais au foot.", "Il pleuvait et il faisait froid."]
+        },
+        {
+          "heading": "与复合过去时",
+          "body": "背景用 imparfait，打断背景的事件用 passé composé。",
+          "bullets": ["Je lisais quand le téléphone a sonné."]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Quand j'étais enfant, nous habitions près de la mer.",
+          "translation": "我小时候，我们住在海边附近。"
+        },
+        {
+          "source": "Elle préparait le dîner quand son frère est arrivé.",
+          "translation": "她弟弟到的时候，她正在做晚饭。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Quand j'étais petit, j'ai joué au foot tous les jours.",
+          "right": "Quand j'étais petit, je jouais au foot tous les jours.",
+          "why": "反复的习惯动作用 imparfait，不用复合过去时。"
+        },
+        {
+          "wrong": "Hier soir, nous parlions pendant deux heures.",
+          "right": "Hier soir, nous avons parlé pendant deux heures.",
+          "why": "有明确时长和终点的一次性动作用 passé composé。"
+        }
+      ],
+      "related": ["fr-passe-compose"],
+      "links": [
+        {
+          "label": "Lawless French · Imperfect",
+          "url": "https://www.lawlessfrench.com/grammar/imperfect/",
+          "site": "Lawless French"
+        },
+        {
+          "label": "Wikipedia · French grammar",
+          "url": "https://en.wikipedia.org/wiki/French_grammar",
+          "site": "Wikipedia"
+        }
+      ],
+      "patterns": [
+        "\\b(?:je|tu|il|elle|on|nous|vous|ils|elles)\\s+\\w+(?:ais|ait|ions|iez|aient)\\b",
+        "\\b(?:étai|étais|était|étions|étiez|étaient)\\b"
+      ],
+      "sample": "Quand j'étais enfant, nous habitions près de la mer.",
+      "priority": 5,
+      "confidence": 0.87
+    },
+    {
+      "id": "fr-subjonctif",
+      "language": "fr",
+      "title": "虚拟式",
+      "english": "Subjunctive (Subjonctif)",
+      "category": "语气",
+      "cefr": "B1",
+      "formula": "que + 主语 + subjonctif présent",
+      "summary": "虚拟式表达愿望、必要、怀疑、情绪或评价，通常出现在 que 引导的从句中。常见触发结构有 il faut que、vouloir que、bien que、avant que。",
+      "sections": [
+        {
+          "heading": "构成",
+          "body": "取 ils 现在时词干加 -e、-es、-e、-ions、-iez、-ent；nous/vous 形式与 imparfait 词干相同。",
+          "bullets": ["que je parle / que nous parlions", "que je sois / qu'il ait"]
+        },
+        {
+          "heading": "触发词",
+          "body": "愿望、必要、情绪、怀疑，以及部分连词（bien que、avant que、pour que）。",
+          "bullets": ["Il faut que tu partes.", "Bien qu'il soit fatigué, il travaille."]
+        },
+        {
+          "heading": "不规则",
+          "body": "être：sois、sois、soit、soyons、soyez、soient；avoir：aie、aies、ait、ayons、ayez、aient；aller：aille。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Il faut que nous finissions ce projet avant vendredi.",
+          "translation": "我们必须在周五前完成这个项目。"
+        },
+        {
+          "source": "Je doute qu'il vienne ce soir.",
+          "translation": "我怀疑他今晚会来。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Il faut que tu viens.",
+          "right": "Il faut que tu viennes.",
+          "why": "il faut que 后面的从句要用虚拟式。"
+        },
+        {
+          "wrong": "Bien qu'il est malade, il travaille.",
+          "right": "Bien qu'il soit malade, il travaille.",
+          "why": "bien que 引导的让步从句要用虚拟式。"
+        }
+      ],
+      "related": ["fr-imparfait"],
+      "links": [
+        {
+          "label": "Lawless French · Subjunctive",
+          "url": "https://www.lawlessfrench.com/grammar/subjunctive/",
+          "site": "Lawless French"
+        },
+        {
+          "label": "Wikipedia · French grammar",
+          "url": "https://en.wikipedia.org/wiki/French_grammar",
+          "site": "Wikipedia"
+        }
+      ],
+      "patterns": [
+        "\\b(?:il faut|bien que|quoique|avant que|pour que|à condition que|il est important|je veux|je doute|il vaut mieux)\\b",
+        "\\bque\\s+(?:je|tu|il|elle|on|nous|vous|ils|elles)\\s+\\w+(?:e|es|ions|iez|ent)\\b"
+      ],
+      "sample": "Il faut que nous finissions ce projet avant vendredi.",
+      "priority": 5,
+      "confidence": 0.86
+    },
+    {
+      "id": "fr-object-pronouns",
+      "language": "fr",
+      "title": "宾语代词",
+      "english": "Object Pronouns",
+      "category": "代词",
+      "cefr": "A2",
+      "formula": "me / te / le / la / nous / vous / les（直接）；lui / leur（间接）",
+      "summary": "直接宾语代词 me、te、le、la、nous、vous、les 要看性数，间接宾语用 lui（单数）和 leur（复数），不分性别。代词放在变位动词前，复合时态中放在助动词前。",
+      "sections": [
+        {
+          "heading": "形式",
+          "body": "第三人称直接宾语 le/la/les 随名词性数变化；间接宾语 lui/leur 只分单复数。",
+          "bullets": ["Je le vois. / Je la vois. / Je les vois.", "Je lui parle. / Je leur parle."]
+        },
+        {
+          "heading": "位置",
+          "body": "放在变位动词前；否定句中夹在 ne 和动词之间；复合时态中放在助动词前。",
+          "bullets": ["Je ne le connais pas.", "Je lui ai écrit hier."]
+        },
+        {
+          "heading": "省音与命令式",
+          "body": "me、te 在元音前省音为 m'、t'；肯定命令式中代词后置，并使用重读形 moi、toi。",
+          "bullets": ["Il m'a appelé.", "Donne-le-moi."]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Ce livre, je l'ai lu l'année dernière.",
+          "translation": "这本书，我去年读过了。"
+        },
+        {
+          "source": "Elle leur a expliqué la règle deux fois.",
+          "translation": "她给他们解释了这条规则两遍。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Je lui vois.",
+          "right": "Je le vois.",
+          "why": "直接宾语用 le/la/les，lui 只能作间接宾语。"
+        },
+        {
+          "wrong": "Je le parle.",
+          "right": "Je lui parle.",
+          "why": "parler à quelqu'un 是间接及物结构，代词用 lui。"
+        }
+      ],
+      "related": ["fr-negation"],
+      "links": [
+        {
+          "label": "Lawless French · Object pronouns",
+          "url": "https://www.lawlessfrench.com/grammar/object-pronouns/",
+          "site": "Lawless French"
+        },
+        {
+          "label": "Wikipedia · French grammar",
+          "url": "https://en.wikipedia.org/wiki/French_grammar",
+          "site": "Wikipedia"
+        }
+      ],
+      "patterns": [
+        "\\b(?:je|tu|il|elle|on|nous|vous|ils|elles)\\s+(?:ne\\s+)?(?:le|la|les|lui|leur)\\s+[a-zà-ÿ']+",
+        "\\b(?:je|tu|il|elle|on)\\s+(?:ne\\s+)?[lmt]'(?:ai|as|a|avons|avez|ont)\\b"
+      ],
+      "sample": "Ce livre, je l'ai lu l'année dernière.",
+      "priority": 5,
+      "confidence": 0.85
+    },
+    {
+      "id": "fr-negation",
+      "language": "fr",
+      "title": "否定",
+      "english": "Negation",
+      "category": "否定",
+      "cefr": "A1",
+      "formula": "ne + 变位动词 + pas（jamais / plus / rien / personne）",
+      "summary": "法语否定由 ne 和 pas 两部分夹住变位动词，其他否定词 jamais、plus、rien、personne 占据 pas 的位置。复合时态中 ne 在助动词前，pas 在助动词后。",
+      "sections": [
+        {
+          "heading": "基本形式",
+          "body": "ne 放在动词前，pas 放在动词后；元音开头的词前 ne 省音为 n'。",
+          "bullets": ["Je ne comprends pas.", "Il n'est pas là."]
+        },
+        {
+          "heading": "其他否定词",
+          "body": "jamais 从不、plus 不再、rien 什么也不、personne 没有人，都替代 pas 的位置。",
+          "bullets": ["Je ne fume plus.", "Elle ne dit rien."]
+        },
+        {
+          "heading": "复合时态",
+          "body": "ne 在助动词前，pas 在助动词与过去分词之间；不定式否定时两者一起放在动词前。",
+          "bullets": ["Je n'ai pas compris.", "Ne pas fumer ici."]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Je n'ai pas encore fini mes devoirs.",
+          "translation": "我还没写完作业。"
+        },
+        {
+          "source": "Personne ne veut partir si tôt.",
+          "translation": "没人想这么早走。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Je ne comprends.",
+          "right": "Je ne comprends pas.",
+          "why": "标准否定需要 pas；只留 ne 是书面或方言用法。"
+        },
+        {
+          "wrong": "Je n'ai compris pas.",
+          "right": "Je n'ai pas compris.",
+          "why": "复合时态中 pas 放在助动词后、过去分词前。"
+        }
+      ],
+      "related": ["fr-object-pronouns"],
+      "links": [
+        {
+          "label": "Lawless French · Negation",
+          "url": "https://www.lawlessfrench.com/grammar/negation/",
+          "site": "Lawless French"
+        },
+        {
+          "label": "Wikipedia · French grammar",
+          "url": "https://en.wikipedia.org/wiki/French_grammar",
+          "site": "Wikipedia"
+        }
+      ],
+      "patterns": [
+        "\\bne\\s+\\w+\\s+(?:pas|jamais|plus|rien|personne)\\b",
+        "\\bn'\\w+\\s+(?:pas|jamais|plus|rien|personne)\\b"
+      ],
+      "sample": "Je n'ai pas encore fini mes devoirs.",
+      "priority": 6,
+      "confidence": 0.88
+    },
+    {
+      "id": "es-preterite-imperfect",
+      "language": "es",
+      "title": "简单过去时与未完成过去时",
+      "english": "Preterite vs. Imperfect",
+      "category": "时态·体",
+      "cefr": "B1",
+      "formula": "pretérito indefinido（事件）/ imperfecto（背景与习惯）",
+      "summary": "西班牙语有两套简单过去时：简单过去时讲已经结束、推进叙事的事件，未完成过去时描写背景、状态和反复习惯。选错时态常比变位错误更影响表达。",
+      "sections": [
+        {
+          "heading": "简单过去时",
+          "body": "用于一次性、有明确终点的事件。规则变位 hablé、hablaste、habló；ir 和 ser 都是 fui、fuiste、fue。",
+          "bullets": ["Ayer fui al médico.", "Ella escribió tres correos."]
+        },
+        {
+          "heading": "未完成过去时",
+          "body": "用于背景、状态和反复习惯：hablaba、hablabas、hablaba；ser → era，ir → iba。",
+          "bullets": ["Cuando era niño, jugaba al fútbol.", "Llovía y hacía frío."]
+        },
+        {
+          "heading": "叙事分工",
+          "body": "同一段话里未完成过去时铺场景，简单过去时推进情节。",
+          "bullets": ["Leía cuando sonó el teléfono."]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Cuando era niño, iba a la playa todos los veranos.",
+          "translation": "我小时候每年夏天都去海边。"
+        },
+        {
+          "source": "Anoche estudiaba cuando se fue la luz.",
+          "translation": "昨晚我正在学习时停电了。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Cuando era niño, fui a la playa todos los veranos.",
+          "right": "Cuando era niño, iba a la playa todos los veranos.",
+          "why": "反复的习惯动作用未完成过去时。"
+        },
+        {
+          "wrong": "Ayer leía un libro entero.",
+          "right": "Ayer leí un libro entero.",
+          "why": "有明确终点的一次性动作用简单过去时。"
+        }
+      ],
+      "related": ["es-ser-estar"],
+      "links": [
+        {
+          "label": "SpanishDict · Preterite vs. Imperfect",
+          "url": "https://www.spanishdict.com/guide/spanish-preterite-vs-imperfect",
+          "site": "SpanishDict"
+        },
+        {
+          "label": "Wikipedia · Spanish grammar",
+          "url": "https://en.wikipedia.org/wiki/Spanish_grammar",
+          "site": "Wikipedia"
+        }
+      ],
+      "patterns": [
+        "\\b(?:hablé|hablaste|habló|comí|comiste|comió|escribí|escribió|fui|fuiste|fue|leí|leyó|estudié|estudió|compré|compró)\\b",
+        "\\b(?:hablaba|hablabas|hablábamos|comía|comías|era|eran|iba|íbamos|llovía|hacía|jugaba|leía|estudiaba|tenía)\\b"
+      ],
+      "sample": "Cuando era niño, iba a la playa todos los veranos.",
+      "priority": 6,
+      "confidence": 0.86
+    },
+    {
+      "id": "es-object-pronouns",
+      "language": "es",
+      "title": "宾语代词",
+      "english": "Object Pronouns",
+      "category": "代词",
+      "cefr": "A2",
+      "formula": "me / te / lo / la / nos / os / los / las（直接）；le / les（间接）",
+      "summary": "直接宾语代词 lo、la、los、las 随名词性数变化，间接宾语用 le、les。代词放在变位动词前，也可连在不定式、命令式和副动词后。",
+      "sections": [
+        {
+          "heading": "形式",
+          "body": "直接宾语看性数；间接宾语 le/les 不分性别。部分地区用 le 指人（leísmo），标准语仍用 lo。",
+          "bullets": ["Lo veo todos los días.", "Le escribo a mi madre."]
+        },
+        {
+          "heading": "位置",
+          "body": "放在变位动词前；不定式、命令式、副动词之后可以后置连写。",
+          "bullets": ["Quiero verlo.", "Dímelo otra vez."]
+        },
+        {
+          "heading": "组合",
+          "body": "间接宾语 le/les 在直接宾语 lo/la/los/las 前变为 se：se lo、se la。",
+          "bullets": ["Se lo expliqué ayer."]
+        }
+      ],
+      "examples": [
+        {
+          "source": "El libro lo compré en una librería del centro.",
+          "translation": "这本书我是在市中心一家书店买的。"
+        },
+        {
+          "source": "Mi hermana me prestó su bicicleta, pero ya se la devolví.",
+          "translation": "我姐姐把自行车借给了我，不过我已经还给她了。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Le veo a Juan todos los días.",
+          "right": "Lo veo todos los días.",
+          "why": "标准语中直接宾语用 lo；leísmo 只通行于西班牙部分地区。"
+        },
+        {
+          "wrong": "Le lo dije ayer.",
+          "right": "Se lo dije ayer.",
+          "why": "间接宾语 le/les 在直接宾语 lo/la 前必须变为 se。"
+        }
+      ],
+      "related": ["es-reflexive"],
+      "links": [
+        {
+          "label": "SpanishDict · Object Pronouns",
+          "url": "https://www.spanishdict.com/guide/spanish-object-pronouns",
+          "site": "SpanishDict"
+        },
+        {
+          "label": "Wikipedia · Spanish grammar",
+          "url": "https://en.wikipedia.org/wiki/Spanish_grammar",
+          "site": "Wikipedia"
+        }
+      ],
+      "patterns": [
+        "\\b(?:me|te|se|nos|os)\\s+(?:lo|la|los|las)\\b",
+        "\\b(?:me|te|nos|os|le|les)\\s+[a-záéíóúñ]{3,}(?:o|as|a|amos|áis|an|en)\\b",
+        "\\b[a-záéíóúñ]{3,}(?:rlo|rla|rlos|rlas|rme|rte|rnos)\\b"
+      ],
+      "sample": "Mi hermana me prestó su bicicleta, pero ya se la devolví.",
+      "priority": 5,
+      "confidence": 0.84
+    },
+    {
+      "id": "es-reflexive",
+      "language": "es",
+      "title": "自复动词",
+      "english": "Reflexive Verbs",
+      "category": "语态",
+      "cefr": "A2",
+      "formula": "动词 + se，按人称变 me / te / se / nos / os / se",
+      "summary": "自复代词表示动作回到主语自身，也用于相互动作、无人称或被动结构，以及改变词义的动词（irse、ponerse、quedarse）。代词位置与宾语代词相同。",
+      "sections": [
+        {
+          "heading": "构成",
+          "body": "及物动词加上自复代词，代词随主语的人称变化。",
+          "bullets": ["Me lavo las manos.", "Se despertó tarde."]
+        },
+        {
+          "heading": "意义类型",
+          "body": "真正自复、相互动作、被动或无人称（se vende、se habla），以及词义转移（ir 去 → irse 离开）。",
+          "bullets": ["Se ayudan mucho.", "Aquí se habla español."]
+        },
+        {
+          "heading": "位置",
+          "body": "放在变位动词前；不定式和肯定命令式之后连写。",
+          "bullets": ["Voy a ducharme.", "Siéntate aquí."]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Cada mañana me levanto a las siete y me ducho.",
+          "translation": "每天早上我七点起床，然后洗澡。"
+        },
+        {
+          "source": "Aquí se hablan dos idiomas.",
+          "translation": "这里通行两种语言。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Yo lavo las manos.",
+          "right": "Me lavo las manos.",
+          "why": "动作作用于自身，必须加自复代词 me。"
+        },
+        {
+          "wrong": "Voy a me duchar.",
+          "right": "Voy a ducharme.",
+          "why": "不定式后的自复代词要连写在动词词尾。"
+        }
+      ],
+      "related": ["es-object-pronouns"],
+      "links": [
+        {
+          "label": "SpanishDict · Reflexive Verbs",
+          "url": "https://www.spanishdict.com/guide/spanish-reflexive-verbs",
+          "site": "SpanishDict"
+        },
+        {
+          "label": "Wikipedia · Spanish grammar",
+          "url": "https://en.wikipedia.org/wiki/Spanish_grammar",
+          "site": "Wikipedia"
+        }
+      ],
+      "patterns": [
+        "\\b(?:me|te|se|nos|os)\\s+[a-záéíóúñ]{3,}(?:o|as|a|amos|áis|an|en)\\b",
+        "\\b[a-záéíóúñ]{3,}(?:rme|rte|rse|rnos)\\b",
+        "\\bse\\s+(?:vende|venden|habla|hablan|puede|dice|alquila)\\b"
+      ],
+      "sample": "Cada mañana me levanto a las siete y me ducho.",
+      "priority": 5,
+      "confidence": 0.83
+    },
+    {
+      "id": "es-por-para",
+      "language": "es",
+      "title": "por 与 para",
+      "english": "Por vs. Para",
+      "category": "介词",
+      "cefr": "A2",
+      "formula": "por + 原因/交换/途径；para + 目的/对象/期限",
+      "summary": "por 指向原因、交换、途径和大致时间，para 指向目的、接受者、用途和期限。两者都可能译成「为了」，要靠功能而不是中文语感来选。",
+      "sections": [
+        {
+          "heading": "por",
+          "body": "用于原因、感谢、交换、方式、经过和大致时间段。",
+          "bullets": ["Gracias por tu ayuda.", "Pagué veinte euros por el libro.", "Caminamos por el parque."]
+        },
+        {
+          "heading": "para",
+          "body": "用于目的、接受者、用途、期限和去向。",
+          "bullets": ["Estudio para aprender.", "Este regalo es para ti.", "Salgo para Madrid mañana."]
+        },
+        {
+          "heading": "对比",
+          "body": "por 回答「为什么/因为」，para 回答「为了什么/给谁」。",
+          "bullets": ["Lo hice por ti.（因为你）", "Lo compré para ti.（给你）"]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Gracias por venir; este regalo es para ti.",
+          "translation": "谢谢你来；这个礼物是给你的。"
+        },
+        {
+          "source": "Estudiamos español para trabajar en Argentina.",
+          "translation": "我们学西班牙语是为了在阿根廷工作。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Gracias para tu ayuda.",
+          "right": "Gracias por tu ayuda.",
+          "why": "表示感谢的原因用 por。"
+        },
+        {
+          "wrong": "Este regalo es por ti.",
+          "right": "Este regalo es para ti.",
+          "why": "表示接受者用 para；por ti 是「为了你/代替你」，语义不同。"
+        }
+      ],
+      "related": ["es-object-pronouns"],
+      "links": [
+        {
+          "label": "SpanishDict · Por vs. Para",
+          "url": "https://www.spanishdict.com/guide/por-vs-para",
+          "site": "SpanishDict"
+        },
+        {
+          "label": "Wikipedia · Spanish grammar",
+          "url": "https://en.wikipedia.org/wiki/Spanish_grammar",
+          "site": "Wikipedia"
+        }
+      ],
+      "patterns": [
+        "\\bpor\\s+[a-záéíóúñ]{3,}\\b",
+        "\\bpara\\s+[a-záéíóúñ]{2,}\\b"
+      ],
+      "sample": "Gracias por venir; este regalo es para ti.",
+      "priority": 6,
+      "confidence": 0.85
+    }
+  ]
+}

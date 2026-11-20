@@ -1,6 +1,6 @@
 /* Minimal service worker: network-first so a local update is never stale. */
-const CACHE = 'lingualens-v4';
-const SHELL = ['/', '/assets/app.css', '/assets/app.js', '/favicon.svg', '/manifest.webmanifest'];
+const CACHE = 'lingualens-v7';
+const SHELL = ['/', '/assets/app.css', '/assets/workbench.css', '/assets/app.js', '/favicon.svg', '/manifest.webmanifest'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(SHELL)).then(() => self.skipWaiting()));

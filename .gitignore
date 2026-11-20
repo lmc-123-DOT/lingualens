@@ -11,6 +11,10 @@ build/
 *.db
 *.db-shm
 *.db-wal
+lexicon/lexicon.db
+lexicon/*.sqlite
+lexicon/*.json
+lexicon/*.csv
 .DS_Store
 Thumbs.db
 

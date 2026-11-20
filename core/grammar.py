@@ -9,7 +9,8 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
-from grammar_data import GRAMMAR, get as get_grammar
+from grammar_data import GRAMMAR, detection_entries, get as get_grammar
+from .languages import GRAMMAR_LANGUAGE_NAMES, GRAMMAR_LANGUAGE_ORDER, grammar_catalog
 from .text import detect_language, split_blocks, split_sentences
 
 
@@ -168,9 +169,38 @@ RULES = {
     "ko": KO_RULES, "fr": FR_RULES, "de": DE_RULES, "es": ES_RULES, "ru": RU_RULES,
 }
 
+
+def _install_data_rules() -> None:
+    """Turn ``patterns`` in the grammar atlas into detector rules.
+
+    Entries can ship their own regex so adding a language is a data change, not
+    a second code change.  Invalid patterns fail at startup with the grammar id
+    attached, which is far easier to fix than a silent false negative.
+    """
+    installed: dict[str, set[str]] = {lang: {r.gid for r in rules} for lang, rules in RULES.items()}
+    for entry in detection_entries():
+        lang = entry["language"]
+        patterns = [p for p in entry.get("patterns", []) if isinstance(p, str) and p.strip()]
+        if not patterns or entry["id"] in installed.setdefault(lang, set()):
+            continue
+        try:
+            rule = Rule(
+                entry["id"], patterns,
+                confidence=float(entry.get("confidence", 0.76)),
+                priority=int(entry.get("priority", 4)),
+            )
+        except re.error as exc:  # pragma: no cover - authoring guard
+            raise RuntimeError(f"Invalid regex in grammar {entry['id']}: {exc}") from exc
+        RULES.setdefault(lang, []).append(rule)
+        installed[lang].add(entry["id"])
+
+
+_install_data_rules()
+
 MAX_POINTS = 24
 MAX_OCCURRENCES = 4
-LANG_SHORT = {"en": "en", "ja": "ja", "zh": "zh", "zh-CN": "zh", "zh-TW": "zh", "ko": "ko", "fr": "fr", "de": "de", "es": "es", "ru": "ru"}
+LANG_SHORT = {code: code for code in GRAMMAR_LANGUAGE_ORDER}
+LANG_SHORT.update({"zh-CN": "zh", "zh-TW": "zh"})
 
 
 def _sentence_rows(text: str) -> list[dict]:
@@ -257,13 +287,14 @@ def detail(grammar_id: str) -> dict | None:
 
 
 def all_library() -> list[dict]:
-    language_order = {"en": 0, "ja": 1, "zh": 2, "ko": 3, "fr": 4, "de": 5, "es": 6, "ru": 7}
+    language_order = {code: index for index, code in enumerate(GRAMMAR_LANGUAGE_ORDER)}
     category_order = {
-        "时态": 0, "时态·体": 1, "语态": 2, "语气": 3, "从句": 4, "句法": 5,
-        "句式": 6, "非谓语": 7, "助词": 8, "助动词": 9, "接续": 10, "条件": 11,
-        "动词": 12, "名词": 13, "代词": 14, "形容词": 15, "副词": 16, "介词": 17,
-        "限定词": 18, "数量词": 19, "比较": 20, "强调": 21, "复句": 22, "补语": 23,
-        "量词": 24, "语序": 25, "敬语": 26, "授受": 27, "格": 28, "名词化": 29,
+        "时态": 0, "时态·体": 1, "体": 2, "语态": 3, "语气": 4, "从句": 5,
+        "句法": 6, "句式": 7, "非谓语": 8, "助词": 9, "助动词": 10, "接续": 11,
+        "条件": 12, "动词": 13, "名词": 14, "代词": 15, "形容词": 16, "副词": 17,
+        "介词": 18, "后置词": 19, "限定词": 20, "数量词": 21, "比较": 22,
+        "强调": 23, "复句": 24, "补语": 25, "量词": 26, "语序": 27, "敬语": 28,
+        "授受": 29, "格": 30, "名词化": 31, "构词": 32, "否定": 33, "疑问": 34,
     }
     return sorted(GRAMMAR.values(), key=lambda e: (
         language_order.get(e["language"], 99),
@@ -278,4 +309,10 @@ def library_stats() -> dict:
     for e in GRAMMAR.values():
         by_language[e["language"]] = by_language.get(e["language"], 0) + 1
         by_category[e["category"]] = by_category.get(e["category"], 0) + 1
-    return {"total": len(GRAMMAR), "byLanguage": by_language, "byCategory": by_category}
+    return {
+        "total": len(GRAMMAR),
+        "byLanguage": by_language,
+        "byCategory": by_category,
+        "languageNames": dict(GRAMMAR_LANGUAGE_NAMES),
+        "languages": grammar_catalog(by_language),
+    }

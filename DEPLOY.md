@@ -1,4 +1,4 @@
-# 语镜公网部署（GitHub + Render）
+﻿# 语镜公网部署（GitHub + Render）
 
 > **GitHub 本身不能跑这个后端。** GitHub 是代码仓库；GitHub Pages 只能放静态网页，跑不了 Python、SQLite、翻译代理和查词接口。正确做法是：**代码放 GitHub，Render 从 GitHub 拉取并运行 Docker 服务**。
 
@@ -14,7 +14,7 @@
 cd "D:\大肥鱼\语镜翻译"
 git init
 git add .
-git commit -m "LinguaLens v1.0.0"
+git commit -m "LinguaLens v2.0.0"
 git branch -M main
 git remote add origin https://github.com/你的用户名/lingualens.git
 git push -u origin main

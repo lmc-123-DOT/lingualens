@@ -82,6 +82,21 @@ def init() -> None:
             payload TEXT NOT NULL,
             created_at TEXT NOT NULL
         );
+        CREATE TABLE IF NOT EXISTS notebook (
+            word_key TEXT PRIMARY KEY,
+            lang TEXT NOT NULL,
+            word TEXT NOT NULL,
+            reading TEXT DEFAULT '',
+            level TEXT DEFAULT '',
+            pos TEXT DEFAULT '',
+            meaning TEXT DEFAULT '',
+            example TEXT DEFAULT '',
+            context TEXT DEFAULT '',
+            added_at TEXT NOT NULL,
+            known INTEGER DEFAULT 0,
+            review_count INTEGER DEFAULT 0
+        );
+        CREATE INDEX IF NOT EXISTS idx_notebook_added ON notebook(added_at DESC);
         """)
 
 
@@ -322,3 +337,51 @@ def get_ai_grammar(grammar_id: str) -> dict | None:
         return json.loads(row["payload"])
     except Exception:
         return None
+
+
+def notebook_key(lang: str, word: str) -> str:
+    return f"{lang}:{word.strip().lower()}"
+
+
+def notebook_add(item: dict) -> dict:
+    lang = (item.get("lang") or "en").strip()
+    word = (item.get("word") or "").strip()
+    if not word:
+        raise ValueError("缺少单词")
+    key = notebook_key(lang, word)
+    with _lock, _connect() as conn:
+        conn.execute(
+            """INSERT INTO notebook(word_key,lang,word,reading,level,pos,meaning,example,context,added_at)
+               VALUES(?,?,?,?,?,?,?,?,?,?)
+               ON CONFLICT(word_key) DO UPDATE SET
+                 reading=excluded.reading, level=excluded.level, pos=excluded.pos,
+                 meaning=excluded.meaning, example=excluded.example, context=excluded.context""",
+            (key, lang, word, item.get("reading") or "", item.get("level") or "",
+             item.get("pos") or "", item.get("meaning") or "", item.get("example") or "",
+             item.get("context") or "", _now()),
+        )
+    return {"ok": True, "key": key}
+
+
+def notebook_remove(key: str) -> dict:
+    with _lock, _connect() as conn:
+        conn.execute("DELETE FROM notebook WHERE word_key=?", (key,))
+    return {"ok": True}
+
+
+def notebook_list(limit: int = 500) -> list[dict]:
+    with _lock, _connect() as conn:
+        rows = conn.execute(
+            "SELECT * FROM notebook ORDER BY added_at DESC LIMIT ?", (max(1, min(2000, limit)),)
+        ).fetchall()
+    return [dict(row) for row in rows]
+
+
+def notebook_review(key: str, known: bool) -> dict:
+    with _lock, _connect() as conn:
+        conn.execute(
+            "UPDATE notebook SET known=?, review_count=review_count+1 WHERE word_key=?",
+            (1 if known else 0, key),
+        )
+    return {"ok": True}
+

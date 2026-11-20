@@ -17,6 +17,7 @@ import urllib.request
 from functools import lru_cache
 
 from .net import SSL_CONTEXT
+from .morphology import explain_in_context
 
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36"
 TAG = re.compile(r"<[^>]+>")
@@ -258,12 +259,14 @@ def lookup_word(word: str, lang: str = "en", context: str = "") -> dict:
             return {"ok": False, "error": "暂未找到这个词的释义"}
         result["word"] = original
         result["ok"] = True
+        result["morphology"] = explain_in_context(original, lang, context)
         result["context"] = (context or "")[:220]
         return result
     except Exception as exc:
         fallback = _machine(word, lang)
         if fallback:
             fallback["ok"] = True
+            fallback["morphology"] = explain_in_context(original, lang, context)
             fallback["context"] = (context or "")[:220]
             return fallback
         return {"ok": False, "error": f"查询失败：{exc}"[:160]}

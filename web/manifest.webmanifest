@@ -1,12 +1,12 @@
 {
   "name": "语镜 LinguaLens",
   "short_name": "语镜",
-  "description": "多格式文章精准翻译、逐段对照、语法提取与可跳转语法知识库。",
+  "description": "25 种语言互译、24 种高频语言语法地图、逐段对照与可跳转语法详情。",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#f4efe4",
-  "theme_color": "#f4efe4",
+  "background_color": "#080b10",
+  "theme_color": "#080b10",
   "lang": "zh-CN",
   "icons": [
     { "src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },

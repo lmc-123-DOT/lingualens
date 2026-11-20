@@ -1,11 +1,11 @@
-Unicode true
+﻿Unicode true
 !include "MUI2.nsh"
 !include "FileFunc.nsh"
 !include "WinVer.nsh"
 
 !define APP_NAME "语镜 LinguaLens"
 !define APP_EXE "LinguaLens.exe"
-!define APP_VERSION "1.0.0"
+!define APP_VERSION "2.0.0"
 !define APP_PUBLISHER "大肥鱼 / LinguaLens"
 !define APP_ID "LinguaLens"
 !define UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\LinguaLens"
@@ -24,7 +24,7 @@ SetCompressor /SOLID lzma
 SetCompressorDictSize 64
 BrandingText "语镜 LinguaLens · 读懂每一句的骨架"
 
-VIProductVersion "1.0.0.0"
+VIProductVersion "2.0.0.0"
 VIAddVersionKey /LANG=2052 "ProductName" "${APP_NAME}"
 VIAddVersionKey /LANG=2052 "FileDescription" "语镜 LinguaLens 安装程序"
 VIAddVersionKey /LANG=2052 "FileVersion" "${APP_VERSION}"

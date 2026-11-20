@@ -43,12 +43,14 @@
     swap: '<path d="M4 8h15M15 4l4 4-4 4M20 16H5M9 12l-4 4 4 4"/>',
     columns: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 4v16"/>',
     speaker: '<path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/>',
+    bookmark: '<path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1Z"/>',
     sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
     moon: '<path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 8.5 8.5 0 1 0 20.5 14.5Z"/>',
     droplet: '<path d="M12 3s6 6.2 6 10.2a6 6 0 0 1-12 0C6 9.2 12 3 12 3Z"/>',
     braille: '<circle cx="8" cy="7" r="1"/><circle cx="16" cy="7" r="1"/><circle cx="8" cy="12" r="1"/><circle cx="16" cy="12" r="1"/><circle cx="8" cy="17" r="1"/><circle cx="16" cy="17" r="1"/>',
     quote: '<path d="M9 11H5a4 4 0 0 1 4-4M9 11v6H5v-6M19 11h-4a4 4 0 0 1 4-4M19 11v6h-4v-6"/>',
     menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
+    code: '<path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/>',
   };
   const icon = (name, size = 16) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name] || ''}</svg>`;
 
@@ -65,20 +67,40 @@
     it: { name: '意大利语', native: 'Italiano', short: 'IT' },
     ru: { name: '俄语', native: 'Русский', short: 'RU' },
     ar: { name: '阿拉伯语', native: 'العربية', short: 'AR' },
+    hi: { name: '印地语', native: 'हिन्दी', short: 'HI' },
+    bn: { name: '孟加拉语', native: 'বাংলা', short: 'BN' },
+    ur: { name: '乌尔都语', native: 'اردو', short: 'UR' },
+    fa: { name: '波斯语', native: 'فارسی', short: 'FA' },
+    he: { name: '希伯来语', native: 'עברית', short: 'HE' },
+    tr: { name: '土耳其语', native: 'Türkçe', short: 'TR' },
+    id: { name: '印尼语', native: 'Bahasa Indonesia', short: 'ID' },
     vi: { name: '越南语', native: 'Tiếng Việt', short: 'VI' },
     th: { name: '泰语', native: 'ไทย', short: 'TH' },
+    nl: { name: '荷兰语', native: 'Nederlands', short: 'NL' },
+    pl: { name: '波兰语', native: 'Polski', short: 'PL' },
+    uk: { name: '乌克兰语', native: 'Українська', short: 'UK' },
+    sv: { name: '瑞典语', native: 'Svenska', short: 'SV' },
     auto: { name: '自动检测', native: 'Auto', short: 'A' },
     unknown: { name: '未知语言', native: 'Unknown', short: '?' },
   };
   const lang = (code) => LANGS[code] || { name: code || '未知', native: code || '', short: (code || '?').slice(0, 2).toUpperCase() };
+  const GRAMMAR_NAMES = {
+    en: '英语', zh: '中文', ja: '日语', ko: '韩语', es: '西班牙语', fr: '法语',
+    de: '德语', pt: '葡萄牙语', it: '意大利语', ru: '俄语', ar: '阿拉伯语',
+    hi: '印地语', bn: '孟加拉语', ur: '乌尔都语', fa: '波斯语', he: '希伯来语',
+    tr: '土耳其语', id: '印尼语', vi: '越南语', th: '泰语', nl: '荷兰语',
+    pl: '波兰语', uk: '乌克兰语', sv: '瑞典语',
+  };
+  const grammarName = (code) => state.health?.grammar?.languageNames?.[code] || GRAMMAR_NAMES[code] || code || '未知';
+  const grammarMeta = (code) => (state.health?.grammar?.languages || []).find((item) => item.code === code) || null;
   const THEMES = {
+    night: { name: '工作台', icon: 'moon', color: '#080b10' },
     paper: { name: '纸墨', icon: 'droplet', color: '#f4efe4' },
-    night: { name: '暗夜', icon: 'sun', color: '#0f1512' },
-    clear: { name: '清透', icon: 'moon', color: '#f7faf8' },
+    clear: { name: '清透', icon: 'sun', color: '#f7faf8' },
   };
   const themeIcon = (theme) => icon(THEMES[theme]?.icon || 'droplet', 17);
   const MOD_KEY = /Mac|iPhone|iPad|iPod/i.test(navigator.platform || navigator.userAgent) ? '⌘' : 'Ctrl';
-  const targetLangs = ['zh-CN', 'en', 'ja', 'ko', 'fr', 'de', 'es', 'ru', 'zh-TW'];
+  const targetLangs = ['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'pt', 'it', 'ru', 'ar', 'hi', 'bn', 'ur', 'fa', 'he', 'tr', 'id', 'vi', 'th', 'nl', 'pl', 'uk', 'sv'];
   const sourceLangs = ['auto', ...targetLangs];
 
   const SAMPLES = {
@@ -150,13 +172,23 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
     loading: false,
     loadingTimer: null,
     view: 'translation',
-    theme: 'paper',
+    theme: 'night',
     readingScale: 1,
     historyQuery: '',
     compareView: 'translation',
+    compareMode: 'block',
     wordCache: new Map(),
     wordHistory: [],
     activeWordToken: null,
+    libraryLang: 'ja',
+    libraryTab: 'words',
+    libraryLevel: '',
+    libraryQuery: '',
+    libraryPage: 1,
+    libraryStats: null,
+    notebookKeys: new Set(),
+    notebookItems: [],
+    review: null,
     sourceLang: 'auto',
     targetLang: 'zh-CN',
     provider: 'auto',
@@ -262,6 +294,8 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
   function activeNav(path) {
     if (path === '/') return 'translate';
     if (path === '/compare') return 'compare';
+    if (path === '/analyze') return 'analyze';
+    if (path === '/library') return 'library';
     if (path.startsWith('/grammar')) return 'grammar';
     if (path.startsWith('/batch')) return 'batch';
     if (path.startsWith('/history')) return 'history';
@@ -280,6 +314,8 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
         <nav class="nav" aria-label="主导航">
           <a href="/" data-link class="${active === 'translate' ? 'is-active' : ''}">翻译台</a>
           <a href="/compare" data-link class="${active === 'compare' ? 'is-active' : ''}">对照阅读</a>
+          <a href="/analyze" data-link class="${active === 'analyze' ? 'is-active' : ''}">文章拆解</a>
+          <a href="/library" data-link class="${active === 'library' ? 'is-active' : ''}">学习站台</a>
           <a href="/grammar" data-link class="${active === 'grammar' ? 'is-active' : ''}">语法索引</a>
           <a href="/batch" data-link class="${active === 'batch' ? 'is-active' : ''}">文件夹批译</a>
           <a href="/history" data-link class="${active === 'history' ? 'is-active' : ''}">历史</a>
@@ -297,7 +333,7 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
   }
 
   function footer() {
-    const total = state.health?.grammar?.total || 106;
+    const total = state.health?.grammar?.total || 231;
     return `<footer class="site-footer">
       <span class="seal"><i></i> 语镜 LinguaLens</span>
       <span>本地优先的阅读工作台 · 语法库 ${total} 条</span>
@@ -322,6 +358,12 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       state.view = 'translation';
       content = workspaceHTML();
       after = afterWorkspace;
+    } else if (path === '/library') {
+      content = libraryHTML();
+      after = afterLibrary;
+    } else if (path === '/analyze') {
+      content = analyzeHTML();
+      after = afterAnalyze;
     } else if (path === '/compare') {
       content = compareHTML();
       after = afterCompare;
@@ -356,6 +398,8 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
   function titleFor(path) {
     if (path === '/') return '语镜 LinguaLens · 读懂每一句的骨架';
     if (path === '/compare') return '对照阅读 · 语镜 LinguaLens';
+    if (path === '/analyze') return '文章拆解 · 语镜 LinguaLens';
+    if (path === '/library') return '学习站台 · 语镜 LinguaLens';
     if (path === '/grammar') return '语法索引 · 语镜 LinguaLens';
     if (path.startsWith('/grammar/')) return '语法讲解 · 语镜 LinguaLens';
     if (path === '/batch') return '文件夹批译 · 语镜 LinguaLens';
@@ -379,7 +423,7 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
   }
 
   function applyTheme(theme, { persist = true, notify = false } = {}) {
-    state.theme = THEMES[theme] ? theme : 'paper';
+    state.theme = THEMES[theme] ? theme : 'night';
     document.documentElement.dataset.theme = state.theme;
     try { localStorage.setItem('ll.theme', state.theme); } catch { /* private mode */ }
     const meta = document.querySelector('meta[name="theme-color"]');
@@ -397,30 +441,34 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
   }
 
   function cycleTheme() {
-    const order = ['paper', 'night', 'clear'];
+    const order = ['night', 'paper', 'clear'];
     const next = order[(order.indexOf(state.theme) + 1) % order.length];
     applyTheme(next, { notify: true });
   }
 
   // ---------------------------------------------------------------- workspace
   function heroHTML() {
-    const total = state.health?.grammar?.total || 106;
-    const langCount = targetLangs.length || 9;
+    const total = state.health?.grammar?.total || 231;
+    const langCount = targetLangs.length || 25;
+    const grammarLangCount = Object.keys(state.health?.grammar?.byLanguage || {}).length || 24;
     return `<section class="hero">
       <div class="hero-copy">
         <p class="eyebrow">TRANSLATE · TRACE · UNDERSTAND</p>
         <h1>把一篇文章，<br>读成<em>自己的语言</em>。</h1>
         <p class="lede">语镜先逐段翻译，再把句子里的语法骨架拆给你看。每一个语法点都能跳转到完整讲解，也能顺着例句回到原文。</p>
         <div class="hero-meta">
-          <span>${langCount} 种语言</span><i class="dot"></i>
-          <span>14 种文章格式</span><i class="dot"></i>
+          <span>${langCount} 种翻译语言</span><i class="dot"></i>
+          <span>${grammarLangCount} 种语法语言</span><i class="dot"></i>
           <span>${total} 个语法点</span><i class="dot"></i>
           <span>本地运行 · 原文不出内网</span>
         </div>
       </div>
       <div class="hero-aside" aria-hidden="true">
-        <div class="hero-number">${total}<small>GRAMMAR ENTRIES</small></div>
-        <div class="hero-stamp">${icon('shield', 13)} PRIVATE BY DEFAULT</div>
+        <div class="hero-metrics">
+          <div class="hero-metric"><strong>${fmtNumber(total)}</strong><span>语法条目</span></div>
+          <div class="hero-metric"><strong>${grammarLangCount}</strong><span>语法语言</span></div>
+          <div class="hero-metric"><strong>${langCount}</strong><span>翻译语言</span></div>
+        </div>
       </div>
     </section>`;
   }
@@ -450,11 +498,18 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
     </div>`;
   }
 
+  function langOption(code, selected) {
+    const meta = code === 'auto' ? { name: '自动检测', native: 'Auto' } : lang(code);
+    return `<option value="${code}" ${selected === code ? 'selected' : ''}>${esc(`${meta.name} · ${meta.native}`)}</option>`;
+  }
   function sourceLangOptions(selected) {
-    return sourceLangs.map((code) => `<option value="${code}" ${selected === code ? 'selected' : ''}>${esc(code === 'auto' ? '自动检测' : `${lang(code).name} · ${lang(code).native}`)}</option>`).join('');
+    return sourceLangs.map((code) => langOption(code, selected)).join('');
   }
   function targetLangOptions(selected) {
-    return targetLangs.map((code) => `<option value="${code}" ${selected === code ? 'selected' : ''}>${esc(`${lang(code).name} · ${lang(code).native}`)}</option>`).join('');
+    const primary = ['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'fr', 'de', 'es', 'ru'];
+    const more = targetLangs.filter((code) => !primary.includes(code));
+    return `<optgroup label="常用语言">${primary.map((code) => langOption(code, selected)).join('')}</optgroup>
+      <optgroup label="更多高频语言">${more.map((code) => langOption(code, selected)).join('')}</optgroup>`;
   }
   function providerOptions(selected) {
     const list = state.providers.length ? state.providers : [
@@ -526,6 +581,7 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
           </div>
           <div class="result-body" id="result-body">${resultBodyHTML()}</div>
         </section>
+        <aside class="grammar-rail" aria-label="文章语法雷达">${railHTML()}</aside>
       </div>
     </section>`;
   }
@@ -668,6 +724,27 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
     </div>`;
   }
 
+  function highlightMatch(sentence, match) {
+    const text = String(sentence || '');
+    const needle = String(match || '');
+    if (!needle) return esc(text);
+    const index = text.toLowerCase().indexOf(needle.toLowerCase());
+    if (index < 0) return esc(text);
+    return `${esc(text.slice(0, index))}<mark>${esc(text.slice(index, index + needle.length))}</mark>${esc(text.slice(index + needle.length))}`;
+  }
+
+  function grammarMiniHTML(p, article) {
+    const occurrence = (p.occurrences || [])[0];
+    return `<a class="grammar-mini" href="/grammar/${encodeURIComponent(p.id)}?from=${encodeURIComponent(article?.id || '')}" data-link>
+      <div class="grammar-mini-top"><span class="chip outline">${esc(p.cefr)}</span><span class="cat">${esc(p.category)}</span><span class="times">${p.count} 处</span></div>
+      <h4>${esc(p.title)}<small>${esc(p.english)}</small></h4>
+      <p class="formula">${esc(p.formula)}</p>
+      ${p.summary ? `<p class="grammar-mini-summary">${esc(p.summary)}</p>` : ''}
+      ${occurrence ? `<blockquote class="grammar-mini-quote">${highlightMatch(occurrence.sentence, occurrence.match)}</blockquote>` : ''}
+      <span class="open-hint">完整讲解 ${icon('arrow', 11)}</span>
+    </a>`;
+  }
+
   function railHTML() {
     const article = state.article;
     const points = article?.grammar?.points || [];
@@ -677,20 +754,31 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
     const totalCat = catList.reduce((s, [, n]) => s + n, 0) || 1;
     const bars = catList.map(([, n]) => `<span style="width:${Math.max(4, (n / totalCat) * 100)}%"></span>`).join('');
     const list = points.length
-      ? points.map((p) => `<button class="grammar-mini" data-goto="/grammar/${encodeURIComponent(p.id)}?from=${encodeURIComponent(article.id)}">
-          <div class="grammar-mini-top"><span class="chip outline">${esc(p.cefr)}</span><span class="cat">${esc(p.category)}</span><span class="times">${p.count} 处</span></div>
-          <h4>${esc(p.title)}<small>${esc(p.english)}</small></h4>
-          <p class="formula">${esc(p.formula)}</p>
-          <span class="open-hint">完整讲解 ${icon('arrow', 11)}</span>
-        </button>`).join('')
+      ? points.map((p) => grammarMiniHTML(p, article)).join('')
       : `<div class="rail-empty"><div class="seal">法</div><p>翻译完成后，这里会出现文章里的语法点。<br>每一个都能点开完整讲解。</p></div>`;
     return `<div class="rail-head">
         <div class="rail-title"><h3>语法雷达</h3><span class="count-badge">${count}</span></div>
-        <p class="rail-sub">${count ? '从原文中定位，点击展开完整讲解' : '等待一篇文章'}</p>
+        <p class="rail-sub">${count ? `${points.reduce((s, p) => s + (p.count || 0), 0)} 处命中 · 点击卡片看完整讲解` : '等待一篇文章'}</p>
         <div class="rail-stats">${bars}</div>
+        ${count ? `<button class="rail-report" data-action="open-grammar-report">${icon('layers', 12)} 语法雷达详细报告</button>` : ''}
       </div>
       <div class="rail-scroll">${list}</div>
       <div class="rail-foot"><button class="btn btn-sm" data-action="open-grammar-index">${icon('layers', 13)} 打开完整语法图谱 ${icon('arrow', 11)}</button></div>`;
+  }
+
+  function openGrammarReport() {
+    const article = state.article;
+    const points = article?.grammar?.points || [];
+    if (!points.length) { toast('还没有识别到语法点。', 'error'); return; }
+    const groups = {};
+    for (const point of points) (groups[point.category] ||= []).push(point);
+    const summary = article.grammar?.summary || {};
+    openModal(`<div class="modal-head"><h2>语法雷达详细报告</h2><span class="sub">${points.length} 类 · ${summary.total || 0} 处</span><button class="icon-btn modal-close" data-action="close-modal">${icon('x', 16)}</button></div>
+      <div class="modal-body grammar-report">
+        <div class="report-summary">${Object.entries(summary.categories || {}).sort((a, b) => b[1] - a[1]).map(([cat, n]) => `<span><b>${esc(cat)}</b>${n}</span>`).join('')}</div>
+        ${Object.entries(groups).map(([category, items]) => `<section class="report-group"><h3>${esc(category)}<small>${items.length} 类</small></h3>${items.map((p) => grammarMiniHTML(p, article)).join('')}</section>`).join('')}
+        <p class="report-note">雷达按规则和已配置的 AI 语法增强生成；复杂句可能有遗漏，可点进单条讲解核对。</p>
+      </div>`);
   }
 
   function afterWorkspace() {
@@ -1037,7 +1125,44 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
     return result;
   }
 
+  function splitSentencesText(text) {
+    const clean = String(text || '').replace(/\s+/g, ' ').trim();
+    if (!clean) return [];
+    const pieces = clean.split(/(?<=[。！？!?])\s*|(?<=[.])\s+(?=[A-Z"「『“])/);
+    return pieces.map((piece) => piece.trim()).filter(Boolean);
+  }
+
+  function comparePairs(article) {
+    const pairs = [];
+    for (const block of (article.target?.blocks || [])) {
+      if (block.type === 'code') continue;
+      const sources = splitSentencesText(block.source);
+      const targets = splitSentencesText(block.target);
+      const total = Math.max(sources.length, targets.length);
+      for (let index = 0; index < total; index += 1) {
+        pairs.push({
+          id: `${block.id || pairs.length}-${index}`,
+          type: block.type || 'paragraph',
+          source: sources[index] || (index === 0 ? block.source : ''),
+          target: targets[index] || (index === 0 ? block.target : ''),
+        });
+      }
+    }
+    return pairs;
+  }
+
   function compareStreamHTML(article, side) {
+    if (state.compareMode === 'sentence') {
+      const lang = side === 'source' ? article.source?.lang : article.target?.lang;
+      return comparePairs(article).map((pair, index) => {
+        const text = side === 'source' ? pair.source : pair.target;
+        if (!text) return '';
+        return `<div class="cmp-line cmp-sentence" data-block="${attr(pair.id)}" data-context="${attr(text)}">
+          <span class="cmp-no">${String(index + 1).padStart(2, '0')}</span>
+          <p class="cmp-text">${tokenizeHTML(text, lang)}</p>
+        </div>`;
+      }).join('');
+    }
     const blocks = (article.target?.blocks || []);
     const lang = side === 'source' ? article.source?.lang : article.target?.lang;
     return blocks.map((block, index) => {
@@ -1100,6 +1225,10 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
             <p>${esc(article.source?.label || article.source?.lang || '原文')} <span class="arr">→</span> ${esc(article.target?.label || article.target?.lang || '译文')} ｜ ${fmtNumber(stats.paragraphs || 0)} 段 ｜ ${fmtNumber(points)} 个语法点</p>
           </div>
           <div class="compare-actions">
+            <div class="compare-modes">
+              <button data-action="compare-mode" data-mode="block" class="${state.compareMode === 'block' ? 'is-active' : ''}">逐段</button>
+              <button data-action="compare-mode" data-mode="sentence" class="${state.compareMode === 'sentence' ? 'is-active' : ''}">逐句</button>
+            </div>
             <a class="btn btn-sm btn-ghost" href="/" data-link>${icon('arrowLeft', 13)} 回翻译台</a>
             <button class="btn btn-sm btn-ghost" data-action="download-word">${icon('file', 13)} Word</button>
             <button class="btn btn-sm btn-ghost" data-action="copy-link">${icon('link', 13)} 复制链接</button>
@@ -1110,7 +1239,7 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       <div class="compare-columns">
         <section class="cmp-col cmp-left" aria-label="原文">
           <div class="cmp-col-head"><span>原文</span><span class="cmp-lang">${esc((article.source?.label || article.source?.lang || '').toUpperCase())}</span></div>
-          <div class="cmp-stream">${compareStreamHTML(article, 'source')}</div>
+          <div class="cmp-stream" id="cmp-left-stream">${compareStreamHTML(article, 'source')}</div>
         </section>
         <section class="cmp-col cmp-right" aria-label="译文和辅助内容">
           <div class="cmp-col-head">
@@ -1124,6 +1253,16 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
           <div class="cmp-stream" id="cmp-right">${compareRightHTML(article)}</div>
         </section>
       </div>`;
+  }
+
+  function switchCompareMode(mode) {
+    state.compareMode = mode === 'sentence' ? 'sentence' : 'block';
+    $$('[data-action="compare-mode"]').forEach((button) => button.classList.toggle('is-active', button.dataset.mode === state.compareMode));
+    const left = $('#cmp-left-stream');
+    const right = $('#cmp-right');
+    if (left) left.innerHTML = compareStreamHTML(state.article, 'source');
+    if (right && state.compareView === 'translation') right.innerHTML = compareStreamHTML(state.article, 'target');
+    toast(state.compareMode === 'sentence' ? '已切换为逐句对照' : '已切换为逐段对照', 'success');
   }
 
   function switchCompareView(view) {
@@ -1153,12 +1292,29 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
   function wordCardHTML(data) {
     const meanings = (data.meanings || []).map((meaning, index) => `
       <li><span class="wc-index">${index + 1}</span><span class="wc-pos">${esc(meaning.pos || '释义')}</span><span class="wc-mean">${esc(meaning.text || '')}</span></li>`).join('');
+    const morph = data.morphology;
+    const saved = state.notebookKeys.has(notebookKey(data.lang, data.word));
+    const firstMeaning = data.meanings?.[0]?.text || '';
+    const saveHTML = `<button class="wc-save" data-action="toggle-notebook" data-word="${attr(data.word)}" data-lang="${attr(data.lang || 'en')}" data-reading="${attr(data.phonetic || '')}" data-pos="${attr((data.pos || [])[0] || '')}" data-meaning="${attr(firstMeaning)}" data-context="${attr(data.context || '')}">${saved ? '✓ 已在生词本' : '+ 加入生词本'}</button>`;
+    const morphHTML = morph?.available ? `<div class="wc-morph">
+      <div class="wc-morph-head"><span>在本文中的状态</span><b>${esc(morph.form || '文中形式')}</b></div>
+      <div class="wc-form-pair">
+        <div><small>${esc(morph.before?.label || '词典形')}</small><strong>${esc(morph.before?.text || '')}</strong></div>
+        <span class="wc-arrow">${icon('arrow', 13)}</span>
+        <div><small>${esc(morph.after?.label || '文中形式')}</small><strong>${esc(morph.after?.text || data.word)}</strong></div>
+      </div>
+      ${morph.change ? `<div class="wc-change">${esc(morph.change)}</div>` : ''}
+      ${morph.features?.length ? `<div class="wc-form-tags">${morph.features.map((tag) => `<span>${esc(tag)}</span>`).join('')}</div>` : ''}
+      <p class="wc-morph-explain">${esc(morph.explain || '')}</p>
+    </div>` : '';
     return `<div class="wc-head">
       <div class="wc-title"><span class="wc-word">${esc(data.word)}</span>${data.phonetic ? `<span class="wc-phon">/${esc(data.phonetic)}/</span>` : ''}</div>
       <button class="wc-close" data-action="close-word" aria-label="关闭">${icon('x', 14)}</button>
     </div>
     <div class="wc-pos-row">${(data.pos || []).map((pos) => `<span class="wc-chip">${esc(pos)}</span>`).join('')}</div>
     <ol class="wc-meanings">${meanings}</ol>
+    ${saveHTML}
+    ${morphHTML}
     ${data.context ? `<div class="wc-context"><span>原句</span><p>${esc(data.context)}</p></div>` : ''}
     <div class="wc-foot"><span class="wc-source">释义来自 ${esc(data.source || '词典')}</span><div class="wc-actions"><button class="wc-icon" data-action="speak-word" title="朗读">${icon('speaker', 14)}</button><button class="wc-icon" data-action="copy-word" title="复制">${icon('copy', 14)}</button></div></div>`;
   }
@@ -1247,20 +1403,416 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
     speechSynthesis.speak(utterance);
   }
 
+  // ---------------------------------------------------------------- article breakdown
+  function analyzeHTML() {
+    return `<section class="analyze-page">
+      <div class="compare-breadcrumb"><a href="/" data-link>翻译台</a><span>/</span><span>文章拆解</span></div>
+      <div id="analyze-root"><div class="compare-loading"><span class="spinner"></span><span>正在逐句拆解文章…</span></div></div>
+    </section>`;
+  }
+
+  async function afterAnalyze() {
+    const root = $('#analyze-root');
+    if (!root) return;
+    const params = new URLSearchParams(location.search);
+    const id = params.get('id') || state.article?.id;
+    try {
+      const data = await api(`/api/analyze${id ? `?id=${encodeURIComponent(id)}` : ''}`);
+      if (!state.article || (id && state.article.id !== id)) {
+        try {
+          const article = await api(`/api/history/${encodeURIComponent(id || state.article?.id)}`);
+          state.article = article.article;
+        } catch { /* analysis still renders without the article object */ }
+      }
+      renderAnalysis(data.analysis, state.article);
+    } catch (err) {
+      root.innerHTML = `<div class="empty-page"><div class="glyph">拆</div><h2>这篇文章还拆不开</h2><p>${esc(err.message)}</p><a class="btn btn-primary" href="/" data-link>先去翻译一篇 ${icon('arrow', 13)}</a></div>`;
+    }
+  }
+
+  function analysisTokenHTML(token, lang, context) {
+    const word = token.text || '';
+    if (!word || token.pos === '标点' || !/[\p{L}\p{N}]/u.test(word)) {
+      return `<span class="ana-punc">${esc(word)}</span>`;
+    }
+    return `<button type="button" class="ana-token word-token" data-word="${attr(word)}" data-lang="${attr(lang)}" data-context="${attr(context)}"><span class="ana-token-word">${esc(word)}</span><span class="ana-token-pos">${esc(token.pos || '词')}</span></button>`;
+  }
+
+  function renderAnalysis(analysis, article) {
+    const root = $('#analyze-root');
+    if (!root) return;
+    const summary = analysis.summary || {};
+    const title = analysis.title || article?.title || '文章拆解';
+    const displayTitle = title.length > 52 ? `${title.slice(0, 52)}…` : title;
+    const articleId = analysis.articleId || article?.id || '';
+    const features = analysis.features || [];
+    root.innerHTML = `
+      <div class="analyze-head">
+        <div>
+          <h1>${esc(displayTitle)}</h1>
+          <p>${esc(analysis.languageLabel)} · ${summary.sentences || 0} 句 · ${summary.tokens || 0} 词 · ${summary.featureTypes || 0} 类语法现象</p>
+        </div>
+        <div class="compare-actions">
+          <a class="btn btn-sm btn-ghost" href="/compare${article?.id ? `?id=${encodeURIComponent(article.id)}` : ''}" data-link>${icon('columns', 13)} 对照阅读</a>
+          <a class="btn btn-sm btn-ghost" href="/" data-link>${icon('arrowLeft', 13)} 回翻译台</a>
+        </div>
+      </div>
+      <div class="analyze-note">${icon('spark', 13)} 先按句切开，再拆主干、短语和语法点。标点是规则拆解，适合当阅读索引；需要更深的语义分析可在设置里配置 AI Key。${analysis.note ? `<br>${esc(analysis.note)}` : ''}</div>
+      <div class="analyze-summary">
+        <div class="ana-stat"><strong>${summary.sentences || 0}</strong><span>句子</span></div>
+        <div class="ana-stat"><strong>${summary.tokens || 0}</strong><span>词/标点</span></div>
+        <div class="ana-stat"><strong>${summary.featureTypes || 0}</strong><span>语法类别</span></div>
+        <div class="ana-stat"><strong>${summary.catalogSize || 0}</strong><span>扫描器覆盖</span></div>
+      </div>
+      ${features.length ? `<div class="analyze-feature-strip">${features.map((f) => `
+        <button type="button" class="ana-feature-summary" ${f.detail ? `data-goto="/grammar/${encodeURIComponent(f.detail)}?from=${encodeURIComponent(articleId)}"` : ''} title="${attr(f.summary || '')}">
+          <span>${esc(f.title)}</span><b>${f.count}</b><small>${esc(f.category || '')}</small>
+        </button>`).join('')}</div>` : ''}
+      <div class="analyze-sentences">${(analysis.sentences || []).map((sentence, index) => {
+        const sk = sentence.skeleton || {};
+        return `<article class="ana-sentence" id="${attr(sentence.id)}">
+          <div class="ana-sentence-head"><span class="ana-no">${String(index + 1).padStart(2, '0')}</span><span class="ana-lang">${esc(analysis.languageLabel)}</span><button class="icon-btn" data-action="speak-sentence" data-text="${attr(sentence.text)}" title="朗读原句" aria-label="朗读原句">${icon('speaker', 14)}</button></div>
+          <p class="ana-source">${esc(sentence.text)}</p>
+          ${sentence.translation ? `<p class="ana-translation">${esc(sentence.translation)}</p>` : ''}
+          <div class="ana-skeleton">${sk.topic ? `<span class="ana-role"><b>话题</b>${esc(sk.topic)}</span>` : ''}${sk.subject ? `<span class="ana-role"><b>主语</b>${esc(sk.subject)}</span>` : ''}${sk.predicate ? `<span class="ana-role"><b>谓语</b>${esc(sk.predicate)}</span>` : ''}${sk.object ? `<span class="ana-role"><b>宾语</b>${esc(sk.object)}</span>` : ''}${sk.adverbial ? `<span class="ana-role"><b>状语</b>${esc(sk.adverbial)}</span>` : ''}</div>
+          <div class="ana-tokens">${(sentence.tokens || []).map((token) => analysisTokenHTML(token, analysis.language, sentence.text)).join('')}</div>
+          <div class="ana-chunks">${(sentence.chunks || []).map((chunk) => `<span class="ana-chunk ${chunk.role === '主语' ? 'is-subject' : chunk.role === '谓语' ? 'is-predicate' : chunk.role === '宾语' ? 'is-object' : ''}"><b>${esc(chunk.role || chunk.label)}</b>${esc(chunk.text)}</span>`).join('')}</div>
+          ${sentence.features?.length ? `<div class="ana-features">${sentence.features.map((feature) => feature.detail ? `<a class="ana-feature" href="/grammar/${encodeURIComponent(feature.detail)}?from=${encodeURIComponent(articleId)}" data-link title="${attr(feature.summary || '')}">${esc(feature.title)} ${icon('arrow', 10)}</a>` : `<span class="ana-feature" title="${attr(feature.summary || '')}">${esc(feature.title)}</span>`).join('')}</div>` : ''}
+        </article>`;
+      }).join('') || `<div class="empty-page"><div class="glyph">句</div><h2>没有可拆解的句子</h2><p>这篇文章的正文可能是代码或空内容。</p></div>`}</div>`;
+  }
+
+  function speakSentence(text) {
+    if (!('speechSynthesis' in window)) { toast('当前浏览器不支持朗读。', 'error'); return; }
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = state.article?.source?.lang === 'zh-CN' || state.article?.source?.lang === 'zh-TW' ? 'zh-CN' : state.article?.source?.lang === 'ja' ? 'ja-JP' : 'en-US';
+    speechSynthesis.cancel();
+    speechSynthesis.speak(utterance);
+  }
+
+  // ---------------------------------------------------------------- library station
+  function libraryHTML() {
+    return `<section class="library-page">
+      <div class="compare-breadcrumb"><a href="/" data-link>翻译台</a><span>/</span><span>学习站台</span></div>
+      <div id="library-root"><div class="compare-loading"><span class="spinner"></span><span>正在整理语法与词汇…</span></div></div>
+    </section>`;
+  }
+
+  async function afterLibrary() {
+    const root = $('#library-root');
+    if (!root) return;
+    try {
+      const stats = await api('/api/library/stats');
+      state.libraryStats = stats;
+      renderLibraryShell(stats);
+      await loadLibrary(true);
+      const search = $('#lib-search');
+      search?.addEventListener('input', debounce(() => {
+        state.libraryQuery = search.value.trim();
+        state.libraryPage = 1;
+        loadLibrary(true);
+      }, 220));
+    } catch (err) {
+      root.innerHTML = `<div class="empty-page"><div class="glyph">册</div><h2>词库没有加载出来</h2><p>${esc(err.message)}</p></div>`;
+    }
+  }
+
+  function libraryLanguageStats(code) {
+    return (state.libraryStats?.languages || []).find((item) => item.code === code) || { levels: [], words: 0, grammar: 0 };
+  }
+
+  function renderLibraryShell(stats) {
+    const root = $('#library-root');
+    if (!root) return;
+    const langs = stats.languages || [];
+    const current = libraryLanguageStats(state.libraryLang);
+    root.innerHTML = `
+      <div class="library-head">
+        <div>
+          <p class="eyebrow">GRAMMAR & VOCABULARY</p>
+          <h1>语法与词汇<br><em>放在同一张桌上。</em></h1>
+          <p>${fmtNumber(stats.words || 0)} 个词条 · ${fmtNumber(stats.grammar || 0)} 条语法 · 按语言和等级筛选</p>
+        </div>
+        <div class="library-big-numbers"><strong>${fmtNumber(stats.words || 0)}</strong><span>WORDS</span><i></i><strong>${fmtNumber(stats.grammar || 0)}</strong><span>GRAMMAR</span></div>
+      </div>
+      <div class="library-tabs">
+        <button data-action="lib-tab" data-tab="words" class="${state.libraryTab === 'words' ? 'is-active' : ''}">${icon('book', 14)} 单词册</button>
+        <button data-action="lib-tab" data-tab="grammar" class="${state.libraryTab === 'grammar' ? 'is-active' : ''}">${icon('layers', 14)} 语法库</button>
+        <button data-action="lib-tab" data-tab="notebook" class="${state.libraryTab === 'notebook' ? 'is-active' : ''}">${icon('bookmark', 14)} 生词本 <b>${state.notebookItems?.length || 0}</b></button>
+        <span class="library-tip">${state.libraryTab === 'words' ? '按等级背词，支持中文/英文释义' : state.libraryTab === 'grammar' ? '日文 N5–N1 565 条，中文/英文释义' : '查词时点「加入生词本」，这里集中复习'}</span>
+      </div>
+      <div class="library-langs">${langs.map((item) => `
+        <button class="lib-lang-card ${state.libraryLang === item.code ? 'is-active' : ''}" data-action="lib-lang" data-lang="${attr(item.code)}">
+          <span class="lib-lang-dot"></span><strong>${esc(item.label)}</strong>
+          <small>${fmtNumber(item.words)} 词 · ${fmtNumber(item.grammar)} 语法</small>
+        </button>`).join('')}</div>
+      <div class="library-toolbar">
+        <div class="lib-levels" id="lib-levels"></div>
+        <div class="search-box lib-search-box">${icon('search', 15)}<input id="lib-search" type="search" placeholder="${state.libraryTab === 'words' ? '搜单词、读音、释义…' : '搜语法句型、释义…'}" value="${attr(state.libraryQuery)}" autocomplete="off" /></div>
+      </div>
+      <div class="library-meta"><span id="lib-count"></span><span id="lib-current"></span></div>
+      <div class="library-grid" id="lib-grid"></div>
+      <div class="library-more-wrap"><button class="btn btn-sm btn-primary" id="lib-start-review" data-action="start-review" ${state.libraryTab === 'notebook' ? '' : 'hidden'}>${icon('book', 13)} 开始背词</button><button class="btn btn-sm" id="lib-more" data-action="lib-more" hidden>加载更多</button></div>`;
+    renderLibraryLevels();
+  }
+
+  function renderLibraryLevels() {
+    const box = $('#lib-levels');
+    if (!box) return;
+    if (state.libraryTab === 'notebook') { box.innerHTML = ''; return; }
+    const current = libraryLanguageStats(state.libraryLang);
+    const levels = current.levels || [];
+    box.innerHTML = `<button class="lib-level ${state.libraryLevel === '' ? 'is-active' : ''}" data-action="lib-level" data-level="">全部</button>` +
+      levels.map((level) => `<button class="lib-level ${state.libraryLevel === level ? 'is-active' : ''}" data-action="lib-level" data-level="${attr(level)}">${esc(level)}</button>`).join('');
+  }
+
+  async function loadLibrary(reset = false) {
+    const grid = $('#lib-grid');
+    if (!grid) return;
+    if (state.libraryTab === 'notebook') {
+      await loadNotebook();
+      const q = state.libraryQuery.toLowerCase();
+      const items = state.notebookItems.filter((item) => {
+        if (q && !`${item.word} ${item.reading} ${item.meaning}`.toLowerCase().includes(q)) return false;
+        return true;
+      });
+      grid.innerHTML = items.length ? items.map(libraryNotebookCard).join('') : `<div class="empty-page" style="grid-column:1/-1"><div class="glyph">词</div><h2>生词本还是空的</h2><p>查词时点「加入生词本」，这里会收起来。</p></div>`;
+      const count = $('#lib-count');
+      if (count) count.textContent = `已收藏 ${items.length} 个词`;
+      const current = $('#lib-current');
+      if (current) current.textContent = state.notebookItems.length ? '点「开始背词」进入复习' : '';
+      const more = $('#lib-more');
+      if (more) more.hidden = true;
+      return;
+    }
+    if (reset) {
+      state.libraryPage = 1;
+      grid.innerHTML = Array.from({ length: 6 }).map(() => `<div class="lib-skeleton"><div></div><div></div><div></div></div>`).join('');
+    }
+    const tab = state.libraryTab === 'grammar' ? 'grammar' : 'words';
+    const params = new URLSearchParams({ lang: state.libraryLang, page: String(state.libraryPage), size: tab === 'words' ? '48' : '36' });
+    if (state.libraryLevel) params.set('level', state.libraryLevel);
+    if (state.libraryQuery) params.set('q', state.libraryQuery);
+    try {
+      const data = await api(`/api/library/${tab}?${params.toString()}`);
+      state.libraryData = data;
+      const items = data.items || [];
+      const cards = items.map((item) => tab === 'grammar' ? libraryGrammarCard(item) : libraryWordCard(item)).join('');
+      if (reset) grid.innerHTML = cards || `<div class="empty-page" style="grid-column:1/-1"><div class="glyph">空</div><h2>没有匹配的词条</h2><p>换一个等级或关键词试试。</p></div>`;
+      else grid.insertAdjacentHTML('beforeend', cards);
+      const count = $('#lib-count');
+      if (count) count.textContent = `找到 ${fmtNumber(data.total || 0)} 条`;
+      const current = $('#lib-current');
+      if (current) current.textContent = `第 ${data.page || 1} / ${data.pages || 1} 页`;
+      const more = $('#lib-more');
+      if (more) more.hidden = (data.page || 1) >= (data.pages || 1);
+    } catch (err) {
+      if (reset) grid.innerHTML = `<div class="empty-page" style="grid-column:1/-1"><div class="glyph">!</div><h2>加载失败</h2><p>${esc(err.message)}</p></div>`;
+    }
+  }
+
+  function libraryWordCard(item) {
+    const meaning = item.meaning_zh || item.meaning_en || '';
+    return `<article class="lib-word-card">
+      <div class="lib-card-top"><span class="lib-level">${esc(item.level)}</span><span class="lib-pos">${esc((item.pos || '').replaceAll('；', ' · '))}</span></div>
+      <h3>${esc(item.word)}${item.reading ? `<small>${esc(item.reading)}</small>` : ''}</h3>
+      <p class="lib-meaning">${esc(meaning)}</p>
+      ${item.meaning_en && item.meaning_zh ? `<p class="lib-meaning-en">${esc(item.meaning_en)}</p>` : ''}
+      ${item.example ? `<div class="lib-example"><p>${esc(item.example)}</p>${item.example_zh ? `<span>${esc(item.example_zh)}</span>` : ''}</div>` : ''}
+    </article>`;
+  }
+
+  function libraryNotebookCard(item) {
+    return `<article class="lib-word-card notebook-card">
+      <div class="lib-card-top"><span class="lib-level">${esc(item.level || item.lang)}</span><span class="lib-pos">${esc(item.pos || '')}</span><button class="icon-btn" data-action="notebook-remove" data-key="${attr(item.word_key)}" title="移出生词本">${icon('trash', 12)}</button></div>
+      <h3>${esc(item.word)}${item.reading ? `<small>${esc(item.reading)}</small>` : ''}</h3>
+      <p class="lib-meaning">${esc(item.meaning || '')}</p>
+      ${item.context ? `<div class="lib-example"><p>${esc(item.context)}</p></div>` : ''}
+      <button class="btn btn-sm btn-ghost notebook-review-one" data-action="notebook-review-one" data-key="${attr(item.word_key)}">${icon('book', 12)} 复习这个词</button>
+    </article>`;
+  }
+
+  function openNotebookReview() {
+    let items = state.notebookItems.filter((item) => !state.libraryLang || item.lang === state.libraryLang);
+    if (!items.length) { toast('生词本还是空的，先查词收藏几个。', 'error'); return; }
+    items = items.slice(0, 40);
+    state.review = { items, index: 0, revealed: false };
+    openModal(`<div class="modal-head"><h2>背词模式</h2><span class="sub">${items.length} 个词</span><button class="icon-btn modal-close" data-action="close-modal">${icon('x', 16)}</button></div><div class="modal-body" id="review-body"></div>`);
+    renderReview();
+  }
+
+  function renderReview() {
+    const body = $('#review-body');
+    const review = state.review;
+    if (!body || !review) return;
+    if (review.index >= review.items.length) {
+      body.innerHTML = `<div class="empty-page"><div class="glyph">完</div><h2>这一轮背完了</h2><p>共复习 ${review.items.length} 个词。</p><button class="btn btn-primary" data-action="close-modal">收起</button></div>`;
+      return;
+    }
+    const item = review.items[review.index];
+    body.innerHTML = `<div class="review-progress">${review.index + 1} / ${review.items.length}</div>
+      <div class="review-card">
+        <span class="lib-level">${esc(item.level || item.lang)}</span>
+        <h2>${esc(item.word)}</h2>
+        ${item.reading ? `<p class="review-reading">${esc(item.reading)}</p>` : ''}
+        ${review.revealed ? `<p class="review-meaning">${esc(item.meaning || '')}</p>${item.context ? `<p class="review-context">${esc(item.context)}</p>` : ''}` : `<p class="review-hidden">先想一想它的意思，再点「显示释义」。</p>`}
+      </div>
+      <div class="review-actions">
+        ${review.revealed ? '' : `<button class="btn btn-primary" data-action="review-reveal">显示释义</button>`}
+        <button class="btn btn-ghost" data-action="review-known">已经认识</button>
+        <button class="btn btn-ghost" data-action="review-next">还不熟，下一个</button>
+      </div>`;
+  }
+
+  function libraryGrammarCard(item) {
+    const examples = (item.examples || []).slice(0, 2);
+    return `<article class="lib-grammar-card">
+      <div class="lib-card-top"><span class="lib-level">${esc(item.level)}</span><span class="lib-pos">${esc(item.tags || '语法')}</span></div>
+      <h3>${esc(item.pattern)}${item.reading ? `<small>${esc(item.reading)}</small>` : ''}</h3>
+      <p class="lib-meaning">${esc(item.meaning || '')}</p>
+      ${item.formation ? `<p class="lib-formation"><b>接续</b>${esc(item.formation)}</p>` : ''}
+      ${examples.length ? `<div class="lib-examples">${examples.map((ex) => `<p>${esc(ex.ja || ex.jp || ex.example || ex.source || '')}${ex.en || ex.zh || ex.translation ? `<span>${esc(ex.en || ex.zh || ex.translation)}</span>` : ''}</p>`).join('')}</div>` : ''}
+      <span class="lib-source">${esc(item.source || '')}</span>
+    </article>`;
+  }
+
+  function updateLibraryPlaceholder() {
+    const search = $('#lib-search');
+    if (!search) return;
+    search.placeholder = state.libraryTab === 'words' ? '搜单词、读音、释义…' : state.libraryTab === 'grammar' ? '搜语法句型、释义…' : '搜生词…';
+  }
+
+  function switchLibraryLang(lang) {
+    state.libraryLang = lang;
+    state.libraryLevel = '';
+    state.libraryPage = 1;
+    $$('.lib-lang-card').forEach((card) => card.classList.toggle('is-active', card.dataset.lang === lang));
+    renderLibraryLevels();
+    updateLibraryPlaceholder();
+    loadLibrary(true);
+  }
+
+  function switchLibraryTab(tab) {
+    state.libraryTab = tab === 'grammar' ? 'grammar' : tab === 'notebook' ? 'notebook' : 'words';
+    state.libraryLevel = '';
+    state.libraryPage = 1;
+    $$('[data-action="lib-tab"]').forEach((button) => button.classList.toggle('is-active', button.dataset.tab === state.libraryTab));
+    const tip = $('.library-tip');
+    if (tip) tip.textContent = state.libraryTab === 'words' ? '按等级背词，支持中文/英文释义' : state.libraryTab === 'grammar' ? '日文 N5–N1 565 条，中文/英文释义' : '查词时点「加入生词本」，这里集中复习';
+    const reviewButton = $('#lib-start-review');
+    if (reviewButton) reviewButton.hidden = state.libraryTab !== 'notebook';
+    renderLibraryLevels();
+    updateLibraryPlaceholder();
+    loadLibrary(true);
+  }
+
+  function notebookKey(lang, word) {
+    return `${lang || 'en'}:${String(word || '').trim().toLowerCase()}`;
+  }
+
+  async function loadNotebook() {
+    try {
+      const data = await api('/api/notebook');
+      state.notebookItems = data.items || [];
+      state.notebookKeys = new Set(state.notebookItems.map((item) => item.word_key));
+    } catch { /* notebook is optional */ }
+  }
+
+  async function toggleNotebookWord(btn) {
+    const word = btn.dataset.word || '';
+    const lang = btn.dataset.lang || 'en';
+    const key = notebookKey(lang, word);
+    try {
+      if (state.notebookKeys.has(key)) {
+        await api('/api/notebook', { method: 'POST', body: { action: 'remove', key } });
+        state.notebookKeys.delete(key);
+        toast('已从生词本移除', 'success');
+      } else {
+        await api('/api/notebook', { method: 'POST', body: {
+          action: 'add', lang, word, reading: btn.dataset.reading || '',
+          level: btn.dataset.level || '', pos: btn.dataset.pos || '',
+          meaning: btn.dataset.meaning || '', context: btn.dataset.context || '',
+        } });
+        state.notebookKeys.add(key);
+        toast('已加入生词本', 'success');
+      }
+      btn.textContent = state.notebookKeys.has(key) ? '✓ 已在生词本' : '+ 加入生词本';
+      await loadNotebook();
+    } catch (err) { toast(err.message || '生词本操作失败', 'error'); }
+  }
+
+  async function removeNotebookItem(key) {
+    try {
+      await api('/api/notebook', { method: 'POST', body: { action: 'remove', key } });
+      await loadNotebook();
+      loadLibrary(true);
+      toast('已移出生词本', 'success');
+    } catch (err) { toast(err.message, 'error'); }
+  }
+
+  function startReviewOne(key) {
+    const item = state.notebookItems.find((row) => row.word_key === key);
+    if (!item) return;
+    state.review = { items: [item], index: 0, revealed: false };
+    openModal(`<div class="modal-head"><h2>背词模式</h2><span class="sub">1 个词</span><button class="icon-btn modal-close" data-action="close-modal">${icon('x', 16)}</button></div><div class="modal-body" id="review-body"></div>`);
+    renderReview();
+  }
+
   // ---------------------------------------------------------------- grammar index
+  function atlasLanguages() {
+    const stats = state.health?.grammar || {};
+    if (Array.isArray(stats.languages) && stats.languages.length) return stats.languages;
+    const byLang = stats.byLanguage || {};
+    return Object.keys(byLang).map((code) => ({
+      code, name: grammarName(code), native: lang(code).native, count: byLang[code],
+      family: '', script: '', blurb: '',
+    }));
+  }
+
+  function atlasHTML() {
+    const languages = atlasLanguages();
+    const active = state.grammarFilters.lang;
+    return `<section class="atlas-section">
+      <div class="atlas-head">
+        <div>
+          <p class="eyebrow">LANGUAGE COVERAGE · ${languages.length}</p>
+          <h2>不止英语和日语，<br>而是一张<em>世界语法地图</em>。</h2>
+        </div>
+        <p class="atlas-intro">从汉语、英语、日语、韩语，到印地语、阿拉伯语、孟加拉语、土耳其语、越南语…… ${languages.length} 种高频语言各有一组可跳转的核心语法条目。点一张卡片，就把下面的索引切到那门语言。</p>
+      </div>
+      <div class="atlas-grid">
+        ${languages.map((item) => `<button class="atlas-card ${active === item.code ? 'is-active' : ''}" data-filter="lang" data-value="${attr(item.code)}" title="${attr(item.family || '')} ${attr(item.script || '')}">
+          <span class="atlas-card-top"><span class="atlas-code">${esc(item.short || item.code.toUpperCase())}</span><span class="atlas-count">${item.count || 0}</span></span>
+          <strong>${esc(item.name)}</strong>
+          <span class="atlas-native">${esc(item.native || '')}</span>
+          <span class="atlas-family">${esc((item.family || '').split('·').pop().trim() || item.script || '')}</span>
+        </button>`).join('')}
+      </div>
+      <p class="atlas-note" id="atlas-note">${active ? esc(atlasNote(active)) : esc(`已收录 ${languages.length} 种语言的 ${state.health?.grammar?.total || 0} 条核心语法；点任意语言卡片即可筛选。`)}</p>
+    </section>`;
+  }
+
+  function atlasNote(code) {
+    const item = atlasLanguages().find((entry) => entry.code === code);
+    if (!item) return '';
+    return `${item.name} · ${item.native}｜${item.family || ''}｜${item.script || ''}｜${item.count || 0} 条语法${item.blurb ? `｜${item.blurb}` : ''}`;
+  }
+
   function grammarIndexHTML() {
     const stats = state.health?.grammar || {};
+    const languageCount = Array.isArray(stats.languages) ? stats.languages.length : Object.keys(stats.byLanguage || {}).length;
     return `<section class="page-hero">
       <div>
         <p class="eyebrow">GRAMMAR ATLAS</p>
         <h1>语法的骨架，<br>值得单独看。</h1>
-        <p class="lede">${stats.total || 106} 个语法点，覆盖英语、日语、中文与另外五种语言。每一条都有结构公式、语感解释、例句、易错点和外部权威参考。</p>
+        <p class="lede">${stats.total || 231} 个语法点，覆盖 ${languageCount || 24} 种高频语言。每一条都有结构公式、语感解释、例句、易错点，以及可以在新标签页打开的权威语法参考。</p>
       </div>
       <div class="page-hero-stats">
-        <div class="big-stat"><strong>${stats.total || 106}</strong><span>语法条目</span></div>
-        <div class="big-stat"><strong>${Object.keys(stats.byLanguage || {}).length || 8}</strong><span>语言</span></div>
+        <div class="big-stat"><strong>${stats.total || 231}</strong><span>语法条目</span></div>
+        <div class="big-stat"><strong>${languageCount || 24}</strong><span>语言</span></div>
       </div>
     </section>
+    ${atlasHTML()}
     <div class="index-layout">
       <aside class="filter-panel">
         <div class="search-box">${icon('search', 15)}<input id="grammar-search" type="search" placeholder="搜语法名、公式、用法…" autocomplete="off" /></div>
@@ -1270,7 +1822,7 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       </aside>
       <section>
         <div class="index-toolbar">
-          <span class="result-count"><strong id="grammar-result-count">${stats.total || 106}</strong> 条语法</span>
+          <span class="result-count"><strong id="grammar-result-count">${stats.total || 231}</strong> 条语法</span>
           <span class="muted" style="font-size:10px">每条都可独立打开、复制链接</span>
           <div class="select-wrap select-sm sort"><select id="grammar-sort"><option value="default">按语言与类别</option><option value="level">按难度</option><option value="name">按名称</option></select></div>
         </div>
@@ -1306,9 +1858,11 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
     const stats = state.health?.grammar || {};
     const byLang = stats.byLanguage || {};
     const byCat = stats.byCategory || {};
-    const langNames = { en: '英语', ja: '日语', zh: '中文', ko: '韩语', fr: '法语', de: '德语', es: '西班牙语', ru: '俄语' };
-    const languages = ['', ...Object.keys(byLang).sort((a, b) => (byLang[b] || 0) - (byLang[a] || 0))];
-    langFilters.innerHTML = languages.map((code) => `<button class="filter-btn ${state.grammarFilters.lang === code ? 'is-active' : ''}" data-filter="lang" data-value="${attr(code)}">${code ? esc(langNames[code] || code) : '全部'}<span class="filter-count">${code ? byLang[code] || 0 : stats.total || 0}</span></button>`).join('');
+    const ordered = Array.isArray(stats.languages)
+      ? stats.languages.map((item) => item.code)
+      : Object.keys(byLang).sort((a, b) => (byLang[b] || 0) - (byLang[a] || 0));
+    const languages = ['', ...ordered];
+    langFilters.innerHTML = languages.map((code) => `<button class="filter-btn ${state.grammarFilters.lang === code ? 'is-active' : ''}" data-filter="lang" data-value="${attr(code)}">${code ? esc(grammarName(code)) : '全部'}<span class="filter-count">${code ? byLang[code] || 0 : stats.total || 0}</span></button>`).join('');
     const categories = ['', ...Object.keys(byCat).sort((a, b) => (byCat[b] || 0) - (byCat[a] || 0))];
     catFilters.innerHTML = categories.map((cat) => `<button class="filter-btn ${state.grammarFilters.category === cat ? 'is-active' : ''}" data-filter="category" data-value="${attr(cat)}">${cat ? esc(cat) : '全部'}</button>`).join('');
   }
@@ -1334,22 +1888,23 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
     if (!grid) return;
     if (!items.length) {
       grid.innerHTML = `<div class="empty-index"><h3>没有找到这条语法</h3><p>换一个关键词，或点“全部”重置筛选。</p></div>`;
-      return;
+    } else {
+      grid.innerHTML = items.map((e, i) => `<a class="grammar-card" href="/grammar/${encodeURIComponent(e.id)}" data-link style="animation-delay:${Math.min(i, 12) * 18}ms">
+        <div class="grammar-card-top"><span class="lang">${esc(grammarName(e.language).toUpperCase())}</span><span class="chip outline">${esc(e.cefr)}</span><span class="spacer"></span><span class="chip">${esc(e.category)}</span></div>
+        <h3>${esc(e.title)}</h3>
+        <p class="en">${esc(e.english)}</p>
+        <p class="sum">${esc(e.summary)}</p>
+        <div class="formula">${esc(e.formula)}</div>
+        <span class="card-foot">查看完整讲解 ${icon('arrow', 12)}</span>
+      </a>`).join('');
     }
-    const langNames = { en: '英语', ja: '日语', zh: '中文', ko: '韩语', fr: '法语', de: '德语', es: '西班牙语', ru: '俄语' };
-    grid.innerHTML = items.map((e, i) => `<a class="grammar-card" href="/grammar/${encodeURIComponent(e.id)}" data-link style="animation-delay:${Math.min(i, 12) * 18}ms">
-      <div class="grammar-card-top"><span class="lang">${esc((langNames[e.language] || e.language).toUpperCase())}</span><span class="chip outline">${esc(e.cefr)}</span><span class="spacer"></span><span class="chip">${esc(e.category)}</span></div>
-      <h3>${esc(e.title)}</h3>
-      <p class="en">${esc(e.english)}</p>
-      <p class="sum">${esc(e.summary)}</p>
-      <div class="formula">${esc(e.formula)}</div>
-      <span class="card-foot">查看完整讲解 ${icon('arrow', 12)}</span>
-    </a>`).join('');
-    // active filter buttons
+    // active filter buttons + atlas cards
     $$('[data-filter]').forEach((btn) => {
       const current = btn.dataset.filter === 'lang' ? f.lang : f.category;
       btn.classList.toggle('is-active', btn.dataset.value === current);
     });
+    const note = $('#atlas-note');
+    if (note) note.textContent = f.lang ? atlasNote(f.lang) : `已收录 ${atlasLanguages().length} 种语言的 ${state.health?.grammar?.total || 0} 条核心语法；点任意语言卡片即可筛选。`;
   }
 
   // ---------------------------------------------------------------- grammar detail
@@ -1398,7 +1953,7 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
   function grammarDetailHTML(entry, context) {
     const point = context?.grammar?.points?.find((p) => p.id === entry.id);
     const occurrences = point?.occurrences || [];
-    const langNames = { en: '英语', ja: '日语', zh: '中文', ko: '韩语', fr: '法语', de: '德语', es: '西班牙语', ru: '俄语' };
+    const meta = grammarMeta(entry.language);
     const sections = (entry.sections || []).map((sec, i) => `<section class="content-section">
       <h2><span class="num">${pad(i + 1)}</span>${esc(sec.heading || '用法')}</h2>
       <p>${esc(sec.body || '')}</p>
@@ -1415,11 +1970,11 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
     const related = relatedHTML(entry);
     const back = context ? `<a class="btn btn-sm btn-ghost" href="/" data-link data-action="back-to-article" data-block="${attr(occurrences[0]?.blockId || '')}">${icon('arrowLeft', 13)} 回到文章</a>` : '';
     return `<div class="detail-top">
-      <div class="breadcrumb"><a href="/grammar" data-link>语法索引</a><span class="sep">/</span><span>${esc(langNames[entry.language] || entry.language)}</span><span class="sep">/</span><span>${esc(entry.category)}</span></div>
+      <div class="breadcrumb"><a href="/grammar" data-link>语法索引</a><span class="sep">/</span><span>${esc(grammarName(entry.language))}</span><span class="sep">/</span><span>${esc(entry.category)}</span></div>
     </div>
     <header class="detail-hero">
       <div>
-        <div class="detail-kicker"><span class="chip jade">${esc(langNames[entry.language] || entry.language)}</span><span class="chip">${esc(entry.category)}</span><span class="chip gold">${esc(entry.cefr)}</span>${entry.source === 'ai' ? '<span class="chip coral">AI 补充</span>' : ''}</div>
+        <div class="detail-kicker"><span class="chip jade">${esc(grammarName(entry.language))}</span><span class="chip">${esc(entry.category)}</span><span class="chip gold">${esc(entry.cefr)}</span>${entry.source === 'ai' ? '<span class="chip coral">AI 补充</span>' : ''}</div>
         <h1>${esc(entry.title)}</h1>
         <p class="en-title">${esc(entry.english)}</p>
         <p class="detail-summary">${esc(entry.summary)}</p>
@@ -1440,9 +1995,11 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       </div>
       <aside class="detail-side">
         <div class="side-card"><h3>在文章中出现</h3>${occHTML}${context ? `<a class="side-link" href="/" data-link data-action="back-to-article" data-block="${attr(occurrences[0]?.blockId || '')}">${icon('arrowLeft', 12)} <span>回到《${esc(context.title)}》</span></a>` : ''}</div>
-        <div class="side-card"><h3>权威参考</h3>${links || '<p class="side-empty">这条由 AI 补充，暂无固定外链。</p>'}</div>
+        <div class="side-card"><h3>权威参考 · 看完整内容</h3>${links || '<p class="side-empty">这条由 AI 补充，暂无固定外链。</p>'}</div>
         <div class="side-card"><h3>关于这个语法点</h3>
-          <div class="side-link">${icon('globe', 12)}<span>语言</span><span class="site">${esc(langNames[entry.language] || entry.language)}</span></div>
+          <div class="side-link">${icon('globe', 12)}<span>语言</span><span class="site">${esc(grammarName(entry.language))}${meta?.native ? ` · ${esc(meta.native)}` : ''}</span></div>
+          ${meta?.family ? `<div class="side-link">${icon('layers', 12)}<span>语系</span><span class="site">${esc(meta.family)}</span></div>` : ''}
+          ${meta?.script ? `<div class="side-link">${icon('code', 12)}<span>文字</span><span class="site">${esc(meta.script)}</span></div>` : ''}
           <div class="side-link">${icon('book', 12)}<span>难度</span><span class="site">${esc(entry.cefr)}</span></div>
           <div class="side-link">${icon('layers', 12)}<span>类别</span><span class="site">${esc(entry.category)}</span></div>
         </div>
@@ -1453,8 +2010,7 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
   function relatedHTML(entry) {
     const items = (entry.related || []).map((id) => state.libraryMap[id]).filter(Boolean);
     if (!items.length) return '';
-    const langNames = { en: '英语', ja: '日语', zh: '中文', ko: '韩语', fr: '法语', de: '德语', es: '西班牙语', ru: '俄语' };
-    return items.map((e) => `<a class="related-card" href="/grammar/${encodeURIComponent(e.id)}" data-link><span class="rc-cat">${esc(langNames[e.language] || e.language)} · ${esc(e.category)}</span><h4>${esc(e.title)}</h4><p>${esc(e.english)}</p></a>`).join('');
+    return items.map((e) => `<a class="related-card" href="/grammar/${encodeURIComponent(e.id)}" data-link><span class="rc-cat">${esc(grammarName(e.language))} · ${esc(e.category)}</span><h4>${esc(e.title)}</h4><p>${esc(e.english)}</p></a>`).join('');
   }
 
   // ---------------------------------------------------------------- batch
@@ -1781,9 +2337,9 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
         <div class="settings-tab-panel" data-settings-panel="output" hidden>
           <div class="form-section"><h3>界面主题</h3>
             <div class="theme-grid">
-              <button type="button" class="theme-choice ${state.theme === 'paper' ? 'is-active' : ''}" data-theme-choice="paper"><span class="theme-preview paper"></span><strong>纸墨</strong><small>温暖纸感 · 当前默认</small></button>
-              <button type="button" class="theme-choice ${state.theme === 'night' ? 'is-active' : ''}" data-theme-choice="night"><span class="theme-preview night"></span><strong>暗夜</strong><small>深色底 · 晚上读长文</small></button>
-              <button type="button" class="theme-choice ${state.theme === 'clear' ? 'is-active' : ''}" data-theme-choice="clear"><span class="theme-preview clear"></span><strong>清透</strong><small>白底细线 · 更现代</small></button>
+              <button type="button" class="theme-choice ${state.theme === 'night' ? 'is-active' : ''}" data-theme-choice="night"><span class="theme-preview night"></span><strong>工作台</strong><small>暗色专业界面 · 当前默认</small></button>
+              <button type="button" class="theme-choice ${state.theme === 'paper' ? 'is-active' : ''}" data-theme-choice="paper"><span class="theme-preview paper"></span><strong>纸墨</strong><small>温暖纸感 · 阅读模式</small></button>
+              <button type="button" class="theme-choice ${state.theme === 'clear' ? 'is-active' : ''}" data-theme-choice="clear"><span class="theme-preview clear"></span><strong>清透</strong><small>白底细线 · 轻量模式</small></button>
             </div>
             <span class="hint">也可以点右上角的主题按钮，三套主题循环切换。</span>
           </div>
@@ -1904,6 +2460,11 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       return;
     }
     if (!e.target.closest('#word-card')) closeWordCard();
+    const compareMode = e.target.closest('[data-action="compare-mode"]');
+    if (compareMode) {
+      switchCompareMode(compareMode.dataset.mode);
+      return;
+    }
     const compareTab = e.target.closest('[data-action="compare-tab"]');
     if (compareTab) {
       switchCompareView(compareTab.dataset.view);
@@ -1957,6 +2518,45 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       applyTheme(themeChoice.dataset.themeChoice, { notify: true });
       return;
     }
+    const libLang = e.target.closest('[data-action="lib-lang"]');
+    if (libLang) { switchLibraryLang(libLang.dataset.lang); return; }
+    const libTab = e.target.closest('[data-action="lib-tab"]');
+    if (libTab) { switchLibraryTab(libTab.dataset.tab); return; }
+    const libLevel = e.target.closest('[data-action="lib-level"]');
+    if (libLevel) {
+      state.libraryLevel = libLevel.dataset.level || '';
+      state.libraryPage = 1;
+      renderLibraryLevels();
+      loadLibrary(true);
+      return;
+    }
+    const libMore = e.target.closest('[data-action="lib-more"]');
+    if (libMore) {
+      state.libraryPage += 1;
+      loadLibrary(false);
+      return;
+    }
+    const notebookToggle = e.target.closest('[data-action="toggle-notebook"]');
+    if (notebookToggle) { toggleNotebookWord(notebookToggle); return; }
+    const notebookRemove = e.target.closest('[data-action="notebook-remove"]');
+    if (notebookRemove) { removeNotebookItem(notebookRemove.dataset.key); return; }
+    const startReview = e.target.closest('[data-action="start-review"]');
+    if (startReview) { openNotebookReview(); return; }
+    const reviewOne = e.target.closest('[data-action="notebook-review-one"]');
+    if (reviewOne) { startReviewOne(reviewOne.dataset.key); return; }
+    const reviewReveal = e.target.closest('[data-action="review-reveal"]');
+    if (reviewReveal) { state.review.revealed = true; renderReview(); return; }
+    const reviewNext = e.target.closest('[data-action="review-next"]');
+    if (reviewNext) { state.review.index += 1; state.review.revealed = false; renderReview(); return; }
+    const reviewKnown = e.target.closest('[data-action="review-known"]');
+    if (reviewKnown) {
+      const item = state.review?.items?.[state.review.index];
+      if (item) api('/api/notebook', { method: 'POST', body: { action: 'review', key: item.word_key, known: true } }).catch(() => {});
+      state.review.index += 1;
+      state.review.revealed = false;
+      renderReview();
+      return;
+    }
     const tab = e.target.closest('[data-action="view-tab"]');
     if (tab) {
       state.view = tab.dataset.view;
@@ -2002,6 +2602,8 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       case 'download-word': downloadWord(); break;
       case 'font-smaller': setReadingScale(state.readingScale - 0.05); break;
       case 'font-larger': setReadingScale(state.readingScale + 0.05); break;
+      case 'speak-sentence': speakSentence(action.dataset.text || ''); break;
+      case 'open-grammar-report': openGrammarReport(); break;
       case 'open-settings': openSettings(); break;
       case 'close-modal': closeModal(); break;
       case 'open-grammar-index': navigate('/grammar'); break;
@@ -2156,10 +2758,13 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       state.settings = settings.settings;
       state.providers = providers.providers || [];
       try {
+        const uiRev = 'workbench-1';
+        const seen = localStorage.getItem('ll.uiRev');
         const savedTheme = localStorage.getItem('ll.theme');
-        state.theme = THEMES[savedTheme] ? savedTheme : (THEMES[state.settings?.theme] ? state.settings.theme : 'paper');
+        state.theme = seen === uiRev && THEMES[savedTheme] ? savedTheme : 'night';
+        localStorage.setItem('ll.uiRev', uiRev);
       } catch {
-        state.theme = THEMES[state.settings?.theme] ? state.settings.theme : 'paper';
+        state.theme = 'night';
       }
       applyTheme(state.theme, { persist: false });
       try {
@@ -2187,6 +2792,7 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       if (state.provider !== 'auto' && !availableProviders.has(state.provider)) state.provider = 'auto';
       renderRoute();
       ensureWordCard();
+      loadNotebook();
       setupFileInput();
       document.addEventListener('click', onDocumentClick);
       document.addEventListener('keydown', onDocumentKeydown);
@@ -2217,3 +2823,4 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
 
   init();
 })();
+

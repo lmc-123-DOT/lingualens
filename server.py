@@ -29,6 +29,8 @@ if str(ROOT) not in sys.path:
 
 from core import ai as ai_grammar  # noqa: E402
 from core import batch, paths, store  # noqa: E402
+from core.analyze import analyze_article  # noqa: E402
+from core import lexicon  # noqa: E402
 from core.docx_export import build_article_docx  # noqa: E402
 from core.words import lookup_word  # noqa: E402
 from core.documents import extract_bytes, fetch_url, read_document  # noqa: E402
@@ -37,10 +39,10 @@ from core.text import (LANGUAGES, blocks_to_text, count_stats, detect_language, 
                        split_blocks, title_from_text)
 from core.translate import (AIClient, PROVIDER_LABELS, TranslationError,  # noqa: E402
                             provider_catalog, translate_blocks)
-from grammar_data import get as get_grammar  # noqa: E402
+from grammar_data import get as get_grammar, public_entry  # noqa: E402
 
 APP_NAME = "语镜 LinguaLens"
-VERSION = "1.0.0"
+VERSION = "2.0.0"
 RESOURCE_ROOT = paths.resource_root()
 WEB_DIR = paths.resource_path("web")
 DATA_DIR = paths.data_dir()
@@ -220,11 +222,45 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json({"ok": True, "providers": provider_catalog(store.get_settings())})
             if path == "/api/settings":
                 return self._json({"ok": True, "settings": store.get_settings()})
+            if path == "/api/notebook":
+                items = store.notebook_list()
+                return self._json({"ok": True, "items": items, "total": len(items)})
             if path == "/api/word":
                 word = (query.get("q") or [""])[0].strip()
                 lang = (query.get("lang") or ["en"])[0]
                 context = (query.get("context") or [""])[0]
                 return self._json(lookup_word(word, lang, context))
+            if path == "/api/analyze":
+                article_id = (query.get("id") or [""])[0]
+                if article_id:
+                    article = store.get_article(article_id)
+                else:
+                    items = store.list_articles(1)
+                    article = store.get_article(items[0]["id"]) if items else None
+                if not article:
+                    return self._error("还没有可拆解的文章", 404)
+                analysis = analyze_article(article)
+                analysis["title"] = article.get("title") or "未命名文章"
+                analysis["articleId"] = article.get("id")
+                return self._json({"ok": True, "analysis": analysis})
+            if path == "/api/library/stats":
+                return self._json(lexicon.stats())
+            if path == "/api/library/words":
+                return self._json(lexicon.words(
+                    (query.get("lang") or ["ja"])[0],
+                    (query.get("level") or [""])[0],
+                    (query.get("q") or [""])[0],
+                    int((query.get("page") or ["1"])[0]),
+                    int((query.get("size") or ["48"])[0]),
+                ))
+            if path == "/api/library/grammar":
+                return self._json(lexicon.grammar(
+                    (query.get("lang") or ["ja"])[0],
+                    (query.get("level") or [""])[0],
+                    (query.get("q") or [""])[0],
+                    int((query.get("page") or ["1"])[0]),
+                    int((query.get("size") or ["40"])[0]),
+                ))
             if path == "/api/grammar":
                 q = (query.get("q") or [""])[0]
                 lang = (query.get("lang") or [""])[0]
@@ -245,7 +281,7 @@ class Handler(BaseHTTPRequestHandler):
                 entry = grammar_detail(gid) or ai_grammar.detail(gid)
                 if not entry:
                     return self._error("语法点不存在", 404)
-                return self._json({"ok": True, "grammar": entry})
+                return self._json({"ok": True, "grammar": public_entry(entry)})
             if path == "/api/history":
                 limit = int((query.get("limit") or ["30"])[0])
                 return self._json({"ok": True, "items": store.list_articles(limit)})
@@ -304,7 +340,8 @@ class Handler(BaseHTTPRequestHandler):
                 return
             # SPA routes
             if path == "/" or path.startswith("/grammar") or path.startswith("/batch") \
-                    or path.startswith("/history") or path.startswith("/settings") or path.startswith("/compare"):
+                    or path.startswith("/history") or path.startswith("/settings") or path.startswith("/compare") \
+                    or path.startswith("/analyze") or path.startswith("/library"):
                 return self._send_file(WEB_DIR / "index.html")
             # static assets
             if path.startswith("/assets/"):
@@ -340,6 +377,13 @@ class Handler(BaseHTTPRequestHandler):
             if path == "/api/settings":
                 saved = store.save_settings(body.get("settings") or body)
                 return self._json({"ok": True, "settings": saved})
+            if path == "/api/notebook":
+                action = str(body.get("action") or "add")
+                if action == "remove":
+                    return self._json(store.notebook_remove(str(body.get("key") or "")))
+                if action == "review":
+                    return self._json(store.notebook_review(str(body.get("key") or ""), bool(body.get("known"))))
+                return self._json(store.notebook_add(body))
             if path == "/api/ai/test":
                 config = body.get("ai") or store.get_settings(include_secret=True).get("ai", {})
                 if not (config or {}).get("apiKey"):

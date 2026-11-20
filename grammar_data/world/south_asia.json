@@ -1,0 +1,1153 @@
+{
+  "entries": [
+    {
+      "id": "hi-word-order",
+      "language": "hi",
+      "title": "动词居末的语序",
+      "english": "SOV Word Order",
+      "category": "语序",
+      "cefr": "A1",
+      "formula": "主语 + 宾语 + 动词（SOV）",
+      "summary": "印地语的动词固定在句末，基本语序是主—宾—动。格关系由后置词和词尾承担，所以成分可以前移，但动词始终收尾。",
+      "sections": [
+        {
+          "heading": "基本语序",
+          "body": "主语在最前，宾语居中，动词放在最后；形容词、属格等修饰语都排在中心词之前。",
+          "bullets": [
+            "मैं चाय पीता हूँ।",
+            "वह किताब पढ़ता है।"
+          ]
+        },
+        {
+          "heading": "疑问与否定",
+          "body": "疑问词不搬到句首，而是留在原来的位置；否定词 नहीं 紧放在动词之前。"
+        },
+        {
+          "heading": "语序调整",
+          "body": "为了强调，宾语或状语可以提到句首，但动词仍然留在末尾，位置不受影响。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "मैं रोज़ सुबह चाय पीता हूँ।",
+          "translation": "我每天早上喝茶。"
+        },
+        {
+          "source": "उसने मुझे एक नई किताब दी।",
+          "translation": "他给了我一本新书。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "मैं पीता हूँ चाय।",
+          "right": "मैं चाय पीता हूँ।",
+          "why": "印地语动词必须收尾，宾语不能跑到动词后面。"
+        },
+        {
+          "wrong": "कहाँ तुम रहते हो?",
+          "right": "तुम कहाँ रहते हो?",
+          "why": "疑问词留在原位，不必像英语那样提前。"
+        }
+      ],
+      "related": [
+        "hi-postpositions",
+        "hi-verb"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Hindustani grammar",
+          "url": "https://en.wikipedia.org/wiki/Hindustani_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "HindiPod101",
+          "url": "https://www.hindipod101.com/",
+          "site": "HindiPod101"
+        }
+      ],
+      "patterns": [
+        "मैं\\s+[^\\n]{1,40}हूँ",
+        "(पीता|पीती|पीते)\\s+हूँ",
+        "उसने\\s+[^\\n]{1,30}दी",
+        "\\b(?:मैं|हम|तुम|आप|वह|वे|यह|ये)\\b[^।]{0,80}\\b(?:हूँ|हैं|है|था|थी|थे)\\b"
+      ],
+      "sample": "मैं रोज़ सुबह चाय पीता हूँ।",
+      "priority": 6,
+      "confidence": 0.86
+    },
+    {
+      "id": "hi-postpositions",
+      "language": "hi",
+      "title": "后置词系统",
+      "english": "Postpositions",
+      "category": "后置词",
+      "cefr": "A1",
+      "formula": "名词 + का/की/के · को · में · से · पर",
+      "summary": "印地语不用介词，而用放在名词之后的后置词。का/की/के 表领属并与中心名词的性数一致，को 标记定指宾语或接受者。",
+      "sections": [
+        {
+          "heading": "领属后置词",
+          "body": "का、की、के 相当于「的」，形式随被领属的中心名词变化：阳性 का、阴性 की、复数或斜格 के。",
+          "bullets": [
+            "मेरा भाई",
+            "मेरी बहन",
+            "मेरे दोस्त"
+          ]
+        },
+        {
+          "heading": "格标记",
+          "body": "को 标记接受者或定指宾语，में 表示「在里面」，पर 表示「在上面」，से 表示来源或工具。"
+        },
+        {
+          "heading": "代词斜格",
+          "body": "后置词前的代词要用斜格形式：मैं 变 मुझ，वह 变 उस，यह 变 इस。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "यह मेरी बहन की किताब है।",
+          "translation": "这是我姐姐的书。"
+        },
+        {
+          "source": "बच्चे बगीचे में खेल रहे हैं।",
+          "translation": "孩子们在花园里玩。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "यह मेरा बहन की किताब है।",
+          "right": "यह मेरी बहन की किताब है।",
+          "why": "बहन 是阴性名词，领属词要用 मेरी、की。"
+        },
+        {
+          "wrong": "मैं स्कूल में जा रहा हूँ।",
+          "right": "मैं स्कूल जा रहा हूँ।",
+          "why": "表示去某地不用 में，में 只表「在……里」。"
+        }
+      ],
+      "related": [
+        "hi-word-order",
+        "hi-gender"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Hindustani grammar",
+          "url": "https://en.wikipedia.org/wiki/Hindustani_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "HindiPod101",
+          "url": "https://www.hindipod101.com/",
+          "site": "HindiPod101"
+        }
+      ],
+      "patterns": [
+        "(का|की|के)\\s+[^\\s]+",
+        "में\\s+[^\\s]+",
+        "(मुझ|तुम|उस|इस)से",
+        "\\b(?:का|की|के|को|में|से|पर|ने)\\b"
+      ],
+      "sample": "यह मेरी बहन की किताब है।",
+      "priority": 6,
+      "confidence": 0.85
+    },
+    {
+      "id": "hi-gender",
+      "language": "hi",
+      "title": "名词的性与数",
+      "english": "Gender and Number",
+      "category": "名词",
+      "cefr": "A1",
+      "formula": "阳性 / 阴性 × 单数 / 复数 + 一致",
+      "summary": "印地语名词分阳性和阴性，形容词、分词和动词都要与名词的性数一致。词尾 -ा 多为阳性、-ी 多为阴性，但存在不少例外。",
+      "sections": [
+        {
+          "heading": "性别判定",
+          "body": "以 -ा 结尾的名词多为阳性，以 -ी 结尾的多为阴性；但像 पानी 是阳性、किताब 是阴性，需要逐个记。"
+        },
+        {
+          "heading": "数与一致",
+          "body": "阳性 -ा 在复数变 -े（लड़का → लड़के），阴性 -ी 常变 -ियाँ（लड़की → लड़कियाँ）。"
+        },
+        {
+          "heading": "动词一致",
+          "body": "形容词和动词分词也要跟着变：阳性 अच्छा、阴性 अच्छी、复数 अच्छे。",
+          "bullets": [
+            "लड़का अच्छा है।",
+            "लड़की अच्छी है।"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "यह लड़का बहुत अच्छा गाता है।",
+          "translation": "这个男孩唱得很好。"
+        },
+        {
+          "source": "उसकी दो बहनें हैं।",
+          "translation": "他有两个姐妹。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "लड़की अच्छा है।",
+          "right": "लड़की अच्छी है।",
+          "why": "लड़की 是阴性，形容词用 अच्छी。"
+        },
+        {
+          "wrong": "मेरा किताब",
+          "right": "मेरी किताब",
+          "why": "किताब 是阴性，领属词用 मेरी。"
+        }
+      ],
+      "related": [
+        "hi-postpositions",
+        "hi-verb"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Hindustani grammar",
+          "url": "https://en.wikipedia.org/wiki/Hindustani_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "HindiPod101",
+          "url": "https://www.hindipod101.com/",
+          "site": "HindiPod101"
+        }
+      ],
+      "patterns": [
+        "अच्छी\\s+है",
+        "बहनें\\s+हैं",
+        "(लड़का|लड़की)\\s+[^\\n]{0,15}है",
+        "\\b(?:अच्छा|अच्छी|बड़ा|बड़ी|छोटा|छोटी|नया|नई)\\b"
+      ],
+      "sample": "उसकी दो बहनें हैं।",
+      "priority": 5,
+      "confidence": 0.85
+    },
+    {
+      "id": "hi-verb",
+      "language": "hi",
+      "title": "动词变位",
+      "english": "Verb Conjugation",
+      "category": "动词",
+      "cefr": "A2",
+      "formula": "词根 + 体词尾（ता/ती/ते、रहा/रही/रहे）+ 助动词（हूँ/हो/है/हैं）",
+      "summary": "印地语动词随人称、数和性变化。惯常体用 -ता/-ती/-ते 加 होना，进行体用 रहा/रही/रहे，完成体用过去分词加助动词。",
+      "sections": [
+        {
+          "heading": "惯常现在时",
+          "body": "词根加 ता/ती/ते，再接 हूँ、हो、है、हैं；词尾的元音要跟主语的性数一致。",
+          "bullets": [
+            "मैं पढ़ता हूँ।",
+            "वह पढ़ती है।",
+            "वे पढ़ते हैं।"
+          ]
+        },
+        {
+          "heading": "进行体",
+          "body": "词根加 रहा/रही/रहे 再接助动词，表示正在进行的动作。"
+        },
+        {
+          "heading": "完成体",
+          "body": "用过去分词加 है/हैं；及物动词的完成体主语要加 ने，动词随宾语变化。",
+          "bullets": [
+            "उसने खाना खाया।",
+            "उसने चाय पी।"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "मैं हर दिन हिन्दी पढ़ता हूँ।",
+          "translation": "我每天学印地语。"
+        },
+        {
+          "source": "वे अभी खाना खा रहे हैं।",
+          "translation": "他们正在吃饭。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "मैं पढ़ता है।",
+          "right": "मैं पढ़ता हूँ।",
+          "why": "第一人称单数用 हूँ，不是 है。"
+        },
+        {
+          "wrong": "वह खाना खाया।",
+          "right": "उसने खाना खाया।",
+          "why": "及物动词完成体主语要加 ने。"
+        }
+      ],
+      "related": [
+        "hi-word-order",
+        "hi-compound-verbs"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Hindustani grammar",
+          "url": "https://en.wikipedia.org/wiki/Hindustani_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "HindiPod101",
+          "url": "https://www.hindipod101.com/",
+          "site": "HindiPod101"
+        }
+      ],
+      "patterns": [
+        "(रहा|रही|रहे)\\s+(है|हैं|हो)",
+        "(ता|ती|ते)\\s+हूँ",
+        "ने\\s+[^\\n]{1,25}(दिया|ली|खाया|पी)",
+        "\\b(?:रहा|रही|रहे|ता|ती|ते|या|यी|ये)\\b"
+      ],
+      "sample": "वे अभी खाना खा रहे हैं।",
+      "priority": 6,
+      "confidence": 0.85
+    },
+    {
+      "id": "hi-compound-verbs",
+      "language": "hi",
+      "title": "复合动词",
+      "english": "Compound Verbs",
+      "category": "动词",
+      "cefr": "B1",
+      "formula": "主要动词词根 + 轻动词（जाना / देना / लेना / डालना…）",
+      "summary": "印地语常用「主要动词 + 轻动词」构成复合动词，第二个动词不表实义，而表示完成、受益、方向或突然等体貌意义。",
+      "sections": [
+        {
+          "heading": "常见组合",
+          "body": "कर देना 表示「做完、为别人做」，कर लेना 表示「为自己做」，कर जाना 表示动作持续下去或彻底完成。",
+          "bullets": [
+            "कर देना",
+            "कर लेना",
+            "कर जाना"
+          ]
+        },
+        {
+          "heading": "意义变化",
+          "body": "第二个动词虚化后不再表示「给、拿、去」的本义，只承担体貌或态度色彩。"
+        },
+        {
+          "heading": "形式规则",
+          "body": "前一个动词用词根形式，不加 -या/-ई；性数一致只体现在轻动词上。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "मैंने सारा काम कर दिया।",
+          "translation": "我把所有活儿都干完了。"
+        },
+        {
+          "source": "उसने पूरी कहानी सुन ली।",
+          "translation": "他把整个故事都听完了。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "मैंने काम किया दिया।",
+          "right": "मैंने काम कर दिया।",
+          "why": "复合动词的第一个动词用词根，不再带过去分词词尾。"
+        },
+        {
+          "wrong": "उसने कहानी सुना ली।",
+          "right": "उसने कहानी सुन ली।",
+          "why": "主要动词保持词根 सुन，性数只由 लेना 变成 ली 体现。"
+        }
+      ],
+      "related": [
+        "hi-verb",
+        "hi-gender"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Hindustani grammar",
+          "url": "https://en.wikipedia.org/wiki/Hindustani_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "HindiPod101",
+          "url": "https://www.hindipod101.com/",
+          "site": "HindiPod101"
+        }
+      ],
+      "patterns": [
+        "कर\\s+(दिया|देना|लिया|लेना)",
+        "सुन\\s+ली",
+        "(दिया|ली)\\s*[।]",
+        "\\b(?:कर|दे|ले|जा|आ)\\s+(?:दिया|देना|लिया|लेना|गया|गई|आया|आई)\\b"
+      ],
+      "sample": "उसने पूरी कहानी सुन ली।",
+      "priority": 4,
+      "confidence": 0.82
+    },
+    {
+      "id": "bn-word-order",
+      "language": "bn",
+      "title": "动词居末的语序",
+      "english": "SOV Word Order",
+      "category": "语序",
+      "cefr": "A1",
+      "formula": "主语 + 宾语 + 动词（SOV）",
+      "summary": "孟加拉语的动词固定在句末，基本语序为 SOV。格关系和后置词承担了语法角色，因此成分可以因话题化而前移。",
+      "sections": [
+        {
+          "heading": "基本语序",
+          "body": "主语在前，宾语居中，动词收尾；形容词、属格修饰语都放在中心词之前。",
+          "bullets": [
+            "আমি ভাত খাই।",
+            "সে বই পড়ে।"
+          ]
+        },
+        {
+          "heading": "疑问句",
+          "body": "疑问词留在原位，句末加疑问语气词 কি，语序基本不变。"
+        },
+        {
+          "heading": "话题移位",
+          "body": "要强调的成分可以提到句首，但动词仍然留在最后。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "আমি প্রতিদিন বাংলা পড়ি।",
+          "translation": "我每天学孟加拉语。"
+        },
+        {
+          "source": "সে আমাকে একটি বই দিয়েছে।",
+          "translation": "他给了我一本书。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "আমি পড়ি বাংলা।",
+          "right": "আমি বাংলা পড়ি।",
+          "why": "动词必须收尾，宾语不能放在动词之后。"
+        },
+        {
+          "wrong": "সে দিয়েছে আমাকে একটি বই।",
+          "right": "সে আমাকে একটি বই দিয়েছে।",
+          "why": "动词居末，间接宾语和直接宾语都在它前面。"
+        }
+      ],
+      "related": [
+        "bn-cases",
+        "bn-verb"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Bengali grammar",
+          "url": "https://en.wikipedia.org/wiki/Bengali_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "BengaliPod101",
+          "url": "https://www.bengalipod101.com/",
+          "site": "BengaliPod101"
+        }
+      ],
+      "patterns": [
+        "পড়ি\\s*[।]",
+        "দিয়েছে\\s*[।]",
+        "(আমি|সে)\\s+[^\\n]{1,25}পড়ি",
+        "\\b(?:আমি|আমরা|তুমি|আপনি|সে|তারা)\\b[^।]{0,80}\\b(?:হই|হইছি|হয়|হয়েছে|ছিল|ছিলেন)\\b"
+      ],
+      "sample": "আমি প্রতিদিন বাংলা পড়ি।",
+      "priority": 6,
+      "confidence": 0.86
+    },
+    {
+      "id": "bn-cases",
+      "language": "bn",
+      "title": "名词的格",
+      "english": "Noun Cases",
+      "category": "格",
+      "cefr": "A2",
+      "formula": "名词 + 格词尾（-র/এর · -কে · -তে · -থেকে）",
+      "summary": "孟加拉语名词靠词尾标示格：属格 -র/এর，宾格与与格 -কে，方位格 -তে，起点用 -থেকে。词尾选择与名词的有生性和语音结尾有关。",
+      "sections": [
+        {
+          "heading": "属格",
+          "body": "属格相当于「的」：元音结尾多加 -র（বাড়ি → বাড়ির），辅音结尾多加 -এর（ছাত্র → ছাত্রের）。",
+          "bullets": [
+            "বাড়ির সামনে",
+            "ছাত্রের বই"
+          ]
+        },
+        {
+          "heading": "宾格与格",
+          "body": "-কে 标记接受者，也可以标记定指的直接宾语，尤其指人时几乎必用。"
+        },
+        {
+          "heading": "方位格",
+          "body": "-তে 表示「在……里/上」，-থেকে 表示「从……」，两者常与地点、时间名词搭配。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "ছেলেটি বাড়ির সামনে দাঁড়িয়ে আছে।",
+          "translation": "那个男孩站在房子前面。"
+        },
+        {
+          "source": "শিক্ষক ছাত্রকে একটি প্রশ্ন করলেন।",
+          "translation": "老师问了学生一个问题。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "ছাত্রর বই",
+          "right": "ছাত্রের বই",
+          "why": "ছাত্র 以辅音结尾，属格用 -এর。"
+        },
+        {
+          "wrong": "বাড়িএর সামনে",
+          "right": "বাড়ির সামনে",
+          "why": "বাড়ি 以元音符号 ি 结尾，属格直接加 -র。"
+        }
+      ],
+      "related": [
+        "bn-word-order",
+        "bn-verb"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Bengali grammar",
+          "url": "https://en.wikipedia.org/wiki/Bengali_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "BengaliPod101",
+          "url": "https://www.bengalipod101.com/",
+          "site": "BengaliPod101"
+        }
+      ],
+      "patterns": [
+        "কে\\s+[^\\n]{1,20}",
+        "[িে]র\\s+[^\\n]{1,15}",
+        "থেকে\\s+[^\\n]{1,15}",
+        "(?:কে|তে|ের|এর|দের)\\b"
+      ],
+      "sample": "ছেলেটি বাড়ির সামনে দাঁড়িয়ে আছে।",
+      "priority": 5,
+      "confidence": 0.83
+    },
+    {
+      "id": "bn-verb",
+      "language": "bn",
+      "title": "动词变位与人称",
+      "english": "Verb Conjugation and Person",
+      "category": "动词",
+      "cefr": "A2",
+      "formula": "词根 + 时态词尾 + 人称词尾（-ি / -স / -ে / -েন）",
+      "summary": "孟加拉语动词随人称和敬语层级变位。现在时词尾 -ি（我）、-স（你）、-ে（他/她）、-েন（尊敬），进行体再加 ছি/ছে/ছেন。",
+      "sections": [
+        {
+          "heading": "现在时",
+          "body": "一般现在时的词尾按人称走：আমি করি、তুমি করো、সে করে、তিনি করেন。",
+          "bullets": [
+            "আমি করি।",
+            "সে করে।",
+            "তিনি করেন।"
+          ]
+        },
+        {
+          "heading": "过去时",
+          "body": "过去时用 -লাম、-লে、-ল、-লেন 等词尾，同样随人称变化。"
+        },
+        {
+          "heading": "进行体",
+          "body": "动词加分词词尾 -চ্ছ-，再接 ছি/ছ/ছে/ছেন，表示正在进行的动作。",
+          "bullets": [
+            "আমি খাচ্ছি।",
+            "সে খাচ্ছে।"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "আমি এখন ভাত খাচ্ছি।",
+          "translation": "我现在正在吃米饭。"
+        },
+        {
+          "source": "তিনি প্রতিদিন সংবাদপত্র পড়েন।",
+          "translation": "他每天读报纸。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "আমি ভাত খায়।",
+          "right": "আমি ভাত খাই।",
+          "why": "第一人称单数用 -ই/-ি 词尾（খাই）。"
+        },
+        {
+          "wrong": "তিনি পড়ে।",
+          "right": "তিনি পড়েন।",
+          "why": "尊敬第三人称要用 -েন，不能和普通第三人称混用。"
+        }
+      ],
+      "related": [
+        "bn-honorifics",
+        "bn-cases"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Bengali grammar",
+          "url": "https://en.wikipedia.org/wiki/Bengali_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "BengaliPod101",
+          "url": "https://www.bengalipod101.com/",
+          "site": "BengaliPod101"
+        }
+      ],
+      "patterns": [
+        "ছি\\s*[।]",
+        "েন\\s*[।?]",
+        "(খাই|পড়ি|করছি|খাচ্ছি)",
+        "(?:ছি|ছ|ছে|লাম|লে|ল|ব|বে|বেন)\\b"
+      ],
+      "sample": "আমি এখন ভাত খাচ্ছি।",
+      "priority": 6,
+      "confidence": 0.84
+    },
+    {
+      "id": "bn-honorifics",
+      "language": "bn",
+      "title": "敬语层级",
+      "english": "Honorific Levels",
+      "category": "敬语",
+      "cefr": "A2",
+      "formula": "人称（তুই / তুমি / আপনি）+ 对应动词词尾",
+      "summary": "孟加拉语用三套人称区分亲密、一般礼貌和正式尊敬，代词选定后动词词尾必须配套，不能混用。",
+      "sections": [
+        {
+          "heading": "三等人称",
+          "body": "তুই 用于极亲密或上对下，তুমি 是日常礼貌，আপনি 用于正式场合和长辈。"
+        },
+        {
+          "heading": "动词配套",
+          "body": "তুই 配 -িস，তুমি 配 -ো/-স，আপনি 配 -েন；三者不能交叉。",
+          "bullets": [
+            "তুই করিস",
+            "তুমি করো",
+            "আপনি করেন"
+          ]
+        },
+        {
+          "heading": "名词敬称",
+          "body": "尊敬的对象用 উনি、তিনি 指代，普通第三人称用 সে，动词形式也随之改变。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "আপনি কেমন আছেন?",
+          "translation": "您好吗？"
+        },
+        {
+          "source": "তুমি কোথায় যাচ্ছ?",
+          "translation": "你去哪儿？"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "আপনি কেমন আছ?",
+          "right": "আপনি কেমন আছেন?",
+          "why": "আপনি 必须配 -েন 词尾。"
+        },
+        {
+          "wrong": "তুমি কেমন আছেন?",
+          "right": "তুমি কেমন আছ?",
+          "why": "তুমি 与 -েন 不属于同一层级，不能混搭。"
+        }
+      ],
+      "related": [
+        "bn-verb",
+        "bn-word-order"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Bengali grammar",
+          "url": "https://en.wikipedia.org/wiki/Bengali_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "BengaliPod101",
+          "url": "https://www.bengalipod101.com/",
+          "site": "BengaliPod101"
+        }
+      ],
+      "patterns": [
+        "আপনি\\s+[^\\n]{0,20}েন",
+        "তুমি\\s+[^\\n]{0,20}ছ",
+        "তুই\\s+[^\\n]{0,20}িস",
+        "\\b(?:আপনি|তুমি|তুই)\\b"
+      ],
+      "sample": "আপনি কেমন আছেন?",
+      "priority": 5,
+      "confidence": 0.84
+    },
+    {
+      "id": "bn-negation",
+      "language": "bn",
+      "title": "否定表达",
+      "english": "Negation",
+      "category": "否定",
+      "cefr": "A2",
+      "formula": "动词 + না；নেই（没有）；নয়（不是）",
+      "summary": "孟加拉语用 না 否定动词，且放在动词之后；নেই 表示「没有」，নয় 用于否定名词判断句，三者分工明确。",
+      "sections": [
+        {
+          "heading": "动词否定",
+          "body": "否定词 না 跟在动词后面，而不是放在动词前，这是和汉语语序最不一样的地方。",
+          "bullets": [
+            "আমি যাই না।",
+            "সে পড়ে না।"
+          ]
+        },
+        {
+          "heading": "存在否定",
+          "body": "表示「没有、不在」用 নেই，主语常带属格：আমার টাকা নেই。"
+        },
+        {
+          "heading": "判断否定",
+          "body": "否定「A 是 B」用 নয়，放在名词谓语之后：এটা আমার নয়。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "আমি আজ স্কুলে যাব না।",
+          "translation": "我今天不去学校。"
+        },
+        {
+          "source": "আমার কোনো টাকা নেই।",
+          "translation": "我一点钱也没有。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "আমি না যাই।",
+          "right": "আমি যাই না।",
+          "why": "না 放在动词之后，不放在动词前。"
+        },
+        {
+          "wrong": "আমার টাকা নয়।",
+          "right": "আমার টাকা নেই।",
+          "why": "表示「没有」用 নেই，নয় 是否定判断。"
+        }
+      ],
+      "related": [
+        "bn-verb"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Bengali grammar",
+          "url": "https://en.wikipedia.org/wiki/Bengali_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "BengaliPod101",
+          "url": "https://www.bengalipod101.com/",
+          "site": "BengaliPod101"
+        }
+      ],
+      "patterns": [
+        "না\\s*[।?]",
+        "নেই\\s*[।]",
+        "(যাই|যাব|খাই|পড়ি)\\s+না",
+        "\\b(?:না|নি|নেই)\\b"
+      ],
+      "sample": "আমি আজ স্কুলে যাব না।",
+      "priority": 5,
+      "confidence": 0.84
+    },
+    {
+      "id": "ur-word-order",
+      "language": "ur",
+      "title": "动词居末的语序",
+      "english": "SOV Word Order",
+      "category": "语序",
+      "cefr": "A1",
+      "formula": "主语 + 宾语 + 动词（SOV）",
+      "summary": "乌尔都语动词固定在句末，基本语序为 SOV。语法关系由后置词和词尾标示，成分可以前移，但动词仍然收尾。",
+      "sections": [
+        {
+          "heading": "基本语序",
+          "body": "主语在前，宾语居中，动词最后；形容词和属格修饰语都放在中心词之前。",
+          "bullets": [
+            "میں چائے پیتا ہوں۔",
+            "وہ کتاب پڑھتا ہے۔"
+          ]
+        },
+        {
+          "heading": "疑问句",
+          "body": "疑问词留在原位，句首可加 کیا 构成一般疑问句，语序不必倒装。"
+        },
+        {
+          "heading": "强调移位",
+          "body": "需要强调的成分可以提到句首，但动词位置不动，仍在句末。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "میں ہر روز اردو پڑھتا ہوں۔",
+          "translation": "我每天学乌尔都语。"
+        },
+        {
+          "source": "اس نے مجھے ایک کتاب دی۔",
+          "translation": "他给了我一本书。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "میں پڑھتا ہوں اردو۔",
+          "right": "میں اردو پڑھتا ہوں۔",
+          "why": "动词必须收尾，宾语不能后置。"
+        },
+        {
+          "wrong": "کہاں تم رہتے ہو؟",
+          "right": "تم کہاں رہتے ہو؟",
+          "why": "疑问词不前置，留在原来的位置。"
+        }
+      ],
+      "related": [
+        "ur-postpositions",
+        "ur-verb"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Hindustani grammar",
+          "url": "https://en.wikipedia.org/wiki/Hindustani_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "UrduPod101",
+          "url": "https://www.urdupod101.com/",
+          "site": "UrduPod101"
+        }
+      ],
+      "patterns": [
+        "پڑھتا\\s+ہوں",
+        "ہوں\\s*[۔]",
+        "دی\\s*[۔]",
+        "\\b(?:میں|ہم|تم|آپ|وہ|یہ)\\b[^۔]{0,80}\\b(?:ہوں|ہیں|ہے|تھا|تھی|تھے)\\b"
+      ],
+      "sample": "میں ہر روز اردو پڑھتا ہوں۔",
+      "priority": 6,
+      "confidence": 0.86
+    },
+    {
+      "id": "ur-postpositions",
+      "language": "ur",
+      "title": "后置词系统",
+      "english": "Postpositions",
+      "category": "后置词",
+      "cefr": "A1",
+      "formula": "名词 + کا/کی/کے · کو · میں · سے · پر",
+      "summary": "乌尔都语用后置词，放在名词之后。کا/کی/کے 表领属并随中心名词的性数变化，کو 标记定指宾语或接受者。",
+      "sections": [
+        {
+          "heading": "领属后置词",
+          "body": "کا 用于阳性单数，کی 用于阴性，کے 用于复数或斜格；选择取决于被领属的中心名词。",
+          "bullets": [
+            "میرا بھائی",
+            "میری بہن",
+            "میرے دوست"
+          ]
+        },
+        {
+          "heading": "格标记",
+          "body": "کو 标记接受者或定指宾语，میں 表「在里面」，پر 表「在上面」，سے 表来源或工具。"
+        },
+        {
+          "heading": "代词斜格",
+          "body": "后置词前的代词用斜格：میں 变 مجھ，وہ 变 اس，یہ 变 اس。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "یہ میری بہن کی کتاب ہے۔",
+          "translation": "这是我姐姐的书。"
+        },
+        {
+          "source": "بچے باغ میں کھیل رہے ہیں۔",
+          "translation": "孩子们在花园里玩。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "یہ میرا بہن کی کتاب ہے۔",
+          "right": "یہ میری بہن کی کتاب ہے۔",
+          "why": "بہن 是阴性，领属词要用 میری、کی。"
+        },
+        {
+          "wrong": "یہ کتاب میں سے لے لو۔",
+          "right": "یہ کتاب مجھ سے لے لو۔",
+          "why": "سے 前的代词要用斜格 مجھ，不能说 میں سے。"
+        }
+      ],
+      "related": [
+        "ur-word-order",
+        "ur-gender"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Hindustani grammar",
+          "url": "https://en.wikipedia.org/wiki/Hindustani_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "UrduPod101",
+          "url": "https://www.urdupod101.com/",
+          "site": "UrduPod101"
+        }
+      ],
+      "patterns": [
+        "(کا|کی|کے)\\s+[^\\s]+",
+        "میں\\s+[^\\n]{1,20}ہیں",
+        "(مجھ|اس|ان)\\s+سے",
+        "\\b(?:کا|کی|کے|کو|میں|سے|پر|نے|تک)\\b"
+      ],
+      "sample": "یہ میری بہن کی کتاب ہے۔",
+      "priority": 6,
+      "confidence": 0.85
+    },
+    {
+      "id": "ur-gender",
+      "language": "ur",
+      "title": "名词的性与数",
+      "english": "Gender and Number",
+      "category": "名词",
+      "cefr": "A1",
+      "formula": "阳性 / 阴性 × 单数 / 复数 + 一致",
+      "summary": "乌尔都语名词分阳性和阴性，形容词和动词要与其性数一致。-ا 结尾多为阳性、-ی 结尾多为阴性，但例外不少，需随词记忆。",
+      "sections": [
+        {
+          "heading": "性别判定",
+          "body": "以 -ا 结尾的多为阳性（لڑکا），以 -ی 结尾的多为阴性（لڑکی）；但 آدمی 是阳性、کتاب 是阴性，不能只靠词尾。"
+        },
+        {
+          "heading": "复数变化",
+          "body": "阳性 -ا 变 -ے（لڑکا → لڑکے），阴性 -ی 变 -یاں（لڑکی → لڑکیاں），部分名词另有规则复数。",
+          "bullets": [
+            "لڑکے",
+            "لڑکیاں",
+            "بہنیں"
+          ]
+        },
+        {
+          "heading": "一致关系",
+          "body": "形容词和动词分词随中心名词变化：اچھا / اچھی / اچھے，动词也用对应的性数形式。",
+          "bullets": [
+            "لڑکا اچھا ہے۔",
+            "لڑکی اچھی ہے۔"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "یہ لڑکا بہت اچھا گاتا ہے۔",
+          "translation": "这个男孩唱得很好。"
+        },
+        {
+          "source": "اس کی دو بہنیں ہیں۔",
+          "translation": "他有两个姐妹。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "لڑکی اچھا ہے۔",
+          "right": "لڑکی اچھی ہے۔",
+          "why": "لڑکی 是阴性，形容词要用 اچھی。"
+        },
+        {
+          "wrong": "میرا کتاب",
+          "right": "میری کتاب",
+          "why": "کتاب 是阴性，领属词用 میری。"
+        }
+      ],
+      "related": [
+        "ur-postpositions",
+        "ur-verb"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Hindustani grammar",
+          "url": "https://en.wikipedia.org/wiki/Hindustani_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "UrduPod101",
+          "url": "https://www.urdupod101.com/",
+          "site": "UrduPod101"
+        }
+      ],
+      "patterns": [
+        "اچھی\\s+ہے",
+        "بہنیں\\s+ہیں",
+        "(لڑکا|لڑکی)\\s+[^\\n]{0,15}ہے",
+        "\\b(?:اچھا|اچھی|بڑا|بڑی|چھوٹا|چھوٹی|نیا|نئی)\\b"
+      ],
+      "sample": "اس کی دو بہنیں ہیں۔",
+      "priority": 5,
+      "confidence": 0.85
+    },
+    {
+      "id": "ur-verb",
+      "language": "ur",
+      "title": "动词变位",
+      "english": "Verb Conjugation",
+      "category": "动词",
+      "cefr": "A2",
+      "formula": "词根 + 体词尾（تا/تی/تے、رہا/رہی/رہے）+ 助动词（ہوں/ہو/ہے/ہیں）",
+      "summary": "乌尔都语动词随人称、数和性变化。惯常体用 -تا/-تی/-تے 加 ہونا，进行体用 رہا/رہی/رہے，完成体用过去分词加助动词。",
+      "sections": [
+        {
+          "heading": "惯常体",
+          "body": "词根加 تا/تی/تے 再接 ہوں、ہو、ہے、ہیں，词尾元音跟主语的性数一致。",
+          "bullets": [
+            "میں پڑھتا ہوں۔",
+            "وہ پڑھتی ہے۔",
+            "وہ پڑھتے ہیں۔"
+          ]
+        },
+        {
+          "heading": "进行体",
+          "body": "词根加 رہا/رہی/رہے 再接助动词，表示正在进行的动作。"
+        },
+        {
+          "heading": "完成体",
+          "body": "用过去分词加 ہے/ہیں；及物动词完成体的主语要加 نے，动词随宾语变化。",
+          "bullets": [
+            "اس نے کھانا کھایا۔",
+            "اس نے چائے پی۔"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "میں ہر روز اردو سیکھتا ہوں۔",
+          "translation": "我每天学乌尔都语。"
+        },
+        {
+          "source": "وہ ابھی کھانا کھا رہا ہے۔",
+          "translation": "他现在正在吃饭。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "میں سیکھتا ہے۔",
+          "right": "میں سیکھتا ہوں۔",
+          "why": "第一人称单数用 ہوں，不用 ہے。"
+        },
+        {
+          "wrong": "وہ کھانا کھایا۔",
+          "right": "اس نے کھانا کھایا۔",
+          "why": "及物动词完成体主语要加 نے。"
+        }
+      ],
+      "related": [
+        "ur-word-order",
+        "ur-honorifics"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Hindustani grammar",
+          "url": "https://en.wikipedia.org/wiki/Hindustani_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "UrduPod101",
+          "url": "https://www.urdupod101.com/",
+          "site": "UrduPod101"
+        }
+      ],
+      "patterns": [
+        "(رہا|رہی|رہے)\\s+ہے",
+        "(تا|تی|تے)\\s+ہوں",
+        "نے\\s+[^\\n]{1,25}کھایا",
+        "\\b(?:رہا|رہی|رہے|تا|تی|تے)\\b"
+      ],
+      "sample": "وہ ابھی کھانا کھا رہا ہے۔",
+      "priority": 6,
+      "confidence": 0.85
+    },
+    {
+      "id": "ur-honorifics",
+      "language": "ur",
+      "title": "敬语与人称",
+      "english": "Honorifics and Person",
+      "category": "敬语",
+      "cefr": "A1",
+      "formula": "آپ / تم / تو + 对应动词形式",
+      "summary": "乌尔都语用 آپ、تم、تو 区分正式尊敬、一般亲近和极亲密（或失礼），代词一换，动词形式也要跟着换。",
+      "sections": [
+        {
+          "heading": "三级人称",
+          "body": "آپ 用于正式场合和长辈，تم 用于朋友和熟人，تو 只用于极亲密关系或表示轻蔑。"
+        },
+        {
+          "heading": "动词配套",
+          "body": "آپ 配复数形式 ہیں，تم 配 ہو 和 -تے，تو 配 ہے 和 -تا，三者不能混搭。",
+          "bullets": [
+            "آپ جاتے ہیں",
+            "تم جاتے ہو",
+            "تو جاتا ہے"
+          ]
+        },
+        {
+          "heading": "敬称用法",
+          "body": "提到受尊敬的人时用 وہ/ان 及其敬语动词形式，避免用 اس 直接指代。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "آپ کیسے ہیں؟",
+          "translation": "您好吗？"
+        },
+        {
+          "source": "تم کہاں جا رہے ہو؟",
+          "translation": "你去哪儿？"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "آپ کیسا ہے؟",
+          "right": "آپ کیسے ہیں؟",
+          "why": "آپ 形式上配复数，动词用 ہیں。"
+        },
+        {
+          "wrong": "تم جاتا ہے۔",
+          "right": "تم جاتے ہو۔",
+          "why": "تم 配 ہو，分词用 -تے。"
+        }
+      ],
+      "related": [
+        "ur-verb",
+        "ur-word-order"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Hindustani grammar",
+          "url": "https://en.wikipedia.org/wiki/Hindustani_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "UrduPod101",
+          "url": "https://www.urdupod101.com/",
+          "site": "UrduPod101"
+        }
+      ],
+      "patterns": [
+        "آپ\\s+[^\\n]{0,20}ہیں",
+        "تم\\s+[^\\n]{0,20}ہو",
+        "تو\\s+[^\\n]{0,20}ہے",
+        "\\b(?:آپ|تم|تو)\\b"
+      ],
+      "sample": "آپ کیسے ہیں؟",
+      "priority": 5,
+      "confidence": 0.84
+    }
+  ]
+}

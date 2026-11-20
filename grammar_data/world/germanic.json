@@ -1,0 +1,1107 @@
+{
+  "entries": [
+    {
+      "id": "de-perfect",
+      "language": "de",
+      "title": "现在完成时",
+      "english": "Perfect Tense (Perfekt)",
+      "category": "时态",
+      "cefr": "A2",
+      "formula": "haben / sein + Partizip II（过去分词居句末）",
+      "summary": "德语口语里最常用的过去时，用 haben 或 sein 的现在时加过去分词构成，强调动作已完成、结果还影响现在。",
+      "sections": [
+        {
+          "heading": "构成",
+          "body": "助动词随人称变位，过去分词放在句子末尾。规则动词的分词是 ge-…-t，强变化动词是 ge-…-en。",
+          "bullets": [
+            "Ich habe gelernt.",
+            "Ich bin gekommen."
+          ]
+        },
+        {
+          "heading": "助动词选择",
+          "body": "大多数动词用 haben；表示位置移动、状态变化，以及 sein、bleiben、werden、geschehen 这类动词用 sein。",
+          "bullets": [
+            "Sie ist nach Hause gegangen.",
+            "Er hat das Buch gelesen."
+          ]
+        },
+        {
+          "heading": "使用场景",
+          "body": "日常口语里 Perfekt 基本取代了过去时 Präteritum，尤其是对话和信件；正式书面叙述仍多用 Präteritum。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Ich habe den ganzen Tag an meinem Projekt gearbeitet.",
+          "translation": "我一整天都在做我的项目。"
+        },
+        {
+          "source": "Sie ist gestern mit dem Fahrrad zur Arbeit gefahren.",
+          "translation": "她昨天骑自行车去上班了。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Ich habe nach Hause gegangen.",
+          "right": "Ich bin nach Hause gegangen.",
+          "why": "gehen 表示位移，完成时要用 sein 作助动词。"
+        },
+        {
+          "wrong": "Ich habe gearbeitet den ganzen Tag.",
+          "right": "Ich habe den ganzen Tag gearbeitet.",
+          "why": "过去分词固定在句末，时间状语放在助动词和分词之间。"
+        }
+      ],
+      "related": [
+        "de-word-order",
+        "de-negation"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia：德语语法",
+          "url": "https://en.wikipedia.org/wiki/German_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Lingolia：Perfekt",
+          "url": "https://deutsch.lingolia.com/en/grammar/tenses/present-perfect",
+          "site": "Lingolia"
+        }
+      ],
+      "patterns": [
+        "\\b(?:habe|hast|hat|haben|habt)\\b[^.?!]{0,60}\\bge\\w+(?:t|en)\\b",
+        "\\b(?:bin|bist|ist|sind|seid)\\b[^.?!]{0,60}\\bge\\w+(?:t|en)\\b",
+        "\\b(?:habe|hast|hat|haben|habt|bin|bist|ist|sind|seid)\\b"
+      ],
+      "sample": "Ich habe den ganzen Tag an meinem Projekt gearbeitet.",
+      "priority": 5,
+      "confidence": 0.86
+    },
+    {
+      "id": "de-adjective-endings",
+      "language": "de",
+      "title": "形容词变格",
+      "english": "Adjective Declension",
+      "category": "形容词",
+      "cefr": "B1",
+      "formula": "定冠词后 -e / -en；ein- 后补强词尾；无冠词时形容词自带格词尾",
+      "summary": "德语形容词作定语时必须变格，词尾取决于前面的冠词类型和名词的性、数、格，分为弱变化、混合变化和强变化三套。",
+      "sections": [
+        {
+          "heading": "三类变格",
+          "body": "定冠词后是弱变化，ein-、kein-、物主冠词后是混合变化，没有冠词时是强变化。",
+          "bullets": [
+            "der kleine Junge",
+            "ein kleines Kind",
+            "frisches Obst"
+          ]
+        },
+        {
+          "heading": "弱变化",
+          "body": "单数主格三种性都用 -e，其余格几乎清一色用 -en。",
+          "bullets": [
+            "die nette Frau",
+            "den netten Vater"
+          ]
+        },
+        {
+          "heading": "强变化",
+          "body": "没有冠词时形容词要自己承担性数格信息：阳性主格 -er、中性 -es、与格 -em。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Der kleine Junge trägt einen roten Mantel.",
+          "translation": "那个小男孩穿着一件红色外套。"
+        },
+        {
+          "source": "Wir wohnen in einem alten Haus mit großem Garten.",
+          "translation": "我们住在一栋带大花园的老房子里。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "ein kleine Kind",
+          "right": "ein kleines Kind",
+          "why": "中性名词在 ein 后没有词尾，要由形容词补上 -es。"
+        },
+        {
+          "wrong": "mit dem neue Auto",
+          "right": "mit dem neuen Auto",
+          "why": "定冠词后的与格一律用弱变化词尾 -en。"
+        }
+      ],
+      "related": [
+        "de-cases",
+        "de-word-order"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia：德语语法",
+          "url": "https://en.wikipedia.org/wiki/German_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Lingolia：形容词变格",
+          "url": "https://deutsch.lingolia.com/en/grammar/adjectives/declension",
+          "site": "Lingolia"
+        }
+      ],
+      "patterns": [
+        "\\b(?:der|die|das|den|dem)\\s+[a-zäöüß]{3,}(?:e|en|er|es|em)\\s+[A-ZÄÖÜ]",
+        "\\b(?:ein|eine|einen|einem|einer|kein\\w*|mein\\w*|dein\\w*)\\s+[a-zäöüß]{3,}(?:e|en|er|es|em)\\s+[a-zäöüß]{3,}",
+        "\\b(?:der|die|das|den|dem)\\s+\\w+(?:e|en|er|es|em)\\b"
+      ],
+      "sample": "Der kleine Junge trägt einen roten Mantel.",
+      "priority": 5,
+      "confidence": 0.84
+    },
+    {
+      "id": "de-subjunctive",
+      "language": "de",
+      "title": "虚拟式II",
+      "english": "Subjunctive II (Konjunktiv II)",
+      "category": "语气",
+      "cefr": "B1",
+      "formula": "würde + 不定式；或 wäre / hätte / könnte 等自身形式",
+      "summary": "虚拟式II 用来表达非现实的条件、愿望、委婉请求和猜测；谈过去则用 hätte / wäre + 过去分词。",
+      "sections": [
+        {
+          "heading": "构成",
+          "body": "多数动词用 würde + 不定式；sein、haben、情态动词和少数强变化动词保留自己的虚拟式II 形式。",
+          "bullets": [
+            "Ich würde gern mitkommen.",
+            "Ich wäre gern dabei."
+          ]
+        },
+        {
+          "heading": "非现实",
+          "body": "wenn 引导的非现实条件句里，从句和主句通常都用虚拟式II。",
+          "bullets": [
+            "Wenn ich Zeit hätte, würde ich mitkommen."
+          ]
+        },
+        {
+          "heading": "委婉语气",
+          "body": "请求、建议和猜测用虚拟式II 会显得客气，könnte、hätte、würde 是日常高频形式。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Wenn ich mehr Zeit hätte, würde ich jeden Tag Klavier spielen.",
+          "translation": "如果我有更多时间，我会每天弹钢琴。"
+        },
+        {
+          "source": "Könnten Sie mir bitte das Fenster öffnen?",
+          "translation": "您能帮我开一下窗吗？"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Wenn ich Zeit habe, würde ich kommen.",
+          "right": "Wenn ich Zeit hätte, würde ich kommen.",
+          "why": "非现实条件从句要用虚拟式II，habe 是陈述式。"
+        },
+        {
+          "wrong": "Wenn ich reich wäre, ich würde ein Haus kaufen.",
+          "right": "Wenn ich reich wäre, würde ich ein Haus kaufen.",
+          "why": "主句动词必须占第二位，前面的 wenn 从句整体算第一位。"
+        }
+      ],
+      "related": [
+        "de-word-order",
+        "de-negation"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia：德语语法",
+          "url": "https://en.wikipedia.org/wiki/German_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Lingolia：Konjunktiv",
+          "url": "https://deutsch.lingolia.com/en/grammar/verbs/subjunctive",
+          "site": "Lingolia"
+        }
+      ],
+      "patterns": [
+        "\\b(?:würde|würdest|würden|würdet)\\b",
+        "\\b(?:wäre|wärst|wären|hätte|hättest|hätten|könnte|könntest|könnten|müsste|müssten)\\b",
+        "\\b(?:würde|wäre|hätte|könnte|müsste|sollte)\\w*\\b"
+      ],
+      "sample": "Wenn ich mehr Zeit hätte, würde ich jeden Tag Klavier spielen.",
+      "priority": 5,
+      "confidence": 0.85
+    },
+    {
+      "id": "de-negation",
+      "language": "de",
+      "title": "否定",
+      "english": "Negation with nicht and kein",
+      "category": "否定",
+      "cefr": "A2",
+      "formula": "nicht 否定动词 / 形容词 / 状语；kein + 名词",
+      "summary": "德语用 nicht 否定动作、性质或整句，用 kein 否定没有定冠词的名词；两者的分工和位置是最常见的错误点。",
+      "sections": [
+        {
+          "heading": "否定范围",
+          "body": "nicht 通常紧贴被否定的成分之前；否定整个动作时放在句末。",
+          "bullets": [
+            "Das ist nicht fair.",
+            "Er kommt heute nicht."
+          ]
+        },
+        {
+          "heading": "名词否定",
+          "body": "名词前是不定冠词或干脆没有冠词时用 kein，kein 按名词的性数格变格。",
+          "bullets": [
+            "Ich habe keine Zeit.",
+            "Das ist kein Problem."
+          ]
+        },
+        {
+          "heading": "位置细节",
+          "body": "复合时态中 nicht 放在过去分词之前；句中有介词短语时，nicht 通常放在介词短语前面。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Ich verstehe die Regel immer noch nicht.",
+          "translation": "我还是没弄懂这条规则。"
+        },
+        {
+          "source": "Sie hat keine Zeit für solche Diskussionen.",
+          "translation": "她没时间做这种讨论。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Ich habe nicht Zeit.",
+          "right": "Ich habe keine Zeit.",
+          "why": "Zeit 前没有冠词，否定名词要用 kein。"
+        },
+        {
+          "wrong": "Er hat gestern Nacht geschlafen nicht.",
+          "right": "Er hat gestern Nacht nicht geschlafen.",
+          "why": "复合时态中 nicht 放在过去分词之前。"
+        }
+      ],
+      "related": [
+        "de-perfect",
+        "de-word-order"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia：德语语法",
+          "url": "https://en.wikipedia.org/wiki/German_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Lingolia：nicht 与 kein",
+          "url": "https://deutsch.lingolia.com/en/grammar/sentence-structure/negation",
+          "site": "Lingolia"
+        }
+      ],
+      "patterns": [
+        "\\b(?:nicht|kein\\w*)\\b",
+        "\\bkein\\w*\\s+[a-zäöüß]{3,}\\b"
+      ],
+      "sample": "Ich verstehe die Regel immer noch nicht.",
+      "priority": 6,
+      "confidence": 0.87
+    },
+    {
+      "id": "nl-v2",
+      "language": "nl",
+      "title": "V2语序",
+      "english": "Verb-Second Word Order",
+      "category": "语序",
+      "cefr": "A2",
+      "formula": "主语 + 变位动词 + 其他；状语前置时：状语 + 变位动词 + 主语",
+      "summary": "荷兰语主句的变位动词永远占第二位；把时间或地点状语提到句首时，主语要移到动词后面，形成倒装。",
+      "sections": [
+        {
+          "heading": "动词第二位",
+          "body": "陈述句里无论句首放什么成分，变位动词都紧跟其后。",
+          "bullets": [
+            "Ik ga morgen naar de tandarts.",
+            "Morgen ga ik naar de tandarts."
+          ]
+        },
+        {
+          "heading": "倒装",
+          "body": "状语前置后主语与动词换位，这是荷兰语最典型、也最容易出错的语序规则。"
+        },
+        {
+          "heading": "其余动词",
+          "body": "不定式和过去分词留在句末，和前面的变位动词一起构成“框形结构”。",
+          "bullets": [
+            "Ik heb gisteren een boek gekocht."
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Morgen ga ik naar de tandarts.",
+          "translation": "明天我去看牙医。"
+        },
+        {
+          "source": "In de zomer fietsen we elke dag langs de rivier.",
+          "translation": "夏天我们每天沿河骑车。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Morgen ik ga naar huis.",
+          "right": "Morgen ga ik naar huis.",
+          "why": "状语占第一位时动词必须占第二位，主语后移。"
+        },
+        {
+          "wrong": "Gisteren ik heb gewerkt.",
+          "right": "Gisteren heb ik gewerkt.",
+          "why": "变位助动词也要占第二位，过去分词留在句末。"
+        }
+      ],
+      "related": [
+        "nl-subordinate",
+        "nl-perfect"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia：荷兰语语法",
+          "url": "https://en.wikipedia.org/wiki/Dutch_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Learn Dutch：语法课程",
+          "url": "https://www.learndutch.org/dutch-grammar/",
+          "site": "learndutch.org"
+        }
+      ],
+      "patterns": [
+        "\\b(?:morgen|gisteren|vandaag|daarna|daarom|vorige week|in de zomer|op zondag)\\s+\\w+\\s+(?:ik|je|jij|hij|zij|ze|we|wij|jullie)\\b",
+        "\\b(?:in|op|bij|na|tijdens)\\s+(?:de|het)\\s+\\w+\\s+\\w+\\s+(?:ik|we|ze|hij|zij)\\b"
+      ],
+      "sample": "Morgen ga ik naar de tandarts.",
+      "priority": 6,
+      "confidence": 0.87
+    },
+    {
+      "id": "nl-articles",
+      "language": "nl",
+      "title": "冠词 de 与 het",
+      "english": "Articles de / het",
+      "category": "限定词",
+      "cefr": "A1",
+      "formula": "de（通性单数、全部复数）+ het（中性单数）",
+      "summary": "荷兰语定冠词只有 de 和 het 两个：约三分之二的名词是通性用 de，三分之一是中性用 het，复数则一律用 de。",
+      "sections": [
+        {
+          "heading": "两类名词",
+          "body": "通性名词配 de，中性名词配 het，中性词通常要在词典里单独记住。",
+          "bullets": [
+            "de tafel",
+            "het huis"
+          ]
+        },
+        {
+          "heading": "复数",
+          "body": "不论单数用 de 还是 het，复数定冠词一律是 de。",
+          "bullets": [
+            "de huizen",
+            "de tafels"
+          ]
+        },
+        {
+          "heading": "指小词",
+          "body": "所有带 -je、-tje、-pje 的指小词都是中性，用 het，这一点非常稳定。",
+          "bullets": [
+            "het meisje",
+            "het kopje"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Het huis staat aan de rand van het dorp.",
+          "translation": "那栋房子坐落在村子边上。"
+        },
+        {
+          "source": "De kinderen spelen met het nieuwe speelgoed.",
+          "translation": "孩子们在玩新玩具。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "de huis",
+          "right": "het huis",
+          "why": "huis 是中性名词，定冠词要用 het。"
+        },
+        {
+          "wrong": "het boeken",
+          "right": "de boeken",
+          "why": "复数定冠词一律用 de，与单数词性无关。"
+        }
+      ],
+      "related": [
+        "nl-negation",
+        "nl-v2"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia：荷兰语语法",
+          "url": "https://en.wikipedia.org/wiki/Dutch_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Learn Dutch：语法课程",
+          "url": "https://www.learndutch.org/dutch-grammar/",
+          "site": "learndutch.org"
+        }
+      ],
+      "patterns": [
+        "\\bhet\\s+[a-zà-ÿ]{3,}\\b",
+        "\\bde\\s+[a-zà-ÿ]{3,}\\b",
+        "\\bhet\\s+\\w+(?:je|tje|pje)\\b"
+      ],
+      "sample": "Het huis staat aan de rand van het dorp.",
+      "priority": 6,
+      "confidence": 0.86
+    },
+    {
+      "id": "nl-perfect",
+      "language": "nl",
+      "title": "现在完成时",
+      "english": "Present Perfect",
+      "category": "时态",
+      "cefr": "A2",
+      "formula": "hebben / zijn + voltooid deelwoord（过去分词居句末）",
+      "summary": "用 hebben 或 zijn 的现在时加过去分词，表示已完成的动作或持续到现在的状态，口语里常代替简单过去时。",
+      "sections": [
+        {
+          "heading": "构成",
+          "body": "规则动词的过去分词以 ge- 开头、以 -t 或 -d 结尾；以 be-、ver-、ont- 开头的不可分动词不加 ge-。",
+          "bullets": [
+            "gewerkt",
+            "betaald",
+            "gezien"
+          ]
+        },
+        {
+          "heading": "助动词",
+          "body": "多数动词用 hebben；表示位移、状态变化，以及 zijn、blijven、worden、gebeuren 用 zijn。",
+          "bullets": [
+            "Ik ben naar huis gegaan.",
+            "Ik heb gewerkt."
+          ]
+        },
+        {
+          "heading": "语序",
+          "body": "过去分词固定在句末，时间状语和宾语放在助动词与分词之间。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Ik heb de hele ochtend aan mijn scriptie gewerkt.",
+          "translation": "我一整个上午都在写论文。"
+        },
+        {
+          "source": "We zijn vorige week naar Antwerpen gefietst.",
+          "translation": "我们上周骑车去了安特卫普。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Ik ben gewerkt.",
+          "right": "Ik heb gewerkt.",
+          "why": "werken 不表示位移或状态变化，助动词用 hebben。"
+        },
+        {
+          "wrong": "Ik heb naar huis gegaan.",
+          "right": "Ik ben naar huis gegaan.",
+          "why": "gaan 表示位移，助动词要用 zijn。"
+        }
+      ],
+      "related": [
+        "nl-v2",
+        "nl-subordinate"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia：荷兰语语法",
+          "url": "https://en.wikipedia.org/wiki/Dutch_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Learn Dutch：完成时课程",
+          "url": "https://www.learndutch.org/dutch-grammar-3/",
+          "site": "learndutch.org"
+        }
+      ],
+      "patterns": [
+        "\\b(?:heb|hebt|heeft|hebben|had|hadden)\\b[^.?!]{0,60}\\bge\\w+(?:t|d|en)\\b",
+        "\\b(?:ben|bent|is|zijn|was|waren)\\b[^.?!]{0,60}\\bge\\w+(?:n|t)\\b"
+      ],
+      "sample": "Ik heb de hele ochtend aan mijn scriptie gewerkt.",
+      "priority": 5,
+      "confidence": 0.86
+    },
+    {
+      "id": "nl-subordinate",
+      "language": "nl",
+      "title": "从句语序",
+      "english": "Subordinate Clause Word Order",
+      "category": "从句",
+      "cefr": "B1",
+      "formula": "主句 + omdat / dat / als / wanneer + 主语 + … + 变位动词（句末）",
+      "summary": "由 omdat、dat、als 等从属连词引导的从句里，变位动词要移到句末，助动词和分词一起堆在后面。",
+      "sections": [
+        {
+          "heading": "动词居末",
+          "body": "从句中所有动词形式都集中在末尾，顺序是先助动词、后分词或不定式。",
+          "bullets": [
+            "…, omdat ik gisteren heb gewerkt.",
+            "…, dat hij morgen komt."
+          ]
+        },
+        {
+          "heading": "连词清单",
+          "body": "常见从属连词有 omdat、doordat、terwijl、hoewel、wanneer、als、zodat，它们后面都要用从句语序。"
+        },
+        {
+          "heading": "与主句对比",
+          "body": "want 是并列连词，后面保持主句语序；omdat 引导从句，动词必须居末。",
+          "bullets": [
+            "Ik blijf thuis, want het regent.",
+            "Ik blijf thuis omdat het regent."
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Ik blijf thuis omdat het vandaag hard regent.",
+          "translation": "今天雨下得很大，所以我待在家里。"
+        },
+        {
+          "source": "Ze vertelde dat ze volgende maand naar Spanje zou verhuizen.",
+          "translation": "她说下个月要搬去西班牙。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "…omdat het regent hard.",
+          "right": "…omdat het hard regent.",
+          "why": "从句动词居末，状语要放在动词之前。"
+        },
+        {
+          "wrong": "Ik denk dat hij is ziek.",
+          "right": "Ik denk dat hij ziek is.",
+          "why": "从句里变位动词 is 要放到句末。"
+        }
+      ],
+      "related": [
+        "nl-v2",
+        "nl-perfect"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia：荷兰语语法",
+          "url": "https://en.wikipedia.org/wiki/Dutch_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Learn Dutch：从句与语序",
+          "url": "https://www.learndutch.org/dutch-grammar-2/",
+          "site": "learndutch.org"
+        }
+      ],
+      "patterns": [
+        "\\b(?:omdat|doordat|terwijl|hoewel|wanneer|als|zodat)\\b[^.?!]{0,70}\\b\\w+(?:t|en)\\s*[.!?]",
+        "\\bdat\\s+(?:ik|je|hij|zij|ze|we|jullie)\\b[^.?!]{0,50}\\b(?:is|zijn|heb|heeft|hebben|kan|kunnen|wil|willen|gaat|gaan|komt|komen|wordt|worden|zou|zouden)\\b[^.?!]{0,25}[.!?]"
+      ],
+      "sample": "Ik blijf thuis omdat het vandaag hard regent.",
+      "priority": 5,
+      "confidence": 0.84
+    },
+    {
+      "id": "nl-negation",
+      "language": "nl",
+      "title": "否定",
+      "english": "Negation with niet and geen",
+      "category": "否定",
+      "cefr": "A2",
+      "formula": "niet 否定动词 / 形容词 / 状语；geen + 名词",
+      "summary": "荷兰语用 niet 否定动作和性质，用 geen 否定名词；geen 相当于“niet een”，后面名词不再带冠词。",
+      "sections": [
+        {
+          "heading": "名词否定",
+          "body": "名词前有不定冠词或没有冠词时用 geen。",
+          "bullets": [
+            "Ik heb geen tijd.",
+            "Dat is geen probleem."
+          ]
+        },
+        {
+          "heading": "动词否定",
+          "body": "否定动词、形容词、副词，或带定冠词的名词时用 niet。",
+          "bullets": [
+            "Ik kom niet.",
+            "Dat is niet waar."
+          ]
+        },
+        {
+          "heading": "否定位置",
+          "body": "niet 一般放在宾语和时间状语之后、所否定成分之前；宾语是代词时则放在 niet 前面。",
+          "bullets": [
+            "Ik ken hem niet.",
+            "Hij woont niet in Utrecht."
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Ik heb geen tijd om naar de film te gaan.",
+          "translation": "我没时间去看电影。"
+        },
+        {
+          "source": "Hij woont niet meer in Utrecht.",
+          "translation": "他不再住在乌得勒支。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Ik heb niet tijd.",
+          "right": "Ik heb geen tijd.",
+          "why": "tijd 前没有冠词，名词否定要用 geen。"
+        },
+        {
+          "wrong": "Ik weet niet het.",
+          "right": "Ik weet het niet.",
+          "why": "宾语代词 het 要放在 niet 之前。"
+        }
+      ],
+      "related": [
+        "nl-articles",
+        "nl-subordinate"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia：荷兰语语法",
+          "url": "https://en.wikipedia.org/wiki/Dutch_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Learn Dutch：否定与语序",
+          "url": "https://www.learndutch.org/dutch-grammar-2/",
+          "site": "learndutch.org"
+        }
+      ],
+      "patterns": [
+        "\\b(?:niet|geen)\\b",
+        "\\bgeen\\s+[a-zà-ÿ]{3,}\\b"
+      ],
+      "sample": "Ik heb geen tijd om naar de film te gaan.",
+      "priority": 6,
+      "confidence": 0.86
+    },
+    {
+      "id": "sv-v2",
+      "language": "sv",
+      "title": "V2语序",
+      "english": "Verb-Second Word Order",
+      "category": "语序",
+      "cefr": "A2",
+      "formula": "主语 + 变位动词 + 其他；状语前置时：状语 + 变位动词 + 主语",
+      "summary": "瑞典语陈述句的变位动词固定占第二位，句首放时间或地点状语时主语要后移，形成倒装。",
+      "sections": [
+        {
+          "heading": "动词第二位",
+          "body": "句首成分不论是主语还是状语，变位动词都紧跟其后。",
+          "bullets": [
+            "Jag åker till Göteborg i morgon.",
+            "I morgon åker jag till Göteborg."
+          ]
+        },
+        {
+          "heading": "倒装",
+          "body": "状语前置时主语与动词换位，这条规则在瑞典语里几乎没有例外。"
+        },
+        {
+          "heading": "从句前置",
+          "body": "整个从句放到句首也算第一位，后面的主句同样要倒装。",
+          "bullets": [
+            "När jag var ung bodde jag i Sverige."
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "I morgon åker vi till Göteborg.",
+          "translation": "明天我们去哥德堡。"
+        },
+        {
+          "source": "På vintern läser hon mycket.",
+          "translation": "冬天她读很多书。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "I morgon vi åker till Göteborg.",
+          "right": "I morgon åker vi till Göteborg.",
+          "why": "状语占第一位时动词必须占第二位，主语后移。"
+        },
+        {
+          "wrong": "Igår jag var sjuk.",
+          "right": "Igår var jag sjuk.",
+          "why": "过去时同样遵守动词第二位规则。"
+        }
+      ],
+      "related": [
+        "sv-subordinate",
+        "sv-perfect"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia：瑞典语语法",
+          "url": "https://en.wikipedia.org/wiki/Swedish_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "iLanguages：瑞典语语序",
+          "url": "https://ielanguages.com/swedish-word-order.html",
+          "site": "iLanguages"
+        }
+      ],
+      "patterns": [
+        "\\b(?:idag|i dag|igår|i går|imorgon|i morgon|sedan|därför|nu|på vintern|i somras)\\s+\\w+\\s+(?:jag|du|han|hon|vi|ni|de)\\b",
+        "\\b(?:på|i|vid|under)\\s+\\w+\\s+(?:läser|bor|jobbar|åker|kommer|går|sitter|står)\\s+(?:jag|hon|han|vi|de)\\b",
+        "\\b(?:idag|igår|imorgon|nu|sedan|därför|även)\\b"
+      ],
+      "sample": "I morgon åker vi till Göteborg.",
+      "priority": 6,
+      "confidence": 0.87
+    },
+    {
+      "id": "sv-articles",
+      "language": "sv",
+      "title": "冠词与定指后缀",
+      "english": "Articles and Definite Suffixes",
+      "category": "限定词",
+      "cefr": "A1",
+      "formula": "不定：en / ett + 名词；定指：名词 + -en / -et",
+      "summary": "瑞典语名词分通性和中性，不定冠词用 en 或 ett；定指不靠前置冠词，而是在名词词尾加 -en 或 -et。",
+      "sections": [
+        {
+          "heading": "两种性",
+          "body": "通性名词配 en，中性名词配 ett，词性必须和名词一起记。",
+          "bullets": [
+            "en bil",
+            "ett hus"
+          ]
+        },
+        {
+          "heading": "定指后缀",
+          "body": "定指时名词自己带词尾：通性加 -en，中性加 -et；复数多为 -na、-en 或 -a。",
+          "bullets": [
+            "bilen",
+            "huset",
+            "bilarna"
+          ]
+        },
+        {
+          "heading": "双重定指",
+          "body": "形容词修饰定指名词时，前面还要加 den、det 或 de，形容词一律用 -a。",
+          "bullets": [
+            "den stora bilen",
+            "det nya huset"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Boken ligger på bordet i köket.",
+          "translation": "那本书放在厨房的桌子上。"
+        },
+        {
+          "source": "Ett litet barn lekte på den stora gården.",
+          "translation": "一个小孩子在那个大院子里玩。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "ett bok",
+          "right": "en bok",
+          "why": "bok 是通性名词，不定冠词用 en。"
+        },
+        {
+          "wrong": "den stor bilen",
+          "right": "den stora bilen",
+          "why": "双重定指时形容词一律用 -a。"
+        }
+      ],
+      "related": [
+        "sv-adjective",
+        "sv-v2"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia：瑞典语语法",
+          "url": "https://en.wikipedia.org/wiki/Swedish_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "iLanguages：名词与冠词",
+          "url": "https://ielanguages.com/swedish-nouns.html",
+          "site": "iLanguages"
+        }
+      ],
+      "patterns": [
+        "\\b(?:en|ett)\\s+[a-zåäö]{3,}",
+        "\\b[a-zåäö]{2,}(?:en|et)\\s+(?:ligger|står|sitter|är|var|hänger|finns)\\b",
+        "\\b[a-zåäö]{2,}(?:en|et)\\b"
+      ],
+      "sample": "Boken ligger på bordet i köket.",
+      "priority": 6,
+      "confidence": 0.85
+    },
+    {
+      "id": "sv-perfect",
+      "language": "sv",
+      "title": "完成时",
+      "english": "Perfect Tense",
+      "category": "时态",
+      "cefr": "A2",
+      "formula": "har / hade + supinum（läst、skrivit、bott 等）",
+      "summary": "完成时用 har 加动词的 supinum 形式，表示到说话时为止的经历或结果，和简单过去时的分工要分清。",
+      "sections": [
+        {
+          "heading": "构成",
+          "body": "har 的现在时加 supinum；弱变化动词的 supinum 与过去分词同形，强变化动词要逐个记。",
+          "bullets": [
+            "har läst",
+            "har skrivit",
+            "har bott"
+          ]
+        },
+        {
+          "heading": "用法",
+          "body": "强调经历或结果、不强调具体过去时间时用完成时；出现 igår、förra året 这类明确时间点时改用过去时。"
+        },
+        {
+          "heading": "过去完成",
+          "body": "hade + supinum 表示过去某个时点之前已经完成。",
+          "bullets": [
+            "Hon hade redan ätit när jag kom."
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Jag har läst den där boken tre gånger.",
+          "translation": "那本书我读过三遍。"
+        },
+        {
+          "source": "De har bott i Lund i tio år.",
+          "translation": "他们在隆德住了十年。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Jag har läste boken.",
+          "right": "Jag har läst boken.",
+          "why": "har 后面要用 supinum，不能用过去时形式 läste。"
+        },
+        {
+          "wrong": "Jag har läst boken igår.",
+          "right": "Jag läste boken igår.",
+          "why": "有明确过去时间状语时用简单过去时。"
+        }
+      ],
+      "related": [
+        "sv-v2",
+        "sv-subordinate"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia：瑞典语语法",
+          "url": "https://en.wikipedia.org/wiki/Swedish_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "iLanguages：现在完成与过去完成",
+          "url": "https://ielanguages.com/swedish-perfect-tenses.html",
+          "site": "iLanguages"
+        }
+      ],
+      "patterns": [
+        "\\b(?:har|hade)\\s+(?:varit|bott|gjort|fått|sett|tagit|kommit|skrivit|läst)\\b",
+        "\\b(?:har|hade)\\s+(?:\\w+\\s+){0,4}\\w+(?:it|at|tt)\\b",
+        "\\b(?:har|hade)\\s+\\w+"
+      ],
+      "sample": "Jag har läst den där boken tre gånger.",
+      "priority": 5,
+      "confidence": 0.85
+    },
+    {
+      "id": "sv-subordinate",
+      "language": "sv",
+      "title": "从句语序",
+      "english": "Subordinate Clause Word Order",
+      "category": "从句",
+      "cefr": "B1",
+      "formula": "主句 + att / om / när / eftersom + 主语 + 句内副词 + 变位动词",
+      "summary": "瑞典语从句不会把动词推到句末，与主句的区别在于 inte、alltid、ofta 这类句内副词要放在变位动词之前。",
+      "sections": [
+        {
+          "heading": "副词前移",
+          "body": "从句里 inte、aldrig、alltid、ofta、redan 等句内副词位于变位动词之前；主句里它们位于动词之后。",
+          "bullets": [
+            "Jag vet att han inte kommer.",
+            "Han kommer inte idag."
+          ]
+        },
+        {
+          "heading": "语序保持",
+          "body": "从句内部仍是主语在前、动词随后，既不倒装，也不把动词挪到句末，这一点和德语、荷兰语不同。"
+        },
+        {
+          "heading": "常见连词",
+          "body": "att、om、när、eftersom、medan、innan、tills、även om 引导从句；整个从句放句首时主句要倒装。",
+          "bullets": [
+            "Om det regnar stannar vi hemma."
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Hon sa att hon inte hade tid.",
+          "translation": "她说她没时间。"
+        },
+        {
+          "source": "Jag stannar hemma eftersom det regnar hela dagen.",
+          "translation": "我一整天待在家里，因为一直在下雨。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Hon sa att hon hade inte tid.",
+          "right": "Hon sa att hon inte hade tid.",
+          "why": "从句中 inte 要放在变位动词之前。"
+        },
+        {
+          "wrong": "Jag tror att han kommer inte.",
+          "right": "Jag tror att han inte kommer.",
+          "why": "同样：从句里的句内副词前置。"
+        }
+      ],
+      "related": [
+        "sv-v2",
+        "sv-perfect"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia：瑞典语语法",
+          "url": "https://en.wikipedia.org/wiki/Swedish_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "iLanguages：连词与从句",
+          "url": "https://ielanguages.com/swedish-conjunctions.html",
+          "site": "iLanguages"
+        }
+      ],
+      "patterns": [
+        "\\b(?:att|om|eftersom|när|medan|innan|tills|även om)\\b[^.?!]{0,60}\\b(?:inte|aldrig|alltid|ofta|redan|bara)\\s+\\w+\\b",
+        "\\b(?:att|om|eftersom|när)\\s+(?:jag|du|han|hon|vi|ni|de)\\b[^.?!]{0,50}[.!?]",
+        "\\b(?:att|om|eftersom|när|medan|innan|tills)\\b"
+      ],
+      "sample": "Hon sa att hon inte hade tid.",
+      "priority": 5,
+      "confidence": 0.84
+    },
+    {
+      "id": "sv-adjective",
+      "language": "sv",
+      "title": "形容词一致",
+      "english": "Adjective Agreement",
+      "category": "形容词",
+      "cefr": "A1",
+      "formula": "en + 形容词（无词尾）；ett + 形容词 + -t；复数 / 定指 + 形容词 + -a",
+      "summary": "瑞典语形容词要和名词的性、数一致：通性单数不加词尾，中性单数加 -t，复数加 -a，定指时一律用 -a。",
+      "sections": [
+        {
+          "heading": "性和数",
+          "body": "通性单数不加词尾，中性单数加 -t，复数加 -a，这是形容词变形的三条主轴。",
+          "bullets": [
+            "en fin bil",
+            "ett fint hus",
+            "fina bilar"
+          ]
+        },
+        {
+          "heading": "定指",
+          "body": "定指名词前用 den、det、de，形容词一律加 -a，名词同时带定指词尾。",
+          "bullets": [
+            "den fina bilen",
+            "det fina huset"
+          ]
+        },
+        {
+          "heading": "不规则",
+          "body": "gammal 变 gamla，liten 变 litet / små，bra、gratis 等则完全不变。",
+          "bullets": [
+            "ett litet barn",
+            "små barn"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Ett gammalt hus står vid havet.",
+          "translation": "一栋老房子立在海边。"
+        },
+        {
+          "source": "Vi bor i ett litet hus med en stor trädgård.",
+          "translation": "我们住在一栋带大花园的小房子里。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "ett stor hus",
+          "right": "ett stort hus",
+          "why": "中性单数名词前的形容词要加 -t。"
+        },
+        {
+          "wrong": "den stor bilen",
+          "right": "den stora bilen",
+          "why": "定指时形容词一律用 -a。"
+        }
+      ],
+      "related": [
+        "sv-articles",
+        "sv-v2"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia：瑞典语语法",
+          "url": "https://en.wikipedia.org/wiki/Swedish_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "iLanguages：形容词一致",
+          "url": "https://ielanguages.com/swedish-adjectives.html",
+          "site": "iLanguages"
+        }
+      ],
+      "patterns": [
+        "\\bett\\s+[a-zåäö]{3,}(?:t|tt)\\s+[a-zåäö]{3,}",
+        "\\b(?:den|det|de)\\s+[a-zåäö]{3,}a\\s+[a-zåäö]{3,}(?:en|et|na)\\b",
+        "\\b(?:den|det|de)\\s+\\w+a\\b"
+      ],
+      "sample": "Ett gammalt hus står vid havet.",
+      "priority": 5,
+      "confidence": 0.85
+    }
+  ]
+}
