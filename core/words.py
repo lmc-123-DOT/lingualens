@@ -12,6 +12,8 @@ from __future__ import annotations
 import html
 import json
 import re
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from functools import lru_cache
@@ -36,9 +38,43 @@ SPEECH_LANG = {"en": "en-US", "zh": "zh-CN", "ja": "ja-JP", "fr": "fr-FR", "de":
 
 
 def _get_json(url: str) -> dict:
-    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/json"})
-    with urllib.request.urlopen(req, timeout=9, context=SSL_CONTEXT) as response:
-        return json.loads(response.read().decode("utf-8", "replace"))
+    last = None
+    for attempt in range(3):
+        try:
+            req = urllib.request.Request(url, headers={
+                "User-Agent": UA,
+                "Accept": "application/json, text/plain, */*",
+                "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.6",
+                "Referer": "https://dict.youdao.com/",
+                "Connection": "close",
+            })
+            with urllib.request.urlopen(req, timeout=9, context=SSL_CONTEXT) as response:
+                return json.loads(response.read().decode("utf-8", "replace"))
+        except Exception as exc:
+            last = exc
+            if attempt < 2:
+                time.sleep(0.35 * (attempt + 1))
+    raise last
+
+
+def _get_text(url: str, referer: str = "") -> str:
+    last = None
+    for attempt in range(3):
+        try:
+            req = urllib.request.Request(url, headers={
+                "User-Agent": UA,
+                "Accept": "text/html,application/xhtml+xml",
+                "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.6",
+                "Referer": referer or url,
+                "Connection": "close",
+            })
+            with urllib.request.urlopen(req, timeout=9, context=SSL_CONTEXT) as response:
+                return response.read().decode("utf-8", "replace")
+        except Exception as exc:
+            last = exc
+            if attempt < 2:
+                time.sleep(0.35 * (attempt + 1))
+    raise last
 
 
 def _plain(value) -> str:
@@ -142,6 +178,66 @@ def _chinese(word: str) -> dict | None:
         "meanings": meanings[:5],
         "source": "有道词典",
         "sourceUrl": "https://dict.youdao.com/result?word=" + urllib.parse.quote(word) + "&lang=zh",
+        "speechLang": SPEECH_LANG["zh"],
+    }
+
+
+def _chinese_suggest(word: str) -> dict | None:
+    """Youdao suggest is lighter than jsonapi and still works when it resets."""
+    try:
+        data = _get_json(
+            "https://dict.youdao.com/suggest?num=5&ver=3.0&doctype=json&cache=false"
+            "&le=zh&q=" + urllib.parse.quote(word)
+        )
+    except Exception:
+        return None
+    entries = ((data.get("data") or {}).get("entries") or [])
+    if not entries:
+        return None
+    explain = _plain(entries[0].get("explain"))
+    if not explain:
+        return None
+    meanings = [{"pos": "英文释义", "text": sense} for sense in _split_senses(explain, limit=4)]
+    if not meanings:
+        return None
+    return {
+        "word": word, "lang": "zh", "phonetic": "",
+        "pos": ["英文释义"], "meanings": meanings,
+        "source": "有道词典",
+        "sourceUrl": "https://dict.youdao.com/result?word=" + urllib.parse.quote(word) + "&lang=zh",
+        "speechLang": SPEECH_LANG["zh"],
+    }
+
+
+def _zdic(word: str) -> dict | None:
+    """Chinese dictionary fallback when Youdao resets the connection."""
+    try:
+        text = _get_text("https://www.zdic.net/hans/" + urllib.parse.quote(word),
+                         referer="https://www.zdic.net/")
+    except Exception:
+        return None
+    definitions = re.findall(r'<div class="xxjs-item__def">(.*?)</div>', text, re.S)
+    english = re.findall(r'<span class="xxjs-english__text">(.*?)</span>', text, re.S)
+    meanings = []
+    for item in definitions[:3]:
+        sense = _plain(item)
+        if sense:
+            meanings.append({"pos": "汉典释义", "text": sense[:220]})
+    if not meanings:
+        return None
+    if english:
+        en = _plain(english[0])
+        if en:
+            meanings.append({"pos": "英文", "text": en[:120]})
+    pinyin = ""
+    match = re.search(r'<span class="xxjs-reading__zy">(.*?)</span>', text, re.S)
+    if match:
+        pinyin = _plain(match.group(1))[:80]
+    return {
+        "word": word, "lang": "zh", "phonetic": pinyin,
+        "pos": ["汉典释义"], "meanings": meanings[:5],
+        "source": "汉典",
+        "sourceUrl": "https://www.zdic.net/hans/" + urllib.parse.quote(word),
         "speechLang": SPEECH_LANG["zh"],
     }
 
@@ -250,7 +346,14 @@ def lookup_word(word: str, lang: str = "en", context: str = "") -> dict:
         if lang == "en":
             result = _english(query) or _english_fallback(query)
         elif lang == "zh":
-            result = _chinese(query)
+            result = None
+            for source in (_chinese, _chinese_suggest, _zdic):
+                try:
+                    result = source(query)
+                except Exception:
+                    result = None
+                if result:
+                    break
         else:
             result = _suggest(query, lang) or _machine(query, lang)
         if not result:
@@ -269,4 +372,4 @@ def lookup_word(word: str, lang: str = "en", context: str = "") -> dict:
             fallback["morphology"] = explain_in_context(original, lang, context)
             fallback["context"] = (context or "")[:220]
             return fallback
-        return {"ok": False, "error": f"查询失败：{exc}"[:160]}
+        return {"ok": False, "error": "词典服务暂时连不上，请稍后再试，或换一个更短的词。"}
