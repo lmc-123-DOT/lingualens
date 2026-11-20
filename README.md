@@ -472,7 +472,21 @@ git push -u origin main
 
 不要提交 `data/`、`logs/`、API Key、个人历史或下载的第三方原始词表；这些已经在 `.gitignore` 中排除。
 
-## 11. 版本
+## 11. 单文件前端
+
+`web/single.html` 是把 `app.css`、`workbench.css`、`app.js` 和图标全部内联后的单文件网页，约 300 KB。它和现在的网页界面功能一致，但仍然需要 Python 后端提供 `/api`。
+
+重新生成：
+
+```bash
+python build_single_html.py
+```
+
+`server.py` 检测到 `web/single.html` 会优先把它作为 SPA 页面返回，所以访问 `/`、`/compare`、`/library` 等路由都会加载这个单文件。
+
+如果只想部署静态页，单文件里的翻译、词库、查词和文件解析接口不会工作；必须同时运行 Python 服务。
+
+## 12. 版本
 
 **v2.0.0** · 2026-11
 
