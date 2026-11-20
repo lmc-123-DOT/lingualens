@@ -45,6 +45,7 @@ APP_NAME = "语镜 LinguaLens"
 VERSION = "2.0.0"
 RESOURCE_ROOT = paths.resource_root()
 WEB_DIR = paths.resource_path("web")
+SINGLE_FILE = WEB_DIR / "single.html"
 DATA_DIR = paths.data_dir()
 MAX_TEXT = 160_000
 MAX_UPLOAD = 48 * 1024 * 1024
@@ -341,8 +342,9 @@ class Handler(BaseHTTPRequestHandler):
             # SPA routes
             if path == "/" or path.startswith("/grammar") or path.startswith("/batch") \
                     or path.startswith("/history") or path.startswith("/settings") or path.startswith("/compare") \
-                    or path.startswith("/analyze") or path.startswith("/library"):
-                return self._send_file(WEB_DIR / "index.html")
+                    or path.startswith("/analyze") or path.startswith("/library") or path == "/single":
+                page = SINGLE_FILE if SINGLE_FILE.exists() else (WEB_DIR / "index.html")
+                return self._send_file(page)
             # static assets
             if path.startswith("/assets/"):
                 candidate = (WEB_DIR / path.lstrip("/")).resolve()
