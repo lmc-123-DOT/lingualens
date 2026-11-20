@@ -558,7 +558,10 @@ class Handler(BaseHTTPRequestHandler):
         }
         if body.get("save", True):
             store.save_article(payload)
-        return self._json({"ok": True, "article": payload})
+        result = {"ok": True, "article": payload}
+        if body.get("analyze"):
+            result["analysis"] = analyze_article(payload)
+        return self._json(result)
 
     def log_message(self, fmt, *args):
         if "/api/" in str(args[0] if args else ""):
