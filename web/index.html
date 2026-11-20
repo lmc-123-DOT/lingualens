@@ -1,0 +1,39 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="语镜 LinguaLens 2.0：25 种语言互译、24 种高频语言的语法地图、逐段对照、可跳转语法详情与权威外链。" />
+  <meta name="theme-color" content="#080b10" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <title>语镜 LinguaLens 2.0 · 多语种翻译与语法地图</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/icon-192.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <script>
+    try {
+      var rev = localStorage.getItem('ll.uiRev');
+      var saved = localStorage.getItem('ll.theme');
+      document.documentElement.dataset.theme = (rev === 'workbench-1' && saved) ? saved : 'night';
+    } catch (e) { document.documentElement.dataset.theme = 'night'; }
+  </script>
+  <link rel="stylesheet" href="/assets/app.css?v=2.1.0" />
+  <link rel="stylesheet" href="/assets/workbench.css?v=2.1.0" />
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <div id="boot" class="boot">
+    <div class="boot-mark" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+    <p>语镜工作台正在连接…</p>
+  </div>
+  <div id="app"></div>
+  <div id="toast-root" class="toast-root" role="status" aria-live="polite"></div>
+  <div id="modal-root"></div>
+  <input id="file-input" type="file" hidden
+         accept=".txt,.md,.markdown,.html,.htm,.docx,.pdf,.epub,.srt,.vtt,.pptx,.xlsx,.rtf,.csv" />
+  <script src="/assets/app.js?v=2.1.0" defer></script>
+</body>
+</html>

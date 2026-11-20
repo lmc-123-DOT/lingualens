@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: lingualens
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: LINGUALENS_PASSWORD
+        sync: false
+      - key: LINGUALENS_REQUIRE_AUTH
+        value: "1"
+      - key: LINGUALENS_DATA
+        value: /data

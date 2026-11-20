@@ -1,0 +1,1599 @@
+{
+  "entries": [
+    {
+      "id": "ar-root",
+      "language": "ar",
+      "title": "三辅音词根",
+      "english": "Triconsonantal Root System",
+      "category": "构词",
+      "cefr": "A2",
+      "formula": "词根（جذر）+ 模板（وزن）→ 派生词族",
+      "summary": "阿拉伯语多数词由三个辅音组成的词根派生，词根只承载核心语义，模板决定词性与语法功能。记住一个词根的常见派生形，就能成串记词。",
+      "sections": [
+        {
+          "heading": "词根",
+          "body": "词根只写辅音，如 ك-ت-ب 表示“书写”。同一词根可派生出动词、名词、形容词和地点名词。",
+          "bullets": [
+            "كَتَبَ 写",
+            "كِتَاب 书",
+            "كَاتِب 作家",
+            "مَكْتَبَة 图书馆"
+          ]
+        },
+        {
+          "heading": "模板",
+          "body": "模板（وزن）是带元音和前后缀的框架，把词根辅音填进去就得到具体的词。",
+          "bullets": [
+            "فَاعِل → كَاتِب",
+            "مَفْعَلَة → مَكْتَبَة"
+          ]
+        },
+        {
+          "heading": "记忆方法",
+          "body": "按词根成组记词，比按字母背词表高效；遇到生词先找出三辅音骨架，再判断它套的是哪个模板。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "يكتب الطالب الدرس كل صباح.",
+          "translation": "学生每天早上写这一课的作业。"
+        },
+        {
+          "source": "هذه المكتبة قريبة من الجامعة.",
+          "translation": "这座图书馆离大学很近。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "把 كِتَاب 当成孤立单词死记",
+          "right": "以 ك-ت-ب 为词根，串记 كَاتِب、مَكْتَبَة、مَكْتُوب",
+          "why": "阿拉伯语词汇以词根词族为单位组织，孤立记词会让记忆量成倍增加。"
+        },
+        {
+          "wrong": "以为同一词根派生出的词元音都相同",
+          "right": "辅音骨架不变，元音由模板决定：كَتَبَ / كِتَاب / كَاتِب",
+          "why": "元音属于模板而不属于词根，这正是派生系统的关键。"
+        }
+      ],
+      "related": [
+        "ar-verb-forms",
+        "ar-nominal"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Semitic root",
+          "url": "https://en.wikipedia.org/wiki/Semitic_root",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Madinah Arabic · 词根与派生",
+          "url": "https://www.madinaharabic.com/",
+          "site": "Madinah Arabic"
+        }
+      ],
+      "patterns": [
+        "(?:^|\\s)(?:ي|ت|ن|أ)?كتب\\w*",
+        "مكتب(?:ة)?|كاتب"
+      ],
+      "sample": "يكتب الطالب الدرس كل صباح.",
+      "priority": 5,
+      "confidence": 0.84
+    },
+    {
+      "id": "ar-cases",
+      "language": "ar",
+      "title": "格与格尾",
+      "english": "Case Endings (I'rab)",
+      "category": "格",
+      "cefr": "B1",
+      "formula": "名词/形容词 + ـُ（主格）/ ـَ（宾格）/ ـِ（属格）",
+      "summary": "书面阿拉伯语用词尾短元音标示名词在句中的语法格：主格 -u、宾格 -a、属格 -i。口语中这些格尾通常不读出来。",
+      "sections": [
+        {
+          "heading": "三种格",
+          "body": "主格标记主语和名词句的谓语，宾格标记直接宾语，属格出现在介词之后和所属结构里。",
+          "bullets": [
+            "الطالبُ（主格）",
+            "الكتابَ（宾格）",
+            "المكتبةِ（属格）"
+          ]
+        },
+        {
+          "heading": "不定名词",
+          "body": "不定名词用 -un/-an/-in 的鼻音化词尾（تنوين），拼写作 ـٌ、ـًا、ـٍ。",
+          "bullets": [
+            "كتابٌ 一本书（主格）",
+            "كتابًا 一本书（宾格）"
+          ]
+        },
+        {
+          "heading": "口语差异",
+          "body": "现代口语基本不读格尾，靠语序和介词表达同样的关系；格尾主要是阅读书面语时的工具。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "قرأ الطالبُ الكتابَ في المكتبةِ.",
+          "translation": "学生在图书馆里读完了这本书。"
+        },
+        {
+          "source": "سلّمتُ الرسالةَ إلى المديرِ.",
+          "translation": "我把信交给了经理。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "قرأ الطالب الكتاب في المكتبةَ.",
+          "right": "قرأ الطالبُ الكتابَ في المكتبةِ.",
+          "why": "主语用主格 -u，直接宾语用宾格 -a，介词 في 后的名词用属格 -i。"
+        },
+        {
+          "wrong": "في المكتبةُ",
+          "right": "في المكتبةِ",
+          "why": "介词支配属格，与名词是不是“话题”无关。"
+        }
+      ],
+      "related": [
+        "ar-nominal",
+        "ar-article"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Arabic grammar",
+          "url": "https://en.wikipedia.org/wiki/Arabic_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "ArabicPod101 · 语法课程",
+          "url": "https://www.arabicpod101.com/",
+          "site": "ArabicPod101"
+        }
+      ],
+      "patterns": [
+        "[\\u0621-\\u064a]ً",
+        "[\\u0621-\\u064a][ُِ]\\s",
+        "(?:^|\\s)(?:في|من|إلى|على|عن|مع)\\s"
+      ],
+      "sample": "قرأ الطالبُ الكتابَ في المكتبةِ.",
+      "priority": 4,
+      "confidence": 0.82
+    },
+    {
+      "id": "ar-article",
+      "language": "ar",
+      "title": "定冠词 ال",
+      "english": "The Definite Article al-",
+      "category": "限定词",
+      "cefr": "A1",
+      "formula": "ال + 名词（太阳字母同化，月亮字母保留 l）",
+      "summary": "ال 加在名词前表示定指，相当于英语 the。遇到太阳字母时 l 不发音、后辅音加重读；遇到月亮字母则正常读 l。",
+      "sections": [
+        {
+          "heading": "定指功能",
+          "body": "ال 让名词变成已知或特定的事物，修饰它的形容词也要跟着加 ال。",
+          "bullets": [
+            "بيت 一座房子 → البيت 那座房子",
+            "البيت الجديد 那座新房子"
+          ]
+        },
+        {
+          "heading": "太阳字母",
+          "body": "ت ث د ذ ر ز س ش ص ض ط ظ ل ن 是太阳字母，ال 的 l 被同化，الشمس 读作 ash-shams 而不是 al-shams。"
+        },
+        {
+          "heading": "连写",
+          "body": "ال 与前接的介词连写：بِ + ال = بال，لِ + ال = لل；与 في 这类词则分开写。",
+          "bullets": [
+            "بالبيت 在那座房子里",
+            "للمدرسة 给那所学校"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "البيت قريب من المدرسة.",
+          "translation": "那座房子离学校很近。"
+        },
+        {
+          "source": "الشمس مشرقة هذا الصباح.",
+          "translation": "今天早上阳光明媚。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "把 الشمس 读成 al-shams",
+          "right": "读成 ash-shams，ل 被 ش 同化",
+          "why": "ش 是太阳字母，ال 的 l 不发音，后面的辅音要加重。"
+        },
+        {
+          "wrong": "بيت الجديد",
+          "right": "البيت الجديد",
+          "why": "名词定指时，修饰它的形容词也必须加定冠词。"
+        }
+      ],
+      "related": [
+        "ar-nominal",
+        "ar-cases"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Arabic definite article",
+          "url": "https://en.wikipedia.org/wiki/Arabic_definite_article",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Madinah Arabic · 冠词与名词",
+          "url": "https://www.madinaharabic.com/",
+          "site": "Madinah Arabic"
+        }
+      ],
+      "patterns": [
+        "\\bال[\\u0600-\\u06ff]+"
+      ],
+      "sample": "البيت قريب من المدرسة.",
+      "priority": 6,
+      "confidence": 0.87
+    },
+    {
+      "id": "ar-verb-forms",
+      "language": "ar",
+      "title": "动词变位",
+      "english": "Verb Conjugation",
+      "category": "动词",
+      "cefr": "A2",
+      "formula": "过去式：词干 + 后缀；现在式：前缀（أ/ت/ي/ن）+ 词干 + 后缀",
+      "summary": "阿拉伯语动词随人称、性和数变化。过去式主要靠后缀区分人称，现在式则用前缀加后缀，阴性复数非人类主语还要用单数动词。",
+      "sections": [
+        {
+          "heading": "过去式",
+          "body": "在词干后加后缀区分人称：-تُ（我）、-تَ（你，阳）、-تِ（你，阴）、-َ（他）、-َتْ（她）。",
+          "bullets": [
+            "كتبتُ 我写了",
+            "كتبوا 他们写了"
+          ]
+        },
+        {
+          "heading": "现在式",
+          "body": "用前缀 أ/ت/ي/ن 加词干，再加 -ُ、-ين、-ون 等后缀。",
+          "bullets": [
+            "أكتب 我写",
+            "تكتب 你写",
+            "يكتبون 他们写"
+          ]
+        },
+        {
+          "heading": "一致规则",
+          "body": "主语是阴性复数且指非人类时，动词用阴性单数形式。",
+          "bullets": [
+            "الكتبُ وصلت 书到了"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "أكتب رسالة إلى صديقي كل مساء.",
+          "translation": "我每天晚上给朋友写一封信。"
+        },
+        {
+          "source": "كتبوا التقرير قبل نهاية الأسبوع.",
+          "translation": "他们在周末前写完了报告。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "هي كتبوا الدرس.",
+          "right": "هي كتبت الدرس.",
+          "why": "单数阴性主语用 -َتْ，不能用复数后缀 -وا。"
+        },
+        {
+          "wrong": "أنت تكتبين（对男性说）",
+          "right": "أنت تكتب（对男性说）",
+          "why": "第二人称阳性单数现在式不加 -ين，那是阴性形式。"
+        }
+      ],
+      "related": [
+        "ar-root",
+        "ar-nominal"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Arabic verbs",
+          "url": "https://en.wikipedia.org/wiki/Arabic_verbs",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "ArabicPod101 · 动词变位",
+          "url": "https://www.arabicpod101.com/",
+          "site": "ArabicPod101"
+        }
+      ],
+      "patterns": [
+        "(?:^|\\s)(?:أ|ت|ي|ن)كتب",
+        "كتب(?:ت|وا|نا|تَ)",
+        "\\b(?:كتب|قرأ|ذهب|قال|كان|صار|عمل)\\w*\\b"
+      ],
+      "sample": "أكتب رسالة إلى صديقي كل مساء.",
+      "priority": 6,
+      "confidence": 0.85
+    },
+    {
+      "id": "ar-nominal",
+      "language": "ar",
+      "title": "名词句",
+      "english": "Nominal Sentence (Jumla Ismiyya)",
+      "category": "句式",
+      "cefr": "A1",
+      "formula": "مبتدأ（主格）+ خبر（主格），现在时无系动词",
+      "summary": "以名词开头的句子叫名词句，主语和谓语都用主格，现在时不用“是”。要表达过去就加 كان，否定用 ليس。",
+      "sections": [
+        {
+          "heading": "基本结构",
+          "body": "主语在前、谓语在后，中间不加动词。",
+          "bullets": [
+            "الطقسُ جميلٌ 天气很好",
+            "هو طالبٌ 他是学生"
+          ]
+        },
+        {
+          "heading": "谓语类型",
+          "body": "谓语可以是形容词、名词或介词短语，也可以是一个完整的句子。"
+        },
+        {
+          "heading": "过去与否定",
+          "body": "加 كان 表过去，其谓语用宾格；否定用 ليس，谓语同样用宾格。",
+          "bullets": [
+            "كان الطقسُ جميلًا 天气曾经很好",
+            "ليس الطقسُ جميلًا 天气不好"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "الطقس جميل هذا الصباح.",
+          "translation": "今天早上天气很好。"
+        },
+        {
+          "source": "هي طالبة مجتهدة في الجامعة.",
+          "translation": "她是大学里一名用功的学生。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "الطقس هو جميل.",
+          "right": "الطقس جميل.",
+          "why": "谓语是形容词时，现在时名词句不加系动词，也不需要多余的 هو。"
+        },
+        {
+          "wrong": "ليس الطقس جميلٌ.",
+          "right": "ليس الطقس جميلًا.",
+          "why": "ليس 的谓语要用宾格，形容词加 -a。"
+        }
+      ],
+      "related": [
+        "ar-cases",
+        "ar-article"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Arabic nouns and adjectives",
+          "url": "https://en.wikipedia.org/wiki/Arabic_nouns_and_adjectives",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Madinah Arabic · 名词句",
+          "url": "https://www.madinaharabic.com/",
+          "site": "Madinah Arabic"
+        }
+      ],
+      "patterns": [
+        "[\\u0621-\\u064a]{3,}ٌ(?:\\s|$)",
+        "(?:^|\\s)(?:هو|هي)\\s+[\\u0621-\\u064a]+ٌ",
+        "\\b(?:هو|هي|هم|هن|أنا|أنت|نحن)\\b"
+      ],
+      "sample": "الطقسُ جميلٌ هذا الصباح.",
+      "priority": 5,
+      "confidence": 0.86
+    },
+    {
+      "id": "fa-word-order",
+      "language": "fa",
+      "title": "语序",
+      "english": "Word Order (SOV)",
+      "category": "语序",
+      "cefr": "A1",
+      "formula": "主语 + 时间/地点 + 宾语 + 动词（SOV）",
+      "summary": "波斯语基本语序是主宾谓，动词固定在句末并携带人称词尾。修饰语跟在被修饰的名词后面。",
+      "sections": [
+        {
+          "heading": "基本语序",
+          "body": "主语在前，宾语在后，动词收尾；时间和地点状语通常紧挨在动词之前。",
+          "bullets": [
+            "من هر روز کتاب میخوانم. 我每天读书。"
+          ]
+        },
+        {
+          "heading": "动词收尾",
+          "body": "动词带人称词尾，所以主语常可省略：میروم 本身已经是“我去”。"
+        },
+        {
+          "heading": "修饰语后置",
+          "body": "形容词和所属语都跟在名词后。",
+          "bullets": [
+            "کتابِ خوب 好书",
+            "خانهی من 我的家"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "من هر روز کتاب میخوانم.",
+          "translation": "我每天读书。"
+        },
+        {
+          "source": "او در تهران زندگی میکند.",
+          "translation": "他住在德黑兰。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "من میخوانم کتاب.",
+          "right": "من کتاب میخوانم.",
+          "why": "把宾语放在动词前是波斯语的无标记语序，动词后置会显得很不自然。"
+        },
+        {
+          "wrong": "خوب کتاب",
+          "right": "کتاب خوب",
+          "why": "形容词修饰名词时必须后置，这点和汉语相反。"
+        }
+      ],
+      "related": [
+        "fa-ezafe",
+        "fa-verb"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Persian grammar",
+          "url": "https://en.wikipedia.org/wiki/Persian_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "PersianPod101 · 语序入门",
+          "url": "https://www.persianpod101.com/",
+          "site": "PersianPod101"
+        }
+      ],
+      "patterns": [
+        "(?:^|\\s)می[\\u0600-\\u06ff]{2,}",
+        "(?:^|\\s)نمی[\\u0600-\\u06ff]+",
+        "\\b(?:است|هست|هستند|بود|شد|می‌شود|می‌کند)\\b"
+      ],
+      "sample": "من هر روز کتاب میخوانم.",
+      "priority": 6,
+      "confidence": 0.86
+    },
+    {
+      "id": "fa-ezafe",
+      "language": "fa",
+      "title": "伊扎菲",
+      "english": "Ezafe Construction",
+      "category": "助词",
+      "cefr": "A1",
+      "formula": "名词 + -e（元音后作 -ye）+ 修饰语",
+      "summary": "伊扎菲是连接名词与形容词、所属语或同位语的短元音 -e，日常书写常省略不写。以元音结尾的名词要加 -ye。",
+      "sections": [
+        {
+          "heading": "连接作用",
+          "body": "名词和后面的形容词、所属语之间必须有 ezafe，读作短元音 -e。",
+          "bullets": [
+            "کتابِ نو 新书",
+            "دوستِ من 我的朋友"
+          ]
+        },
+        {
+          "heading": "元音后变体",
+          "body": "名词以 ه 或 ا、و 结尾时，ezafe 写作 -ye。",
+          "bullets": [
+            "خانهی بزرگ 大房子",
+            "دریای آبی 蓝色的海"
+          ]
+        },
+        {
+          "heading": "省略写法",
+          "body": "现代书面语通常不标出 ezafe，只靠语序判断；朗读时必须补出来。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "دوست من در شیراز زندگی میکند.",
+          "translation": "我的朋友住在设拉子。"
+        },
+        {
+          "source": "خانهی ما نزدیک پارک است.",
+          "translation": "我们家离公园很近。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "خانه بزرگ 读作 khāne bozorg",
+          "right": "خانهی بزرگ 读作 khāne-ye bozorg",
+          "why": "以元音结尾的名词必须加 -ye 才能连接后面的修饰语。"
+        },
+        {
+          "wrong": "دوستم خانه（想说“我朋友的家”）",
+          "right": "خانهی دوستم",
+          "why": "所属结构是“被拥有物 + ezafe + 拥有者”，顺序和汉语相反。"
+        }
+      ],
+      "related": [
+        "fa-word-order",
+        "fa-ra"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Persian grammar",
+          "url": "https://en.wikipedia.org/wiki/Persian_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Easy Persian · 名词短语",
+          "url": "https://www.easypersian.com/",
+          "site": "Easy Persian"
+        }
+      ],
+      "patterns": [
+        "هی\\s",
+        "(?:^|\\s)خانه(?:ی|ٔ)",
+        "[\\u0600-\\u06ff]ِ\\s",
+        "(?:^|\\s)\\S+ِ\\s"
+      ],
+      "sample": "خانهی ما نزدیک پارک است.",
+      "priority": 6,
+      "confidence": 0.85
+    },
+    {
+      "id": "fa-verb",
+      "language": "fa",
+      "title": "动词变位",
+      "english": "Verb Conjugation",
+      "category": "动词",
+      "cefr": "A1",
+      "formula": "词干 + 人称词尾：-am / -i / -ad / -im / -id / -and",
+      "summary": "波斯语动词由词干加人称词尾构成：现在时用现在词干，过去时用过去词干；第三人称单数过去式不加词尾。",
+      "sections": [
+        {
+          "heading": "现在时",
+          "body": "现在词干加词尾 -am/-i/-ad/-im/-id/-and，常带 می 表示进行或习惯。",
+          "bullets": [
+            "میروم 我去",
+            "میروند 他们去"
+          ]
+        },
+        {
+          "heading": "过去时",
+          "body": "过去词干加同样的词尾，但第三人称单数不加词尾。",
+          "bullets": [
+            "رفتم 我去了",
+            "رفت 他去了"
+          ]
+        },
+        {
+          "heading": "不规则词干",
+          "body": "有些动词的现在词干和不定式差别很大，需要单独记。",
+          "bullets": [
+            "رفتن → رو",
+            "گفتن → گو"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "من فارسی یاد میگیرم.",
+          "translation": "我在学波斯语。"
+        },
+        {
+          "source": "دیروز به بازار رفتم.",
+          "translation": "昨天我去了市场。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "من دیروز به بازار میروم.",
+          "right": "من دیروز به بازار رفتم.",
+          "why": "دیروز 指明过去，动词要用过去词干。"
+        },
+        {
+          "wrong": "او رفتند.",
+          "right": "او رفت.",
+          "why": "第三人称单数过去式不加人称词尾，-ند 是复数形式。"
+        }
+      ],
+      "related": [
+        "fa-word-order",
+        "fa-subjunctive"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Persian verbs",
+          "url": "https://en.wikipedia.org/wiki/Persian_verbs",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Easy Persian · 动词变位",
+          "url": "https://www.easypersian.com/",
+          "site": "Easy Persian"
+        }
+      ],
+      "patterns": [
+        "(?:^|\\s)رفت(?:م|ی|یم|ید|ند)\\b",
+        "(?:^|\\s)میگیر(?:م|ی|د|یم|ید|ند)\\b",
+        "\\b(?:رفت|آمد|کرد|شد|بود|دارد|دارند)\\w*\\b"
+      ],
+      "sample": "دیروز به بازار رفتم.",
+      "priority": 5,
+      "confidence": 0.84
+    },
+    {
+      "id": "fa-ra",
+      "language": "fa",
+      "title": "宾语标记 را",
+      "english": "Object Marker rā",
+      "category": "助词",
+      "cefr": "A2",
+      "formula": "确定直接宾语 + را + 动词",
+      "summary": "را 放在确定的直接宾语后面，标明它是动作的对象。定指、专有或上文已提到的宾语要加 را，泛指宾语一般不加。",
+      "sections": [
+        {
+          "heading": "确定宾语",
+          "body": "带指示词、专有名词或上文已提到的宾语后面要加 را。",
+          "bullets": [
+            "این کتاب را خواندم 我读了这本书",
+            "علی را دیدم 我看见了阿里"
+          ]
+        },
+        {
+          "heading": "位置",
+          "body": "را 紧跟宾语之后，宾语的其他修饰成分放在 را 前面；口语里常读作 رو。"
+        },
+        {
+          "heading": "泛指宾语",
+          "body": "泛指或不定宾语不加 را。",
+          "bullets": [
+            "کتاب میخوانم 我在读书",
+            "سیب میخورم 我在吃苹果"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "کتاب را روی میز گذاشتم.",
+          "translation": "我把书放在桌子上了。"
+        },
+        {
+          "source": "او را دیروز در بازار دیدم.",
+          "translation": "我昨天在市场看见了他。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "کتاب را میخوانم.（本想说“我在读书”这种泛指）",
+          "right": "کتاب میخوانم.",
+          "why": "泛指宾语不加 را；加上 را 就变成特指某一本书。"
+        },
+        {
+          "wrong": "را کتاب را خواندم.",
+          "right": "کتاب را خواندم.",
+          "why": "را 是后置助词，只能跟在宾语后面，不能提前。"
+        }
+      ],
+      "related": [
+        "fa-word-order",
+        "fa-ezafe"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Persian grammar",
+          "url": "https://en.wikipedia.org/wiki/Persian_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "PersianPod101 · 宾语与语序",
+          "url": "https://www.persianpod101.com/",
+          "site": "PersianPod101"
+        }
+      ],
+      "patterns": [
+        "(?:^|\\s)را(?:\\s|$)"
+      ],
+      "sample": "کتاب را روی میز گذاشتم.",
+      "priority": 6,
+      "confidence": 0.86
+    },
+    {
+      "id": "fa-subjunctive",
+      "language": "fa",
+      "title": "虚拟式",
+      "english": "Subjunctive Mood",
+      "category": "语气",
+      "cefr": "B1",
+      "formula": "بـ + 现在词干 + 人称词尾（بروم / ببینی）",
+      "summary": "虚拟式用前缀 بـ 加现在词干构成，用于愿望、可能、目的和情感评价后的从句，如 میخواهم که ...、شاید ...。",
+      "sections": [
+        {
+          "heading": "构成",
+          "body": "بـ 加现在词干再加人称词尾；否定时 بـ 换成 نـ。",
+          "bullets": [
+            "بروم 我去（虚拟）",
+            "بروید 你们去（虚拟）",
+            "نروم 我不去（虚拟）"
+          ]
+        },
+        {
+          "heading": "触发语境",
+          "body": "میخواهم که、باید、شاید、تا 以及表达目的或评价的结构后面用虚拟式。"
+        },
+        {
+          "heading": "与直陈式对比",
+          "body": "میروم 陈述事实，بروم 表达意愿或不确定。",
+          "bullets": [
+            "میروم 我去（陈述）",
+            "بروم 我去（愿望/可能）"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "میخواهم فردا به کتابخانه بروم.",
+          "translation": "我想明天去图书馆。"
+        },
+        {
+          "source": "شاید این هفته باران ببارد.",
+          "translation": "也许这周会下雨。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "میخواهم فردا به کتابخانه میروم.",
+          "right": "میخواهم فردا به کتابخانه بروم.",
+          "why": "خواستن 后面的从句要用虚拟式，去掉 می 加 بـ。"
+        },
+        {
+          "wrong": "شاید او میآید.",
+          "right": "شاید او بیاید.",
+          "why": "شاید 表示不确定，后面的动词要用虚拟式。"
+        }
+      ],
+      "related": [
+        "fa-verb",
+        "fa-word-order"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Persian verbs",
+          "url": "https://en.wikipedia.org/wiki/Persian_verbs",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "PersianPod101 · 虚拟式",
+          "url": "https://www.persianpod101.com/",
+          "site": "PersianPod101"
+        }
+      ],
+      "patterns": [
+        "(?:^|\\s)ب(?:روم|روی|رود|رویم|روید|روند)\\b",
+        "ببارد|بیاید|ببینم"
+      ],
+      "sample": "میخواهم فردا به کتابخانه بروم.",
+      "priority": 4,
+      "confidence": 0.8
+    },
+    {
+      "id": "he-binyan",
+      "language": "he",
+      "title": "动词模板",
+      "english": "Binyan Verb Patterns",
+      "category": "动词",
+      "cefr": "A2",
+      "formula": "词根（שורש）+ 七个 בניין 模板",
+      "summary": "希伯来语动词由三辅音词根套进七个 בניין 模板构成，模板决定主动、被动、使役或反身等意义。",
+      "sections": [
+        {
+          "heading": "七个模板",
+          "body": "פעל、נפעל、פיעל、פועל、הפעיל、הופעל、התפעל，各有固定的元音和前后缀模式。",
+          "bullets": [
+            "כתב 写（פעל）",
+            "הכתיב 口述（הפעיל）",
+            "התכתב 通信（התפעל）"
+          ]
+        },
+        {
+          "heading": "语态配对",
+          "body": "פעל 的被动是 נפעל，פיעל 的被动是 פועל，הפעיל 的被动是 הופעל。"
+        },
+        {
+          "heading": "词根识别",
+          "body": "同一词根进入不同模板，意义相关但不同，所以记词要把词根和模板一起记。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "המורה הסביר את השיעור.",
+          "translation": "老师讲解了这一课。"
+        },
+        {
+          "source": "הדלת נסגרה בשמונה בערב.",
+          "translation": "门在晚上八点关上了。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "以为一个词根只对应一个动词",
+          "right": "同一词根可进多个模板：כתב / הכתיב / התכתב",
+          "why": "模板改变语态和语义，只记词根会漏掉关键的语态信息。"
+        },
+        {
+          "wrong": "הדלת סגרה.",
+          "right": "הדלת נסגרה.",
+          "why": "“门被关上”用 נפעל 的 נסגרה；סגרה 是主动的“她关了”。"
+        }
+      ],
+      "related": [
+        "he-tenses",
+        "he-construct"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Modern Hebrew verb conjugation",
+          "url": "https://en.wikipedia.org/wiki/Modern_Hebrew_verb_conjugation",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Pealim · 动词变位查询",
+          "url": "https://www.pealim.com/",
+          "site": "Pealim"
+        }
+      ],
+      "patterns": [
+        "נ(?:סגר|כנס|פתח)",
+        "ה(?:סביר|פעיל|תפעל)",
+        "\\b(?:קנ|למד|כתב|המליץ|אהב|רצה|שמע|ראה)\\w*"
+      ],
+      "sample": "הדלת נסגרה בשמונה בערב.",
+      "priority": 5,
+      "confidence": 0.83
+    },
+    {
+      "id": "he-article",
+      "language": "he",
+      "title": "定冠词 ה",
+      "english": "Definite Article he",
+      "category": "限定词",
+      "cefr": "A1",
+      "formula": "ה + 名词（连写，不空格）",
+      "summary": "希伯来语的定冠词是名词前的 ה，与名词连写，相当于英语 the。名词带 ה 时，修饰它的形容词也要加 ה。",
+      "sections": [
+        {
+          "heading": "基本用法",
+          "body": "ה 直接贴在名词前，中间不留空格：ילד → הילד。",
+          "bullets": [
+            "הספר 那本书",
+            "הילדים 那些孩子"
+          ]
+        },
+        {
+          "heading": "形容词一致",
+          "body": "修饰有定名词的形容词也要加 ה。",
+          "bullets": [
+            "הילד הקטן 那个小男孩",
+            "הספר החדש 那本新书"
+          ]
+        },
+        {
+          "heading": "省略冠词",
+          "body": "专有名词、带人称属格后缀的名词和不定名词都不加 ה。",
+          "bullets": [
+            "ספרי 我的书",
+            "דוד 大卫"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "הילדים משחקים בגן.",
+          "translation": "孩子们在公园里玩。"
+        },
+        {
+          "source": "הספר החדש על השולחן.",
+          "translation": "那本新书在桌子上。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "הילד קטן（想说“那个小男孩”）",
+          "right": "הילד הקטן",
+          "why": "名词有定冠词时，修饰它的形容词也要加 ה。"
+        },
+        {
+          "wrong": "הו ילד",
+          "right": "הילד",
+          "why": "定冠词 ה 是前缀，与名词连写，中间不能有空格或额外字母。"
+        }
+      ],
+      "related": [
+        "he-construct",
+        "he-negation"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Hebrew grammar",
+          "url": "https://en.wikipedia.org/wiki/Hebrew_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "HebrewPod101 · 冠词与名词",
+          "url": "https://www.hebrewpod101.com/",
+          "site": "HebrewPod101"
+        }
+      ],
+      "patterns": [
+        "(?:^|\\s)ה(?:ילדים|ספר|ילד|מורה|שולחן|דלת|משפחה)",
+        "ה[\\u05d0-\\u05ea]+\\s+ה[\\u05d0-\\u05ea]+",
+        "\\bה[א-ת]{2,}\\b"
+      ],
+      "sample": "הילדים משחקים בגן.",
+      "priority": 6,
+      "confidence": 0.86
+    },
+    {
+      "id": "he-construct",
+      "language": "he",
+      "title": "构造态",
+      "english": "Construct State (Smichut)",
+      "category": "名词",
+      "cefr": "A2",
+      "formula": "名词1（构造形）+ 名词2（领属名词）",
+      "summary": "希伯来语用构造态表达领属和复合名词：第一个名词取构造形，直接跟第二个名词，不加“的”。定冠词只加在第二个名词上。",
+      "sections": [
+        {
+          "heading": "构成",
+          "body": "两个名词紧挨在一起，第一个取构造形（词尾常缩短），第二个可以带定冠词。",
+          "bullets": [
+            "בית ספר 学校",
+            "בית הספר 那所学校"
+          ]
+        },
+        {
+          "heading": "定冠词位置",
+          "body": "定冠词只加在最后一个名词上，第一个名词不能加 ה。"
+        },
+        {
+          "heading": "复数构造",
+          "body": "阳性复数词尾 -ים 在构造态变为 -י。",
+          "bullets": [
+            "ספרי בית הספר 学校的书"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "בית הספר נמצא ברחוב הזה.",
+          "translation": "学校在这条街上。"
+        },
+        {
+          "source": "שם המשפחה שלי כהן.",
+          "translation": "我姓科恩。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "הבית הספר",
+          "right": "בית הספר",
+          "why": "定冠词只放在第二个名词上，第一个名词不能加 ה。"
+        },
+        {
+          "wrong": "ספר של בית（想说“学校”）",
+          "right": "בית ספר",
+          "why": "固定的复合名词用构造态，不加 של。"
+        }
+      ],
+      "related": [
+        "he-article",
+        "he-binyan"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Construct state",
+          "url": "https://en.wikipedia.org/wiki/Construct_state",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "HebrewPod101 · 领属结构",
+          "url": "https://www.hebrewpod101.com/",
+          "site": "HebrewPod101"
+        }
+      ],
+      "patterns": [
+        "בית (?:הספר|הילדים|קפה|חולים)",
+        "שם ה(?:משפחה|עיר|דבר)",
+        "\\b(?:של|את)\\b",
+        "\\bש(?:ל|ה)[א-ת]+\\b"
+      ],
+      "sample": "בית הספר נמצא ברחוב הזה.",
+      "priority": 5,
+      "confidence": 0.84
+    },
+    {
+      "id": "he-tenses",
+      "language": "he",
+      "title": "时态",
+      "english": "Hebrew Tenses",
+      "category": "时态",
+      "cefr": "A1",
+      "formula": "过去（后缀式）/ 现在（בינוני 分词）/ 将来（前缀式）",
+      "summary": "希伯来语只有三种时态：过去、现在、将来。现在时用分词形式，必须与主语的性、数一致；将来时用 א/ת/י/נ 前缀。",
+      "sections": [
+        {
+          "heading": "过去时",
+          "body": "词干加后缀区分人称：-תי（我）、-ת（你/她）、-נו（我们）、-ו（他们）。",
+          "bullets": [
+            "למדתי 我学了",
+            "הלכנו 我们去了"
+          ]
+        },
+        {
+          "heading": "现在时",
+          "body": "用分词形式，必须与主语性数一致。",
+          "bullets": [
+            "הוא לומד 他在学",
+            "היא לומדת 她在学"
+          ]
+        },
+        {
+          "heading": "将来时",
+          "body": "前缀 א/ת/י/נ 加词干。",
+          "bullets": [
+            "אלמד 我将学",
+            "תלמדי 你将学（阴）"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "אני לומד עברית באוניברסיטה.",
+          "translation": "我在大学学希伯来语。"
+        },
+        {
+          "source": "אתמול הלכנו לים.",
+          "translation": "昨天我们去了海边。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "היא לומד עברית.",
+          "right": "היא לומדת עברית.",
+          "why": "现在时是分词，必须与主语阴性一致，加 -ת。"
+        },
+        {
+          "wrong": "אתמול אני לומד.",
+          "right": "אתמול למדתי.",
+          "why": "明确指过去的时间要用过去时形式，现在分词不能表过去。"
+        }
+      ],
+      "related": [
+        "he-binyan",
+        "he-negation"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Hebrew grammar",
+          "url": "https://en.wikipedia.org/wiki/Hebrew_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Pealim · 时态变位表",
+          "url": "https://www.pealim.com/",
+          "site": "Pealim"
+        }
+      ],
+      "patterns": [
+        "(?:^|\\s)ה(?:לכנו|לכתי|לך|לכה)(?:\\s|$)",
+        "אני לומד|היא לומדת|הוא לומד",
+        "\\b(?:היה|הייתה|היו|יהיה|תהיה)\\b",
+        "\\b(?:קניתי|למדתי|כתבתי|המלצתי|אכלתי|הלכתי|ראיתי)\\b"
+      ],
+      "sample": "אתמול הלכנו לים.",
+      "priority": 5,
+      "confidence": 0.82
+    },
+    {
+      "id": "he-negation",
+      "language": "he",
+      "title": "否定",
+      "english": "Negation",
+      "category": "否定",
+      "cefr": "A1",
+      "formula": "לא + 动词/形容词；אין + 名词（没有）",
+      "summary": "לא 放在动词或形容词前否定动作和性质；אין 表示“没有”或不存在，常与 ל 代词连用。",
+      "sections": [
+        {
+          "heading": "动词否定",
+          "body": "用 לא 否定动词、形容词和副词，位置紧贴被否定的成分之前。",
+          "bullets": [
+            "אני לא מבין 我不明白",
+            "זה לא טוב 这不好"
+          ]
+        },
+        {
+          "heading": "存在否定",
+          "body": "用 אין 否定存在或拥有，常与 ל 代词连用。",
+          "bullets": [
+            "אין זמן 没时间",
+            "אין לי כסף 我没钱"
+          ]
+        },
+        {
+          "heading": "祈使否定",
+          "body": "“别做某事”用 אל 加将来式。",
+          "bullets": [
+            "אל תדאג 别担心",
+            "אל תלך 别走"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "אני לא מבין את השאלה.",
+          "translation": "我不明白这个问题。"
+        },
+        {
+          "source": "אין לנו זמן היום.",
+          "translation": "我们今天没有时间。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "אני אין מבין.",
+          "right": "אני לא מבין.",
+          "why": "否定动词用 לא，אין 只用于“没有/不存在”。"
+        },
+        {
+          "wrong": "לא יש לי זמן.",
+          "right": "אין לי זמן.",
+          "why": "表达“没有”直接用一个 אין，不用 לא 加 יש。"
+        }
+      ],
+      "related": [
+        "he-tenses",
+        "he-article"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Hebrew grammar",
+          "url": "https://en.wikipedia.org/wiki/Hebrew_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "HebrewPod101 · 否定表达",
+          "url": "https://www.hebrewpod101.com/",
+          "site": "HebrewPod101"
+        }
+      ],
+      "patterns": [
+        "(?:^|\\s)לא\\s+[\\u05d0-\\u05ea]+",
+        "(?:^|\\s)אין\\s+[\\u05d0-\\u05ea]+"
+      ],
+      "sample": "אני לא מבין את השאלה.",
+      "priority": 6,
+      "confidence": 0.85
+    },
+    {
+      "id": "tr-vowel-harmony",
+      "language": "tr",
+      "title": "元音和谐",
+      "english": "Vowel Harmony",
+      "category": "构词",
+      "cefr": "A1",
+      "formula": "后元音 a ı o u → a；前元音 e i ö ü → e",
+      "summary": "土耳其语后缀的元音必须与词干最后一个元音同类：后元音后接 a，前元音后接 e。四变体后缀还会区分圆唇与否。",
+      "sections": [
+        {
+          "heading": "两元音和谐",
+          "body": "后缀只在 a/e 之间选择，如 -lar/-ler、-da/-de、-dan/-den。",
+          "bullets": [
+            "kitaplar 书（复数）",
+            "evler 房子（复数）",
+            "evde 在家里"
+          ]
+        },
+        {
+          "heading": "四元音和谐",
+          "body": "-ı/-i/-u/-ü 还要看词干末尾是否圆唇。",
+          "bullets": [
+            "yazı 文字",
+            "evi 他的房子",
+            "okulu 他的学校",
+            "gözü 他的眼睛"
+          ]
+        },
+        {
+          "heading": "辅音同化",
+          "body": "清辅音后 -da 变 -ta，-dan 变 -tan。",
+          "bullets": [
+            "kitapta 在书里",
+            "sokakta 在街上"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Kitaplar masada duruyor.",
+          "translation": "书在桌子上放着。"
+        },
+        {
+          "source": "Evde kimse yok.",
+          "translation": "家里没有人。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "kitablar",
+          "right": "kitaplar",
+          "why": "-lar 以辅音开头，词干末尾的 p 不浊化，直接写 kitaplar。"
+        },
+        {
+          "wrong": "evlar",
+          "right": "evler",
+          "why": "ev 是前元音词干，复数后缀要用 -ler。"
+        }
+      ],
+      "related": [
+        "tr-cases",
+        "tr-relative"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Vowel harmony",
+          "url": "https://en.wikipedia.org/wiki/Vowel_harmony",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "TurkishClass101 · 后缀与和谐",
+          "url": "https://www.turkishclass101.com/",
+          "site": "TurkishClass101"
+        }
+      ],
+      "patterns": [
+        "(?:lar|ler)\\b",
+        "(?:da|de|ta|te)\\b"
+      ],
+      "sample": "Kitaplar masada duruyor.",
+      "priority": 6,
+      "confidence": 0.87
+    },
+    {
+      "id": "tr-cases",
+      "language": "tr",
+      "title": "格",
+      "english": "Noun Cases",
+      "category": "格",
+      "cefr": "A1",
+      "formula": "词干 + -i（宾格）/ -e（与格）/ -de（位格）/ -den（从格）/ -in（属格）",
+      "summary": "土耳其语用后缀表示六个格：主格零形式、宾格 -ı、与格 -e、位格 -da、从格 -dan、属格 -ın。后缀随元音和谐变化。",
+      "sections": [
+        {
+          "heading": "六个格",
+          "body": "主格无标记，其余各格用一个后缀表示语法关系或方向。",
+          "bullets": [
+            "kitap 书（主格）",
+            "kitabı 把书",
+            "kitaba 向书",
+            "kitapta 在书里",
+            "kitaptan 从书里",
+            "kitabın 书的"
+          ]
+        },
+        {
+          "heading": "缓冲辅音",
+          "body": "元音结尾的名词要加 y 或 n 作缓冲。",
+          "bullets": [
+            "araba → arabayı 把车",
+            "araba → arabanın 车的"
+          ]
+        },
+        {
+          "heading": "辅音同化",
+          "body": "清辅音后用 -ta/-te、-tan/-ten。",
+          "bullets": [
+            "sokakta 在街上",
+            "sokaktan 从街上"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Kitabı masaya koydum.",
+          "translation": "我把书放在桌子上了。"
+        },
+        {
+          "source": "Ankara'dan İstanbul'a gidiyorum.",
+          "translation": "我正从安卡拉去伊斯坦布尔。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Kitap masaya koydum.",
+          "right": "Kitabı masaya koydum.",
+          "why": "确定的直接宾语必须带宾格 -ı，词干末尾 p 在元音前浊化为 b。"
+        },
+        {
+          "wrong": "Ankaradan geliyorum.",
+          "right": "Ankara'dan geliyorum.",
+          "why": "专有名词加格后缀时要用撇号隔开。"
+        }
+      ],
+      "related": [
+        "tr-vowel-harmony",
+        "tr-tense"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Turkish grammar",
+          "url": "https://en.wikipedia.org/wiki/Turkish_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "TurkishClass101 · 名词格",
+          "url": "https://www.turkishclass101.com/",
+          "site": "TurkishClass101"
+        }
+      ],
+      "patterns": [
+        "(?:ya|ye)\\s+(?:koydum|gidiyorum|geldim)",
+        "(?:dan|den|tan|ten)\\b"
+      ],
+      "sample": "Kitabı masaya koydum.",
+      "priority": 6,
+      "confidence": 0.86
+    },
+    {
+      "id": "tr-tense",
+      "language": "tr",
+      "title": "时态",
+      "english": "Tense Suffixes",
+      "category": "时态",
+      "cefr": "A1",
+      "formula": "词干 + -yor / -dı / -acak + 人称词尾",
+      "summary": "土耳其语时态靠后缀叠加：现在进行时 -yor、过去时 -dı/-di、将来时 -acak/-ecek，最后再加人称词尾。",
+      "sections": [
+        {
+          "heading": "现在进行",
+          "body": "-yor 后面接人称词尾。",
+          "bullets": [
+            "içiyorum 我正在喝",
+            "gidiyorsun 你正在去",
+            "geliyor 他正在来"
+          ]
+        },
+        {
+          "heading": "过去时",
+          "body": "-dı/-di/-du/-dü 后面接人称词尾。",
+          "bullets": [
+            "geldim 我来了",
+            "gitti 他去了",
+            "okuduk 我们读了"
+          ]
+        },
+        {
+          "heading": "将来时",
+          "body": "-acak/-ecek，第三人称单数常缩短词尾。",
+          "bullets": [
+            "gideceğim 我将去",
+            "gidecek 他将去",
+            "gideceğiz 我们将去"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Her sabah kahve içiyorum.",
+          "translation": "我每天早上喝咖啡。"
+        },
+        {
+          "source": "Yarın sinemaya gideceğiz.",
+          "translation": "明天我们要去看电影。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Dün sinemaya gidiyorum.",
+          "right": "Dün sinemaya gittim.",
+          "why": "dün 指过去，动词要用过去时 -dı 并加第一人称词尾。"
+        },
+        {
+          "wrong": "Yarın sinemaya gideceğim.（主语是 biz）",
+          "right": "Yarın sinemaya gideceğiz.",
+          "why": "主语 biz 时人称词尾是 -eceğiz，不是 -eceğim。"
+        }
+      ],
+      "related": [
+        "tr-evidencial",
+        "tr-cases"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Turkish grammar",
+          "url": "https://en.wikipedia.org/wiki/Turkish_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "TurkishClass101 · 时态",
+          "url": "https://www.turkishclass101.com/",
+          "site": "TurkishClass101"
+        }
+      ],
+      "patterns": [
+        "(?:yor|yorum|yorsun|yoruz)\\b",
+        "(?:ecek|acak|eceğiz|acağız)\\b",
+        "\\b(?:yor|ecek|acak|dı|di|du|dü|mış|miş|muş|müş)\\w*\\b"
+      ],
+      "sample": "Her sabah kahve içiyorum.",
+      "priority": 6,
+      "confidence": 0.85
+    },
+    {
+      "id": "tr-evidencial",
+      "language": "tr",
+      "title": "传闻过去 -miş",
+      "english": "Evidential Past -miş",
+      "category": "语气",
+      "cefr": "B1",
+      "formula": "词干 + -mış/-miş/-muş/-müş + 人称词尾",
+      "summary": "-miş 表示说话人没有亲眼所见，而是听说或推断出来的过去；与表示亲眼目击的 -dı 形成对比。",
+      "sections": [
+        {
+          "heading": "传闻",
+          "body": "转述别人的话或消息时用 -miş。",
+          "bullets": [
+            "Ali gelmiş 听说阿里来了",
+            "Duydum ki taşınmışlar 听说他们搬家了"
+          ]
+        },
+        {
+          "heading": "推断",
+          "body": "根据迹象做出的推断也用 -miş。",
+          "bullets": [
+            "Hava soğumuş 看来天变冷了"
+          ]
+        },
+        {
+          "heading": "人称词尾",
+          "body": "要加 -ım/-sın 等人称词尾，第三人称不加。",
+          "bullets": [
+            "gelmişim 听说我来了",
+            "gelmişsin 听说你来了"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Ali dün eve gelmiş.",
+          "translation": "听说阿里昨天回家了。"
+        },
+        {
+          "source": "Hava çok soğumuş.",
+          "translation": "天气好像冷了很多。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Ali dün eve geldi.（转述别人的话）",
+          "right": "Ali dün eve gelmiş.",
+          "why": "转述未经目击的信息要用 -miş；-dı 表示自己亲眼所见。"
+        },
+        {
+          "wrong": "Sen gelmiş.",
+          "right": "Sen gelmişsin.",
+          "why": "第二人称必须加 -sin 人称词尾。"
+        }
+      ],
+      "related": [
+        "tr-tense",
+        "tr-relative"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Evidentiality",
+          "url": "https://en.wikipedia.org/wiki/Evidentiality",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "TurkishClass101 · 传闻语气",
+          "url": "https://www.turkishclass101.com/",
+          "site": "TurkishClass101"
+        }
+      ],
+      "patterns": [
+        "(?:mış|miş|muş|müş)\\b",
+        "(?:mış|miş)(?:ım|im|sın|sin|ız|iz)\\b"
+      ],
+      "sample": "Hava çok soğumuş.",
+      "priority": 5,
+      "confidence": 0.82
+    },
+    {
+      "id": "tr-relative",
+      "language": "tr",
+      "title": "关系从句",
+      "english": "Relative Clauses",
+      "category": "从句",
+      "cefr": "B1",
+      "formula": "动词 + -dik/-acak + 人称词尾 + 名词",
+      "summary": "土耳其语没有关系代词，用 -dik/-acak 加人称后缀构成形动词短语，直接放在名词前修饰它。",
+      "sections": [
+        {
+          "heading": "构成",
+          "body": "动词加 -dik/-acak 再加人称词尾，整个短语放在被修饰的名词之前。",
+          "bullets": [
+            "aldığım kitap 我买的书",
+            "gelecek adam 要来的那个人"
+          ]
+        },
+        {
+          "heading": "宾语关系化",
+          "body": "被关系化的成分在从句里省略，从句主语的属格保留。",
+          "bullets": [
+            "Ali'nin aldığı kitap 阿里买的那本书"
+          ]
+        },
+        {
+          "heading": "与英语对比",
+          "body": "英语 the book that I bought 在土耳其语里是 aldığım kitap，修饰语和被修饰语的顺序正好相反。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Dün aldığım kitap çok güzel.",
+          "translation": "我昨天买的那本书很好看。"
+        },
+        {
+          "source": "Sana söylediğim şeyi unutma.",
+          "translation": "别忘了我跟你说过的事。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "kitap aldığım çok güzel",
+          "right": "aldığım kitap çok güzel",
+          "why": "形动词短语必须放在被修饰名词之前。"
+        },
+        {
+          "wrong": "Ali aldığı kitap",
+          "right": "Ali'nin aldığı kitap",
+          "why": "关系从句的主语要用属格，动词带第三人称词尾 -ğı。"
+        }
+      ],
+      "related": [
+        "tr-cases",
+        "tr-evidencial"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Turkish grammar",
+          "url": "https://en.wikipedia.org/wiki/Turkish_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "TurkishClass101 · 关系从句",
+          "url": "https://www.turkishclass101.com/",
+          "site": "TurkishClass101"
+        }
+      ],
+      "patterns": [
+        "(?:dığ|diğ|duğ|düğ)(?:ı|i|u|ü|ım|im|um|üm)\\b",
+        "(?:acağ|eceğ)(?:ı|i|u|ü)\\b"
+      ],
+      "sample": "Dün aldığım kitap çok güzel.",
+      "priority": 4,
+      "confidence": 0.79
+    }
+  ]
+}

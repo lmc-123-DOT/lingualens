@@ -1,0 +1,1100 @@
+{
+  "entries": [
+    {
+      "id": "ru-aspect",
+      "language": "ru",
+      "title": "动词体：完成体与未完成体",
+      "english": "Russian Verbal Aspect",
+      "category": "体",
+      "cefr": "A2",
+      "formula": "未完成体（НСВ）↔ 完成体（СВ）：前缀 про-/на-/с-/по- 或后缀 -ыва-/-ива-",
+      "summary": "俄语动词几乎都以成对的形式出现。未完成体看过程与重复，完成体看结果与一次完成。",
+      "sections": [
+        {
+          "heading": "体的对立",
+          "body": "同一动作可以有两种看法：писать 是写的过程，написать 是写完的结果。词典里通常把两个形式分别列出。",
+          "bullets": [
+            "читать — прочитать",
+            "писать — написать",
+            "делать — сделать",
+            "говорить — сказать"
+          ]
+        },
+        {
+          "heading": "构成方式",
+          "body": "最常见的是加前缀，其次是用后缀替换词干，也有完全不同的异干对。前缀往往同时带来完成体的结果意味。",
+          "bullets": [
+            "前缀：писать → написать",
+            "后缀：открывать → открыть",
+            "异干：говорить → сказать"
+          ]
+        },
+        {
+          "heading": "使用场合",
+          "body": "叙述事件顺序用完成体，描写背景、习惯和持续过程用未完成体。完成体没有复合将来时，它的现在时形式本身就表将来。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Я читал эту книгу два часа.",
+          "translation": "这本书我读了两个小时。"
+        },
+        {
+          "source": "Я прочитал эту книгу за два дня.",
+          "translation": "我两天就把这本书读完了。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Я прочитал книгу два часа.",
+          "right": "Я читал книгу два часа.",
+          "why": "два часа 表示持续的过程，必须用未完成体；完成体强调动作已经结束。"
+        },
+        {
+          "wrong": "Завтра я буду прочитать книгу.",
+          "right": "Завтра я прочитаю книгу.",
+          "why": "完成体不能和 буду 连用，它的将来意义由现在时形式承担。"
+        }
+      ],
+      "related": [
+        "ru-past",
+        "ru-negation"
+      ],
+      "links": [
+        {
+          "label": "Russian verbs · Aspect",
+          "url": "https://en.wikipedia.org/wiki/Russian_verbs",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "RussianLessons.net · Grammar",
+          "url": "https://www.russianlessons.net/grammar/",
+          "site": "RussianLessons.net"
+        }
+      ],
+      "patterns": [
+        "\\b(прочитал|прочитала|написал|сделал|прочитаю|напишу)\\b",
+        "\\b(читал|читала|писал|делал|читаю|пишу)\\b"
+      ],
+      "sample": "Вчера я прочитал эту книгу за два дня.",
+      "priority": 6,
+      "confidence": 0.87
+    },
+    {
+      "id": "ru-past",
+      "language": "ru",
+      "title": "过去时",
+      "english": "Russian Past Tense",
+      "category": "时态",
+      "cefr": "A1",
+      "formula": "不定式去 -ть + -л / -ла / -ло / -ли",
+      "summary": "俄语过去时只随性、数变化，不随人称变化。阳性 -л，阴性 -ла，中性 -ло，复数 -ли。",
+      "sections": [
+        {
+          "heading": "构成",
+          "body": "去掉不定式的 -ть，再加 -л 系列词尾。少数动词词干会变化，需要单独记。",
+          "bullets": [
+            "читать → читал / читала / читало / читали",
+            "говорить → говорил / говорила",
+            "идти → шёл / шла / шло / шли"
+          ]
+        },
+        {
+          "heading": "性数一致",
+          "body": "主语是阴性就用 -ла，中性用 -ло，复数一律 -ли，不再区分性别。过去时没有人称词尾，所以 я、ты、он 的形式可能相同。"
+        },
+        {
+          "heading": "体与时",
+          "body": "过去时同样分体：читал 强调当时在读，прочитал 强调已经读完。叙事里两者交替出现，形成背景与事件的层次。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Вчера она написала письмо бабушке.",
+          "translation": "昨天她给奶奶写了一封信。"
+        },
+        {
+          "source": "Мы долго гуляли по городу.",
+          "translation": "我们在城里逛了很久。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Она читал книгу.",
+          "right": "Она читала книгу.",
+          "why": "主语 она 是阴性，过去时要用 -ла。"
+        },
+        {
+          "wrong": "Я идёл домой.",
+          "right": "Я шёл домой.",
+          "why": "идти 的过去时是 шёл / шла，属于不规则形式。"
+        }
+      ],
+      "related": [
+        "ru-aspect",
+        "ru-word-order"
+      ],
+      "links": [
+        {
+          "label": "Russian grammar · Past tense",
+          "url": "https://en.wikipedia.org/wiki/Russian_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Master Russian · Grammar",
+          "url": "https://masterrussian.com/",
+          "site": "Master Russian"
+        }
+      ],
+      "patterns": [
+        "\\b(написала|читала|гуляли|пришёл|шла|были|сказал)\\b",
+        "\\b[а-яё]+(л|ла|ло|ли)\\s+(книгу|письмо|домой|вчера)\\b"
+      ],
+      "sample": "Вчера она написала письмо бабушке.",
+      "priority": 5,
+      "confidence": 0.86
+    },
+    {
+      "id": "ru-word-order",
+      "language": "ru",
+      "title": "语序与信息结构",
+      "english": "Russian Word Order and Information Structure",
+      "category": "语序",
+      "cefr": "B1",
+      "formula": "中性语序 SVO；已知信息在前，焦点信息放句末",
+      "summary": "俄语语序灵活，格标记保证句法关系。改变词序主要改变信息结构：什么已知、什么才是新信息。",
+      "sections": [
+        {
+          "heading": "中性语序",
+          "body": "没有特殊强调时按主谓宾排列，句末自然承载新信息，这也是最保险的写法。",
+          "bullets": [
+            "Мама купила молоко.",
+            "Студент читает книгу."
+          ]
+        },
+        {
+          "heading": "焦点后置",
+          "body": "回答“谁买了牛奶”时把新信息放到句末，语序随之倒装。俄语靠这种位置变化而不是靠重音来标记焦点。",
+          "bullets": [
+            "Молоко купила мама.",
+            "Книгу принёс брат."
+          ]
+        },
+        {
+          "heading": "倒装强调",
+          "body": "把宾语提前会形成对比话题，暗示“这个而不是别的”。口语里语调也参与区分，书面语只能靠词序。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Молоко купила мама.",
+          "translation": "牛奶是妈妈买的。"
+        },
+        {
+          "source": "Эту книгу я прочитал ещё в школе.",
+          "translation": "这本书我在中学时就读过了。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Кто купил молоко? — Мама купила молоко.",
+          "right": "Кто купил молоко? — Молоко купила мама.",
+          "why": "回答疑问词时焦点应落在句末，重复已知的 молоко 会让答句显得生硬。"
+        },
+        {
+          "wrong": "Книгу я прочитал вчера ради удовольствия.",
+          "right": "Я прочитал книгу вчера ради удовольствия.",
+          "why": "没有对比意图时宾语不必前置，前置会额外带出“这本书”的话题意味。"
+        }
+      ],
+      "related": [
+        "ru-aspect",
+        "ru-negation"
+      ],
+      "links": [
+        {
+          "label": "Russian grammar · Word order",
+          "url": "https://en.wikipedia.org/wiki/Russian_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "LearnRussian · Grammar",
+          "url": "https://learnrussian.rt.com/",
+          "site": "LearnRussian (RT)"
+        }
+      ],
+      "patterns": [
+        "\\b(эту|этот|это|эти)\\s+[а-яё]+\\s+(я|ты|он|она|мы|вы|они)\\b",
+        "\\b[А-ЯЁ][а-яё]+\\s+(купила|принёс|прочитал)\\s+[А-ЯЁ][а-яё]+\\b"
+      ],
+      "sample": "Эту книгу я прочитал ещё в школе.",
+      "priority": 4,
+      "confidence": 0.79
+    },
+    {
+      "id": "ru-negation",
+      "language": "ru",
+      "title": "否定",
+      "english": "Russian Negation",
+      "category": "否定",
+      "cefr": "A2",
+      "formula": "не + 动词；нет + 属格；否定代词与 не 同现",
+      "summary": "俄语用 не 否定谓语，用 нет 加属格否定存在。否定代词出现时 не 仍要保留，形成多重否定。",
+      "sections": [
+        {
+          "heading": "否定谓语",
+          "body": "не 直接放在动词前面，几乎是最简单的否定方式。否定形容词和副词也用同一个 не。",
+          "bullets": [
+            "Я не знаю.",
+            "Он не пришёл на встречу.",
+            "Это не моя книга."
+          ]
+        },
+        {
+          "heading": "存在否定",
+          "body": "说“没有某物”用 нет，后面的名词要变成属格。过去和将来则用 не было / не будет，同样接属格。",
+          "bullets": [
+            "У меня нет времени.",
+            "Здесь нет магазина."
+          ]
+        },
+        {
+          "heading": "双重否定",
+          "body": "никто、ничего、никогда、нигде 必须与 не 同时出现，这不是错误而是规范。缺少 не 的句子反而不合语法。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "У меня нет свободного времени.",
+          "translation": "我没有空闲时间。"
+        },
+        {
+          "source": "Он никогда не опаздывает на работу.",
+          "translation": "他上班从不迟到。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "У меня нет время.",
+          "right": "У меня нет времени.",
+          "why": "нет 后面的名词必须用属格，время 的属格是 времени。"
+        },
+        {
+          "wrong": "Я не знаю ничего.",
+          "right": "Я ничего не знаю.",
+          "why": "否定代词通常放在动词前，не 也不能省，语序比逐字对应更重要。"
+        }
+      ],
+      "related": [
+        "ru-aspect",
+        "ru-word-order"
+      ],
+      "links": [
+        {
+          "label": "Russian grammar · Negation",
+          "url": "https://en.wikipedia.org/wiki/Russian_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "RussianLessons.net · Grammar",
+          "url": "https://www.russianlessons.net/grammar/",
+          "site": "RussianLessons.net"
+        }
+      ],
+      "patterns": [
+        "\\bне\\s+(знаю|был|была|хочу|может|пришёл|опаздывает|работает)\\b",
+        "\\b(нет|не было|не будет)\\s+[а-яё]+(а|я|и|ы|время|времени)\\b"
+      ],
+      "sample": "Он никогда не опаздывает на работу.",
+      "priority": 5,
+      "confidence": 0.85
+    },
+    {
+      "id": "uk-cases",
+      "language": "uk",
+      "title": "七格系统",
+      "english": "Ukrainian Seven Cases",
+      "category": "格",
+      "cefr": "A2",
+      "formula": "називний / родовий / давальний / знахідний / орудний / місцевий / кличний",
+      "summary": "乌克兰语保留七个格，比俄语多出一个呼格。格由词尾和介词共同标示，是读懂句子关系的关键。",
+      "sections": [
+        {
+          "heading": "七格功能",
+          "body": "主格作主语，属格表所属和否定，与格表接受者，宾格作直接宾语，工具格表工具与方式，位格表地点，呼格用于称呼。",
+          "bullets": [
+            "книга（主格）",
+            "книги（属格）",
+            "книзі（与格/位格）",
+            "книгу（宾格）",
+            "книгою（工具格）",
+            "книго!（呼格）"
+          ]
+        },
+        {
+          "heading": "介词支配",
+          "body": "в/у 表地点时接位格，表方向时接宾格；до 接属格，з 接工具格。介词几乎决定了后面必须用哪个格。",
+          "bullets": [
+            "в Києві（在基辅）",
+            "в Київ（去基辅）",
+            "до Києва（到基辅）"
+          ]
+        },
+        {
+          "heading": "形容词一致",
+          "body": "形容词、物主代词要和名词的性数格一起变化。цей / ця / це 在宾格阴性里变成 цю。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Я читаю цікаву книгу.",
+          "translation": "我在读一本有趣的书。"
+        },
+        {
+          "source": "Ми говоримо про нову роботу.",
+          "translation": "我们在谈新工作。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Я живу в Київ.",
+          "right": "Я живу в Києві.",
+          "why": "表示所在地点时 в 接位格，Київ 的位格是 Києві。"
+        },
+        {
+          "wrong": "Я читаю книга.",
+          "right": "Я читаю книгу.",
+          "why": "直接宾语用宾格，阴性 -а 变成 -у。"
+        }
+      ],
+      "related": [
+        "uk-vocative",
+        "uk-aspect"
+      ],
+      "links": [
+        {
+          "label": "Ukrainian grammar · Cases",
+          "url": "https://en.wikipedia.org/wiki/Ukrainian_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Ukrainian Lessons",
+          "url": "https://www.ukrainianlessons.com/",
+          "site": "Ukrainian Lessons"
+        }
+      ],
+      "patterns": [
+        "\\b(у|в)\\s+[А-ЯІЇЄҐа-яіїєґ]+(і|ї|ові|еві)\\b",
+        "\\b(книгу|роботу|мову|статтю|каву)\\b"
+      ],
+      "sample": "Я живу в Києві.",
+      "priority": 6,
+      "confidence": 0.85
+    },
+    {
+      "id": "uk-aspect",
+      "language": "uk",
+      "title": "动词体",
+      "english": "Ukrainian Verbal Aspect",
+      "category": "体",
+      "cefr": "A2",
+      "formula": "недоконаний ↔ доконаний：前缀 про-/на-/з-/по- 或后缀 -ува-/-ову-",
+      "summary": "乌克兰语动词成对出现。未完成体写过程与重复，完成体写结果与一次完成。",
+      "sections": [
+        {
+          "heading": "体的对立",
+          "body": "同一动作有两种呈现方式：читати 是读的过程，прочитати 是读完的结果。词典会把两个形式分别标注。",
+          "bullets": [
+            "читати — прочитати",
+            "писати — написати",
+            "робити — зробити"
+          ]
+        },
+        {
+          "heading": "构成",
+          "body": "加前缀是最常见的手段，其次是替换后缀，还有完全不同的异干对。前缀常同时带来“做到某个结果”的意味。",
+          "bullets": [
+            "前缀：писати → написати",
+            "后缀：відкривати → відкрити",
+            "异干：говорити → сказати"
+          ]
+        },
+        {
+          "heading": "用法",
+          "body": "叙述事件顺序用完成体，描写背景和习惯用未完成体。完成体没有现在时，其现在时形式直接表将来。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Я читав цю книжку дві години.",
+          "translation": "这本小书我读了两个小时。"
+        },
+        {
+          "source": "Я прочитав цю книжку за два дні.",
+          "translation": "我两天就把这本小书读完了。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Я прочитав книжку дві години.",
+          "right": "Я читав книжку дві години.",
+          "why": "дві години 表示持续的时段，要用未完成体。"
+        },
+        {
+          "wrong": "Завтра я буду прочитати книжку.",
+          "right": "Завтра я прочитаю книжку.",
+          "why": "буду 只能接未完成体不定式，完成体的将来用现在时形式表达。"
+        }
+      ],
+      "related": [
+        "uk-past",
+        "uk-future"
+      ],
+      "links": [
+        {
+          "label": "Grammatical aspect",
+          "url": "https://en.wikipedia.org/wiki/Grammatical_aspect",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Ukrainian Lessons",
+          "url": "https://www.ukrainianlessons.com/",
+          "site": "Ukrainian Lessons"
+        }
+      ],
+      "patterns": [
+        "\\b(прочитав|написав|зробив|прочитаю|напишу|зроблю)\\b",
+        "\\b(читав|писав|робив|читаю|пишу)\\b"
+      ],
+      "sample": "Я прочитав цю книжку за два дні.",
+      "priority": 6,
+      "confidence": 0.86
+    },
+    {
+      "id": "uk-past",
+      "language": "uk",
+      "title": "过去时",
+      "english": "Ukrainian Past Tense",
+      "category": "时态",
+      "cefr": "A1",
+      "formula": "不定式去 -ти + -в / -ла / -ло / -ли",
+      "summary": "乌克兰语过去时随性、数变化，不随人称变化。阳性 -в，阴性 -ла，中性 -ло，复数 -ли。",
+      "sections": [
+        {
+          "heading": "构成",
+          "body": "去掉不定式的 -ти 再加词尾。部分动词词干会变，属于不规则，需要单独记。",
+          "bullets": [
+            "читати → читав / читала / читало / читали",
+            "працювати → працював / працювала / працювали",
+            "іти → ішов / ішла / ішли"
+          ]
+        },
+        {
+          "heading": "性数一致",
+          "body": "阴性主语用 -ла，中性用 -ло，复数一律 -ли。过去时没有人称词尾，所以 я 和 він 的形式常常一样。"
+        },
+        {
+          "heading": "体与时",
+          "body": "过去时也分体：читав 强调当时在读，прочитав 强调已经读完。两种体在同一段叙述里交替出现。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Учора вона написала лист своїй бабусі.",
+          "translation": "昨天她给自己的奶奶写了一封信。"
+        },
+        {
+          "source": "Ми довго гуляли містом.",
+          "translation": "我们在城里逛了很久。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Вона читав книжку.",
+          "right": "Вона читала книжку.",
+          "why": "主语 вона 是阴性，过去时要用 -ла。"
+        },
+        {
+          "wrong": "Я ідів додому.",
+          "right": "Я ішов додому.",
+          "why": "іти 的过去时是 ішов / ішла，属不规则变化。"
+        }
+      ],
+      "related": [
+        "uk-aspect",
+        "uk-cases"
+      ],
+      "links": [
+        {
+          "label": "Ukrainian grammar · Past tense",
+          "url": "https://en.wikipedia.org/wiki/Ukrainian_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Ukrainian Lessons",
+          "url": "https://www.ukrainianlessons.com/",
+          "site": "Ukrainian Lessons"
+        }
+      ],
+      "patterns": [
+        "\\b(читала|писала|гуляли|працював|прийшов|ішов|написала)\\b",
+        "\\b[а-яіїєґ]+(ла|ли|ло)\\s+(книжку|містом|лист|додому)\\b"
+      ],
+      "sample": "Ми довго гуляли містом.",
+      "priority": 5,
+      "confidence": 0.85
+    },
+    {
+      "id": "uk-future",
+      "language": "uk",
+      "title": "将来时",
+      "english": "Ukrainian Future Tense",
+      "category": "时态",
+      "cefr": "A2",
+      "formula": "未完成体：буду + 不定式；完成体：现在时形式表将来",
+      "summary": "乌克兰语有两套将来时。未完成体用 буду 加不定式，完成体直接借用现在时形式表将来。",
+      "sections": [
+        {
+          "heading": "合成将来",
+          "body": "буду / будеш / буде / будемо / будете / будуть 加上未完成体不定式，是最常用的一套形式。",
+          "bullets": [
+            "Я буду читати.",
+            "Вони будуть працювати."
+          ]
+        },
+        {
+          "heading": "完成体将来",
+          "body": "прочитаю、напишу、зроблю 形式像现在时，意义却是将来，因为它们表示动作会一次做完。"
+        },
+        {
+          "heading": "其他形式",
+          "body": "书面语还有 читатиму 这样的后缀形式，把 -му 加在不定式后面。口语里更常用 буду читати。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Завтра я буду читати цю книжку.",
+          "translation": "明天我会读这本小书。"
+        },
+        {
+          "source": "Я прочитаю її до вечора.",
+          "translation": "我会在傍晚前把它读完。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Я буду прочитати книжку.",
+          "right": "Я прочитаю книжку.",
+          "why": "буду 只接未完成体不定式，完成体要用现在时形式表将来。"
+        },
+        {
+          "wrong": "Він буде написати листа.",
+          "right": "Він напише листа.",
+          "why": "написати 是完成体，不能和 буде 搭配。"
+        }
+      ],
+      "related": [
+        "uk-aspect",
+        "uk-past"
+      ],
+      "links": [
+        {
+          "label": "Ukrainian grammar · Future",
+          "url": "https://en.wikipedia.org/wiki/Ukrainian_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Ukrainian Lessons",
+          "url": "https://www.ukrainianlessons.com/",
+          "site": "Ukrainian Lessons"
+        }
+      ],
+      "patterns": [
+        "\\b(буду|будеш|буде|будемо|будете|будуть)\\s+[а-яіїєґ]+ти\\b",
+        "\\b(прочитаю|напишу|зроблю|піду|прийду|скажу)\\b"
+      ],
+      "sample": "Завтра я буду читати цю книжку.",
+      "priority": 5,
+      "confidence": 0.84
+    },
+    {
+      "id": "uk-vocative",
+      "language": "uk",
+      "title": "呼格",
+      "english": "Ukrainian Vocative Case",
+      "category": "格",
+      "cefr": "A2",
+      "formula": "-о / -е / -у：Іване, Оксано, пане, друже",
+      "summary": "呼格用于直接称呼，在乌克兰语里仍然活跃。人名和称谓的呼格形式与主格差别明显。",
+      "sections": [
+        {
+          "heading": "构成",
+          "body": "阳性多取 -е 或 -у，阴性多取 -о 或 -е。词尾取决于词干结尾的辅音性质。",
+          "bullets": [
+            "Іван → Іване",
+            "Оксана → Оксано",
+            "Марія → Маріє",
+            "пан → пане"
+          ]
+        },
+        {
+          "heading": "使用场合",
+          "body": "日常对话、书信开头、正式称谓都会用呼格。称呼头衔时形容词和名词要一起变。",
+          "bullets": [
+            "пане професоре",
+            "дорога Оксано"
+          ]
+        },
+        {
+          "heading": "与主格区别",
+          "body": "主格是词典形式，呼格只用于称呼，不能作句子主语。名字叫错格会显得生硬甚至不礼貌。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Оксано, ти вже вдома?",
+          "translation": "奥克萨娜，你到家了吗？"
+        },
+        {
+          "source": "Добрий день, пане професоре!",
+          "translation": "教授先生，您好！"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Добрий день, пан професор!",
+          "right": "Добрий день, пане професоре!",
+          "why": "称呼时名词和同位语都要用呼格，пан 变 пане，професор 变 професоре。"
+        },
+        {
+          "wrong": "Іван, іди сюди!",
+          "right": "Іване, іди сюди!",
+          "why": "直接称呼阳性人名要用呼格词尾 -е。"
+        }
+      ],
+      "related": [
+        "uk-cases",
+        "uk-past"
+      ],
+      "links": [
+        {
+          "label": "Vocative case",
+          "url": "https://en.wikipedia.org/wiki/Vocative_case",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Ukrainian Lessons",
+          "url": "https://www.ukrainianlessons.com/",
+          "site": "Ukrainian Lessons"
+        }
+      ],
+      "patterns": [
+        "\\b(Оксано|Іване|Маріє|пане|друже|пані|професоре)\\b",
+        "\\b[А-ЯІЇЄҐ][а-яіїєґ]+(о|е|у),\\s"
+      ],
+      "sample": "Оксано, ти вже вдома?",
+      "priority": 4,
+      "confidence": 0.83
+    },
+    {
+      "id": "pl-cases",
+      "language": "pl",
+      "title": "七格系统",
+      "english": "Polish Seven Cases",
+      "category": "格",
+      "cefr": "A2",
+      "formula": "mianownik / dopełniacz / celownik / biernik / narzędnik / miejscownik / wołacz",
+      "summary": "波兰语有七个格，名词和形容词的词尾要一起变化。用哪个格由句法角色和介词共同决定。",
+      "sections": [
+        {
+          "heading": "七格功能",
+          "body": "主格作主语，属格表所属与否定宾语，与格表接受者，宾格作直接宾语，工具格表工具与交通方式，位格只用于介词后表地点或话题，呼格用于称呼。",
+          "bullets": [
+            "kobieta（主格）",
+            "kobiety（属格）",
+            "kobiecie（与格/位格）",
+            "kobietę（宾格）",
+            "kobietą（工具格）",
+            "kobieto!（呼格）"
+          ]
+        },
+        {
+          "heading": "介词支配",
+          "body": "do 接属格，ku 接与格，z 接工具格，w 表地点时接位格。记住介词搭配比死背词尾表更实用。",
+          "bullets": [
+            "do Warszawy",
+            "z przyjacielem",
+            "w Warszawie"
+          ]
+        },
+        {
+          "heading": "形容词一致",
+          "body": "形容词必须跟着名词的性数格走：nowy dom、nowa książka、nowe okno，宾格阴性则是 nową książkę。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Czytam ciekawą książkę.",
+          "translation": "我在读一本有趣的书。"
+        },
+        {
+          "source": "Mieszkam w Warszawie od pięciu lat.",
+          "translation": "我在华沙住了五年。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Mieszkam w Warszawa.",
+          "right": "Mieszkam w Warszawie.",
+          "why": "w 表示所在地点时接位格，Warszawa 的位格是 Warszawie。"
+        },
+        {
+          "wrong": "Czytam książka.",
+          "right": "Czytam książkę.",
+          "why": "直接宾语用宾格，阴性 -a 变成 -ę。"
+        }
+      ],
+      "related": [
+        "pl-gender",
+        "pl-aspect"
+      ],
+      "links": [
+        {
+          "label": "Polish grammar · Cases",
+          "url": "https://en.wikipedia.org/wiki/Polish_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "PolishPod101",
+          "url": "https://www.polishpod101.com/",
+          "site": "PolishPod101"
+        }
+      ],
+      "patterns": [
+        "\\b(w|we)\\s+[A-ZŁŚŻŹĆŃÓĄĘa-złśżźćńóąę]+(ie|i|u|ach)\\b",
+        "\\b(książkę|kawę|pracę|wodę|herbatę)\\b",
+        "\\b(?:w|na|z|do|od|dla|przez|po)\\b"
+      ],
+      "sample": "Mieszkam w Warszawie od pięciu lat.",
+      "priority": 6,
+      "confidence": 0.85
+    },
+    {
+      "id": "pl-aspect",
+      "language": "pl",
+      "title": "动词体",
+      "english": "Polish Verbal Aspect",
+      "category": "体",
+      "cefr": "A2",
+      "formula": "niedokonany ↔ dokonany：前缀 prze-/na-/z-/po- 或后缀 -ywa-/-iwa-",
+      "summary": "波兰语动词成对出现。未完成体表过程与习惯，完成体表结果与一次完成。",
+      "sections": [
+        {
+          "heading": "体的对立",
+          "body": "czytać 是读的过程，przeczytać 是读完的结果。词典通常以未完成体为词条，再标注对应的完成体。",
+          "bullets": [
+            "czytać — przeczytać",
+            "pisać — napisać",
+            "robić — zrobić"
+          ]
+        },
+        {
+          "heading": "构成",
+          "body": "加前缀最常见，其次是后缀替换，也有异干对。前缀常常同时带来结果或方向的意味。",
+          "bullets": [
+            "前缀：pisać → napisać",
+            "后缀：otwierać → otworzyć",
+            "异干：mówić → powiedzieć"
+          ]
+        },
+        {
+          "heading": "用法",
+          "body": "叙述事件顺序用完成体，描写背景和重复习惯用未完成体。完成体没有现在时，其现在时形式表示将来。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Czytałem tę książkę dwie godziny.",
+          "translation": "这本书我读了两个小时。"
+        },
+        {
+          "source": "Przeczytałem tę książkę w dwa dni.",
+          "translation": "我两天就把这本书读完了。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Przeczytałem książkę dwie godziny.",
+          "right": "Czytałem książkę dwie godziny.",
+          "why": "dwie godziny 表示持续的时段，要用未完成体。"
+        },
+        {
+          "wrong": "Jutro będę przeczytać książkę.",
+          "right": "Jutro przeczytam książkę.",
+          "why": "będę 只能接未完成体不定式，完成体将来用现在时形式。"
+        }
+      ],
+      "related": [
+        "pl-cases",
+        "pl-conditional"
+      ],
+      "links": [
+        {
+          "label": "Polish grammar · Aspect",
+          "url": "https://en.wikipedia.org/wiki/Polish_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Mówić po polsku",
+          "url": "https://mowicpopolsku.com/",
+          "site": "Mówić po polsku"
+        }
+      ],
+      "patterns": [
+        "\\b(przeczytał|przeczytałem|przeczytała|napisał|zrobił|przeczytam|napisze)\\w*\\b",
+        "\\b(czytał|czytałem|czytała|pisał|robił|czytam)\\w*\\b"
+      ],
+      "sample": "Przeczytałem tę książkę w dwa dni.",
+      "priority": 6,
+      "confidence": 0.86
+    },
+    {
+      "id": "pl-gender",
+      "language": "pl",
+      "title": "名词的性、数、格",
+      "english": "Polish Noun Gender, Number and Agreement",
+      "category": "名词",
+      "cefr": "A1",
+      "formula": "阳性 / 阴性 / 中性 + 单数 / 复数；形容词与名词性数格一致",
+      "summary": "波兰语名词分阳性、阴性、中性，复数里还区分阳性人称与其余。形容词、代词和数词都要与名词一致。",
+      "sections": [
+        {
+          "heading": "三性",
+          "body": "以辅音结尾的多为阳性，以 -a 结尾的多为阴性，以 -o、-e、-ę 结尾的多为中性。词尾只是线索，例外要单独记。",
+          "bullets": [
+            "dom（阳性）",
+            "kobieta（阴性）",
+            "okno（中性）"
+          ]
+        },
+        {
+          "heading": "复数",
+          "body": "阳性人称复数用 -i / -y 和 ci 这一套，其余复数用 -e / -a 和 te。这条区分会一路影响到形容词和代词。",
+          "bullets": [
+            "ci nowi studenci",
+            "te nowe książki"
+          ]
+        },
+        {
+          "heading": "一致",
+          "body": "形容词和物主代词跟着名词变：nowy dom、nowa książka、nowe okno。数词 dwa 与阴性 dwie 也按性选择。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Ci nowi studenci są z Ukrainy.",
+          "translation": "这些新学生来自乌克兰。"
+        },
+        {
+          "source": "Te nowe książki leżą na stole.",
+          "translation": "这些新书放在桌上。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Te nowi studenci.",
+          "right": "Ci nowi studenci.",
+          "why": "阳性人称复数要用 ci，不能用 te。"
+        },
+        {
+          "wrong": "Nowa okno.",
+          "right": "Nowe okno.",
+          "why": "okno 是中性，形容词用 -e 词尾。"
+        }
+      ],
+      "related": [
+        "pl-cases",
+        "pl-negation"
+      ],
+      "links": [
+        {
+          "label": "Polish grammar · Gender",
+          "url": "https://en.wikipedia.org/wiki/Polish_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "PolishPod101",
+          "url": "https://www.polishpod101.com/",
+          "site": "PolishPod101"
+        }
+      ],
+      "patterns": [
+        "\\b(nowy|nowa|nowe|stary|stara|stare|ciekawy|ciekawa|ciekawe)\\s+[a-złśżźćńóąę]+\\b",
+        "\\b(ci|te)\\s+(nowi|nowe|starzy|stare)\\b"
+      ],
+      "sample": "Te nowe książki leżą na stole.",
+      "priority": 5,
+      "confidence": 0.84
+    },
+    {
+      "id": "pl-conditional",
+      "language": "pl",
+      "title": "条件式",
+      "english": "Polish Conditional",
+      "category": "语气",
+      "cefr": "B1",
+      "formula": "过去式 + -bym / -byś / -by / -byśmy / -byście / -by（助词 by 附着）",
+      "summary": "波兰语条件式由助词 by 加过去式构成，可表假设、礼貌请求和委婉愿望。",
+      "sections": [
+        {
+          "heading": "构成",
+          "body": "把 -by 系列助词直接粘在过去式后面，或放在过去式之前。人称信息由助词承担。",
+          "bullets": [
+            "czytałbym / czytałabym",
+            "czytałbyś / czytałabyś",
+            "czytalibyśmy / czytałybyśmy"
+          ]
+        },
+        {
+          "heading": "假设",
+          "body": "与事实相反的假设常用 gdyby 引导，主句也用条件式。过去式的性要与主语一致。",
+          "bullets": [
+            "Gdybym miał czas, pojechałbym nad morze.",
+            "Gdybyś powiedział wcześniej, pomógłbym ci."
+          ]
+        },
+        {
+          "heading": "礼貌与愿望",
+          "body": "条件式让请求更客气，也让愿望显得委婉。chciałbym / chciałabym 是日常最常用的说法之一。",
+          "bullets": [
+            "Czy mógłby pan powtórzyć?",
+            "Chciałabym kawę."
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "source": "Gdybym miał więcej czasu, uczyłbym się hiszpańskiego.",
+          "translation": "如果我有更多时间，我就会学西班牙语。"
+        },
+        {
+          "source": "Czy mógłby pan powtórzyć?",
+          "translation": "您能再说一遍吗？"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Gdybym mam czas, pojadę nad morze.",
+          "right": "Gdybym miał czas, pojechałbym nad morze.",
+          "why": "by 后面必须接过去式，主句也要用条件式才与假设呼应。"
+        },
+        {
+          "wrong": "Chciałbym bym kawę.",
+          "right": "Chciałbym kawę.",
+          "why": "人称助词只出现一次，chciałbym 里已经含了 -bym。"
+        }
+      ],
+      "related": [
+        "pl-aspect",
+        "pl-negation"
+      ],
+      "links": [
+        {
+          "label": "Polish grammar · Conditional",
+          "url": "https://en.wikipedia.org/wiki/Polish_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "PolishPod101",
+          "url": "https://www.polishpod101.com/",
+          "site": "PolishPod101"
+        }
+      ],
+      "patterns": [
+        "\\b\\w+(łbym|łabym|łbyś|łabyś|libyśmy|łybyśmy|łby)\\b",
+        "\\b(gdyby|bym|byś|by)\\s+\\w+(ł|ła|li|ły)\\b"
+      ],
+      "sample": "Gdybym miał więcej czasu, uczyłbym się hiszpańskiego.",
+      "priority": 5,
+      "confidence": 0.82
+    },
+    {
+      "id": "pl-negation",
+      "language": "pl",
+      "title": "否定",
+      "english": "Polish Negation",
+      "category": "否定",
+      "cefr": "A2",
+      "formula": "nie + 动词；否定宾语常用属格；否定代词与 nie 同现",
+      "summary": "波兰语用 nie 否定谓语。否定及物动词的宾语常变属格，否定代词出现时 nie 必须保留。",
+      "sections": [
+        {
+          "heading": "否定谓语",
+          "body": "nie 放在动词或形容词前面，是最基本的否定手段。它和后面的词通常连写。",
+          "bullets": [
+            "Nie znam tego człowieka.",
+            "On nie przyszedł na spotkanie."
+          ]
+        },
+        {
+          "heading": "属格否定",
+          "body": "肯定句里的宾格宾语，在否定句里常变成属格。这条规则在“没有、不知道、没看见”一类动词上最明显。",
+          "bullets": [
+            "Mam czas. → Nie mam czasu.",
+            "Widzę samochód. → Nie widzę samochodu."
+          ]
+        },
+        {
+          "heading": "双重否定",
+          "body": "nikt、nic、nigdy、nigdzie 必须和 nie 一起出现。少写 nie 会被判为语法错误，而不是“更简洁”。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Nie mam dzisiaj czasu.",
+          "translation": "我今天没有时间。"
+        },
+        {
+          "source": "Nigdy nie byłem w Krakowie.",
+          "translation": "我从没去过克拉科夫。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Nie mam czas.",
+          "right": "Nie mam czasu.",
+          "why": "否定及物动词的宾语用属格，czas 的属格是 czasu。"
+        },
+        {
+          "wrong": "Nikt przyszedł na spotkanie.",
+          "right": "Nikt nie przyszedł na spotkanie.",
+          "why": "否定代词 nikt 所在的句子必须加 nie。"
+        }
+      ],
+      "related": [
+        "pl-cases",
+        "pl-conditional"
+      ],
+      "links": [
+        {
+          "label": "Polish grammar · Negation",
+          "url": "https://en.wikipedia.org/wiki/Polish_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Mówić po polsku",
+          "url": "https://mowicpopolsku.com/",
+          "site": "Mówić po polsku"
+        }
+      ],
+      "patterns": [
+        "\\bnie\\s+(mam|masz|ma|znam|wiem|było|byłem|przyszedł|widzę)\\b",
+        "\\b(nikt|nigdy|nic|nigdzie)\\s+nie\\b",
+        "\\bnie\\b"
+      ],
+      "sample": "Nie mam dzisiaj czasu.",
+      "priority": 5,
+      "confidence": 0.84
+    }
+  ]
+}

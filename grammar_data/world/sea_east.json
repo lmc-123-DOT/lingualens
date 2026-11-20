@@ -1,0 +1,1362 @@
+{
+  "entries": [
+    {
+      "id": "id-word-order",
+      "language": "id",
+      "title": "语序：SVO 与后置修饰",
+      "english": "Word Order: SVO with Postmodifiers",
+      "category": "语序",
+      "cefr": "A1",
+      "formula": "主语 + 谓语 + 宾语；名词 + 修饰语（形容词 / 领属语 / 关系从句后置）",
+      "summary": "印尼语是典型的 SVO 语言，动词不随人称变化；形容词、领属语和 yang 从句一律跟在名词后面，语序承担了大部分语法信息。",
+      "sections": [
+        {
+          "heading": "基本语序",
+          "body": "主语在前，谓语居中，宾语在后，顺序相当固定；没有格变化，句法角色几乎全靠位置判断。",
+          "bullets": [
+            "Saya membaca buku.",
+            "Kami tinggal di Jakarta."
+          ]
+        },
+        {
+          "heading": "修饰后置",
+          "body": "形容词、领属语、指示词都放在名词之后：rumah besar（大房子）、buku saya（我的书）、rumah itu（那栋房子）。这与汉语“定语在前”的顺序正好相反。"
+        },
+        {
+          "heading": "疑问不换序",
+          "body": "一般疑问句只在句末加 kah 或抬高语调，疑问词留在原位（Kamu tinggal di mana?），不需要像英语那样倒装。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Saya membaca buku di perpustakaan setiap sore.",
+          "translation": "我每天下午在图书馆看书。"
+        },
+        {
+          "source": "Rumah besar itu milik keluarga kami.",
+          "translation": "那栋大房子是我们家的。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Dia buku membaca.",
+          "right": "Dia membaca buku.",
+          "why": "宾语必须跟在动词之后，不能随意提到动词前。"
+        },
+        {
+          "wrong": "Saya tinggal di besar rumah.",
+          "right": "Saya tinggal di rumah besar.",
+          "why": "形容词修饰名词时后置，不能放在名词前。"
+        }
+      ],
+      "related": [
+        "id-men",
+        "id-aspect"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Indonesian language",
+          "url": "https://en.wikipedia.org/wiki/Indonesian_language",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "IndonesianPod101",
+          "url": "https://www.indonesianpod101.com/",
+          "site": "IndonesianPod101"
+        }
+      ],
+      "patterns": [
+        "\\b(saya|kamu|dia|kami|kita|mereka)\\s+(membaca|menulis|makan|minum|pergi|tinggal|membeli|suka)\\b",
+        "\\b(rumah|buku|mobil|kota|anak)\\s+(besar|kecil|baru|lama|bagus|tinggi|murah)\\b"
+      ],
+      "sample": "Saya tinggal di rumah besar dekat pasar.",
+      "priority": 6,
+      "confidence": 0.86
+    },
+    {
+      "id": "id-men",
+      "language": "id",
+      "title": "meN- 前缀：主动及物动词",
+      "english": "meN- Prefix for Active Transitive Verbs",
+      "category": "构词",
+      "cefr": "A2",
+      "formula": "meN- + 词根 → 主动及物动词（me- / mem- / men- / meny- / menge-）",
+      "summary": "meN- 是最常用的动词前缀，把词根变成主动及物动词并把焦点放在施事上；前缀形态随词根首音发生同化。",
+      "sections": [
+        {
+          "heading": "同化规则",
+          "body": "前缀形态由词根首音决定：ambil→mengambil、beli→membeli、dapat→mendapat、sapu→menyapu、cat→mengecat。",
+          "bullets": [
+            "menulis surat",
+            "membeli sayur",
+            "mengambil buku"
+          ]
+        },
+        {
+          "heading": "及物与焦点",
+          "body": "meN- 动词通常带宾语，句子焦点落在施事身上；如果要把受事变成焦点，就改用 di- 被动式。"
+        },
+        {
+          "heading": "口语省略",
+          "body": "雅加达口语里常直接甩出词根（“gua tulis”），但书面语和正式场合仍需保留前缀。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Dia menulis surat untuk ibunya.",
+          "translation": "他给母亲写信。"
+        },
+        {
+          "source": "Kami membeli sayur di pasar pagi ini.",
+          "translation": "我们今天早上在市场买了蔬菜。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Dia tulis surat itu.",
+          "right": "Dia menulis surat itu.",
+          "why": "书面语中主动及物动词必须带 meN- 前缀，裸词根只用于口语。"
+        },
+        {
+          "wrong": "Dia mengpukul anjing itu.",
+          "right": "Dia memukul anjing itu.",
+          "why": "p 开头的词根同化为 mem-，不能直接拼成 meng-。"
+        }
+      ],
+      "related": [
+        "id-di",
+        "id-word-order"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Indonesian language",
+          "url": "https://en.wikipedia.org/wiki/Indonesian_language",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "IndonesianPod101",
+          "url": "https://www.indonesianpod101.com/",
+          "site": "IndonesianPod101"
+        }
+      ],
+      "patterns": [
+        "\\b(?:me|men|mem|meny|menge)(?:nulis|mbeli|mbaca|ngambil|mbuat|ngirim|njual|ncari|ngerti|mbuka|nutup|mukul|nyapu|ngecat|ndengar|lihat|beri)\\b",
+        "\\b(?:mem|men|meny|menge)[a-z]{4,}\\b",
+        "\\b(?:me|men|mem|meny|menge)\\w+\\b"
+      ],
+      "sample": "Dia menulis surat untuk ibunya.",
+      "priority": 6,
+      "confidence": 0.84
+    },
+    {
+      "id": "id-di",
+      "language": "id",
+      "title": "di- 被动式",
+      "english": "di- Passive Voice",
+      "category": "语态",
+      "cefr": "A2",
+      "formula": "受事 + di-动词 (+ oleh + 施事)",
+      "summary": "di- 把受事提到句首作主语，动词换成 di- 形式，施事用 oleh 引出或干脆省略，是印尼语最常见的被动结构。",
+      "sections": [
+        {
+          "heading": "构成方式",
+          "body": "di- 直接粘在词根前，不再发生鼻音同化：tulis→ditulis、beli→dibeli、ambil→diambil。",
+          "bullets": [
+            "Surat itu ditulis kemarin.",
+            "Rumah itu dibeli tahun lalu."
+          ]
+        },
+        {
+          "heading": "施事表达",
+          "body": "施事可用 oleh 引出；代词施事常省略 oleh 并挪到动词前（surat itu saya tulis），口语中更自然。"
+        },
+        {
+          "heading": "意外与能力",
+          "body": "ter- 表示非故意的结果或能力（terbuka、terbaca），句中通常不出现施事；中性叙述则用 di-。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Surat itu ditulis oleh ayah kemarin.",
+          "translation": "那封信是昨天父亲写的。"
+        },
+        {
+          "source": "Rumah kami dibangun tahun lalu.",
+          "translation": "我们的房子是去年建成的。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Surat itu menulis oleh ayah.",
+          "right": "Surat itu ditulis oleh ayah.",
+          "why": "受事作主语时动词要用 di- 被动式，meN- 是主动式。"
+        },
+        {
+          "wrong": "Buku itu di baca saya.",
+          "right": "Buku itu dibaca oleh saya.",
+          "why": "di- 是动词前缀，必须与词根连写；介词 di 才分开写（di pasar）。"
+        }
+      ],
+      "related": [
+        "id-men",
+        "id-negation"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Indonesian language",
+          "url": "https://en.wikipedia.org/wiki/Indonesian_language",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "IndonesianPod101",
+          "url": "https://www.indonesianpod101.com/",
+          "site": "IndonesianPod101"
+        }
+      ],
+      "patterns": [
+        "\\bdi(?:tulis|beli|baca|ambil|buat|bangun|kirim|jual|cari|buka|tutup|beri|pakai|makan)\\b",
+        "\\bdi[a-z]{3,}\\s+oleh\\b",
+        "\\bdi\\w+\\b"
+      ],
+      "sample": "Surat itu ditulis oleh ayah kemarin.",
+      "priority": 5,
+      "confidence": 0.83
+    },
+    {
+      "id": "id-aspect",
+      "language": "id",
+      "title": "时体标记：sudah / sedang / akan",
+      "english": "Aspect and Time Markers",
+      "category": "时态·体",
+      "cefr": "A1",
+      "formula": "主语 + (sudah / sedang / akan / masih / belum) + 动词",
+      "summary": "印尼语没有时态屈折，动词形式不随过去、现在、将来改变；时间与体由 sudah、sedang、akan 这类副词和时间名词承担。",
+      "sections": [
+        {
+          "heading": "没有时态",
+          "body": "同一个 makan 可以表示“吃、吃了、要吃”，全靠上下文和时间词，动词本身永远不变形。",
+          "bullets": [
+            "Saya makan.",
+            "Saya makan kemarin.",
+            "Saya akan makan."
+          ]
+        },
+        {
+          "heading": "核心体标记",
+          "body": "sudah/telah 表完成，sedang 表进行，akan 表将来或意愿，masih 表持续，pernah 表曾经，belum 表尚未。"
+        },
+        {
+          "heading": "时间词配合",
+          "body": "kemarin、besok、sekarang 等时间词常与体标记同现；时间已经说清楚时，标记可以省略。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Saya sudah makan nasi sebelum berangkat.",
+          "translation": "我出发前已经吃过饭了。"
+        },
+        {
+          "source": "Dia sedang belajar bahasa Indonesia di kampus.",
+          "translation": "他正在校园里学印尼语。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Saya tidak sudah makan.",
+          "right": "Saya belum makan.",
+          "why": "“还没”直接用 belum 否定 sudah，不能把 tidak 和 sudah 叠在一起。"
+        },
+        {
+          "wrong": "Dia sudah sedang makan.",
+          "right": "Dia sedang makan.",
+          "why": "完成体和进行体互相排斥，不能同时加在同一个动词上。"
+        }
+      ],
+      "related": [
+        "id-negation",
+        "id-di"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Indonesian language",
+          "url": "https://en.wikipedia.org/wiki/Indonesian_language",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "IndonesianPod101",
+          "url": "https://www.indonesianpod101.com/",
+          "site": "IndonesianPod101"
+        }
+      ],
+      "patterns": [
+        "\\b(sudah|telah|sedang|masih|akan|pernah|belum|baru)\\s+\\w+",
+        "\\b(sudah|sedang|akan|belum)\\s+(makan|belajar|pergi|pulang|datang|tinggal)\\b"
+      ],
+      "sample": "Saya sudah makan nasi sebelum berangkat.",
+      "priority": 6,
+      "confidence": 0.85
+    },
+    {
+      "id": "id-negation",
+      "language": "id",
+      "title": "否定：tidak 与 bukan",
+      "english": "Negation: tidak vs. bukan",
+      "category": "否定",
+      "cefr": "A1",
+      "formula": "tidak + 动词/形容词；bukan + 名词/代词；belum 表“尚未”",
+      "summary": "印尼语按被否定的成分选否定词：动词和形容词用 tidak，名词性谓语用 bukan，jangan 用于禁止。",
+      "sections": [
+        {
+          "heading": "两类否定",
+          "body": "tidak 否定动作和性质，bukan 否定名词性成分或用来纠正对方的说法。",
+          "bullets": [
+            "Saya tidak mengerti.",
+            "Dia bukan guru."
+          ]
+        },
+        {
+          "heading": "未然与禁止",
+          "body": "belum 表示“还没”，jangan 表示“别、不要”，两者都不能用 tidak 替代。"
+        },
+        {
+          "heading": "位置固定",
+          "body": "否定词紧贴在被否定成分之前，一般放在动词或形容词前面，不能在句末追加。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Saya tidak mengerti pertanyaan itu.",
+          "translation": "我不明白那个问题。"
+        },
+        {
+          "source": "Dia bukan guru, dia dokter.",
+          "translation": "他不是老师，他是医生。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Dia tidak guru.",
+          "right": "Dia bukan guru.",
+          "why": "名词作谓语时用 bukan，tidak 不能否定名词。"
+        },
+        {
+          "wrong": "Jangan tidak datang besok.",
+          "right": "Jangan datang besok.",
+          "why": "禁止只用 jangan，不能再叠加 tidak。"
+        }
+      ],
+      "related": [
+        "id-aspect",
+        "id-word-order"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Indonesian language",
+          "url": "https://en.wikipedia.org/wiki/Indonesian_language",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "IndonesianPod101",
+          "url": "https://www.indonesianpod101.com/",
+          "site": "IndonesianPod101"
+        }
+      ],
+      "patterns": [
+        "\\b(tidak|bukan|belum|jangan)\\b"
+      ],
+      "sample": "Saya tidak mengerti pertanyaan itu.",
+      "priority": 6,
+      "confidence": 0.86
+    },
+    {
+      "id": "vi-word-order",
+      "language": "vi",
+      "title": "语序：SVO 与后置修饰",
+      "english": "Word Order: SVO with Postmodifiers",
+      "category": "语序",
+      "cefr": "A1",
+      "formula": "主语 + 动词 + 宾语；名词 + 形容词 / 领属语 / 指示词",
+      "summary": "越南语是孤立语，主语—动词—宾语顺序固定，修饰语全部后置；疑问句只在句末加虚词，不改变语序。",
+      "sections": [
+        {
+          "heading": "基本语序",
+          "body": "主语、动词、宾语依次排列；主语在语境清楚时可以省略，但动词和宾语的先后不能调换。",
+          "bullets": [
+            "Tôi học tiếng Việt.",
+            "Cô ấy mua áo."
+          ]
+        },
+        {
+          "heading": "修饰后置",
+          "body": "形容词、领属语、指示词都跟在名词后：nhà đẹp（漂亮的房子）、nhà của tôi（我的房子）、nhà này（这栋房子）。"
+        },
+        {
+          "heading": "疑问不变序",
+          "body": "一般疑问句在句末加 không 或 à，特殊疑问词留在原位：Bạn tên gì?（你叫什么名字？）"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Tôi học tiếng Việt mỗi ngày.",
+          "translation": "我每天学越南语。"
+        },
+        {
+          "source": "Cô ấy mua một chiếc áo đẹp.",
+          "translation": "她买了一件漂亮的衣服。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Tôi tiếng Việt học.",
+          "right": "Tôi học tiếng Việt.",
+          "why": "宾语必须跟在动词之后，不能像汉语话题句那样前置。"
+        },
+        {
+          "wrong": "đẹp nhà",
+          "right": "nhà đẹp",
+          "why": "形容词修饰名词时后置，顺序不能倒。"
+        }
+      ],
+      "related": [
+        "vi-classifiers",
+        "vi-tense"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Vietnamese language",
+          "url": "https://en.wikipedia.org/wiki/Vietnamese_language",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "VietnamesePod101",
+          "url": "https://www.vietnamesepod101.com/",
+          "site": "VietnamesePod101"
+        }
+      ],
+      "patterns": [
+        "\\b(tôi|bạn|anh|chị|em|cô ấy|chúng tôi|họ)\\s+(học|mua|ăn|đi|làm|thích|đọc|uống|nói|viết)\\b",
+        "\\b(nhà|sách|áo|xe|cơm|trà|phở)\\s+(đẹp|mới|ngon|to|lớn|nhỏ|rẻ)\\b"
+      ],
+      "sample": "Tôi học tiếng Việt mỗi ngày.",
+      "priority": 6,
+      "confidence": 0.86
+    },
+    {
+      "id": "vi-classifiers",
+      "language": "vi",
+      "title": "量词：数词与名词之间的 loại từ",
+      "english": "Classifiers (loại từ)",
+      "category": "量词",
+      "cefr": "A1",
+      "formula": "数词 + 量词 + 名词（hai con mèo）",
+      "summary": "越南语数词不能直接连名词，中间必须插一个量词；量词按物体的类别和形状选择，还兼有定指作用。",
+      "sections": [
+        {
+          "heading": "基本结构",
+          "body": "số từ + loại từ + danh từ：hai con mèo（两只猫）、ba quyển sách（三本书）。",
+          "bullets": [
+            "một cái bàn",
+            "hai con mèo"
+          ]
+        },
+        {
+          "heading": "常用量词",
+          "body": "cái 通用物件，con 动物（也可指人，带感情色彩），chiếc 车辆或成对物，quyển/cuốn 书，người 人，tấm 平面物，bức 画或信。"
+        },
+        {
+          "heading": "定指作用",
+          "body": "量词加指示词可以指已知对象：con mèo này（这只猫），这时不需要数词。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Tôi có hai con mèo.",
+          "translation": "我有两只猫。"
+        },
+        {
+          "source": "Cô ấy mua ba quyển sách ở hiệu sách.",
+          "translation": "她在书店买了三本书。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Tôi có hai mèo.",
+          "right": "Tôi có hai con mèo.",
+          "why": "数词与名词之间必须加量词，省略只出现在很随便的口语里。"
+        },
+        {
+          "wrong": "Cô ấy mua ba sách.",
+          "right": "Cô ấy mua ba quyển sách.",
+          "why": "书籍类要用 quyển/cuốn，缺量词句子不合法。"
+        }
+      ],
+      "related": [
+        "vi-word-order",
+        "vi-negation"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Vietnamese language",
+          "url": "https://en.wikipedia.org/wiki/Vietnamese_language",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "VietnamesePod101",
+          "url": "https://www.vietnamesepod101.com/",
+          "site": "VietnamesePod101"
+        }
+      ],
+      "patterns": [
+        "\\b(một|hai|ba|bốn|năm|sáu|bảy|tám|chín|mười)\\s+(cái|con|chiếc|quyển|cuốn|người|tấm|bức|tờ|hạt|đôi)\\b"
+      ],
+      "sample": "Tôi có hai con mèo và ba quyển sách.",
+      "priority": 5,
+      "confidence": 0.85
+    },
+    {
+      "id": "vi-tense",
+      "language": "vi",
+      "title": "时体：đã / đang / sẽ",
+      "english": "Tense-Aspect Markers đã, đang, sẽ",
+      "category": "时态·体",
+      "cefr": "A1",
+      "formula": "đã / đang / sẽ + 动词（+ 时间词）",
+      "summary": "越南语动词不变化，过去、进行、将来分别由 đã、đang、sẽ 三个虚词标出，另有 vừa/mới、sắp、từng 表示更细的时间意义。",
+      "sections": [
+        {
+          "heading": "三大标记",
+          "body": "đã 表已完成（多指过去），đang 表正在进行，sẽ 表将来或意愿，都放在动词前面。",
+          "bullets": [
+            "Tôi đã ăn.",
+            "Tôi đang ăn.",
+            "Tôi sẽ ăn."
+          ]
+        },
+        {
+          "heading": "细分意义",
+          "body": "vừa/mới 表刚刚，sắp 表即将，từng 表曾经有过；这些标记同样紧贴动词之前。"
+        },
+        {
+          "heading": "时间词",
+          "body": "hôm qua、ngày mai、bây giờ 等时间词出现时，标记可以省略，语义仍然清楚。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Tôi đã ăn cơm rồi.",
+          "translation": "我已经吃过饭了。"
+        },
+        {
+          "source": "Cô ấy đang học bài ở nhà.",
+          "translation": "她正在家学习。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Tôi đã đang học bài.",
+          "right": "Tôi đang học bài.",
+          "why": "đã（完成）与 đang（进行）语义冲突，不能叠加。"
+        },
+        {
+          "wrong": "Ngày mai tôi đã đi Hà Nội.",
+          "right": "Ngày mai tôi sẽ đi Hà Nội.",
+          "why": "đã 指已完成，与表将来的时间词矛盾，将来要用 sẽ。"
+        }
+      ],
+      "related": [
+        "vi-negation",
+        "vi-word-order"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Vietnamese language",
+          "url": "https://en.wikipedia.org/wiki/Vietnamese_language",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "VietnamesePod101",
+          "url": "https://www.vietnamesepod101.com/",
+          "site": "VietnamesePod101"
+        }
+      ],
+      "patterns": [
+        "\\b(đã|đang|sẽ|vừa|mới|sắp|từng)\\s+\\w+"
+      ],
+      "sample": "Tôi đã ăn cơm rồi.",
+      "priority": 6,
+      "confidence": 0.86
+    },
+    {
+      "id": "vi-negation",
+      "language": "vi",
+      "title": "否定：không / chưa / đừng",
+      "english": "Negation: không, chưa, đừng",
+      "category": "否定",
+      "cefr": "A1",
+      "formula": "không / chưa / đừng + 动词；không phải + 名词",
+      "summary": "không 是一般否定，chưa 表示“还没”，đừng 表示劝阻；名词性判断句的否定用 không phải。",
+      "sections": [
+        {
+          "heading": "一般否定",
+          "body": "không 放在动词或形容词前，是最中性的否定词，不携带时间信息。",
+          "bullets": [
+            "Tôi không hiểu.",
+            "Trời không lạnh."
+          ]
+        },
+        {
+          "heading": "未然否定",
+          "body": "chưa 表示到现在还没发生，暗含以后可能发生；回答“还没”只能用 chưa。"
+        },
+        {
+          "heading": "禁止与判断",
+          "body": "đừng 用于劝阻或命令；否定“是”要用 không phải (là)，不能说 không là。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Tôi không hiểu câu này.",
+          "translation": "我不懂这句话。"
+        },
+        {
+          "source": "Tôi chưa ăn sáng.",
+          "translation": "我还没吃早饭。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Tôi không chưa ăn sáng.",
+          "right": "Tôi chưa ăn sáng.",
+          "why": "không 与 chưa 语义重复，二者只能取一。"
+        },
+        {
+          "wrong": "Tôi không là giáo viên.",
+          "right": "Tôi không phải là giáo viên.",
+          "why": "判断句“是”的否定用 không phải，不说 không là。"
+        }
+      ],
+      "related": [
+        "vi-tense",
+        "vi-passive"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Vietnamese language",
+          "url": "https://en.wikipedia.org/wiki/Vietnamese_language",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "VietnamesePod101",
+          "url": "https://www.vietnamesepod101.com/",
+          "site": "VietnamesePod101"
+        }
+      ],
+      "patterns": [
+        "\\b(không|chưa|đừng|chẳng)\\b"
+      ],
+      "sample": "Tôi không hiểu câu này.",
+      "priority": 6,
+      "confidence": 0.86
+    },
+    {
+      "id": "vi-passive",
+      "language": "vi",
+      "title": "被动：bị 与 được",
+      "english": "Passive with bị / được",
+      "category": "语态",
+      "cefr": "B1",
+      "formula": "受事 + bị / được + (施事) + 动词",
+      "summary": "越南语没有纯语法的被动式，而用 bị（遭遇不利）和 được（获得有利）构成被动，受事提到句首，施事可以省略。",
+      "sections": [
+        {
+          "heading": "不利被动",
+          "body": "bị 引出不如意的事：被偷、被批评、被雨淋；受事作主语，施事放在 bị 之后。"
+        },
+        {
+          "heading": "有利被动",
+          "body": "được 引出受益的事：得到礼物、被表扬、获准做某事；được 也能单独作动词“得到、能够”。"
+        },
+        {
+          "heading": "其他用法",
+          "body": "施事可以省略（Cái cửa bị mở）；được 表许可时（Tôi được về sớm）只是情态，不算被动。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "Cái cửa bị gió thổi mở.",
+          "translation": "门被风吹开了。"
+        },
+        {
+          "source": "Tôi được mẹ tặng một món quà.",
+          "translation": "我得到妈妈送的一份礼物。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "Tôi bị mẹ tặng quà.",
+          "right": "Tôi được mẹ tặng quà.",
+          "why": "bị 带不幸色彩，收到礼物这种好事要用 được。"
+        },
+        {
+          "wrong": "Cái cửa được gió thổi mở.",
+          "right": "Cái cửa bị gió thổi mở.",
+          "why": "门被风吹开不是好事，用 bị 更自然。"
+        }
+      ],
+      "related": [
+        "vi-negation",
+        "vi-word-order"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Vietnamese language",
+          "url": "https://en.wikipedia.org/wiki/Vietnamese_language",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "VietnamesePod101",
+          "url": "https://www.vietnamesepod101.com/",
+          "site": "VietnamesePod101"
+        }
+      ],
+      "patterns": [
+        "\\b(bị|được)\\s+\\S+"
+      ],
+      "sample": "Cái cửa bị gió thổi mở.",
+      "priority": 5,
+      "confidence": 0.82
+    },
+    {
+      "id": "th-word-order",
+      "language": "th",
+      "title": "语序：SVO 与后置修饰",
+      "english": "Word Order: SVO",
+      "category": "语序",
+      "cefr": "A1",
+      "formula": "主语 + 动词 + 宾语；名词 + 修饰语",
+      "summary": "泰语是 SVO 孤立语，修饰语后置；形容词谓语常省略系动词，主语和宾语在语境清楚时可以省略。",
+      "sections": [
+        {
+          "heading": "基本语序",
+          "body": "主语—动词—宾语，顺序固定；没有格变化，句子成分的角色几乎全靠位置判断。"
+        },
+        {
+          "heading": "修饰后置",
+          "body": "形容词和领属语跟在名词之后：บ้านใหม่（新房子）、แม่ฉัน（我妈妈）；数词加量词也放在名词后。"
+        },
+        {
+          "heading": "省略习惯",
+          "body": "形容词作谓语时不加系动词：เขาสูง（他很高）；主语在语境中明确时常被省略。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "ฉันเรียนภาษาไทยทุกวัน",
+          "translation": "我每天学泰语。"
+        },
+        {
+          "source": "เขาซื้อบ้านหลังใหม่",
+          "translation": "他买了一栋新房子。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "ฉันภาษาไทยเรียน",
+          "right": "ฉันเรียนภาษาไทย",
+          "why": "宾语不能提到动词前面。"
+        },
+        {
+          "wrong": "เขาสูงเป็น",
+          "right": "เขาสูง",
+          "why": "形容词作谓语不加系动词，也不能把 เป็น 放到句末。"
+        }
+      ],
+      "related": [
+        "th-classifiers",
+        "th-tense"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Thai language",
+          "url": "https://en.wikipedia.org/wiki/Thai_language",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "ThaiPod101",
+          "url": "https://www.thaipod101.com/",
+          "site": "ThaiPod101"
+        }
+      ],
+      "patterns": [
+        "(ฉัน|ผม|คุณ|เขา|เรา|พวกเขา)\\s*(เรียน|กิน|ไป|มา|ซื้อ|อ่าน|ชอบ|ทำ|อยู่)",
+        "(บ้าน|หนังสือ|แมว|รถ|ข้าว)\\s*(ใหม่|เก่า|สวย|ใหญ่|เล็ก|อร่อย)",
+        "(?:^|\\s)(?:ฉัน|ผม|คุณ|เขา|เรา|พวกเขา)"
+      ],
+      "sample": "ฉันเรียนภาษาไทยทุกวัน",
+      "priority": 6,
+      "confidence": 0.85
+    },
+    {
+      "id": "th-classifiers",
+      "language": "th",
+      "title": "量词：名词 + 数词 + 量词",
+      "english": "Classifiers (ลักษณะนาม)",
+      "category": "量词",
+      "cefr": "A1",
+      "formula": "名词 + 数词 + 量词 (+ นี้)",
+      "summary": "泰语量词跟在数词后面，位置与汉语相反；量词按物体类别选择，并与指示词配合表示定指。",
+      "sections": [
+        {
+          "heading": "结构顺序",
+          "body": "名词先说，再跟数词和量词：แมวสองตัว（两只猫）、หนังสือสามเล่ม（三本书）。"
+        },
+        {
+          "heading": "常用量词",
+          "body": "ตัว 动物或身体，คน 人，คัน 车辆，เล่ม 书或刀，ใบ 叶子或容器，หลัง 房屋，ลูก 圆形果实，ขวด 瓶子。"
+        },
+        {
+          "heading": "指示与定指",
+          "body": "量词后加 นี้/นั้น 表定指：แมวสองตัวนี้（这两只猫）。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "ฉันมีแมวสองตัว",
+          "translation": "我有两只猫。"
+        },
+        {
+          "source": "เขาซื้อหนังสือสามเล่ม",
+          "translation": "他买了三本书。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "ฉันมีสองแมว",
+          "right": "ฉันมีแมวสองตัว",
+          "why": "泰语量词结构是“名词+数词+量词”，不是“数词+量词+名词”。"
+        },
+        {
+          "wrong": "หนังสือสาม",
+          "right": "หนังสือสามเล่ม",
+          "why": "数词后面必须带量词，不能裸接名词。"
+        }
+      ],
+      "related": [
+        "th-word-order",
+        "th-negation"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Thai language",
+          "url": "https://en.wikipedia.org/wiki/Thai_language",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "ThaiPod101",
+          "url": "https://www.thaipod101.com/",
+          "site": "ThaiPod101"
+        }
+      ],
+      "patterns": [
+        "(หนึ่ง|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า|สิบ)\\s*(ตัว|คน|คัน|เล่ม|ใบ|หลัง|ลูก|ขวด|ชิ้น|แผ่น)"
+      ],
+      "sample": "ฉันมีแมวสองตัว",
+      "priority": 6,
+      "confidence": 0.85
+    },
+    {
+      "id": "th-tense",
+      "language": "th",
+      "title": "时体：กำลัง / แล้ว / จะ",
+      "english": "Tense-Aspect Markers",
+      "category": "时态·体",
+      "cefr": "A1",
+      "formula": "กำลัง + 动词 + อยู่；动词 + แล้ว；จะ + 动词",
+      "summary": "泰语动词不变形，进行、完成、将来分别靠 กำลัง…อยู่、แล้ว、จะ 这些助词表示，过去则常不加任何标记。",
+      "sections": [
+        {
+          "heading": "进行与持续",
+          "body": "กำลัง 放在动词前、อยู่ 放在句末，两头夹住表示“正在”。"
+        },
+        {
+          "heading": "完成与变化",
+          "body": "แล้ว 在句末表示动作已完成，或状态已经改变。"
+        },
+        {
+          "heading": "将来与经历",
+          "body": "จะ 表将来或意愿；เคย 表曾经，ยัง 表仍然，ยังไม่ 表尚未。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "ฉันกำลังอ่านหนังสืออยู่",
+          "translation": "我正在看书。"
+        },
+        {
+          "source": "เขาจะไปเชียงใหม่พรุ่งนี้",
+          "translation": "他明天要去清迈。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "ฉันกำลังอ่านหนังสือแล้ว",
+          "right": "ฉันกำลังอ่านหนังสืออยู่",
+          "why": "กำลัง 与 แล้ว 冲突：一个表进行，一个表完成。"
+        },
+        {
+          "wrong": "เมื่อวานฉันจะไปตลาด",
+          "right": "เมื่อวานฉันไปตลาด",
+          "why": "จะ 不能用于过去，过去靠时间词或语境表达。"
+        }
+      ],
+      "related": [
+        "th-negation",
+        "th-word-order"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Thai language",
+          "url": "https://en.wikipedia.org/wiki/Thai_language",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "ThaiPod101",
+          "url": "https://www.thaipod101.com/",
+          "site": "ThaiPod101"
+        }
+      ],
+      "patterns": [
+        "(กำลัง|แล้ว|จะ|เคย|ยังไม่|เพิ่ง)\\s*"
+      ],
+      "sample": "ฉันกำลังอ่านหนังสืออยู่",
+      "priority": 6,
+      "confidence": 0.85
+    },
+    {
+      "id": "th-negation",
+      "language": "th",
+      "title": "否定：ไม่ / ไม่ได้ / อย่า",
+      "english": "Negation: ไม่, ไม่ได้, อย่า",
+      "category": "否定",
+      "cefr": "A1",
+      "formula": "ไม่ + 动词/形容词；ไม่ได้ + 动词；อย่า + 动词",
+      "summary": "ไม่ 是最基本的否定词，紧贴在动词或形容词前；ไม่ได้ 否定能力或“没能”，อย่า 用于劝阻。",
+      "sections": [
+        {
+          "heading": "一般否定",
+          "body": "ไม่ 放在动词或形容词前面，没有任何形态变化。",
+          "bullets": [
+            "ฉันไม่เข้าใจ",
+            "เขาไม่มา"
+          ]
+        },
+        {
+          "heading": "能力与完成",
+          "body": "ไม่ได้ 表示不能、没做到；ไม่มี 表示“没有、不存在”。"
+        },
+        {
+          "heading": "禁止",
+          "body": "อย่า 放在动词前表示“别、不要”，语气比单纯陈述的 ไม่ 更强。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "ฉันไม่เข้าใจคำถามนี้",
+          "translation": "我不懂这个问题。"
+        },
+        {
+          "source": "ที่นี่ไม่มีร้านกาแฟ",
+          "translation": "这里没有咖啡店。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "ฉันไม่มีเข้าใจ",
+          "right": "ฉันไม่เข้าใจ",
+          "why": "否定动词直接用 ไม่，不需要再加 มี。"
+        },
+        {
+          "wrong": "เธอไม่ไปนะ",
+          "right": "เธออย่าไปนะ",
+          "why": "劝阻别人用 อย่า，ไม่ 只是客观否定。"
+        }
+      ],
+      "related": [
+        "th-tense",
+        "th-politeness"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Thai language",
+          "url": "https://en.wikipedia.org/wiki/Thai_language",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "ThaiPod101",
+          "url": "https://www.thaipod101.com/",
+          "site": "ThaiPod101"
+        }
+      ],
+      "patterns": [
+        "(ไม่|ไม่ได้|อย่า|ยังไม่)"
+      ],
+      "sample": "ฉันไม่เข้าใจคำถามนี้",
+      "priority": 6,
+      "confidence": 0.86
+    },
+    {
+      "id": "th-politeness",
+      "language": "th",
+      "title": "语气词与礼貌：ครับ / ค่ะ",
+      "english": "Politeness Particles ครับ / ค่ะ",
+      "category": "语气",
+      "cefr": "A1",
+      "formula": "句末 + ครับ（男）/ ค่ะ（女，陈述）/ คะ（女，疑问）",
+      "summary": "泰语靠句末语气词表达礼貌和说话人性别：男性用 ครับ，女性陈述用 ค่ะ、提问用 คะ；语气词还能软化请求。",
+      "sections": [
+        {
+          "heading": "性别分工",
+          "body": "男性句末用 ครับ，女性句末用 ค่ะ；用错性别比不用语气词更尴尬。"
+        },
+        {
+          "heading": "疑问与陈述",
+          "body": "女性陈述句用 ค่ะ，疑问句在书面语中写作 คะ；男性两种情况都用 ครับ。"
+        },
+        {
+          "heading": "软化语气",
+          "body": "นะ/นะคะ 缓和请求或提醒，สิ 表催促，จ้ะ 用于关系亲近的人之间。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "สวัสดีครับ ผมชื่อมิน",
+          "translation": "您好，我叫敏。"
+        },
+        {
+          "source": "ขอบคุณมากค่ะ",
+          "translation": "非常感谢。（女性说法）"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "ขอบคุณครับ（女性说）",
+          "right": "ขอบคุณค่ะ",
+          "why": "女性礼貌句末用 ค่ะ，ครับ 是男性用语。"
+        },
+        {
+          "wrong": "คุณชื่ออะไรครับ（女性说）",
+          "right": "คุณชื่ออะไรคะ",
+          "why": "女性疑问句句末用 คะ。"
+        }
+      ],
+      "related": [
+        "th-word-order",
+        "th-negation"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Thai language",
+          "url": "https://en.wikipedia.org/wiki/Thai_language",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "ThaiPod101",
+          "url": "https://www.thaipod101.com/",
+          "site": "ThaiPod101"
+        }
+      ],
+      "patterns": [
+        "(ครับ|ค่ะ|คะ|นะ|จ้ะ|สิ)"
+      ],
+      "sample": "สวัสดีครับ ผมชื่อมิน",
+      "priority": 5,
+      "confidence": 0.84
+    },
+    {
+      "id": "ko-honorifics",
+      "language": "ko",
+      "title": "敬语：-시- 与尊敬词汇",
+      "english": "Honorifics: -시- and Honorific Lexicon",
+      "category": "敬语",
+      "cefr": "A2",
+      "formula": "动词词干 + (으)시 + 词尾；尊称主语用 께서",
+      "summary": "当主语是需要尊敬的人时，动词要加先语末词尾 -시-，主语助词换成 께서，部分名词和动词还有专门的尊敬形式。",
+      "sections": [
+        {
+          "heading": "先语末词尾",
+          "body": "词干有收音加 으시，无收音加 시：읽다→읽으십니다，가다→가십니다。",
+          "bullets": [
+            "선생님께서 오십니다.",
+            "아버지께서 읽으십니다."
+          ]
+        },
+        {
+          "heading": "尊敬词汇",
+          "body": "밥→진지，나이→연세，집→댁，먹다→드시다，자다→주무시다，있다→계시다。"
+        },
+        {
+          "heading": "谦让与助词",
+          "body": "对长辈用 께서（主格）、께（与格）；说话人自谦用 드리다、뵙다、여쭙다。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "선생님께서 책을 읽으십니다.",
+          "translation": "老师在读书。"
+        },
+        {
+          "source": "할머니께서 진지를 드십니다.",
+          "translation": "奶奶在吃饭。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "선생님이 책을 읽습니다.",
+          "right": "선생님께서 책을 읽으십니다.",
+          "why": "尊敬的主语要用 께서，谓语要加 -(으)시-。"
+        },
+        {
+          "wrong": "할머니가 밥을 먹습니다.",
+          "right": "할머니께서 진지를 드십니다.",
+          "why": "长辈的“饭、吃”换成 진지、드시다 更得体。"
+        }
+      ],
+      "related": [
+        "ko-tense",
+        "ko-negation"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Korean honorifics",
+          "url": "https://en.wikipedia.org/wiki/Korean_honorifics",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Talk To Me In Korean",
+          "url": "https://talktomeinkorean.com/",
+          "site": "TTMIK"
+        }
+      ],
+      "patterns": [
+        "(으시|께서|드시|드리|뵙|여쭙|십니다)",
+        "(?:시|께서|드시|드리|뵙|여쭙|십니다)"
+      ],
+      "sample": "선생님께서 책을 읽으십니다.",
+      "priority": 6,
+      "confidence": 0.87
+    },
+    {
+      "id": "ko-tense",
+      "language": "ko",
+      "title": "时态：-았/었- 与 -겠-",
+      "english": "Tense: Past -았/었- and Future -겠-",
+      "category": "时态",
+      "cefr": "A1",
+      "formula": "词干 + 았/었 + 词尾；词干 + 겠 / -(으)ㄹ 것 + 词尾",
+      "summary": "韩语时态靠词尾：过去用 -았/었-（按元音和谐选形），将来和意志用 -겠- 或 -(으)ㄹ 것이다；现在时通常不加标记。",
+      "sections": [
+        {
+          "heading": "过去词尾",
+          "body": "阳元音词干加 았，阴元音加 었：가다→갔어요，먹다→먹었어요，하다→했어요。",
+          "bullets": [
+            "어제 학교에 갔어요.",
+            "밥을 먹었어요."
+          ]
+        },
+        {
+          "heading": "将来与推测",
+          "body": "-겠- 表意志或推测（가겠습니다），-(으)ㄹ 것이다 表计划或打算（볼 거예요）。"
+        },
+        {
+          "heading": "现在时",
+          "body": "现在时一般用无标记形式，进行体加 -고 있다（읽고 있어요）。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "어제 비가 많이 왔습니다.",
+          "translation": "昨天雨下得很大。"
+        },
+        {
+          "source": "주말에 영화를 볼 거예요.",
+          "translation": "周末我要看电影。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "가았어요",
+          "right": "갔어요",
+          "why": "가 + 았 缩合为 갔，不能拆开写。"
+        },
+        {
+          "wrong": "내일 영화를 봤어요.",
+          "right": "내일 영화를 볼 거예요.",
+          "why": "过去词尾不能和表将来的时间词连用。"
+        }
+      ],
+      "related": [
+        "ko-honorifics",
+        "ko-passive"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Korean grammar",
+          "url": "https://en.wikipedia.org/wiki/Korean_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "How to Study Korean",
+          "url": "https://www.howtostudykorean.com/",
+          "site": "How to Study Korean"
+        }
+      ],
+      "patterns": [
+        "(았|었|겠|거예요|거야|것입니다)",
+        "(왔|갔|봤|했|샀|줬|마셨|배웠)"
+      ],
+      "sample": "어제 비가 많이 왔습니다.",
+      "priority": 6,
+      "confidence": 0.85
+    },
+    {
+      "id": "ko-passive",
+      "language": "ko",
+      "title": "被动与使动：-이/히/리/기-",
+      "english": "Passive and Causative Suffixes",
+      "category": "语态",
+      "cefr": "B1",
+      "formula": "词干 + 이/히/리/기 + 词尾（被动）；同一批词尾也构成使动",
+      "summary": "韩语用 -이-、-히-、-리-、-기- 派生被动动词，具体选哪个由动词决定，必须逐个记；同一批词尾还兼作使动。",
+      "sections": [
+        {
+          "heading": "被动词尾",
+          "body": "보다→보이다，잡다→잡히다，열다→열리다，끊다→끊기다；受事作主语，施事用 에게 或 에 의해 引出。"
+        },
+        {
+          "heading": "变成状态",
+          "body": "-아/어지다 表示状态变化：밝다→밝아지다；열리다 的过去式 문이 열렸다 也常用来描述结果状态。"
+        },
+        {
+          "heading": "使动同形",
+          "body": "먹이다（喂）、입히다（给…穿）、울리다（弄哭）用的是同一批词尾，靠宾语和语境区分被动与使动。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "문이 바람에 열렸습니다.",
+          "translation": "门被风吹开了。"
+        },
+        {
+          "source": "그 소식이 모두에게 알려졌습니다.",
+          "translation": "那个消息被所有人知道了。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "문이 열었습니다.",
+          "right": "문이 열렸습니다.",
+          "why": "门自己开是被动，要用 열리다 而不是及物动词 열다。"
+        },
+        {
+          "wrong": "문이 열어졌습니다.",
+          "right": "문이 열렸습니다.",
+          "why": "열다 的被动形式是 열리다，不是 열어지다。"
+        }
+      ],
+      "related": [
+        "ko-tense",
+        "ko-honorifics"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Korean verbs",
+          "url": "https://en.wikipedia.org/wiki/Korean_verbs",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "How to Study Korean",
+          "url": "https://www.howtostudykorean.com/",
+          "site": "How to Study Korean"
+        }
+      ],
+      "patterns": [
+        "(열렸|열리|잡혔|잡히|보였|보이|들렸|들리|알려졌|알려지|끊겼|끊기|렸|혔|겼|졌)"
+      ],
+      "sample": "문이 바람에 열렸습니다.",
+      "priority": 5,
+      "confidence": 0.82
+    },
+    {
+      "id": "ko-negation",
+      "language": "ko",
+      "title": "否定：안 / -지 않다 / 못",
+      "english": "Negation: 안, -지 않다, 못",
+      "category": "否定",
+      "cefr": "A1",
+      "formula": "안 + 动词；动词 + -지 않다；못 + 动词；动词 + -지 말다",
+      "summary": "短否定 안 放在动词前，长否定 -지 않다 接在词干后；못 否定能力或客观不可能，-지 말다 表示禁止。",
+      "sections": [
+        {
+          "heading": "短式否定",
+          "body": "안 直接放在动词前；하다 类动词要插在 하다 前面：공부 안 했어요。",
+          "bullets": [
+            "안 갔어요.",
+            "공부 안 해요."
+          ]
+        },
+        {
+          "heading": "长式否定",
+          "body": "词干 + -지 않다，语气更书面、更委婉：가지 않습니다。"
+        },
+        {
+          "heading": "能力与禁止",
+          "body": "못 表“不能、没能力”（못 먹어요）；-지 말다 表禁止（가지 마세요）。"
+        }
+      ],
+      "examples": [
+        {
+          "source": "오늘은 학교에 안 갔습니다.",
+          "translation": "今天没去学校。"
+        },
+        {
+          "source": "저는 매운 음식을 못 먹어요.",
+          "translation": "我不能吃辣的食物。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "wrong": "안 공부했어요.",
+          "right": "공부 안 했어요.",
+          "why": "하다 类动词的短否定要插在 하다 前面。"
+        },
+        {
+          "wrong": "못 갔어요.",
+          "right": "안 갔어요.",
+          "why": "못 表示没能力或客观不能；主观上不去用 안。"
+        }
+      ],
+      "related": [
+        "ko-tense",
+        "ko-honorifics"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia · Korean grammar",
+          "url": "https://en.wikipedia.org/wiki/Korean_grammar",
+          "site": "Wikipedia"
+        },
+        {
+          "label": "Talk To Me In Korean",
+          "url": "https://talktomeinkorean.com/",
+          "site": "TTMIK"
+        }
+      ],
+      "patterns": [
+        "(안\\s+\\S*[았었]|안\\s+\\S+습니다|지\\s*않|지\\s*못|못\\s+\\S*[았었]|지\\s*마)"
+      ],
+      "sample": "오늘은 학교에 안 갔습니다.",
+      "priority": 6,
+      "confidence": 0.85
+    }
+  ]
+}

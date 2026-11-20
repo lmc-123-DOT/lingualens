@@ -1,0 +1,10 @@
+# 语镜 LinguaLens runtime dependencies
+# PDF text extraction (the rest of the document formats use the standard library)
+pypdf>=5.0
+
+# Reliable CA bundle for HTTPS on Windows
+certifi>=2024.2.2
+
+# Chinese / Japanese tokenization for article breakdown and morphology
+jieba>=0.42.1
+janome>=0.5.2
