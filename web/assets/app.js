@@ -305,8 +305,10 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
   function topbar(path) {
     const active = activeNav(path);
     const aiReady = !!state.health?.aiConfigured;
+    const backButton = path !== '/' ? `<button class="icon-btn back-btn" data-action="go-back" aria-label="返回上一页" title="返回上一页">${icon('arrowLeft', 17)}</button>` : '';
     return `<header class="topbar">
       <div class="topbar-inner">
+        ${backButton}
         <a class="brand" href="/" data-link aria-label="语镜首页">
           <span class="brand-mark">语</span>
           <span class="brand-word"><strong>语镜</strong><small>LinguaLens</small></span>
@@ -408,10 +410,22 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
   }
 
   function navigate(path, { replace = false, scroll = true } = {}) {
-    if (replace) history.replaceState({}, '', path);
-    else history.pushState({}, '', path);
+    const current = { ...(history.state || {}), scrollY: window.scrollY };
+    if (replace) {
+      history.replaceState({ ...current, scrollY: 0 }, '', path);
+    } else {
+      history.replaceState(current, '', location.href);
+      history.pushState({ scrollY: 0 }, '', path);
+    }
     renderRoute();
     if (scroll) window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  function restoreScrollPosition() {
+    const top = Number(history.state?.scrollY || 0);
+    const apply = () => window.scrollTo({ top, behavior: 'instant' });
+    requestAnimationFrame(apply);
+    setTimeout(apply, 120);
   }
 
   function syncStatusPill() {
@@ -2613,6 +2627,10 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
           toast('链接已复制', 'success');
         } catch { toast('复制失败，请手动复制地址栏。', 'error'); }
         break;
+      case 'go-back':
+        if (history.length > 1) history.back();
+        else navigate('/');
+        break;
       case 'back-to-article':
         state.scrollBlock = action.dataset.block || null;
         navigate('/'); break;
@@ -2738,7 +2756,20 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
   }
 
   function setupPopState() {
-    window.addEventListener('popstate', () => renderRoute());
+    window.addEventListener('popstate', () => {
+      renderRoute();
+      restoreScrollPosition();
+    });
+    let saveTimer = null;
+    window.addEventListener('scroll', () => {
+      if (saveTimer) return;
+      saveTimer = setTimeout(() => {
+        saveTimer = null;
+        try {
+          history.replaceState({ ...(history.state || {}), scrollY: window.scrollY }, '', location.href);
+        } catch (e) { /* ignore */ }
+      }, 180);
+    }, { passive: true });
   }
 
   // ---------------------------------------------------------------- 404
