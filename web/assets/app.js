@@ -331,7 +331,98 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
           <button class="icon-btn" data-action="open-settings" aria-label="设置" title="设置">${icon('settings', 17)}</button>
         </div>
       </div>
-    </header>`;
+    </header>${tabbar(path)}${mobileMoreHTML()}`;
+  }
+
+  // ---------------------------------------------------------------- mobile shell
+  const TAB_ITEMS = [
+    { key: 'translate', href: '/', label: '翻译', icon: 'book' },
+    { key: 'compare', href: '/compare', label: '对照', icon: 'columns' },
+    { key: 'analyze', href: '/analyze', label: '拆解', icon: 'code' },
+    { key: 'grammar', href: '/grammar', label: '语法', icon: 'layers' },
+  ];
+
+  function tabbar(path) {
+    const active = activeNav(path);
+    const moreActive = ['library', 'batch', 'history'].includes(active);
+    const tabs = TAB_ITEMS.map((tab) => `<a class="tab ${active === tab.key ? 'is-active' : ''}" href="${tab.href}" data-link>${icon(tab.icon, 21)}<span>${tab.label}</span></a>`).join('');
+    return `<nav class="tabbar" aria-label="移动端主导航">
+      ${tabs}
+      <button type="button" class="tab tab-more ${moreActive ? 'is-active' : ''}" data-action="open-mobile-more" aria-label="更多功能" aria-haspopup="dialog">${icon('menu', 21)}<span>更多</span></button>
+    </nav>`;
+  }
+
+  function mobileMoreHTML() {
+    const themeName = THEMES[state.theme]?.name || '工作台';
+    return `<div class="sheet-layer" id="mobile-more" hidden>
+      <div class="sheet-backdrop" data-action="close-mobile-more" aria-hidden="true"></div>
+      <div class="sheet" role="dialog" aria-modal="true" aria-label="更多功能">
+        <div class="sheet-grip" aria-hidden="true"></div>
+        <p class="sheet-title">更多 · ${esc(themeName)}主题</p>
+        <div class="sheet-grid">
+          <a class="sheet-item" href="/library" data-link>${icon('book', 18)}<span><b>学习站台</b><small>单词册、语法库和生词本</small></span>${icon('chevron', 14)}</a>
+          <a class="sheet-item" href="/history" data-link>${icon('history', 18)}<span><b>历史记录</b><small>翻过的文章与导出</small></span>${icon('chevron', 14)}</a>
+          <a class="sheet-item" href="/batch" data-link>${icon('folder', 18)}<span><b>文件夹批译</b><small>整夹翻译，建议在电脑上操作</small></span><span class="sheet-badge">电脑</span></a>
+          <button type="button" class="sheet-item" data-action="open-connect">${icon('globe', 18)}<span><b>手机 / 平板访问</b><small>手机、平板的打开方式</small></span>${icon('chevron', 14)}</button>
+        </div>
+        <div class="sheet-foot">
+          <button type="button" class="btn" data-action="cycle-theme">${themeIcon(state.theme)} 切换主题</button>
+          <button type="button" class="btn" data-action="open-settings">${icon('settings', 16)} 设置</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function openMobileMore() {
+    const layer = $('#mobile-more');
+    if (!layer) return;
+    layer.hidden = false;
+    document.body.classList.add('sheet-open');
+  }
+
+  function closeMobileMore() {
+    const layer = $('#mobile-more');
+    if (layer) layer.hidden = true;
+    document.body.classList.remove('sheet-open');
+  }
+
+  async function openConnectDialog() {
+    let net = null;
+    try { net = await api('/api/net'); } catch (err) { /* offline */ }
+    const urls = (net?.urls || []).filter(Boolean);
+    const lan = !!net?.lan;
+    const isPublic = !!net?.public;
+    const origin = location.origin;
+    const primaryUrl = urls[0];
+    const extraUrls = urls.slice(1);
+    const urlBlock = primaryUrl ? `<div class="connect-urls"><button type="button" class="connect-url" data-copy="${attr(primaryUrl)}"><span>${esc(primaryUrl)}</span>${icon('copy', 14)}</button></div>
+      ${extraUrls.length ? `<details class="connect-alt"><summary>手机还是打不开？其它 ${extraUrls.length} 个网卡地址</summary>${extraUrls.map((url) => `<button type="button" class="connect-url connect-url-sm" data-copy="${attr(url)}"><span>${esc(url)}</span>${icon('copy', 14)}</button>`).join('')}<p>第一行通常是 Wi-Fi 地址；192.168.x.1 这类多半是 VMware / Hyper-V 的虚拟网卡，手机连不上是正常的。</p></details>` : ''}` : '';
+    const steps = `<ol class="connect-steps">
+      <li><b>连同一个 Wi-Fi</b><span>手机和这台电脑要在同一个路由器下，别开热点隔离。</span></li>
+      <li><b>在手机浏览器里打开地址</b><span>地址就是上面那行，输入一次以后就记住了。</span></li>
+      <li><b>把语镜放到主屏幕</b><span>iPhone 用 Safari 分享 → 添加到主屏幕；安卓 Chrome 菜单 → 添加到主屏幕。</span></li>
+    </ol>`;
+    const publicContent = `<div class="connect-lead">语镜已经部署在公网：手机在任意网络下都能打开，不用和电脑连同一个 Wi-Fi。</div>
+      <div class="connect-urls"><button type="button" class="connect-url" data-copy="${attr(origin)}"><span>${esc(origin)}</span>${icon('copy', 14)}</button></div>
+      <p class="connect-hint">第一次打开会弹出登录框：用户名随便填，密码是 Render 控制台里 <b>LINGUALENS_PASSWORD</b> 的值。</p>
+      <ol class="connect-steps">
+        <li><b>在手机浏览器打开这个地址</b><span>4G / 5G / 任何 Wi-Fi 都行，不需要电脑开着。</span></li>
+        <li><b>输入公网密码</b><span>就是 Render → Environment 里那串密码，浏览器会记住。</span></li>
+        <li><b>把语镜放到主屏幕</b><span>iPhone 用 Safari 分享 → 添加到主屏幕；安卓 Chrome 菜单 → 添加到主屏幕。</span></li>
+      </ol>`;
+    const content = isPublic
+      ? publicContent
+      : lan
+      ? `<div class="connect-lead">手机、平板和这台电脑连同一个 Wi-Fi，就能用完整的语镜。</div>
+         ${urlBlock}
+         <p class="connect-hint">点一下地址即可复制。手机第一次打不开时，多半是 Windows 防火墙挡住了，运行一次「放行手机访问」就行。</p>
+         ${steps}`
+      : `<div class="connect-lead">现在是“只在本机”模式：只有这台电脑能打开 ${esc(net?.localUrl || '127.0.0.1')}。</div>
+         <p class="connect-hint">想让手机 / 平板也能用，双击文件夹里的 <b>启动语镜手机版.vbs</b>，它会用局域网模式重新启动，并显示手机访问地址。</p>
+         <div class="connect-lead">手机上能做的事：翻译、逐句对照、语法详解、文章拆解、历史记录、学习站台。文件夹批译仍然建议在电脑上做。</div>`;
+    openModal(`<div class="modal-head"><h2>手机 / 平板访问</h2><span class="sub">${isPublic ? '公网 HTTPS · 随时随地' : '局域网直连 · 数据留在电脑'}</span><button class="icon-btn modal-close" data-action="close-modal" aria-label="关闭">${icon('x', 16)}</button></div>
+      <div class="modal-body connect-body">${content}</div>
+      <div class="modal-foot"><span class="spacer"></span><button type="button" class="btn" data-action="close-modal">知道啦</button></div>`);
   }
 
   function footer() {
@@ -410,6 +501,7 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
   }
 
   function navigate(path, { replace = false, scroll = true } = {}) {
+    closeMobileMore();
     const current = { ...(history.state || {}), scrollY: window.scrollY };
     if (replace) {
       history.replaceState({ ...current, scrollY: 0 }, '', path);
@@ -514,7 +606,8 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
 
   function langOption(code, selected) {
     const meta = code === 'auto' ? { name: '自动检测', native: 'Auto' } : lang(code);
-    return `<option value="${code}" ${selected === code ? 'selected' : ''}>${esc(`${meta.name} · ${meta.native}`)}</option>`;
+    const label = meta.name === meta.native ? meta.name : `${meta.name} · ${meta.native}`;
+    return `<option value="${code}" ${selected === code ? 'selected' : ''}>${esc(label)}</option>`;
   }
   function sourceLangOptions(selected) {
     return sourceLangs.map((code) => langOption(code, selected)).join('');
@@ -893,6 +986,9 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       state.loading = false;
       try { sessionStorage.setItem('ll.article', JSON.stringify(data.article)); } catch { /* quota */ }
       renderRoute();
+      if (window.matchMedia('(max-width: 900px)').matches) {
+        requestAnimationFrame(() => $('.result-pane')?.scrollIntoView({ block: 'start', behavior: 'smooth' }));
+      }
       const warnings = data.article.warnings || [];
       if (data.article.target?.provider === 'offline') toast('在线引擎不可用，当前是离线预览。', 'error');
       else if (warnings.length) toast(warnings[0], 'error');
@@ -2372,6 +2468,7 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
             <div class="side-link">${icon('globe', 12)}<span>版本</span><span class="site">v${esc(state.health?.version || '1.0.0')}</span></div>
             <div class="side-link">${icon('shield', 12)}<span>数据</span><span class="site">本机 SQLite</span></div>
             <div style="margin-top:14px"><button class="btn btn-sm" data-action="install-app">${icon('download', 12)} 安装到桌面</button><span class="hint" style="margin-left:8px">需要 Chrome / Edge，通过 localhost 打开</span></div>
+            <div style="margin-top:10px"><button class="btn btn-sm" data-action="open-connect">${icon('globe', 12)} 手机 / 平板访问</button><span class="hint" style="margin-left:8px">同一 Wi-Fi 下用手机打开，无需安装</span></div>
             <div style="margin-top:10px"><button class="btn btn-sm btn-ghost" data-action="quit-app">${icon('x', 12)} 退出语镜（桌面版）</button></div>
           </div>
           <div class="callout">${icon('book', 14)}<span>翻译质量取决于引擎。免费引擎适合快速阅读；需要出版级精度时，建议配置 AI，并使用「AI 精准模式」。</span></div>
@@ -2623,6 +2720,11 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       navigate(goto.dataset.goto);
       return;
     }
+    const copyTarget = e.target.closest('[data-copy]');
+    if (copyTarget) {
+      copyText(copyTarget.dataset.copy || '');
+      return;
+    }
     const openHistoryBtn = e.target.closest('[data-open-history]');
     if (openHistoryBtn) {
       openHistory(openHistoryBtn.dataset.openHistory);
@@ -2706,6 +2808,9 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       return;
     }
     switch (a) {
+      case 'open-mobile-more': openMobileMore(); break;
+      case 'close-mobile-more': closeMobileMore(); break;
+      case 'open-connect': closeMobileMore(); openConnectDialog(); break;
       case 'translate': doTranslate(); break;
       case 'cycle-theme': cycleTheme(); break;
       case 'clear':
@@ -2740,10 +2845,7 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       case 'close-modal': closeModal(); break;
       case 'open-grammar-index': navigate('/grammar'); break;
       case 'copy-link':
-        try {
-          await navigator.clipboard.writeText(location.href);
-          toast('链接已复制', 'success');
-        } catch { toast('复制失败，请手动复制地址栏。', 'error'); }
+        copyText(location.href);
         break;
       case 'go-back':
         if (history.length > 1) history.back();
@@ -2813,7 +2915,10 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
   }
 
   function onDocumentKeydown(e) {
-    if (e.key === 'Escape') { closeWordCard(); closeModal(); }
+    if (e.key === 'Escape') {
+      if (!$('#mobile-more')?.hidden) { closeMobileMore(); return; }
+      closeWordCard(); closeModal();
+    }
     if ((e.key === 'Enter' || e.key === ' ') && e.target.closest?.('.word-token')) {
       e.preventDefault();
       openWordCard(e.target.closest('.word-token'));

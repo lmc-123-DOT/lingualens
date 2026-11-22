@@ -24,12 +24,14 @@ def main() -> None:
     css = "\n\n".join([
         (ASSETS / "app.css").read_text(encoding="utf-8"),
         (ASSETS / "workbench.css").read_text(encoding="utf-8"),
+        (ASSETS / "mobile.css").read_text(encoding="utf-8"),
     ])
     js = (ASSETS / "app.js").read_text(encoding="utf-8")
 
-    # Inline the two stylesheets in their original order.
+    # Inline the stylesheets in their original order.
     html = re.sub(r'\s*<link rel="stylesheet" href="/assets/app\.css[^"]*" />', "", html)
     html = re.sub(r'\s*<link rel="stylesheet" href="/assets/workbench\.css[^"]*" />', "", html)
+    html = re.sub(r'\s*<link rel="stylesheet" href="/assets/mobile\.css[^"]*" />', "", html)
     html = html.replace("</head>", f"  <style>\n{css}\n  </style>\n</head>")
 
     # Inline icons; a single static file cannot depend on /assets.
@@ -37,11 +39,16 @@ def main() -> None:
         html = html.replace('href="/favicon.svg"', f'href="{data_uri(WEB / "favicon.svg", "image/svg+xml")}"')
     if (ASSETS / "icon-192.png").exists():
         html = html.replace('href="/assets/icon-192.png"', f'href="{data_uri(ASSETS / "icon-192.png", "image/png")}"')
-    html = re.sub(r'\s*<link rel="manifest" href="/manifest\.webmanifest" />', "", html)
+        # Keep a real URL for the iOS home-screen icon; data URIs are ignored there.
+        html = re.sub(
+            r'<link rel="apple-touch-icon" href="data:image/png;base64,[^"]+" />',
+            '<link rel="apple-touch-icon" href="/assets/icon-192.png" />',
+            html,
+        )
 
-    # A single file has no sibling sw.js; don't let a 404 register noise.
-    js = js.replace("navigator.serviceWorker.register('/sw.js').catch(() => {});", "/* single-file build: no external service worker */")
-
+    # The split assets are still served by server.py, so keep the manifest and
+    # service worker: on HTTPS deployments this makes 语镜 installable as a PWA.
+    # When opened from file:// the browser ignores both links.
     html = re.sub(r'\s*<script src="/assets/app\.js[^"]*" defer></script>', "", html)
     html = html.replace("</body>", f"  <script>\n{js}\n  </script>\n</body>")
     html = html.replace("<head>", "<head>\n  <!-- Single-file frontend. Requires the LinguaLens Python backend for /api. -->")

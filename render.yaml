@@ -3,10 +3,14 @@ services:
     name: lingualens
     runtime: docker
     plan: free
+    region: singapore
+    branch: deploy
+    autoDeploy: true
     healthCheckPath: /api/health
     envVars:
+      # 第一次创建时 Render 自动生成一个强密码，之后在 Dashboard → Environment 里查看/修改
       - key: LINGUALENS_PASSWORD
-        sync: false
+        generateValue: true
       - key: LINGUALENS_REQUIRE_AUTH
         value: "1"
       - key: LINGUALENS_DATA
