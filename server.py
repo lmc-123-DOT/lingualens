@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import argparse
 import base64
+import hashlib
 import hmac
 import json
 import mimetypes
@@ -45,10 +46,42 @@ APP_NAME = "语镜 LinguaLens"
 VERSION = "2.0.0"
 RESOURCE_ROOT = paths.resource_root()
 WEB_DIR = paths.resource_path("web")
+SINGLE_FILE = WEB_DIR / "single.html"
 DATA_DIR = paths.data_dir()
 MAX_TEXT = 160_000
 MAX_UPLOAD = 48 * 1024 * 1024
 QUIT_EVENT = None
+# Render sets RENDER=true; the same flag keeps the LAN-only /mobile page out of
+# public deployments (there is no "same Wi-Fi" step there).
+PUBLIC_MODE = bool(os.environ.get("RENDER") or os.environ.get("LINGUALENS_PUBLIC"))
+COOKIE_NAME = "ll_session"
+PUBLIC_PATHS = {
+    "/login", "/api/login", "/api/logout", "/api/health",
+    "/sw.js", "/manifest.webmanifest", "/favicon.svg", "/favicon.ico",
+}
+
+
+def _auth_secret() -> bytes:
+    password = os.environ.get("LINGUALENS_PASSWORD", "")
+    return hashlib.sha256(("lingualens-session-v1:" + password).encode("utf-8")).digest()
+
+
+def make_session(hours: int) -> str:
+    expires = int(time.time()) + hours * 3600
+    mac = hmac.new(_auth_secret(), str(expires).encode(), hashlib.sha256).hexdigest()
+    return f"{expires}.{mac}"
+
+
+def valid_session(token: str) -> bool:
+    try:
+        expires_text, mac = token.split(".", 1)
+        expires = int(expires_text)
+    except Exception:
+        return False
+    if expires < time.time():
+        return False
+    expected = hmac.new(_auth_secret(), expires_text.encode(), hashlib.sha256).hexdigest()
+    return hmac.compare_digest(mac, expected)
 
 try:  # Keep Chinese log lines readable in the Windows launcher console.
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -126,13 +159,15 @@ class Handler(BaseHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
 
     # ----- helpers ---------------------------------------------------------
-    def _json(self, data, status=200):
+    def _json(self, data, status=200, headers: dict | None = None):
         raw = json.dumps(data, ensure_ascii=False).encode("utf-8")
         self.send_response(status)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(raw)))
         self.send_header("Cache-Control", "no-store")
         self.send_header("X-Content-Type-Options", "nosniff")
+        for key, value in (headers or {}).items():
+            self.send_header(key, value)
         self.end_headers()
         self.wfile.write(raw)
 
@@ -141,10 +176,25 @@ class Handler(BaseHTTPRequestHandler):
             log("ERROR", message, repr(exc))
         self._json({"ok": False, "error": message}, status)
 
+    def _is_https(self) -> bool:
+        proto = (self.headers.get("X-Forwarded-Proto") or "").split(",")[0].strip().lower()
+        return proto == "https"
+
+    def _has_session(self) -> bool:
+        for part in (self.headers.get("Cookie") or "").split(";"):
+            key, _, value = part.strip().partition("=")
+            if key == COOKIE_NAME and valid_session(value):
+                return True
+        return False
+
     def _authorized(self, path: str) -> bool:
-        """Optional single-user Basic Auth for public deployments."""
+        """Password protection for public deployments: session cookie or Basic Auth."""
         password = os.environ.get("LINGUALENS_PASSWORD", "")
-        if not password or path == "/api/health":
+        if not password:
+            return True
+        if path in PUBLIC_PATHS or path.startswith("/assets/"):
+            return True
+        if self._has_session():
             return True
         header = self.headers.get("Authorization", "")
         if not header.startswith("Basic "):
@@ -157,14 +207,49 @@ class Handler(BaseHTTPRequestHandler):
         return hmac.compare_digest(supplied, password)
 
     def _unauthorized(self):
-        raw = json.dumps({"ok": False, "error": "需要密码访问"}, ensure_ascii=False).encode("utf-8")
+        # No WWW-Authenticate: the browser must not show the ugly native dialog.
+        raw = json.dumps({"ok": False, "error": "需要登录"}, ensure_ascii=False).encode("utf-8")
         self.send_response(401)
-        self.send_header("WWW-Authenticate", 'Basic realm="LinguaLens", charset="UTF-8"')
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(raw)))
         self.send_header("Cache-Control", "no-store")
         self.end_headers()
         self.wfile.write(raw)
+
+    def _handle_login(self):
+        try:
+            body = self._body(64 * 1024)
+        except ValueError as exc:
+            return self._error(str(exc))
+        password = os.environ.get("LINGUALENS_PASSWORD", "")
+        if not password:
+            return self._json({"ok": True})
+        expected_user = os.environ.get("LINGUALENS_USER", "lingualens")
+        user = str(body.get("username") or "").strip()
+        supplied = str(body.get("password") or "")
+        if user != expected_user or not hmac.compare_digest(supplied, password):
+            time.sleep(0.5)
+            return self._json({"ok": False, "error": "用户名或密码不对"}, 401)
+        remember = bool(body.get("remember"))
+        hours = 24 * 30 if remember else 12
+        cookie = f"{COOKIE_NAME}={make_session(hours)}; Path=/; HttpOnly; SameSite=Lax"
+        if remember:
+            cookie += f"; Max-Age={hours * 3600}"
+        if self._is_https():
+            cookie += "; Secure"
+        return self._json({"ok": True}, headers={"Set-Cookie": cookie})
+
+    def _logout(self):
+        cookie = f"{COOKIE_NAME}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0"
+        if self._is_https():
+            cookie += "; Secure"
+        return self._json({"ok": True}, headers={"Set-Cookie": cookie})
+
+    def _redirect(self, location: str, status: int = 302):
+        self.send_response(status)
+        self.send_header("Location", location)
+        self.send_header("Content-Length", "0")
+        self.end_headers()
 
     def _body(self, max_bytes: int = MAX_UPLOAD + 8 * 1024 * 1024) -> dict:
         length = int(self.headers.get("Content-Length") or 0)
@@ -183,7 +268,10 @@ class Handler(BaseHTTPRequestHandler):
 
     def _base_url(self) -> str:
         host = self.headers.get("Host") or f"127.0.0.1:{self.server.server_port}"
-        return f"http://{host}"
+        proto = (self.headers.get("X-Forwarded-Proto") or "http").split(",")[0].strip().lower()
+        if proto not in ("http", "https"):
+            proto = "http"
+        return f"{proto}://{host}"
 
     def _send_file(self, path: Path, cache: bool = False):
         if not path.is_file():
@@ -207,16 +295,47 @@ class Handler(BaseHTTPRequestHandler):
         path = urllib.parse.unquote(parsed.path)
         query = urllib.parse.parse_qs(parsed.query)
         if not self._authorized(path):
+            if path.startswith("/api/"):
+                return self._unauthorized()
+            if "text/html" in self.headers.get("Accept", ""):
+                nxt = urllib.parse.quote(self.path, safe="")
+                return self._redirect(f"/login?next={nxt}")
             return self._unauthorized()
         try:
+            if path == "/login":
+                if os.environ.get("LINGUALENS_PASSWORD") and self._has_session():
+                    return self._redirect("/")
+                page = WEB_DIR / "login.html"
+                if page.exists():
+                    return self._send_file(page)
+                return self._error("登录页不存在", 404)
             if path == "/api/health":
                 settings = store.get_settings()
                 return self._json({
                     "ok": True, "app": APP_NAME, "version": VERSION,
+                    "public": PUBLIC_MODE,
+                    "loginRequired": bool(os.environ.get("LINGUALENS_PASSWORD")),
                     "aiConfigured": AIClient(settings.get("ai", {})).configured,
                     "grammar": library_stats(),
                     "languages": {k: v for k, v in LANGUAGES.items() if k not in ("auto", "unknown")},
                     "time": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+                })
+            if path == "/api/net":
+                host = str(self.server.server_address[0])
+                port = int(self.server.server_port)
+                lan = host in ("0.0.0.0", "::", "") and not PUBLIC_MODE
+                ips = lan_addresses() if lan else []
+                return self._json({
+                    "ok": True,
+                    "lan": lan,
+                    "public": PUBLIC_MODE,
+                    "port": port,
+                    "host": host,
+                    "hostname": socket.gethostname(),
+                    "ips": ips,
+                    "urls": [f"http://{ip}:{port}" for ip in ips],
+                    "localUrl": f"http://127.0.0.1:{port}",
+                    "version": VERSION,
                 })
             if path == "/api/providers":
                 return self._json({"ok": True, "providers": provider_catalog(store.get_settings())})
@@ -338,11 +457,20 @@ class Handler(BaseHTTPRequestHandler):
                 self.end_headers()
                 self.wfile.write(data)
                 return
+            # connection guide for phones / tablets
+            if path == "/mobile":
+                if PUBLIC_MODE:
+                    return self._redirect("/")
+                page = WEB_DIR / "mobile.html"
+                if page.exists():
+                    return self._send_file(page)
+                return self._error("手机连接页还没准备好", 404)
             # SPA routes
             if path == "/" or path.startswith("/grammar") or path.startswith("/batch") \
                     or path.startswith("/history") or path.startswith("/settings") or path.startswith("/compare") \
-                    or path.startswith("/analyze") or path.startswith("/library"):
-                return self._send_file(WEB_DIR / "index.html")
+                    or path.startswith("/analyze") or path.startswith("/library") or path == "/single":
+                page = SINGLE_FILE if SINGLE_FILE.exists() else (WEB_DIR / "index.html")
+                return self._send_file(page)
             # static assets
             if path.startswith("/assets/"):
                 candidate = (WEB_DIR / path.lstrip("/")).resolve()
@@ -364,6 +492,10 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self):
         parsed = urllib.parse.urlparse(self.path)
         path = urllib.parse.unquote(parsed.path)
+        if path == "/api/login":
+            return self._handle_login()
+        if path == "/api/logout":
+            return self._logout()
         if not self._authorized(path):
             return self._unauthorized()
         try:
@@ -556,7 +688,10 @@ class Handler(BaseHTTPRequestHandler):
         }
         if body.get("save", True):
             store.save_article(payload)
-        return self._json({"ok": True, "article": payload})
+        result = {"ok": True, "article": payload}
+        if body.get("analyze"):
+            result["analysis"] = analyze_article(payload)
+        return self._json(result)
 
     def log_message(self, fmt, *args):
         if "/api/" in str(args[0] if args else ""):
@@ -598,13 +733,43 @@ def free_port(preferred: int) -> int:
     return preferred
 
 
+def lan_addresses() -> list[str]:
+    """Return non-loopback IPv4 addresses, default-route address first."""
+    found: list[str] = []
+
+    def add(ip: str) -> None:
+        if ip and not ip.startswith("127.") and ip not in found:
+            found.append(ip)
+
+    try:  # No packet is sent; this only asks Windows which local IP routes out.
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+            sock.connect(("8.8.8.8", 80))
+            add(sock.getsockname()[0])
+    except OSError:
+        pass
+    try:
+        for info in socket.getaddrinfo(socket.gethostname(), None, socket.AF_INET):
+            add(str(info[4][0]))
+    except OSError:
+        pass
+    return found
+
+
+def lan_urls(port: int) -> list[str]:
+    return [f"http://{ip}:{port}" for ip in lan_addresses()]
+
+
 def main():
     parser = argparse.ArgumentParser(description="语镜 LinguaLens local translator")
     parser.add_argument("--port", type=int, default=int(os.environ.get("PORT") or os.environ.get("LINGUALENS_PORT", "8765")))
     parser.add_argument("--host", default=os.environ.get("LINGUALENS_HOST", "127.0.0.1"))
+    parser.add_argument("--lan", action="store_true", help="listen on all interfaces so phones/tablets on the same Wi-Fi can connect")
     parser.add_argument("--open", action="store_true", help="open the browser after starting")
     parser.add_argument("--no-open", action="store_true")
     args = parser.parse_args()
+
+    lan_mode = args.lan or os.environ.get("LINGUALENS_LAN", "").lower() in ("1", "true", "yes", "on")
+    host = "0.0.0.0" if lan_mode else args.host
 
     require_auth = os.environ.get("LINGUALENS_REQUIRE_AUTH", "").lower() in ("1", "true", "yes", "on")
     if require_auth and not os.environ.get("LINGUALENS_PASSWORD"):
@@ -613,22 +778,25 @@ def main():
 
     store.init()
     port = free_port(args.port)
-    server = ThreadingHTTPServer((args.host, port), Handler)
+    server = ThreadingHTTPServer((host, port), Handler)
     server.daemon_threads = True
-    display_host = "127.0.0.1" if args.host in ("0.0.0.0", "::") else args.host
+    display_host = "127.0.0.1" if host in ("0.0.0.0", "::") else host
     url = f"http://{display_host}:{port}"
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-    (DATA_DIR / "runtime.json").write_text(json.dumps({"url": url, "pid": os.getpid(), "host": args.host}, ensure_ascii=False), encoding="utf-8")
+    (DATA_DIR / "runtime.json").write_text(json.dumps({"url": url, "pid": os.getpid(), "host": host}, ensure_ascii=False), encoding="utf-8")
     log("=" * 58)
     log(f"  {APP_NAME}  v{VERSION}")
     log(f"  {url}")
-    if args.host in ("0.0.0.0", "::"):
-        log("  LAN/public mode: listening on all interfaces")
+    if host in ("0.0.0.0", "::"):
+        log("  LAN mode: listening on all interfaces")
+        for lan_url in lan_urls(port):
+            log(f"  phone / tablet: {lan_url}")
+        log(f"  connection page: {url}/mobile")
     log(f"  grammar library: {library_stats()['total']} entries")
     log("  Ctrl+C to stop")
     log("=" * 58)
     if args.open and not args.no_open:
-        threading.Timer(0.8, lambda: webbrowser.open(url)).start()
+        threading.Timer(0.8, lambda: webbrowser.open(f"{url}/mobile" if lan_mode else url)).start()
     try:
         server.serve_forever()
     except KeyboardInterrupt:

@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#080b10" />
+<meta name="robots" content="noindex" />
+<title>手机 / 平板访问 · 语镜 LinguaLens</title>
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #080b10;
+    --card: #0e141c;
+    --line: rgba(148, 163, 184, .16);
+    --line-strong: rgba(148, 163, 184, .28);
+    --ink: #e8eef7;
+    --soft: #b8c4d4;
+    --muted: #7f8da1;
+    --jade: #4de2c5;
+    --jade-dark: #a7f3e4;
+    --jade-wash: rgba(77, 226, 197, .08);
+    --warn: #fbbf24;
+    --sans: "Segoe UI Variable", "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    --mono: "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    padding: 34px 22px 56px;
+    background:
+      radial-gradient(900px 520px at 8% -10%, rgba(77, 226, 197, .10), transparent 60%),
+      radial-gradient(760px 520px at 100% 0%, rgba(96, 165, 250, .08), transparent 58%),
+      var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 30px; }
+  .mark {
+    width: 34px; height: 34px; border-radius: 9px;
+    display: grid; place-items: center;
+    background: linear-gradient(135deg, var(--jade), #67e8f9 70%, #60a5fa);
+    color: #03120e; font-weight: 900; font-size: 17px;
+    box-shadow: 0 8px 22px rgba(77, 226, 197, .18);
+  }
+  .brand b { font-size: 18px; letter-spacing: .04em; }
+  .brand small { color: var(--muted); font-family: var(--mono); font-size: 9px; letter-spacing: .2em; text-transform: uppercase; }
+  h1 { margin: 0 0 10px; font-size: clamp(26px, 5vw, 34px); line-height: 1.2; letter-spacing: -.02em; }
+  h1 em { font-style: normal; color: var(--jade); }
+  .lede { margin: 0 0 24px; color: var(--soft); font-size: 14px; line-height: 1.85; }
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--card);
+    box-shadow: 0 22px 60px rgba(0, 0, 0, .32);
+    overflow: hidden;
+  }
+  .status {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+    font-size: 12.5px; color: var(--soft);
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--jade); box-shadow: 0 0 0 4px rgba(77, 226, 197, .14); flex: none; }
+  .dot.off { background: var(--warn); box-shadow: 0 0 0 4px rgba(251, 191, 36, .12); }
+  .status b { color: var(--ink); font-weight: 600; }
+  .status .spacer { flex: 1; }
+  .status code { font-family: var(--mono); font-size: 10.5px; color: var(--muted); }
+  .body { padding: 20px; display: grid; gap: 16px; }
+  .urls { display: grid; gap: 9px; }
+  .url {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    width: 100%; padding: 15px 16px;
+    border: 1px dashed rgba(77, 226, 197, .55);
+    border-radius: 12px;
+    background: var(--jade-wash);
+    color: var(--jade-dark);
+    font-family: var(--mono);
+    font-size: 17px;
+    letter-spacing: .01em;
+    text-align: left;
+    cursor: pointer;
+  }
+  .url:hover { border-color: var(--jade); }
+  .url:active { background: rgba(77, 226, 197, .16); }
+  .url .copy { flex: none; font-family: var(--sans); font-size: 11px; color: var(--jade); border: 1px solid rgba(77, 226, 197, .3); border-radius: 999px; padding: 3px 9px; }
+  .empty { padding: 16px; border-radius: 12px; background: rgba(251, 191, 36, .06); border: 1px solid rgba(251, 191, 36, .22); color: #f5d48b; font-size: 12.5px; line-height: 1.8; }
+  details.alt { padding: 0; border: 0; }
+  details.alt summary { color: var(--muted); font-size: 11.5px; }
+  details.alt p { margin: 10px 0 0; color: var(--faint, #6b7a8d); font-size: 10.5px; line-height: 1.7; }
+  .url.alt-url { margin-top: 8px; font-size: 13.5px; padding: 11px 13px; opacity: .85; }
+  .steps { margin: 0; padding: 0; list-style: none; display: grid; gap: 14px; counter-reset: s; }
+  .steps li { position: relative; padding-left: 34px; }
+  .steps li::before {
+    counter-increment: s; content: counter(s);
+    position: absolute; left: 0; top: 1px;
+    width: 22px; height: 22px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: rgba(77, 226, 197, .12);
+    color: var(--jade);
+    font-family: var(--mono); font-size: 10px;
+  }
+  .steps b { display: block; font-size: 13px; }
+  .steps span { display: block; margin-top: 2px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+  .notice {
+    display: flex; gap: 10px;
+    padding: 13px 14px;
+    border-radius: 10px;
+    background: rgba(251, 191, 36, .05);
+    color: #d9c08b;
+    font-size: 11.5px;
+    line-height: 1.75;
+  }
+  .notice svg { flex: none; margin-top: 2px; }
+  details { border-top: 1px solid var(--line); padding: 14px 18px; }
+  details summary { cursor: pointer; color: var(--soft); font-size: 12.5px; }
+  details p, details ol { color: var(--muted); font-size: 11.5px; line-height: 1.8; }
+  details code { font-family: var(--mono); font-size: 11px; color: var(--jade-dark); }
+  .foot { margin-top: 22px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; color: var(--muted); font-size: 11px; }
+  .foot a { color: var(--jade); text-decoration: none; border-bottom: 1px solid rgba(77, 226, 197, .35); }
+  .foot .spacer { flex: 1; }
+  .toast {
+    position: fixed; left: 50%; bottom: 26px; transform: translate(-50%, 12px);
+    padding: 10px 16px; border-radius: 999px;
+    background: var(--jade); color: #04140f; font-size: 12px; font-weight: 600;
+    opacity: 0; pointer-events: none; transition: .2s;
+  }
+  .toast.on { opacity: 1; transform: translate(-50%, 0); }
+  @media (max-width: 560px) {
+    body { padding: 22px 14px 40px; }
+    .url { font-size: 14.5px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <span class="mark">语</span>
+    <div><b>语镜 LinguaLens</b><br><small>Phone &amp; Tablet</small></div>
+  </div>
+
+  <h1>把语镜放到<em>手机 / 平板</em>上</h1>
+  <p class="lede">同一张 Wi-Fi 下，手机浏览器打开下面的地址就能用。翻译、对照、语法、历史都在电脑上跑，手机只是屏幕。</p>
+
+  <div class="card">
+    <div class="status" id="status">
+      <span class="dot off"></span><b>正在检查连接状态…</b><span class="spacer"></span>
+    </div>
+    <div class="body">
+      <div class="urls" id="urls"></div>
+      <div id="local-tip"></div>
+      <ol class="steps">
+        <li><b>手机连同一个 Wi-Fi</b><span>电脑和手机要连同一个路由器。校园网、酒店网如果开了“设备隔离”，两台设备可能互相看不到。</span></li>
+        <li><b>在手机浏览器里输入地址</b><span>一台设备输入一次就够，之后可以直接从历史记录或主屏幕打开。</span></li>
+        <li><b>添加到主屏幕</b><span>iPhone：Safari 分享 → 添加到主屏幕。安卓：Chrome 右上角菜单 → 添加到主屏幕。</span></li>
+      </ol>
+      <div class="notice">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 9v5M12 17h.01"/><path d="M10.3 3.9 2.4 18a2 2 0 0 0 1.8 3h15.6a2 2 0 0 0 1.8-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+        <span>局域网模式没有密码：同一个 Wi-Fi 里的人都能打开语镜，也会看到你的翻译历史。只在家里或可信网络用，公共 Wi-Fi 用完就关掉。</span>
+      </div>
+    </div>
+    <details>
+      <summary>手机打不开？多半是 Windows 防火墙</summary>
+      <p>第一次从手机访问时，Windows 可能拦住了端口。任选一种：</p>
+      <ol>
+        <li>双击语镜文件夹里的 <code>放行手机访问.vbs</code>，在弹出的管理员确认里点“是”。它会为语镜的端口加一条规则。</li>
+        <li>启动器第一次运行时也会主动问你要不要放行；当时点了“否”的话，用上一条补上。</li>
+        <li>或打开“Windows 安全中心 → 防火墙和网络保护 → 允许应用通过防火墙”，手动放行 Python 的入站连接。</li>
+      </ol>
+      <p>如果电脑连着公共 Wi-Fi，Windows 默认会拦掉所有入站连接；放行后能用，但用完最好关掉手机版。地址里的 IP 变了，通常是换了 Wi-Fi 或路由器重新分配，重新打开一次手机版就好。</p>
+    </details>
+  </div>
+
+  <div class="foot">
+    <span>只在这台电脑上运行 · 原文不出内网</span>
+    <span class="spacer"></span>
+    <a href="/">回到电脑版</a>
+  </div>
+</div>
+<div class="toast" id="toast">地址已复制</div>
+<script>
+  const $ = (sel) => document.querySelector(sel);
+  const toast = (text) => {
+    const el = $('#toast');
+    el.textContent = text;
+    el.classList.add('on');
+    clearTimeout(el._t);
+    el._t = setTimeout(() => el.classList.remove('on'), 1600);
+  };
+  const copy = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast('地址已复制');
+    } catch (e) {
+      toast('复制失败，请长按手动复制');
+    }
+  };
+  async function load() {
+    let net = null;
+    try {
+      const res = await fetch('/api/net', { cache: 'no-store' });
+      net = await res.json();
+    } catch (e) { /* ignore */ }
+    const status = $('#status');
+    const urls = $('#urls');
+    const tip = $('#local-tip');
+    if (!net || !net.ok) {
+      status.innerHTML = '<span class="dot off"></span><b>连不上语镜服务</b><span class="spacer"></span><code>请重新启动</code>';
+      urls.innerHTML = '';
+      tip.innerHTML = '<div class="empty">这个页面没有连上后台服务。回到电脑上重新双击“启动语镜手机版”试试。</div>';
+      return;
+    }
+    if (!net.lan) {
+      status.innerHTML = '<span class="dot off"></span><b>当前是仅本机模式</b><span class="spacer"></span><code>127.0.0.1</code>';
+      urls.innerHTML = '';
+      tip.innerHTML = '<div class="empty">手机还连不进来：服务只监听了本机。请关掉这个窗口，双击文件夹里的 <b>启动语镜手机版.vbs</b>，它会用局域网模式重新启动。</div>';
+      return;
+    }
+    status.innerHTML = `<span class="dot"></span><b>局域网模式已开启</b><span class="spacer"></span><code>端口 ${net.port}</code>`;
+    if (!net.urls || !net.urls.length) {
+      urls.innerHTML = '';
+      tip.innerHTML = '<div class="empty">没有找到可用的局域网地址。请确认电脑已经连上 Wi-Fi 或网线，然后重新打开手机版。</div>';
+      return;
+    }
+    const primary = net.urls[0];
+    const others = net.urls.slice(1);
+    urls.innerHTML = `<button class="url" type="button" data-url="${primary}"><span>${primary}</span><span class="copy">复制</span></button>`;
+    if (others.length) {
+      tip.innerHTML = `<details class="alt"><summary>手机还是打不开？试试其它网卡地址</summary>${others.map((url) => `<button class="url alt-url" type="button" data-url="${url}"><span>${url}</span><span class="copy">复制</span></button>`).join('')}<p>上面第一行通常就是 Wi-Fi 地址；带 192.168.x.1 的可能是 VMware / Hyper-V 的虚拟网卡，手机连不上是正常的。</p></details>`;
+    } else {
+      tip.innerHTML = '';
+    }
+    document.querySelectorAll('.url').forEach((btn) => btn.addEventListener('click', () => copy(btn.dataset.url)));
+  }
+  load();
+  setInterval(load, 4000);
+</script>
+</body>
+</html>

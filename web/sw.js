@@ -1,6 +1,6 @@
 /* Minimal service worker: network-first so a local update is never stale. */
-const CACHE = 'lingualens-v7';
-const SHELL = ['/', '/assets/app.css', '/assets/workbench.css', '/assets/app.js', '/favicon.svg', '/manifest.webmanifest'];
+const CACHE = 'lingualens-v9';
+const SHELL = ['/login', '/assets/app.css', '/assets/workbench.css', '/assets/mobile.css', '/assets/app.js', '/favicon.svg', '/manifest.webmanifest'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(SHELL)).then(() => self.skipWaiting()));
@@ -20,6 +20,6 @@ self.addEventListener('fetch', (event) => {
         caches.open(CACHE).then((cache) => cache.put(req, copy));
       }
       return res;
-    }).catch(() => caches.match(req).then((hit) => hit || caches.match('/')))
+    }).catch(() => caches.match(req).then((hit) => hit || caches.match('/login')))
   );
 });

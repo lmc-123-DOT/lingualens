@@ -1,72 +1,117 @@
-﻿# 语镜公网部署（GitHub + Render）
+# 语镜公网部署（Render · 不连 GitHub 也能做）
 
-> **GitHub 本身不能跑这个后端。** GitHub 是代码仓库；GitHub Pages 只能放静态网页，跑不了 Python、SQLite、翻译代理和查词接口。正确做法是：**代码放 GitHub，Render 从 GitHub 拉取并运行 Docker 服务**。
-
-部署完成后你会得到类似 `https://lingualens-xxxx.onrender.com` 的 HTTPS 地址，手机浏览器直接打开就能用。
-
----
-
-## 1. 把代码放到 GitHub
-
-在 GitHub 新建一个 **Private** 仓库，例如 `lingualens`，然后把项目文件推上去。
-
-```bash
-cd "D:\大肥鱼\语镜翻译"
-git init
-git add .
-git commit -m "LinguaLens v2.0.0"
-git branch -M main
-git remote add origin https://github.com/你的用户名/lingualens.git
-git push -u origin main
-```
-
-不要提交 `.venv`、`data`、`logs`、`dist`，这些已经在 `.gitignore` / `.dockerignore` 里排除。
-
-## 2. 在 Render 创建服务
-
-1. 打开 [render.com](https://render.com)，用 GitHub 登录。
-2. **New → Web Service**，选择刚才的仓库。
-3. Runtime 选 **Docker**（仓库里有 `Dockerfile`）。
-4. Instance 选 **Free**。
-5. 在 Environment 里添加：
-   - `LINGUALENS_PASSWORD`：设置一个强密码（必须设置，否则公网没有登录保护）。
-   - `LINGUALENS_DATA`：`/data`
-6. 点 **Create Web Service**，等构建完成。
-
-也可以直接用仓库里的 `render.yaml` 创建 Blueprint，效果一样。
-
-## 3. 手机访问
-
-部署完成后打开 Render 给的 HTTPS 地址：
-
-- 浏览器会弹出登录框：用户名随便填（例如 `lingualens`），密码填 `LINGUALENS_PASSWORD`。
-- 登录后就是完整界面，手机尺寸会自动变成单列。
-- 对照阅读页支持点词卡片；查词需要服务器能访问有道词典。
-
-## 4. 数据持久化
-
-免费实例的磁盘是临时的，重新部署/休眠重启后 SQLite 历史可能丢失。
-
-要长期保存历史：
-
-1. Render 升级到支持 Persistent Disk 的实例。
-2. 添加 Disk，Mount Path 填 `/data`，大小 1 GB 即可。
-3. 保持 `LINGUALENS_DATA=/data`。
-
-## 5. 安全与费用
-
-- 必须设置 `LINGUALENS_PASSWORD`；这是单用户 Basic Auth，适合个人使用。
-- Render 提供 HTTPS，密码不会明文传输。
-- 免费实例一段时间无人访问会休眠，首次打开会慢几十秒。
-- 翻译免费引擎（MyMemory / Google）不需要 Key；AI 精准模式需要在页面设置里填自己的 API Key。
-- 不要把 `.env`、数据库、API Key 提交到 GitHub。
-
-## 6. 不用 Render 的替代方案
-
-- **Railway / Fly.io**：同样支持 Docker，把 `Dockerfile` 指过去即可。
-- **自己的云服务器**：`docker build -t lingualens .`，然后 `docker run -d -p 80:8000 -e LINGUALENS_PASSWORD=... -v /srv/lingualens:/data lingualens`，前面用 Caddy/Nginx 配 HTTPS。
-- **Cloudflare Tunnel**：不想买服务器时，可以从这台电脑临时映射一个公网地址，但电脑必须一直开着。
+> 目标：拿到 `https://lingualens-xxxx.onrender.com`，手机在**任何网络**下都能打开。
+>
+> 代码已经在 GitHub 的 `deploy` 分支：<https://github.com/lmc-123-DOT/lingualens/tree/deploy>
+> 仓库是公开的，所以 Render 可以直接用「Public Git Repository」拉取，**不需要授权 GitHub 账号**。
 
 ---
 
-部署遇到问题，把 Render 的构建日志发我，我按日志改。
+## 0. 先关代理
+
+Render 直连能打开；开着代理时 Edge 可能白屏（证书校验状态被打断）。
+如果页面白屏：把代理关掉，**完全退出 Edge 再重开**。
+
+## 1. 注册 Render（用邮箱）
+
+1. 打开 <https://dashboard.render.com/signup>
+2. 填邮箱 + 密码，点 **Sign in / Sign up**
+3. 去邮箱点验证链接
+4. 不需要点「Continue with GitHub」
+
+## 2. 创建 Web Service
+
+1. 右上角 **New +** → **Web Service**
+2. 选 **Public Git Repository** 标签（不是 GitHub）
+3. 填仓库地址：
+
+   ```
+   https://github.com/lmc-123-DOT/lingualens
+   ```
+
+4. Branch 填 **`deploy`**
+5. 其它配置：
+
+   | 项目 | 填什么 |
+   |---|---|
+   | Name | `lingualens` |
+   | Region | `Singapore`（不行就选 Oregon） |
+   | Runtime | **Docker**（会自动识别） |
+   | Plan | **Free** |
+   | Health Check Path | `/api/health` |
+
+6. 展开 **Environment Variables**，加三条：
+
+   | Key | Value |
+   |---|---|
+   | `LINGUALENS_PASSWORD` | 自己设一个强密码，记下来 |
+   | `LINGUALENS_REQUIRE_AUTH` | `1` |
+   | `LINGUALENS_DATA` | `/data` |
+
+7. 点 **Create Web Service**，等构建 3–6 分钟（会下载学习站台词库）。
+
+## 3. 打开和登录
+
+1. 构建完成后，服务页顶部就是地址：`https://lingualens-xxxx.onrender.com`
+2. 会打开语镜自己的登录页（不再是浏览器原生弹窗）：
+   - 用户名：`lingualens`
+   - 密码：第 2 步设置的 `LINGUALENS_PASSWORD`
+   - 勾选「记住这台设备」可以 30 天免登录
+3. 登录后就是完整界面，手机尺寸自动使用底部导航。
+4. 想退出登录：页面右上角设置 →「关于」→「退出登录」。
+
+## 4. 手机 / 平板
+
+1. 手机在 4G / 5G / 任何 Wi-Fi 下打开上面的 HTTPS 地址。
+2. 第一次会要求登录，用户名随便填，密码同上。
+3. **添加到主屏幕**：
+   - iPhone：Safari 分享 → 添加到主屏幕
+   - 安卓：Chrome 菜单 → 添加到主屏幕
+4. HTTPS 下语镜自带 manifest 和 service worker，可以像 App 一样独立窗口运行。
+
+## 5. 免费版要知道的
+
+| 事项 | 说明 |
+|---|---|
+| 休眠 | 15 分钟没人访问会休眠，下一次打开等 30–60 秒冷启动 |
+| 数据 | 免费实例没有持久磁盘，**重新部署或重启后历史会清空** |
+| 长期保存 | 升级 Starter，加 1 GB Disk 挂 `/data`，保持 `LINGUALENS_DATA=/data` |
+| 更新代码 | Public Git Repository 没有自动部署；改完推 `deploy` 后，在服务页点 **Manual Deploy → Deploy latest commit** |
+| 学习站台 | Docker 构建时从上游公开数据源下载并生成，下载失败会自动跳过，其它功能不受影响 |
+| 密码 | 单用户 Basic Auth；个人使用够用 |
+
+## 6. 常见问题
+
+**页面白屏 / 打不开**：先关代理并完全重启浏览器；再确认打开的是 `https://`。
+
+**构建失败**：服务页 → Logs → Build，看最后 30 行。多半是网络超时，点 **Manual Deploy → Clear build cache & deploy** 重试。
+
+**502 / 一直转圈**：免费实例冷启动，等 30–60 秒。
+
+**登录框反复弹**：确认是 HTTPS；Basic Auth 每个新的浏览器会话会再问一次。需要「记住我」的登录页可以再改。
+
+**翻译失败**：免费引擎有限额；在页面「设置 → 翻译引擎」里配置 AI Key。
+
+## 7. 安全
+
+- 必须保留 `LINGUALENS_REQUIRE_AUTH=1` 和 `LINGUALENS_PASSWORD`。
+- 不要把 `.env`、API Key、`data/` 提交到 GitHub。
+- 学习站台数据来自第三方公开数据集，许可证见 `THIRD_PARTY_NOTICES.md`；只在个人部署的镜像里构建，不提交到仓库。
+
+---
+
+## 附：以后接了 GitHub，可以用 Blueprint
+
+如果之后网络方便、愿意把 GitHub 授权给 Render，可以直接用仓库里的 `render.yaml`：
+
+1. Render → **New +** → **Blueprint**
+2. 选 `lmc-123-DOT/lingualens`，分支 `deploy`
+3. Apply；密码会自动生成，在 Environment 里查看
+4. 之后推 `deploy` 分支会自动部署
+
+## 附：不用 Render 的替代方案
+
+- **Docker Compose**：`cp .env.example .env`，改强密码，`docker compose up -d --build`，打开 `http://127.0.0.1:8000`。
+- **Railway / Fly.io**：支持 Docker，把仓库指过去即可。
+- **自己的云服务器**：`docker build -t lingualens .`，`docker run -d -p 80:8000 -e LINGUALENS_PASSWORD=... -v /srv/lingualens:/data lingualens`，前面用 Caddy/Nginx 配 HTTPS。
+- **Cloudflare Tunnel**：从本机临时映射公网地址，电脑必须一直开着。

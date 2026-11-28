@@ -229,6 +229,11 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
         body: body ? JSON.stringify(body) : undefined,
         signal: controller.signal,
       });
+      if (res.status === 401) {
+        const next = encodeURIComponent(location.pathname + location.search);
+        location.href = `/login?next=${next}`;
+        throw new Error('登录状态已失效，请重新登录');
+      }
       const text = await res.text();
       let data = {};
       try { data = text ? JSON.parse(text) : {}; } catch { throw new Error(`服务器返回了非 JSON 内容（${res.status}）`); }
@@ -305,8 +310,10 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
   function topbar(path) {
     const active = activeNav(path);
     const aiReady = !!state.health?.aiConfigured;
+    const backButton = path !== '/' ? `<button class="icon-btn back-btn" data-action="go-back" aria-label="返回上一页" title="返回上一页">${icon('arrowLeft', 17)}</button>` : '';
     return `<header class="topbar">
       <div class="topbar-inner">
+        ${backButton}
         <a class="brand" href="/" data-link aria-label="语镜首页">
           <span class="brand-mark">语</span>
           <span class="brand-word"><strong>语镜</strong><small>LinguaLens</small></span>
@@ -329,11 +336,102 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
           <button class="icon-btn" data-action="open-settings" aria-label="设置" title="设置">${icon('settings', 17)}</button>
         </div>
       </div>
-    </header>`;
+    </header>${tabbar(path)}${mobileMoreHTML()}`;
+  }
+
+  // ---------------------------------------------------------------- mobile shell
+  const TAB_ITEMS = [
+    { key: 'translate', href: '/', label: '翻译', icon: 'book' },
+    { key: 'compare', href: '/compare', label: '对照', icon: 'columns' },
+    { key: 'analyze', href: '/analyze', label: '拆解', icon: 'code' },
+    { key: 'grammar', href: '/grammar', label: '语法', icon: 'layers' },
+  ];
+
+  function tabbar(path) {
+    const active = activeNav(path);
+    const moreActive = ['library', 'batch', 'history'].includes(active);
+    const tabs = TAB_ITEMS.map((tab) => `<a class="tab ${active === tab.key ? 'is-active' : ''}" href="${tab.href}" data-link>${icon(tab.icon, 21)}<span>${tab.label}</span></a>`).join('');
+    return `<nav class="tabbar" aria-label="移动端主导航">
+      ${tabs}
+      <button type="button" class="tab tab-more ${moreActive ? 'is-active' : ''}" data-action="open-mobile-more" aria-label="更多功能" aria-haspopup="dialog">${icon('menu', 21)}<span>更多</span></button>
+    </nav>`;
+  }
+
+  function mobileMoreHTML() {
+    const themeName = THEMES[state.theme]?.name || '工作台';
+    return `<div class="sheet-layer" id="mobile-more" hidden>
+      <div class="sheet-backdrop" data-action="close-mobile-more" aria-hidden="true"></div>
+      <div class="sheet" role="dialog" aria-modal="true" aria-label="更多功能">
+        <div class="sheet-grip" aria-hidden="true"></div>
+        <p class="sheet-title">更多 · ${esc(themeName)}主题</p>
+        <div class="sheet-grid">
+          <a class="sheet-item" href="/library" data-link>${icon('book', 18)}<span><b>学习站台</b><small>单词册、语法库和生词本</small></span>${icon('chevron', 14)}</a>
+          <a class="sheet-item" href="/history" data-link>${icon('history', 18)}<span><b>历史记录</b><small>翻过的文章与导出</small></span>${icon('chevron', 14)}</a>
+          <a class="sheet-item" href="/batch" data-link>${icon('folder', 18)}<span><b>文件夹批译</b><small>整夹翻译，建议在电脑上操作</small></span><span class="sheet-badge">电脑</span></a>
+          <button type="button" class="sheet-item" data-action="open-connect">${icon('globe', 18)}<span><b>手机 / 平板访问</b><small>手机、平板的打开方式</small></span>${icon('chevron', 14)}</button>
+        </div>
+        <div class="sheet-foot">
+          <button type="button" class="btn" data-action="cycle-theme">${themeIcon(state.theme)} 切换主题</button>
+          <button type="button" class="btn" data-action="open-settings">${icon('settings', 16)} 设置</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function openMobileMore() {
+    const layer = $('#mobile-more');
+    if (!layer) return;
+    layer.hidden = false;
+    document.body.classList.add('sheet-open');
+  }
+
+  function closeMobileMore() {
+    const layer = $('#mobile-more');
+    if (layer) layer.hidden = true;
+    document.body.classList.remove('sheet-open');
+  }
+
+  async function openConnectDialog() {
+    let net = null;
+    try { net = await api('/api/net'); } catch (err) { /* offline */ }
+    const urls = (net?.urls || []).filter(Boolean);
+    const lan = !!net?.lan;
+    const isPublic = !!net?.public;
+    const origin = location.origin;
+    const primaryUrl = urls[0];
+    const extraUrls = urls.slice(1);
+    const urlBlock = primaryUrl ? `<div class="connect-urls"><button type="button" class="connect-url" data-copy="${attr(primaryUrl)}"><span>${esc(primaryUrl)}</span>${icon('copy', 14)}</button></div>
+      ${extraUrls.length ? `<details class="connect-alt"><summary>手机还是打不开？其它 ${extraUrls.length} 个网卡地址</summary>${extraUrls.map((url) => `<button type="button" class="connect-url connect-url-sm" data-copy="${attr(url)}"><span>${esc(url)}</span>${icon('copy', 14)}</button>`).join('')}<p>第一行通常是 Wi-Fi 地址；192.168.x.1 这类多半是 VMware / Hyper-V 的虚拟网卡，手机连不上是正常的。</p></details>` : ''}` : '';
+    const steps = `<ol class="connect-steps">
+      <li><b>连同一个 Wi-Fi</b><span>手机和这台电脑要在同一个路由器下，别开热点隔离。</span></li>
+      <li><b>在手机浏览器里打开地址</b><span>地址就是上面那行，输入一次以后就记住了。</span></li>
+      <li><b>把语镜放到主屏幕</b><span>iPhone 用 Safari 分享 → 添加到主屏幕；安卓 Chrome 菜单 → 添加到主屏幕。</span></li>
+    </ol>`;
+    const publicContent = `<div class="connect-lead">语镜已经部署在公网：手机在任意网络下都能打开，不用和电脑连同一个 Wi-Fi。</div>
+      <div class="connect-urls"><button type="button" class="connect-url" data-copy="${attr(origin)}"><span>${esc(origin)}</span>${icon('copy', 14)}</button></div>
+      <p class="connect-hint">第一次打开会弹出登录框：用户名随便填，密码是 Render 控制台里 <b>LINGUALENS_PASSWORD</b> 的值。</p>
+      <ol class="connect-steps">
+        <li><b>在手机浏览器打开这个地址</b><span>4G / 5G / 任何 Wi-Fi 都行，不需要电脑开着。</span></li>
+        <li><b>输入公网密码</b><span>就是 Render → Environment 里那串密码，浏览器会记住。</span></li>
+        <li><b>把语镜放到主屏幕</b><span>iPhone 用 Safari 分享 → 添加到主屏幕；安卓 Chrome 菜单 → 添加到主屏幕。</span></li>
+      </ol>`;
+    const content = isPublic
+      ? publicContent
+      : lan
+      ? `<div class="connect-lead">手机、平板和这台电脑连同一个 Wi-Fi，就能用完整的语镜。</div>
+         ${urlBlock}
+         <p class="connect-hint">点一下地址即可复制。手机第一次打不开时，多半是 Windows 防火墙挡住了，运行一次「放行手机访问」就行。</p>
+         ${steps}`
+      : `<div class="connect-lead">现在是“只在本机”模式：只有这台电脑能打开 ${esc(net?.localUrl || '127.0.0.1')}。</div>
+         <p class="connect-hint">想让手机 / 平板也能用，双击文件夹里的 <b>启动语镜手机版.vbs</b>，它会用局域网模式重新启动，并显示手机访问地址。</p>
+         <div class="connect-lead">手机上能做的事：翻译、逐句对照、语法详解、文章拆解、历史记录、学习站台。文件夹批译仍然建议在电脑上做。</div>`;
+    openModal(`<div class="modal-head"><h2>手机 / 平板访问</h2><span class="sub">${isPublic ? '公网 HTTPS · 随时随地' : '局域网直连 · 数据留在电脑'}</span><button class="icon-btn modal-close" data-action="close-modal" aria-label="关闭">${icon('x', 16)}</button></div>
+      <div class="modal-body connect-body">${content}</div>
+      <div class="modal-foot"><span class="spacer"></span><button type="button" class="btn" data-action="close-modal">知道啦</button></div>`);
   }
 
   function footer() {
-    const total = state.health?.grammar?.total || 231;
+    const total = state.health?.grammar?.total || 325;
     return `<footer class="site-footer">
       <span class="seal"><i></i> 语镜 LinguaLens</span>
       <span>本地优先的阅读工作台 · 语法库 ${total} 条</span>
@@ -408,10 +506,23 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
   }
 
   function navigate(path, { replace = false, scroll = true } = {}) {
-    if (replace) history.replaceState({}, '', path);
-    else history.pushState({}, '', path);
+    closeMobileMore();
+    const current = { ...(history.state || {}), scrollY: window.scrollY };
+    if (replace) {
+      history.replaceState({ ...current, scrollY: 0 }, '', path);
+    } else {
+      history.replaceState(current, '', location.href);
+      history.pushState({ scrollY: 0 }, '', path);
+    }
     renderRoute();
     if (scroll) window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  function restoreScrollPosition() {
+    const top = Number(history.state?.scrollY || 0);
+    const apply = () => window.scrollTo({ top, behavior: 'instant' });
+    requestAnimationFrame(apply);
+    setTimeout(apply, 120);
   }
 
   function syncStatusPill() {
@@ -448,7 +559,7 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
 
   // ---------------------------------------------------------------- workspace
   function heroHTML() {
-    const total = state.health?.grammar?.total || 231;
+    const total = state.health?.grammar?.total || 325;
     const langCount = targetLangs.length || 25;
     const grammarLangCount = Object.keys(state.health?.grammar?.byLanguage || {}).length || 24;
     return `<section class="hero">
@@ -500,7 +611,8 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
 
   function langOption(code, selected) {
     const meta = code === 'auto' ? { name: '自动检测', native: 'Auto' } : lang(code);
-    return `<option value="${code}" ${selected === code ? 'selected' : ''}>${esc(`${meta.name} · ${meta.native}`)}</option>`;
+    const label = meta.name === meta.native ? meta.name : `${meta.name} · ${meta.native}`;
+    return `<option value="${code}" ${selected === code ? 'selected' : ''}>${esc(label)}</option>`;
   }
   function sourceLangOptions(selected) {
     return sourceLangs.map((code) => langOption(code, selected)).join('');
@@ -560,7 +672,7 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
               <button class="btn btn-sm" data-action="upload">${icon('upload', 13)} 导入文件</button>
               <button class="btn btn-sm" data-action="open-url">${icon('link', 13)} 网页链接</button>
               <button class="btn btn-sm" data-action="load-sample" data-sample="en">${icon('book', 13)} 示例</button>
-              <span class="meta" id="source-meta">${stats ? `${fmtNumber(stats.paragraphs)} 段 · 约 ${stats.minutes} 分钟` : 'Ctrl / ⌘ + Enter 翻译'}</span>
+              <span class="meta" id="source-meta">${stats ? `${fmtNumber(stats.paragraphs)} 段 · 约 ${stats.minutes} 分钟` : '选中句子可单独翻译 / 解析 · Ctrl / ⌘ + Enter 翻译'}</span>
             </div>
           </div>
         </section>
@@ -879,6 +991,9 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       state.loading = false;
       try { sessionStorage.setItem('ll.article', JSON.stringify(data.article)); } catch { /* quota */ }
       renderRoute();
+      if (window.matchMedia('(max-width: 900px)').matches) {
+        requestAnimationFrame(() => $('.result-pane')?.scrollIntoView({ block: 'start', behavior: 'smooth' }));
+      }
       const warnings = data.article.warnings || [];
       if (data.article.target?.provider === 'offline') toast('在线引擎不可用，当前是离线预览。', 'error');
       else if (warnings.length) toast(warnings[0], 'error');
@@ -1805,10 +1920,10 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       <div>
         <p class="eyebrow">GRAMMAR ATLAS</p>
         <h1>语法的骨架，<br>值得单独看。</h1>
-        <p class="lede">${stats.total || 231} 个语法点，覆盖 ${languageCount || 24} 种高频语言。每一条都有结构公式、语感解释、例句、易错点，以及可以在新标签页打开的权威语法参考。</p>
+        <p class="lede">${stats.total || 325} 个语法点，覆盖 ${languageCount || 24} 种高频语言。每一条都有结构公式、语感解释、例句、易错点，以及可以在新标签页打开的权威语法参考。</p>
       </div>
       <div class="page-hero-stats">
-        <div class="big-stat"><strong>${stats.total || 231}</strong><span>语法条目</span></div>
+        <div class="big-stat"><strong>${stats.total || 325}</strong><span>语法条目</span></div>
         <div class="big-stat"><strong>${languageCount || 24}</strong><span>语言</span></div>
       </div>
     </section>
@@ -1822,7 +1937,7 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       </aside>
       <section>
         <div class="index-toolbar">
-          <span class="result-count"><strong id="grammar-result-count">${stats.total || 231}</strong> 条语法</span>
+          <span class="result-count"><strong id="grammar-result-count">${stats.total || 325}</strong> 条语法</span>
           <span class="muted" style="font-size:10px">每条都可独立打开、复制链接</span>
           <div class="select-wrap select-sm sort"><select id="grammar-sort"><option value="default">按语言与类别</option><option value="level">按难度</option><option value="name">按名称</option></select></div>
         </div>
@@ -2357,7 +2472,9 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
             <div class="side-link">${icon('layers', 12)}<span>语法库</span><span class="site">${state.health?.grammar?.total || 106} 条</span></div>
             <div class="side-link">${icon('globe', 12)}<span>版本</span><span class="site">v${esc(state.health?.version || '1.0.0')}</span></div>
             <div class="side-link">${icon('shield', 12)}<span>数据</span><span class="site">本机 SQLite</span></div>
-            <div style="margin-top:14px"><button class="btn btn-sm" data-action="install-app">${icon('download', 12)} 安装到桌面</button><span class="hint" style="margin-left:8px">需要 Chrome / Edge，通过 localhost 打开</span></div>
+            <div style="margin-top:14px"><button class="btn btn-sm" data-action="install-app">${icon('download', 12)} 安装到桌面</button><span class="hint" style="margin-left:8px">需要 Chrome / Edge，HTTPS 或 localhost 打开</span></div>
+            <div style="margin-top:10px"><button class="btn btn-sm" data-action="open-connect">${icon('globe', 12)} 手机 / 平板访问</button><span class="hint" style="margin-left:8px">同一 Wi-Fi 下用手机打开，无需安装</span></div>
+            ${state.health?.loginRequired ? `<div style="margin-top:10px"><button class="btn btn-sm" data-action="logout">${icon('x', 12)} 退出登录</button><span class="hint" style="margin-left:8px">清除这台设备保存的登录状态</span></div>` : ''}
             <div style="margin-top:10px"><button class="btn btn-sm btn-ghost" data-action="quit-app">${icon('x', 12)} 退出语镜（桌面版）</button></div>
           </div>
           <div class="callout">${icon('book', 14)}<span>翻译质量取决于引擎。免费引擎适合快速阅读；需要出版级精度时，建议配置 AI，并使用「AI 精准模式」。</span></div>
@@ -2420,6 +2537,119 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
     } catch (err) {
       if (box) box.innerHTML = `<span style="color:var(--coral-dark)">${icon('alert', 12)} ${esc(err.message)}</span>`;
     } finally { if (btn) btn.disabled = false; }
+  }
+
+  // ---------------------------------------------------------------- selection translate
+  let selectionToolEl = null;
+  let selectionPicked = '';
+  let selectionTimer = null;
+
+  function ensureSelectionTool() {
+    if (selectionToolEl) return;
+    selectionToolEl = document.createElement('div');
+    selectionToolEl.id = 'selection-tool';
+    selectionToolEl.className = 'selection-tool';
+    selectionToolEl.hidden = true;
+    selectionToolEl.innerHTML = `<button type="button" class="selection-tool-btn" data-action="translate-selection">${icon('spark', 13)} 翻译并解析</button>`;
+    selectionToolEl.addEventListener('mousedown', (e) => e.preventDefault());
+    document.body.appendChild(selectionToolEl);
+  }
+
+  function readPageSelection() {
+    const active = document.activeElement;
+    if (active && active.id === 'source-text') {
+      const start = active.selectionStart || 0;
+      const end = active.selectionEnd || 0;
+      if (end - start > 1) {
+        return { text: active.value.slice(start, end), rect: active.getBoundingClientRect() };
+      }
+    }
+    const sel = window.getSelection();
+    if (!sel || sel.isCollapsed || !sel.rangeCount) return null;
+    const text = sel.toString().trim();
+    if (text.length < 2) return null;
+    const anchor = sel.anchorNode;
+    const el = anchor?.nodeType === 3 ? anchor.parentElement : anchor;
+    if (!el || !el.closest('#app')) return null;
+    if (el.closest('a, button, input, textarea, select, .word-card, .modal, .selection-tool, .nav, .topbar')) return null;
+    if (el.closest('#cmp-right')) return null;
+    if (!el.closest('.pane-body, .bi-source, .cmp-text, .ana-sentence, .source-area-wrap')) return null;
+    const rect = sel.getRangeAt(0).getBoundingClientRect();
+    return { text, rect };
+  }
+
+  function hideSelectionTool() {
+    if (selectionToolEl) selectionToolEl.hidden = true;
+    selectionPicked = '';
+  }
+
+  function refreshSelectionTool() {
+    ensureSelectionTool();
+    const picked = readPageSelection();
+    if (!picked || picked.text.length > 1200) { hideSelectionTool(); return; }
+    selectionPicked = picked.text;
+    const rect = picked.rect;
+    const width = 150;
+    const left = Math.min(window.innerWidth - width - 10, Math.max(10, rect.left + Math.min(rect.width, 280) / 2 - width / 2));
+    const top = rect.top > 58 ? rect.top - 44 : Math.min(window.innerHeight - 54, rect.bottom + 8);
+    selectionToolEl.style.left = `${left}px`;
+    selectionToolEl.style.top = `${top}px`;
+    selectionToolEl.hidden = false;
+  }
+
+  function scheduleSelectionTool() {
+    clearTimeout(selectionTimer);
+    selectionTimer = setTimeout(refreshSelectionTool, 30);
+  }
+
+  function selectionResultHTML(text, article, analysis) {
+    const target = article.target || {};
+    const translated = (target.blocks || []).map((b) => b.target).filter(Boolean).join('\n\n') || target.text || '—';
+    const points = article.grammar?.points || [];
+    const sentences = analysis?.sentences || [];
+    const grammarHTML = points.length ? points.slice(0, 6).map((p) => `
+      <button class="selection-grammar-item" data-action="selection-grammar" data-gid="${attr(p.id)}">
+        <span class="chip">${esc(p.category)}</span>
+        <strong>${esc(p.title)}</strong>
+        <small>${esc(p.formula)}</small>
+        <span class="sel-open">完整讲解 ${icon('arrow', 10)}</span>
+      </button>`).join('') : `<p class="selection-empty">这次没有匹配到语法条目，但译文已经生成。</p>`;
+    const parseHTML = sentences.length ? sentences.slice(0, 4).map((s) => `
+      <div class="selection-sentence">
+        <p class="sel-sentence-text">${esc(s.text)}</p>
+        ${s.translation ? `<p class="sel-sentence-tr">${esc(s.translation)}</p>` : ''}
+        <div class="sel-tokens">${(s.tokens || []).slice(0, 24).map((t) => `<span class="sel-token"><b>${esc(t.text)}</b><small>${esc(t.pos || '')}</small></span>`).join('')}</div>
+        ${s.chunks?.length ? `<div class="sel-chunks">${s.chunks.slice(0, 8).map((c) => `<span>${esc(c.role || '')} · ${esc(c.label || '')}</span>`).join('')}</div>` : ''}
+      </div>`).join('') : `<p class="selection-empty">暂时没有逐句拆解结果。</p>`;
+    return `<div class="modal-head"><div><h2>选中句子</h2><p class="sub">单独翻译 · 语法解析</p></div><button class="icon-btn modal-close" data-action="close-modal">${icon('x', 16)}</button></div>
+      <div class="selection-modal">
+        <div class="selection-block"><span class="selection-label">原文</span><p class="selection-source">${esc(text)}</p></div>
+        <div class="selection-block selection-result"><span class="selection-label">译文</span><p class="selection-translation">${esc(translated)}</p></div>
+        <div class="selection-columns">
+          <section class="selection-section"><h3>语法点</h3>${grammarHTML}</section>
+          <section class="selection-section"><h3>逐句拆解</h3>${parseHTML}</section>
+        </div>
+        <div class="selection-foot"><span>${esc(target.providerLabel || providerLabel(target.provider))} · ${sentences.length || 1} 句</span><button class="btn btn-sm" data-action="close-modal">关闭</button></div>
+      </div>`;
+  }
+
+  async function openSelectionModal(text) {
+    const clean = (text || '').trim();
+    if (clean.length < 2) { toast('先选中一个句子或短语。', 'error'); return; }
+    hideSelectionTool();
+    openModal(`<div class="modal-head"><div><h2>选中句子</h2><p class="sub">正在单独翻译与解析…</p></div><button class="icon-btn modal-close" data-action="close-modal">${icon('x', 16)}</button></div><div class="selection-loading"><span class="spinner"></span><span>正在翻译并拆解这一句…</span></div>`);
+    try {
+      const data = await api('/api/translate', {
+        method: 'POST',
+        body: { text: clean, source: state.sourceLang, target: state.targetLang, provider: state.provider, save: false, analyze: true },
+        timeout: 90000,
+      });
+      const modal = $('#modal-root .modal');
+      if (modal) modal.innerHTML = selectionResultHTML(clean, data.article || {}, data.analysis || data.article?.analysis);
+    } catch (err) {
+      const modal = $('#modal-root .modal');
+      if (modal) modal.innerHTML = `<div class="modal-head"><div><h2>选中句子</h2><p class="sub">单独翻译失败</p></div><button class="icon-btn modal-close" data-action="close-modal">${icon('x', 16)}</button></div><div class="wc-error">${esc(err.message || '翻译失败，请稍后再试。')}</div>`;
+    }
   }
 
   // ---------------------------------------------------------------- modal
@@ -2494,6 +2724,11 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
     const goto = e.target.closest('[data-goto]');
     if (goto) {
       navigate(goto.dataset.goto);
+      return;
+    }
+    const copyTarget = e.target.closest('[data-copy]');
+    if (copyTarget) {
+      copyText(copyTarget.dataset.copy || '');
       return;
     }
     const openHistoryBtn = e.target.closest('[data-open-history]');
@@ -2579,6 +2814,9 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       return;
     }
     switch (a) {
+      case 'open-mobile-more': openMobileMore(); break;
+      case 'close-mobile-more': closeMobileMore(); break;
+      case 'open-connect': closeMobileMore(); openConnectDialog(); break;
       case 'translate': doTranslate(); break;
       case 'cycle-theme': cycleTheme(); break;
       case 'clear':
@@ -2604,20 +2842,30 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       case 'font-larger': setReadingScale(state.readingScale + 0.05); break;
       case 'speak-sentence': speakSentence(action.dataset.text || ''); break;
       case 'open-grammar-report': openGrammarReport(); break;
+      case 'translate-selection': openSelectionModal(selectionPicked); break;
+      case 'selection-grammar':
+        closeModal();
+        navigate(`/grammar/${encodeURIComponent(action.dataset.gid || '')}`);
+        break;
       case 'open-settings': openSettings(); break;
       case 'close-modal': closeModal(); break;
       case 'open-grammar-index': navigate('/grammar'); break;
       case 'copy-link':
-        try {
-          await navigator.clipboard.writeText(location.href);
-          toast('链接已复制', 'success');
-        } catch { toast('复制失败，请手动复制地址栏。', 'error'); }
+        copyText(location.href);
+        break;
+      case 'go-back':
+        if (history.length > 1) history.back();
+        else navigate('/');
         break;
       case 'back-to-article':
         state.scrollBlock = action.dataset.block || null;
         navigate('/'); break;
       case 'save-settings': saveSettings(); break;
       case 'test-ai': testAI(); break;
+      case 'logout':
+        try { await fetch('/api/logout', { method: 'POST' }); } catch (err) { /* ignore */ }
+        location.href = '/login';
+        break;
       case 'quit-app':
         if (!window.confirm('退出语镜？桌面服务会停止，网页将断开。')) break;
         api('/api/quit', { method: 'POST', body: {}, timeout: 5000 })
@@ -2677,7 +2925,10 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
   }
 
   function onDocumentKeydown(e) {
-    if (e.key === 'Escape') { closeWordCard(); closeModal(); }
+    if (e.key === 'Escape') {
+      if (!$('#mobile-more')?.hidden) { closeMobileMore(); return; }
+      closeWordCard(); closeModal();
+    }
     if ((e.key === 'Enter' || e.key === ' ') && e.target.closest?.('.word-token')) {
       e.preventDefault();
       openWordCard(e.target.closest('.word-token'));
@@ -2738,7 +2989,20 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
   }
 
   function setupPopState() {
-    window.addEventListener('popstate', () => renderRoute());
+    window.addEventListener('popstate', () => {
+      renderRoute();
+      restoreScrollPosition();
+    });
+    let saveTimer = null;
+    window.addEventListener('scroll', () => {
+      if (saveTimer) return;
+      saveTimer = setTimeout(() => {
+        saveTimer = null;
+        try {
+          history.replaceState({ ...(history.state || {}), scrollY: window.scrollY }, '', location.href);
+        } catch (e) { /* ignore */ }
+      }, 180);
+    }, { passive: true });
   }
 
   // ---------------------------------------------------------------- 404
@@ -2792,10 +3056,13 @@ So read slowly. Let the sentence finish. Then look again at how it was built.`,
       if (state.provider !== 'auto' && !availableProviders.has(state.provider)) state.provider = 'auto';
       renderRoute();
       ensureWordCard();
+      ensureSelectionTool();
       loadNotebook();
       setupFileInput();
       document.addEventListener('click', onDocumentClick);
       document.addEventListener('keydown', onDocumentKeydown);
+      document.addEventListener('mouseup', scheduleSelectionTool);
+      document.addEventListener('keyup', (e) => { if (e.shiftKey || e.key === 'Shift') scheduleSelectionTool(); });
       window.addEventListener('scroll', () => {
         if (state.activeWordToken && !$('#word-card')?.hidden) positionWordCard(state.activeWordToken);
       }, { passive: true });

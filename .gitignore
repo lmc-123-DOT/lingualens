@@ -19,3 +19,9 @@ lexicon/*.csv
 Thumbs.db
 
 browser/
+
+server.json
+runtime.json
+server.url
+lan.json
+lan.url

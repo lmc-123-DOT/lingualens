@@ -1,0 +1,24 @@
+services:
+  lingualens:
+    build: .
+    container_name: lingualens
+    ports:
+      - "8000:8000"
+    environment:
+      LINGUALENS_HOST: "0.0.0.0"
+      LINGUALENS_REQUIRE_AUTH: "1"
+      LINGUALENS_PASSWORD: "${LINGUALENS_PASSWORD:?set LINGUALENS_PASSWORD in .env}"
+      LINGUALENS_DATA: "/data"
+      PORT: "8000"
+    volumes:
+      - ./data:/data
+      # Optional: if you built the learning-station database locally, mount it
+      # read-only. It is deliberately not committed to the public repository.
+      # - ./lexicon/lexicon.db:/app/lexicon/lexicon.db:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s

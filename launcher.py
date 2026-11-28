@@ -30,6 +30,25 @@ from http.server import ThreadingHTTPServer  # noqa: E402
 
 APP_TITLE = "语镜 LinguaLens"
 NO_BROWSER = "--no-browser" in sys.argv
+LAN = "--lan" in sys.argv or os.environ.get("LINGUALENS_LAN", "").lower() in ("1", "true", "yes", "on")
+
+
+def _arg_value(name: str, default: int) -> int:
+    for index, item in enumerate(sys.argv):
+        if item == name and index + 1 < len(sys.argv):
+            try:
+                return int(sys.argv[index + 1])
+            except ValueError:
+                return default
+        if item.startswith(name + "="):
+            try:
+                return int(item.split("=", 1)[1])
+            except ValueError:
+                return default
+    return default
+
+
+PORT = _arg_value("--port", 8765)
 
 
 def _log_stream():
@@ -59,35 +78,96 @@ def _url_file() -> Path:
 
 
 def _existing_url() -> str | None:
-    for candidate in (_url_file(), paths.instance_file()):
+    instance = _existing_instance()
+    return instance[0] if instance else None
+
+
+def _existing_instance() -> tuple[str, str] | None:
+    """Return (url, mode) for a healthy running instance, otherwise None."""
+    url = ""
+    try:
+        info = json.loads(paths.instance_file().read_text(encoding="utf-8"))
+        url = str(info.get("url") or "")
+    except Exception:
+        url = ""
+    if not url:
         try:
-            if candidate.suffix == ".json":
-                url = json.loads(candidate.read_text(encoding="utf-8")).get("url")
-            else:
-                url = candidate.read_text(encoding="utf-8").strip()
+            url = _url_file().read_text(encoding="utf-8").strip()
         except Exception:
-            continue
-        if not url:
-            continue
-        try:
-            with urllib.request.urlopen(url.rstrip("/") + "/api/health", timeout=1.5) as response:
-                if response.status == 200:
-                    return url.rstrip("/")
-        except Exception:
-            continue
+            return None
+    if not url:
+        return None
+    url = url.rstrip("/")
+    try:  # Newer builds report their bind mode here.
+        with urllib.request.urlopen(url + "/api/net", timeout=1.5) as response:
+            data = json.loads(response.read().decode("utf-8"))
+        return url, ("lan" if data.get("lan") else "portable")
+    except Exception:
+        pass
+    try:
+        with urllib.request.urlopen(url + "/api/health", timeout=1.5) as response:
+            if response.status == 200:
+                return url, "portable"
+    except Exception:
+        return None
     return None
 
 
-def _write_url(url: str) -> None:
+def _request_quit(url: str) -> None:
+    try:
+        request = urllib.request.Request(
+            url.rstrip("/") + "/api/quit",
+            data=b"{}",
+            method="POST",
+            headers={"Content-Type": "application/json"},
+        )
+        urllib.request.urlopen(request, timeout=3).read()
+    except Exception:
+        logging.info("Quit request failed or instance already closing")
+
+
+def _wait_down(url: str, timeout: float = 6.0) -> None:
+    deadline = time.time() + timeout
+    while time.time() < deadline:
+        try:
+            with urllib.request.urlopen(url.rstrip("/") + "/api/health", timeout=0.8):
+                pass
+        except Exception:
+            return
+        time.sleep(0.25)
+
+
+def _write_url(url: str, mode: str = "portable") -> None:
     _url_file().write_text(url, encoding="utf-8")
     paths.instance_file().write_text(
-        json.dumps({"url": url, "pid": os.getpid(), "mode": "portable"}, ensure_ascii=False),
+        json.dumps({"url": url, "pid": os.getpid(), "mode": mode}, ensure_ascii=False),
         encoding="utf-8",
     )
 
 
+def _write_lan(port: int) -> list[str]:
+    """Publish the phone-facing URL so the launcher script can open /mobile."""
+    urls = app_server.lan_urls(port)
+    mobile = f"http://127.0.0.1:{port}/mobile"
+    data = {
+        "urls": urls,
+        "localUrl": f"http://127.0.0.1:{port}",
+        "mobileUrl": mobile,
+        "port": port,
+        "pid": os.getpid(),
+    }
+    (paths.data_dir() / "lan.json").write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+    (paths.data_dir() / "lan.url").write_text(mobile, encoding="utf-8")
+    return urls
+
+
 def _cleanup_files() -> None:
-    for path in (_url_file(), paths.instance_file()):
+    for path in (
+        _url_file(),
+        paths.instance_file(),
+        paths.data_dir() / "lan.json",
+        paths.data_dir() / "lan.url",
+    ):
         try:
             path.unlink(missing_ok=True)
         except Exception:
@@ -146,7 +226,7 @@ def _focus_app_window() -> bool:
         return False
 
 
-def _open_browser(url: str) -> bool:
+def _open_browser(url: str, size: str = "1440,920") -> bool:
     """Open the app in a real, foreground browser window.
 
     webbrowser.open() depends on the default-browser association and can fail
@@ -165,7 +245,7 @@ def _open_browser(url: str) -> bool:
     for browser in candidates:
         if browser.exists():
             try:
-                subprocess.Popen([str(browser), f"--app={url}", "--window-size=1440,920"], close_fds=True)
+                subprocess.Popen([str(browser), f"--app={url}", f"--window-size={size}"], close_fds=True)
                 logging.info("Opened browser app window: %s", browser)
                 for _ in range(140):
                     time.sleep(0.25)
@@ -192,30 +272,56 @@ def _open_browser(url: str) -> bool:
 
 def main() -> None:
     _log_stream()
-    logging.info("Portable launcher starting; packaged=%s; root=%s", paths.is_packaged(), paths.resource_root())
-    existing = _existing_url()
+    logging.info(
+        "Portable launcher starting; lan=%s; packaged=%s; root=%s",
+        LAN, paths.is_packaged(), paths.resource_root(),
+    )
+    existing = _existing_instance()
     if existing:
-        logging.info("Existing instance found: %s", existing)
-        if not NO_BROWSER and not _open_browser(existing):
-            _message("语镜已经在运行，但没能打开浏览器。\n\n请手动访问：\n" + existing, error=True)
-        return
+        url, mode = existing
+        logging.info("Existing instance found: %s (mode=%s)", url, mode)
+        if LAN and mode != "lan":
+            # The phone launcher was used while a local-only instance was running:
+            # stop it, then start again bound to the LAN interface.
+            logging.info("Restarting local instance in LAN mode")
+            _request_quit(url)
+            _wait_down(url)
+            try:
+                _cleanup_files()
+            except Exception:
+                pass
+        elif LAN:
+            port = int(url.rsplit(":", 1)[-1])
+            _write_lan(port)
+            logging.info("LAN instance already running; refreshed connection page")
+            return
+        else:
+            if not NO_BROWSER and not _open_browser(url):
+                _message("语镜已经在运行，但没能打开浏览器。\n\n请手动访问：\n" + url, error=True)
+            return
 
     _cleanup_files()
     httpd = None
     try:
         store.init()
-        port = app_server.free_port(8765)
-        httpd = ThreadingHTTPServer(("127.0.0.1", port), app_server.Handler)
+        port = app_server.free_port(PORT)
+        bind_host = "0.0.0.0" if LAN else "127.0.0.1"
+        httpd = ThreadingHTTPServer((bind_host, port), app_server.Handler)
         httpd.daemon_threads = True
         event = threading.Event()
         app_server.QUIT_EVENT = event
         thread = threading.Thread(target=httpd.serve_forever, name="lingualens-http", daemon=True)
         thread.start()
         url = f"http://127.0.0.1:{port}"
-        _write_url(url)
+        _write_url(url, mode="portable-lan" if LAN else "portable")
+        target = url
+        if LAN:
+            urls = _write_lan(port)
+            target = f"{url}/mobile"
+            logging.info("LAN ready: %s", ", ".join(urls) or "no LAN address found")
         logging.info("Service ready: %s", url)
-        if not NO_BROWSER and not _open_browser(url):
-            _message("语镜服务已启动，但没能自动打开浏览器。\n\n请手动访问：\n" + url, error=True)
+        if not NO_BROWSER and not _open_browser(target, "980,880" if LAN else "1440,920"):
+            _message("语镜服务已启动，但没能自动打开浏览器。\n\n请手动访问：\n" + target, error=True)
         event.wait()
         logging.info("Quit requested by UI")
     except Exception:

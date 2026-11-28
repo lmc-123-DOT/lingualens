@@ -14,6 +14,7 @@ from pathlib import Path
 from core.languages import GRAMMAR_LANGUAGE_NAMES, GRAMMAR_LANGUAGE_ORDER
 
 from .en import EN
+from .english_plus import EN_PLUS
 from .extra import EXTRA
 from .ja import JA
 from .other import OTHER
@@ -61,7 +62,7 @@ def _load_world() -> list[dict]:
 
 
 WORLD = _load_world()
-ALL_ENTRIES = [*EN, *JA, *ZH, *OTHER, *EXTRA, *WORLD]
+ALL_ENTRIES = [*EN, *EN_PLUS, *JA, *ZH, *OTHER, *EXTRA, *WORLD]
 GRAMMAR: dict[str, dict] = {}
 for _entry in ALL_ENTRIES:
     if _entry["id"] in GRAMMAR:
